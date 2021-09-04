@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:viewmodel="clr-namespace:WPF_TEST.ViewModel"
+                    xmlns:local="clr-namespace:WPF_TEST">
+    <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
+    <viewmodel:ConfigurationModel x:Key="CFGMain"></viewmodel:ConfigurationModel>
+    <viewmodel:DataStreamCollectionModel x:Key="DataStr"></viewmodel:DataStreamCollectionModel>
+    <viewmodel:Ethenet_SerialModel x:Key="Ethernet_Serial"></viewmodel:Ethenet_SerialModel>
+    <viewmodel:MainMenuModel x:Key="Mainmenu"></viewmodel:MainMenuModel>
+    <viewmodel:PlannerModel x:Key="Planner"></viewmodel:PlannerModel>
+    <viewmodel:WorkflowCreatorModel x:Key="WorkFlow"></viewmodel:WorkflowCreatorModel>
+    <viewmodel:EditJobModel x:Key="EditJob"></viewmodel:EditJobModel>
+    
+</ResourceDictionary>

@@ -1,0 +1,142 @@
+﻿<Window x:Class="WPF_TEST.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_TEST"
+        mc:Ignorable="d"
+        xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:viewmodels ="clr-namespace:WPF_TEST.ViewModel"
+        DataContext="{StaticResource MainVM}"
+        Title="MainWindow" Height="1080" Width="1920"
+        WindowStartupLocation="CenterScreen">
+    
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid Background="#f4f5f9">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition Height="900"></RowDefinition>
+        </Grid.RowDefinitions>
+        <!--Prouction Bar-->
+        <Grid  Width="auto" Height="150" VerticalAlignment="Top" Grid.Row="0">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0.5 0" EndPoint="0.5 1">
+                    <GradientStop Color="#FF2281D1"/>
+                    <GradientStop Color="#FF1166E0" Offset="1"/>
+                    <GradientStop Color="#FF189CE8" Offset="0.645"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="20" Direction="0" RenderingBias="Quality" ShadowDepth="2" Color="Purple"/>
+            </Grid.Effect>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+
+                <TextBlock Text="USER" VerticalAlignment="Center" FontSize="30" Foreground="WhiteSmoke" />
+
+                <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Margin="10,10,10,10" >
+                    <StackPanel Width="200">
+
+                        <Button Content="Home" FontSize="20">
+                        </Button>
+                        <Button Content="My Profile" FontSize="20"/>
+                        <Button Content="Tasks" FontSize="20"/>
+                        <Separator/>
+                        <Button Content="Log out" FontSize="20"/>
+                    </StackPanel>
+                </materialDesign:PopupBox>
+
+            </StackPanel>
+
+
+        </Grid>
+        <!--Main Area-->
+        <Grid VerticalAlignment ="Top"  Height="900" Grid.Row="1">
+            <Grid Width="700" Height="200" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="150,80,400,0">
+                <Button
+                x:Name="btn_OpenConfiguration"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Height="200"
+                materialDesign:ButtonAssist.CornerRadius="20"
+                Background="#f36a5a"
+                Command="{Binding LoadConfiguration}"
+                >
+
+                </Button>
+                <Label Content="CONFIGURATION" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="30" FontSize="50" Foreground="WhiteSmoke"/>
+                <Label Content="Partten, Profile &amp; Checklist Builder" HorizontalAlignment="Right" Margin="0,100,10,40"  Foreground="WhiteSmoke" FontSize="30"/>
+            </Grid>
+            <!--Floor-->
+            <Grid Width="700" Height="200" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,80,130,0">
+                <Button
+                x:Name="btn_OpenFloor"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Height="200"
+                Width="700"
+                materialDesign:ButtonAssist.CornerRadius="20"
+                Background="#9a59b5" Click="btn_OpenFloor_Click"
+                >
+                </Button>
+                <Label Content="FLOOR VIEW" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="30" FontSize="50" Foreground="WhiteSmoke"/>
+                <Label Content="Area wise Machine Status" HorizontalAlignment="Right" Margin="0,100,10,40"  Foreground="WhiteSmoke" FontSize="30"/>
+            </Grid>
+            <!--Dashboard-->
+            <Grid Width="700" Height="200" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,340,130,0">
+                <Button
+                x:Name="btn_OpenDashBoard"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Height="200"
+                materialDesign:ButtonAssist.CornerRadius="20"
+                Background="#5b9ad0"
+                Click="btn_OpenDashBoard_Click">
+
+                </Button>
+                <Label Content="DASHBOARD" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="30" FontSize="50" Foreground="WhiteSmoke"/>
+                <Label Content="AM/PM List &amp; Extensions" HorizontalAlignment="Right" Margin="0,100,10,40"  Foreground="WhiteSmoke" FontSize="30" />
+            </Grid>
+            <!--Scheduling-->
+            <Grid Width="700" Height="200" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="150,340,60,0">
+                <Button
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Height="200"
+                materialDesign:ButtonAssist.CornerRadius="20"
+                Background="#25c180">
+
+                </Button>
+                <Label Content="SCHEDULING" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="30" FontSize="50" Foreground="WhiteSmoke"/>
+                <Label Content="AM/PM Scheduling" HorizontalAlignment="Right" Margin="0,100,10,40"  Foreground="WhiteSmoke" FontSize="30" />
+            </Grid>
+            <!--Report-->
+            <Grid Width="700" Height="200" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="150,600,60,0">
+                <Button
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Height="200"
+                materialDesign:ButtonAssist.CornerRadius="20"
+                Background="#e77d03">
+
+                </Button>
+                <Label Content="REPORT CENTER" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="30" FontSize="50" Foreground="WhiteSmoke"/>
+                <Label Content="AM/PM Checklist Reports" HorizontalAlignment="Right" Margin="0,100,10,40"  Foreground="WhiteSmoke" FontSize="30"/>
+            </Grid>
+
+            <Grid Width="700" Height="200" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,600,130,0">
+                <Button
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Height="200"
+                materialDesign:ButtonAssist.CornerRadius="20">
+
+                </Button>
+                <Label Content="REPORT CENTER" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="30" FontSize="50" Foreground="WhiteSmoke"/>
+                <Label Content="AM/PM Checklist Reports" HorizontalAlignment="Right" Margin="0,100,10,40"  Foreground="WhiteSmoke" FontSize="30"/>
+            </Grid>
+        </Grid>
+        
+        
+        
+    </Grid>
+   
+</Window>

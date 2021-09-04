@@ -1,0 +1,40 @@
+﻿<Application x:Class="WPF_TEST.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:WPF_TEST"
+             xmlns:viewmodels="clr-namespace:WPF_TEST.ViewModel"
+             xmlns:views="clr-namespace:WPF_TEST.View"
+             StartupUri="WorkflowCreator.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+                <ResourceDictionary Source="/MainResource/MainResource.xaml"/>
+                
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type viewmodels:AMDashBoardModel}">
+                <views:AMDashBoard/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:DataCollectConfigureModel}">
+                <views:DataCollectConfigure/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:MainMenuModel}">
+                <views:MainMenu/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:Ethenet_SerialModel}">
+                <views:Ethenet_Serial/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:PlannerModel}">
+                <views:PlannerView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:EditJobModel}">
+                <views:EditJobModelView/>
+            </DataTemplate>
+            
+            
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
