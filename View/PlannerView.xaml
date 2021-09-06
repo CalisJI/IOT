@@ -13,14 +13,22 @@
              xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              DataContext="{StaticResource Planner}"
+             
              d:DesignHeight="1080" d:DesignWidth="1920">
 
     <UserControl.Resources>
-        <DataTemplate x:Key="priorityCellTemplate">
+        <local1:TaskPriorityToIconFilenameConverter x:Key="ImageConvert"/>
+        <DataTemplate x:Key="Template">
             <Border Background="Transparent">
-                <Image Stretch="None" HorizontalAlignment="Center" />
+                <Image 
+                Source="{Binding TaskPriority,Converter={StaticResource ImageConvert}}"
+                Stretch="None"
+                
+                HorizontalAlignment="Center"/>
             </Border>
+            
         </DataTemplate>
+       
     </UserControl.Resources>
 
     <dxlc:LayoutControl 
@@ -164,11 +172,12 @@
                                            Margin="0,5,-70,0"/>
                             </StackPanel>
                         </materialDesign:Card>
+                        
                     </StackPanel>
                 </Expander>
 
-                <dxlc:LayoutItem Label="Task" LabelPosition="Top" Margin="0,0,0,0" HorizontalAlignment="Stretch">
-                    <dxg:GridControl ItemsSource="{Binding Path=AssignedTask}" Height="1000" Width="1700">
+                <dxlc:LayoutItem Label="Task" LabelPosition="Top" Margin="0,0,0,0" HorizontalAlignment="Stretch" Width="1700">
+                    <dxg:GridControl ItemsSource="{Binding Path=AssignedTask}" Height="1000" Margin="0,0,20,0">
                         <dxg:GridControl.Columns>
                             <dxg:GridColumn FieldName="Name" Width="100">
 
@@ -184,13 +193,15 @@
                             </dxg:GridColumn>
                             <dxg:GridColumn FieldName="Priority" Header="Priority" FixedWidth="True">
                                 <dxg:GridColumn.EditSettings>
-                                    <dxe:ComboBoxEditSettings ItemsSource="{dxe:EnumItemsSource EnumType=local1:TaskPriority,AllowImages=False}"
+                                    
+                                    <dxe:ComboBoxEditSettings ItemsSource="{dxe:EnumItemsSource EnumType=local1:TaskPriority,AllowImages=True}"
                                                           ApplyItemTemplateToSelectedItem="True"
                                                           IsTextEditable="False"
                                                           AllowDefaultButton="False"
                                                           HorizontalContentAlignment="Stretch"
-                                                          
+                                                          ItemTemplate="{StaticResource Template}"
                                                       />
+                                    
                                 </dxg:GridColumn.EditSettings>
 
 
@@ -206,13 +217,18 @@
                                     IsPercent="True"/>
                                 </dxg:GridColumn.EditSettings>
                             </dxg:GridColumn>
-                            <dxg:GridColumn FieldName="Current_Stage" Header="Curent Stage">
-
+                            <dxg:GridColumn 
+                                FieldName="Current_Stage" 
+                                Header="Curent Stage">
+                                
                             </dxg:GridColumn>
                         </dxg:GridControl.Columns>
                     </dxg:GridControl>
+                    
                 </dxlc:LayoutItem>
+                
             </StackPanel>
+            
         </dxlc:LayoutGroup>
 
 

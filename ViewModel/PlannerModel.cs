@@ -19,7 +19,8 @@ namespace WPF_TEST.ViewModel
 {
     static class PlannerHelper 
     {
-        public const string ImagePath = "pack://appication:,,,/WPF_TEST;component/ImageSource/";
+        public const string ImagePath = "pack://application:,,,/WPF_TEST;component/ImageSource/";
+        //public const string ImagePath = @"F:\VISUAL PROJECT\C#\WPF\WPF_TEST\ImageSource\";
     }
     public class PlannerModel:BaseViewModel
     {
@@ -28,7 +29,7 @@ namespace WPF_TEST.ViewModel
         //    get { return Enum.GetValues(typeof(TaskPriority)).Cast<TaskPriority>(); }
 
         //}
-        public ObservableCollection<Image> Image { get; set; }
+        public ObservableCollection<ImageSource> Images { get; set; }
         ObservableCollection<PlannerTask> assignedTask;
 
         public TaskPriority taskPriority;
@@ -43,7 +44,16 @@ namespace WPF_TEST.ViewModel
         }
         void Initialize() 
         {
-            
+            //Images = new ObservableCollection<ImageSource>();
+            //Images.Add(new BitmapImage(
+            //    new Uri(@"F:\VISUAL PROJECT\C#\WPF\WPF_TEST\ImageSource\Low.png")));
+            //Images.Add(new BitmapImage(
+            //    new Uri(@"F:\VISUAL PROJECT\C#\WPF\WPF_TEST\ImageSource\Normal.png")));
+            //Images.Add(new BitmapImage(
+            //    new Uri(@"F:\VISUAL PROJECT\C#\WPF\WPF_TEST\ImageSource\Medium.png")));
+            //Images.Add(new BitmapImage(
+            //    new Uri(@"F:\VISUAL PROJECT\C#\WPF\WPF_TEST\ImageSource\High.png")));
+
         }
         void GenerateAssignedTasks() 
         {
@@ -70,6 +80,28 @@ namespace WPF_TEST.ViewModel
             plannerTask1.Completion = 30;
             plannerTask1.Current_Stage = "Inspetion";
             AssignedTask.Add(plannerTask1);
+
+            PlannerTask plannerTask2 = new PlannerTask();
+            plannerTask2.Name = "Mã số 3";
+            plannerTask2.Posting_Time = DateTime.Now;
+            plannerTask2.StartDate = DateTime.Now;
+            plannerTask2.DueDate = DateTime.Now;
+            plannerTask2.Priority = TaskPriority.Urgent;
+            plannerTask2.Actual_vs_Liftime = 0.25f;
+            plannerTask2.Completion = 30;
+            plannerTask2.Current_Stage = "Inspetion";
+            AssignedTask.Add(plannerTask2);
+
+            PlannerTask plannerTask4 = new PlannerTask();
+            plannerTask4.Name = "Mã số 3";
+            plannerTask4.Posting_Time = DateTime.Now;
+            plannerTask4.StartDate = DateTime.Now;
+            plannerTask4.DueDate = DateTime.Now;
+            plannerTask4.Priority = TaskPriority.Low;
+            plannerTask4.Actual_vs_Liftime = 0.25f;
+            plannerTask4.Completion = 30;
+            plannerTask4.Current_Stage = "Inspetion";
+            AssignedTask.Add(plannerTask4);
 
         }
     }
@@ -98,12 +130,89 @@ namespace WPF_TEST.ViewModel
         Urgent
 
     }
+    public enum Status 
+    {
+        Running,
+        Queued,
+        Ready,
+        Paused,
+        Delayed,
+        Done,
+        Plan
+
+    }
+    [ValueConversion(typeof(TaskPriority), typeof(string))]
+    public class TaskPriorityToIconFilenameConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            switch ((TaskPriority)value)
+            {
+                case TaskPriority.Low:
+                    return "Low.png";
+                case TaskPriority.Normal:
+                    return "Normal.png";
+                case TaskPriority.High:
+                    return "Medium.png";
+                case TaskPriority.Urgent:
+                    return "High.png";
+                default:
+                    return null;
+            }
+
+            // or
+            return Enum.GetName(typeof(TaskPriority), value) + ".png";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotSupportedException();
+        }
+    }
+    [ValueConversion(typeof(TaskPriority), typeof(string))]
+    public class NameToBackgroundConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            
+            switch ((Status)value)
+            {
+                case Status.Running:
+                    return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#05fd00"));
+                    
+                case Status.Queued:
+                    return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#808080"));
+                    
+                case Status.Ready:
+                    return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#7c0080"));
+                   
+                case Status.Paused:
+                    return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#fefe00"));
+                   
+                case Status.Delayed:
+                    return new SolidColorBrush((Color)ColorConverter.ConvertFromString("fd0000"));
+                   
+                case Status.Done:
+                    return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#6495e5"));
+                    
+                case Status.Plan:
+                    return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ffa204"));
+                   
+            }
+            return Enum.GetName(typeof(Status), value);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return null;
+        }
+    }
     //public enum TaskPriority
     //{
-    //    [Image(@"D:\VISUAL PROJECT\C#\WPF\WPF_TEST\ImageSource\Low.png")] Low,
-    //    [Image(@"D:\VISUAL PROJECT\C#\WPF\WPF_TEST\ImageSource\Low.png")] Normal,
-    //    [Image(@"D:\VISUAL PROJECT\C#\WPF\WPF_TEST\ImageSource\Low.png")] High,
-    //    [Image(@"D:\VISUAL PROJECT\C#\WPF\WPF_TEST\ImageSource\Low.png")] Urgent,
+    //    Low,
+    //    Normal,
+    //    High,
+    //    Urgent,
     //}
 
     public class Images 

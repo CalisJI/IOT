@@ -33,7 +33,9 @@
             <DataTemplate DataType="{x:Type viewmodels:EditJobModel}">
                 <views:EditJobModelView/>
             </DataTemplate>
-            
+            <DataTemplate DataType="{x:Type viewmodels:ScheduleViewModel}">
+                <views:ScheduleView/>
+            </DataTemplate>
             
         </ResourceDictionary>
     </Application.Resources>

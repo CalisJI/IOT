@@ -36,9 +36,6 @@ F:\VISUAL PROJECT\C#\WPF\WPF_TEST\bin\Debug\MaterialDesignColors.dll
 F:\VISUAL PROJECT\C#\WPF\WPF_TEST\bin\Debug\MaterialDesignThemes.Wpf.dll
 F:\VISUAL PROJECT\C#\WPF\WPF_TEST\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
 F:\VISUAL PROJECT\C#\WPF\WPF_TEST\bin\Debug\Microsoft.Bcl.HashCode.dll
-F:\VISUAL PROJECT\C#\WPF\WPF_TEST\bin\Debug\Microsoft.EntityFrameworkCore.Abstractions.dll
-F:\VISUAL PROJECT\C#\WPF\WPF_TEST\bin\Debug\Microsoft.EntityFrameworkCore.dll
-F:\VISUAL PROJECT\C#\WPF\WPF_TEST\bin\Debug\Microsoft.EntityFrameworkCore.Relational.dll
 F:\VISUAL PROJECT\C#\WPF\WPF_TEST\bin\Debug\Microsoft.Expression.Interactions.dll
 F:\VISUAL PROJECT\C#\WPF\WPF_TEST\bin\Debug\Microsoft.Extensions.Caching.Abstractions.dll
 F:\VISUAL PROJECT\C#\WPF\WPF_TEST\bin\Debug\Microsoft.Extensions.Caching.Memory.dll
@@ -88,9 +85,6 @@ F:\VISUAL PROJECT\C#\WPF\WPF_TEST\bin\Debug\MaterialDesignThemes.Wpf.pdb
 F:\VISUAL PROJECT\C#\WPF\WPF_TEST\bin\Debug\MaterialDesignThemes.Wpf.xml
 F:\VISUAL PROJECT\C#\WPF\WPF_TEST\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
 F:\VISUAL PROJECT\C#\WPF\WPF_TEST\bin\Debug\Microsoft.Bcl.HashCode.xml
-F:\VISUAL PROJECT\C#\WPF\WPF_TEST\bin\Debug\Microsoft.EntityFrameworkCore.xml
-F:\VISUAL PROJECT\C#\WPF\WPF_TEST\bin\Debug\Microsoft.EntityFrameworkCore.Abstractions.xml
-F:\VISUAL PROJECT\C#\WPF\WPF_TEST\bin\Debug\Microsoft.EntityFrameworkCore.Relational.xml
 F:\VISUAL PROJECT\C#\WPF\WPF_TEST\bin\Debug\Microsoft.Expression.Interactions.xml
 F:\VISUAL PROJECT\C#\WPF\WPF_TEST\bin\Debug\Microsoft.Extensions.Caching.Abstractions.xml
 F:\VISUAL PROJECT\C#\WPF\WPF_TEST\bin\Debug\Microsoft.Extensions.Caching.Memory.xml
@@ -181,6 +175,10 @@ F:\VISUAL PROJECT\C#\WPF\WPF_TEST\obj\Debug\WPF_TEST.exe
 F:\VISUAL PROJECT\C#\WPF\WPF_TEST\obj\Debug\WPF_TEST.pdb
 F:\VISUAL PROJECT\C#\WPF\WPF_TEST\obj\Debug\WorkflowCreator.g.cs
 F:\VISUAL PROJECT\C#\WPF\WPF_TEST\obj\Debug\WorkflowCreator.baml
-F:\VISUAL PROJECT\C#\WPF\WPF_TEST\obj\Debug\WPF_TEST.csproj.AssemblyReference.cache
 F:\VISUAL PROJECT\C#\WPF\WPF_TEST\obj\Debug\View\EditJobModelView.g.cs
 F:\VISUAL PROJECT\C#\WPF\WPF_TEST\obj\Debug\View\EditJobModelView.baml
+F:\VISUAL PROJECT\C#\WPF\WPF_TEST\obj\Debug\WPF_TEST.csproj.AssemblyReference.cache
+F:\VISUAL PROJECT\C#\WPF\WPF_TEST\obj\Debug\View\ScheduleView.g.cs
+F:\VISUAL PROJECT\C#\WPF\WPF_TEST\obj\Debug\View\ScheduleView.baml
+F:\VISUAL PROJECT\C#\WPF\WPF_TEST\bin\Debug\System.ValueTuple.dll
+F:\VISUAL PROJECT\C#\WPF\WPF_TEST\bin\Debug\System.ValueTuple.xml

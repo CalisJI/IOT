@@ -1,6 +1,14 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewmodel="clr-namespace:WPF_TEST.ViewModel"
+                    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                    xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+                    xmlns:dxsch="http://schemas.devexpress.com/winfx/2008/xaml/scheduling"
+                    xmlns:dxscht="http://schemas.devexpress.com/winfx/2008/xaml/scheduling/themekeys"
+    
+                    xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
                     xmlns:local="clr-namespace:WPF_TEST">
     <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
     <viewmodel:ConfigurationModel x:Key="CFGMain"></viewmodel:ConfigurationModel>
@@ -10,5 +18,5 @@
     <viewmodel:PlannerModel x:Key="Planner"></viewmodel:PlannerModel>
     <viewmodel:WorkflowCreatorModel x:Key="WorkFlow"></viewmodel:WorkflowCreatorModel>
     <viewmodel:EditJobModel x:Key="EditJob"></viewmodel:EditJobModel>
-    
+    <viewmodel:ScheduleViewModel x:Key="Schedule"></viewmodel:ScheduleViewModel>
 </ResourceDictionary>
