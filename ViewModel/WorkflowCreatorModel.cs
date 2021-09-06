@@ -11,6 +11,7 @@ namespace WPF_TEST.ViewModel
     {
         private BaseViewModel _selectedViewModel;
         public ICommand WorKScope { get; set; }
+        public ICommand Save { get; set; }
         public BaseViewModel SelectedViewModel
         {
             get { return _selectedViewModel; }
@@ -37,6 +38,10 @@ namespace WPF_TEST.ViewModel
             {
                 this.workflowCreatorModel.SelectedViewModel = PlannerModel;
                 //this.dataStreamCollectionModel.SelectedViewModel = DataCollectConfigureModel;
+            });
+            Save = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+            
             });
         }
     }

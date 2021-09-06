@@ -9,9 +9,8 @@
     xmlns:dxschcore="http://schemas.devexpress.com/winfx/2008/xaml/scheduling/core"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
-    xmlns:local="clr-namespace:WPF_TEST"
-    xmlns:col="clr-namespace:System.Collections;assembly=mscorlib" 
-    xmlns:local1="clr-namespace:WPF_TEST.Common">
+    xmlns:local1="clr-namespace:WPF_TEST.Common"
+    xmlns:col="clr-namespace:System.Collections;assembly=mscorlib" >
 
     <Style x:Key="Options.RibbonPage" TargetType="dxr:RibbonPage">
         <Setter Property="Caption" Value="Options"/>
@@ -332,7 +331,7 @@
             <Setter.Value>
                 <DataTemplate>
                     <ContentControl>
-                        <local1:BarEditItem_WorkTimeEditBehavior/>
+                        <local1:BarSubItem_FirstDayOfWeek/>
                     </ContentControl>
                 </DataTemplate>
             </Setter.Value>

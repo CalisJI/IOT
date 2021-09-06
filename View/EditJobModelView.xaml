@@ -188,7 +188,7 @@
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
                     Margin="0,0,20,30"
-                    Command="{Binding WorKScope}"
+                    Command="{Binding Save}"
                     Background="#673ab7"
                     materialDesign:ButtonAssist.CornerRadius="8">
                     <StackPanel Orientation="Vertical">

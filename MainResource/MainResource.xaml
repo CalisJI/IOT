@@ -1,16 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:viewmodel="clr-namespace:WPF_TEST.ViewModel"
-                    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
-                    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
-                    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
-                    xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
-                    xmlns:dxsch="http://schemas.devexpress.com/winfx/2008/xaml/scheduling"
-                    xmlns:dxscht="http://schemas.devexpress.com/winfx/2008/xaml/scheduling/themekeys"
-    
-                    xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+                    xmlns:viewmodel="clr-namespace:WPF_TEST.ViewModel"                 
                     xmlns:local="clr-namespace:WPF_TEST">
-    <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
+    <viewmodel:MainMenuModel x:Key="MainVM"></viewmodel:MainMenuModel>
     <viewmodel:ConfigurationModel x:Key="CFGMain"></viewmodel:ConfigurationModel>
     <viewmodel:DataStreamCollectionModel x:Key="DataStr"></viewmodel:DataStreamCollectionModel>
     <viewmodel:Ethenet_SerialModel x:Key="Ethernet_Serial"></viewmodel:Ethenet_SerialModel>
@@ -19,4 +11,5 @@
     <viewmodel:WorkflowCreatorModel x:Key="WorkFlow"></viewmodel:WorkflowCreatorModel>
     <viewmodel:EditJobModel x:Key="EditJob"></viewmodel:EditJobModel>
     <viewmodel:ScheduleViewModel x:Key="Schedule"></viewmodel:ScheduleViewModel>
+    <viewmodel:OutlookInspiredDemoViewModel x:Key="Outlook"></viewmodel:OutlookInspiredDemoViewModel>
 </ResourceDictionary>

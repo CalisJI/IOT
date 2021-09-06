@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:WPF_TEST"
              xmlns:viewmodels="clr-namespace:WPF_TEST.ViewModel"
              xmlns:views="clr-namespace:WPF_TEST.View"
-             StartupUri="WorkflowCreator.xaml">
+             StartupUri="SchedulerMain.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -13,7 +13,9 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
                 <ResourceDictionary Source="/MainResource/MainResource.xaml"/>
+                <ResourceDictionary Source="/MainResource/OutlookInspired.xaml"/>
                 
+               
             </ResourceDictionary.MergedDictionaries>
             <DataTemplate DataType="{x:Type viewmodels:AMDashBoardModel}">
                 <views:AMDashBoard/>
@@ -33,10 +35,10 @@
             <DataTemplate DataType="{x:Type viewmodels:EditJobModel}">
                 <views:EditJobModelView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodels:ScheduleViewModel}">
-                <views:ScheduleView/>
-            </DataTemplate>
             
+            <DataTemplate DataType="{x:Type viewmodels:OutlookInspiredDemoViewModel}">
+                <views:OutlookInspiredDemoModule/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

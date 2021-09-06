@@ -13,6 +13,7 @@ using DevExpress.Mvvm;
 using DevExpress.Mvvm.UI;
 using DevExpress.Mvvm.UI.Interactivity;
 using DevExpress.Mvvm.UI.ModuleInjection;
+using DevExpress.Mvvm.ViewModel;
 using DevExpress.Xpf.DXBinding;
 using DevExpress.Xpf.Editors;
 using DevExpress.Xpf.Editors.DataPager;
