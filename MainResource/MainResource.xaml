@@ -2,14 +2,14 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewmodel="clr-namespace:WPF_TEST.ViewModel"                 
                     xmlns:local="clr-namespace:WPF_TEST">
-    <viewmodel:MainMenuModel x:Key="MainVM"></viewmodel:MainMenuModel>
-    <viewmodel:ConfigurationModel x:Key="CFGMain"></viewmodel:ConfigurationModel>
-    <viewmodel:DataStreamCollectionModel x:Key="DataStr"></viewmodel:DataStreamCollectionModel>
-    <viewmodel:Ethenet_SerialModel x:Key="Ethernet_Serial"></viewmodel:Ethenet_SerialModel>
-    <viewmodel:MainMenuModel x:Key="Mainmenu"></viewmodel:MainMenuModel>
-    <viewmodel:PlannerModel x:Key="Planner"></viewmodel:PlannerModel>
-    <viewmodel:WorkflowCreatorModel x:Key="WorkFlow"></viewmodel:WorkflowCreatorModel>
-    <viewmodel:EditJobModel x:Key="EditJob"></viewmodel:EditJobModel>
-    <viewmodel:ScheduleViewModel x:Key="Schedule"></viewmodel:ScheduleViewModel>
-    <viewmodel:OutlookInspiredDemoViewModel x:Key="Outlook"></viewmodel:OutlookInspiredDemoViewModel>
+    <viewmodel:MainMenuModel x:Key="MainVM"/>
+    <viewmodel:ConfigurationModel x:Key="CFGMain"/>
+    <viewmodel:DataStreamCollectionModel x:Key="DataStr"/>
+    <viewmodel:Ethenet_SerialModel x:Key="Ethernet_Serial"/>
+    <viewmodel:MainMenuModel x:Key="Mainmenu"/>
+    <viewmodel:PlannerModel x:Key="Planner"/>
+    <viewmodel:WorkflowCreatorModel x:Key="WorkFlow"/>
+    <viewmodel:EditJobModel x:Key="EditJob"/>
+    <viewmodel:SchedulerViewModel x:Key="ScheduleViewModel"/>
+    <viewmodel:OutlookInspiredDemoViewModel x:Key="Outlook"/>
 </ResourceDictionary>

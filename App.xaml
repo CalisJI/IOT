@@ -36,9 +36,9 @@
                 <views:EditJobModelView/>
             </DataTemplate>
             
-            <DataTemplate DataType="{x:Type viewmodels:OutlookInspiredDemoViewModel}">
+            <!--<DataTemplate DataType="{x:Type viewmodels:OutlookInspiredDemoViewModel}">
                 <views:OutlookInspiredDemoModule/>
-            </DataTemplate>
+            </DataTemplate>-->
         </ResourceDictionary>
     </Application.Resources>
 </Application>

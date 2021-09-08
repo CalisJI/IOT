@@ -1,37 +1,68 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Windows;
+﻿using DevExpress.Mvvm;
+using DevExpress.Mvvm.DataAnnotations;
 using DevExpress.Xpf.Core;
 using DevExpress.Xpf.Scheduling;
 using DevExpress.Xpf.Scheduling.iCalendar;
 using Microsoft.Win32;
+using System;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Windows;
+using WPF_TEST.Class_Resource;
 
 namespace WPF_TEST.ViewModel
 {
-    public class OutlookInspiredDemoViewModel:BaseViewModel
+    [POCOViewModel]
+    public class SchedulerViewModel:BaseViewModel
     {
-        public virtual DateTime Start { get; set; }
-        //public IEnumerable<WorkCalendar> Calendars { get { return WorkData.Calendars; } }
-        //public IEnumerable<WorkAppointment> Appointments { get { return WorkData.Appointments; } }
-        public IEnumerable<WorkCalendar> Calendars { get; set; }
-        public IEnumerable<WorkAppointment> Appointments { get; set; }
+        public virtual ObservableCollection<ProcessData> ProcessDatas { get; set; }
+        public virtual ObservableCollection<ProcessAppointment> Appointments { get; set; }
 
-        public OutlookInspiredDemoViewModel()
+        //private BaseViewModel _selectedViewModel;
+        //public BaseViewModel SelectedViewModel
+        //{
+        //    get { return _selectedViewModel; }
+        //    set
+        //    {
+        //        _selectedViewModel = value;
+        //        OnPropertyChanged(nameof(SelectedViewModel));
+        //    }
+        //}
+        OutlookInspiredDemoViewModel OutlookInspiredDemoViewModel = new OutlookInspiredDemoViewModel();
+       
+        
+        private void CreateProcess()
         {
-            //Start = WorkData.TodayStart;
-            Init();
+            ProcessDatas = new ObservableCollection<ProcessData>();
+            ProcessDatas.Add(ProcessData.Create(Id: 1, Name: "Action 1"));
+            ProcessDatas.Add(ProcessData.Create(Id: 2, Name: "Action 2"));
+            ProcessDatas.Add(ProcessData.Create(Id: 3, Name: "Action 3"));
         }
-        void Init()
+        private void CreateMedicalAppointments()
         {
-            //WorkData.Calendars.ToList()
-            //    .ForEach(x => x.IsVisible = false);
-            //WorkData.CalendarPersonal.IsVisible = true;
-            //WorkData.CalendarConferenceRoom.IsVisible = true;
-            //WorkData.CalendarTrainingRoom.IsVisible = true;
+            Appointments = new ObservableCollection<ProcessAppointment>();
+            Appointments.Add(ProcessAppointment.Create(
+                startTime: DateTime.Now.Date.AddHours(10), endTime: DateTime.Now.Date.AddHours(11),
+                ProcessId: 1, notes: "", location: "101", categoryId: 1, ProcessName: "Anyone"));
         }
-
+        public void CreateProcessAppointments( DateTime dateTimeStart,DateTime dateTimeEnd,int ProcessID, string note, string locations, int categori,string ProcessName) 
+        {
+            Appointments = new ObservableCollection<ProcessAppointment>();
+            Appointments.Add(ProcessAppointment.Create(
+                startTime: dateTimeStart, endTime: dateTimeEnd,
+                ProcessId: ProcessID, notes: note, location: locations, categoryId: categori, ProcessName: ProcessName));
+        }
+        public SchedulerViewModel()
+        {
+            //CreateProcess();
+            CreateMedicalAppointments();
+            //if (!loaded)
+            //{
+            //    scheduleViewModel = this;
+            //    scheduleViewModel.SelectedViewModel = OutlookInspiredDemoViewModel;
+            //    loaded = true;
+            //}
+        }
         public void OutlookImport(SchedulerControl scheduler)
         {
             OutlookExchange(scheduler, OutlookExchangeType.Import);
@@ -95,17 +126,5 @@ namespace WPF_TEST.ViewModel
                 return null;
             return dialog.OpenFile();
         }
-
-        private class WorkData
-        {
-        }
-    }
-
-    public class WorkCalendar
-    {
-    }
-
-    public class WorkAppointment
-    {
     }
 }

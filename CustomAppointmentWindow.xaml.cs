@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevExpress.Xpf.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,17 +11,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WPF_TEST.View
+namespace WPF_TEST
 {
     /// <summary>
-    /// Interaction logic for OutlookInspiredDemoModule.xaml
+    /// Interaction logic for CustomAppointmentWindow.xaml
     /// </summary>
-    public partial class OutlookInspiredDemoModule : UserControl
+    public partial class CustomAppointmentWindow : ThemedWindow
     {
-        public OutlookInspiredDemoModule()
+        public CustomAppointmentWindow()
         {
             InitializeComponent();
         }

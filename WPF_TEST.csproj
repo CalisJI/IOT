@@ -255,16 +255,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Class_Resource\ProcessData.cs" />
+    <Compile Include="Class_Resource\ProcessMySQL.cs" />
     <Compile Include="Command\UpdateViewCommand.cs" />
     <Compile Include="Common\Behaviors.cs" />
     <Compile Include="Common\Converters.cs" />
     <Compile Include="Configuration.xaml.cs">
       <DependentUpon>Configuration.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomAppointmentWindow.xaml.cs">
+      <DependentUpon>CustomAppointmentWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DataStreamCollection.xaml.cs">
       <DependentUpon>DataStreamCollection.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MySchedulerDataModel.cs" />
     <Compile Include="OutlookExchangeOptionsWindow.xaml.cs">
       <DependentUpon>OutlookExchangeOptionsWindow.xaml</DependentUpon>
     </Compile>
@@ -280,10 +284,11 @@
     <Compile Include="ViewModel\Ethenet_SerialModel.cs" />
     <Compile Include="ViewModel\MainMenuModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="Class_Resource\ProcessAppointment .cs" />
     <Compile Include="ViewModel\OutlookExchangeOptionsWindowViewModel.cs" />
     <Compile Include="ViewModel\OutlookInspiredDemoViewModel.cs" />
     <Compile Include="ViewModel\PlannerModel.cs" />
-    <Compile Include="ViewModel\ScheduleViewModel.cs" />
+    <Compile Include="ViewModel\SchedulerViewModel.cs" />
     <Compile Include="ViewModel\WorkflowCreatorModel.cs" />
     <Compile Include="View\AMDashBoardView.xaml.cs">
       <DependentUpon>AMDashBoardView.xaml</DependentUpon>
@@ -303,9 +308,6 @@
     <Compile Include="View\MainMenuView.xaml.cs">
       <DependentUpon>MainMenuView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\OutlookInspiredDemoModule.xaml.cs">
-      <DependentUpon>OutlookInspiredDemoModule.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\PlannerView.xaml.cs">
       <DependentUpon>PlannerView.xaml</DependentUpon>
     </Compile>
@@ -313,6 +315,10 @@
       <DependentUpon>WorkflowCreator.xaml</DependentUpon>
     </Compile>
     <Page Include="Configuration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomAppointmentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -380,10 +386,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainMenuView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\OutlookInspiredDemoModule.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

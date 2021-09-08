@@ -960,7 +960,6 @@ F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\EditJobModelView.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Ethenet_SerialView.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\FileConfigurateView.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\MainMenuView.g.cs
-F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\OutlookInspiredDemoModule.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\PlannerView.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WorkflowCreator.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\App.g.cs
@@ -983,7 +982,6 @@ F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\EditJobModelView.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Ethenet_SerialView.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\FileConfigurateView.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\MainMenuView.baml
-F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\OutlookInspiredDemoModule.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\PlannerView.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WorkflowCreator.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.g.resources
@@ -994,3 +992,5 @@ F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.csproj.CoreCompileInput
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.csproj.CopyComplete
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.exe
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.pdb
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\CustomAppointmentWindow.baml
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\CustomAppointmentWindow.g.cs
