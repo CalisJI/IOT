@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using WPF_TEST.Class_Resource;
 
 namespace WPF_TEST
 {
@@ -13,5 +15,11 @@ namespace WPF_TEST
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+           
+            
+            base.OnStartup(e);
+        }
     }
 }

@@ -113,6 +113,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="FastMember, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\FastMember.1.5.0\lib\net461\FastMember.dll</HintPath>
+    </Reference>
     <Reference Include="Google.Protobuf, Version=3.17.3.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>packages\Google.Protobuf.3.17.3\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
@@ -255,8 +258,28 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Class_Resource\ProcessData.cs" />
-    <Compile Include="Class_Resource\ProcessMySQL.cs" />
+    <Compile Include="Class_Resource\DataEntity.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataEntity.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Class_Resource\DataEntity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Class_Resource\DataEntity.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataEntity.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Class_Resource\DataProvider.cs" />
+    <Compile Include="Class_Resource\processdata.cs">
+      <DependentUpon>DataEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Class_Resource\proessdataappointment.cs">
+      <DependentUpon>DataEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Command\UpdateViewCommand.cs" />
     <Compile Include="Common\Behaviors.cs" />
     <Compile Include="Common\Converters.cs" />
@@ -265,6 +288,12 @@
     </Compile>
     <Compile Include="CustomAppointmentWindow.xaml.cs">
       <DependentUpon>CustomAppointmentWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomAppointmentWindow1.xaml.cs">
+      <DependentUpon>CustomAppointmentWindow1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomRecurrenceWindow.xaml.cs">
+      <DependentUpon>CustomRecurrenceWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataStreamCollection.xaml.cs">
       <DependentUpon>DataStreamCollection.xaml</DependentUpon>
@@ -284,7 +313,6 @@
     <Compile Include="ViewModel\Ethenet_SerialModel.cs" />
     <Compile Include="ViewModel\MainMenuModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="Class_Resource\ProcessAppointment .cs" />
     <Compile Include="ViewModel\OutlookExchangeOptionsWindowViewModel.cs" />
     <Compile Include="ViewModel\OutlookInspiredDemoViewModel.cs" />
     <Compile Include="ViewModel\PlannerModel.cs" />
@@ -319,6 +347,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomAppointmentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomAppointmentWindow1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomRecurrenceWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -417,6 +453,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Class_Resource\DataEntity.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DataEntity.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Class_Resource\DataEntity.edmx.diagram">
+      <DependentUpon>DataEntity.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -449,6 +492,16 @@
     <Resource Include="ImageSource\Allprocess.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Class_Resource\DataEntity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DataEntity.edmx</DependentUpon>
+      <LastGenOutput>DataEntity.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Class_Resource\DataEntity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DataEntity.edmx</DependentUpon>
+      <LastGenOutput>DataEntity.cs</LastGenOutput>
+    </Content>
     <Content Include="Images\OutlookInspired\Svg\CalendarGroup.svg" />
     <Content Include="Images\OutlookInspired\Svg\CalendarPermission.svg" />
     <Content Include="Images\OutlookInspired\Svg\Categorize.svg" />

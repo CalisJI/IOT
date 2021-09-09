@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("class_resource/dataentity.context.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("class_resource/dataentity.tt")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/outlookinspired/svg/calendargroup.svg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/outlookinspired/svg/calendarpermission.svg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/outlookinspired/svg/categorize.svg")]

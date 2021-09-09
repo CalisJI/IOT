@@ -18,6 +18,7 @@ namespace WPF_TEST.Common
     public abstract class BarItemBehaviorBase<T> : Behavior<T> where T : BarItem
     {
         protected DevExpress.Xpf.Scheduling.SchedulerControl Scheduler { get { return DevExpress.Xpf.Scheduling.SchedulerControl.GetScheduler(AssociatedObject); } }
+
         protected override void OnAttached()
         {
             base.OnAttached();

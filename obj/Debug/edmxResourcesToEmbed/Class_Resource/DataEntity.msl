@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="savedataModelStoreContainer" CdmEntityContainer="savedataEntities">
+    <EntitySetMapping Name="processdatas">
+      <EntityTypeMapping TypeName="savedataModel.processdata">
+        <MappingFragment StoreEntitySet="processdata">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="idProcessData" ColumnName="idProcessData" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="proessdataappointments">
+      <EntityTypeMapping TypeName="savedataModel.proessdataappointment">
+        <MappingFragment StoreEntitySet="proessdataappointment">
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="ProcessName" ColumnName="ProcessName" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="idProessDataAppoint" ColumnName="idProessDataAppoint" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

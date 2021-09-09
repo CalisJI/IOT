@@ -1,12 +1,14 @@
-﻿F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\GeneratedInternalTypeHelper.g.cs
+﻿
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\App.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\Configuration.xaml;;
+FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\CustomAppointmentWindow.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\DataStreamCollection.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\Login_form.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\MainResource\MainResource.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\MainResource\OutlookInspired.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\MainResource\Ribbon.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\MainWindow.xaml;;
+FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\SchedulerMain.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\AMDashBoardView.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\DataCollectConfigureView.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\EditJobModelView.xaml;;
