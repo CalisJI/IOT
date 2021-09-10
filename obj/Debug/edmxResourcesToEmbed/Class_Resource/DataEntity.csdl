@@ -22,6 +22,6 @@
     <Property Name="ProcessName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
     <Property Name="Notes" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
     <Property Name="StatusId" Type="Int32" />
-    <Property Name="Priority" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="Priority" Type="Int32" />
   </EntityType>
 </Schema>

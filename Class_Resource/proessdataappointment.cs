@@ -20,6 +20,6 @@ namespace WPF_TEST.Class_Resource
         public string ProcessName { get; set; }
         public string Notes { get; set; }
         public Nullable<int> StatusId { get; set; }
-        public string Priority { get; set; }
+        public Nullable<int> Priority { get; set; }
     }
 }

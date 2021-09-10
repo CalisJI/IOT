@@ -19,7 +19,7 @@
     >
    
     <DockPanel>
-
+        
         <ContentControl
             
             Content="{Binding}"
@@ -89,6 +89,15 @@
             FirstDayOfWeek="Monday"
             HorizontalAlignment="Left" 
             VerticalAlignment="Top">
+            <dxmvvm:Interaction.Behaviors>
+                <dxmvvm:EventToCommand Command="{Binding SaveCommand , RelativeSource={RelativeSource AncestorType=dxb:BarButtonItem}}" EventName="AppointmentAdded" >
+
+                </dxmvvm:EventToCommand>
+                <dxmvvm:EventToCommand Command="{Binding SaveCommand}" EventName="AppointmentAdded" />
+                <dxmvvm:EventToCommand Command="{Binding SaveCommand}" EventName="AppointmentEdited" />
+                <dxmvvm:EventToCommand Command="{Binding SaveCommand}" EventName="AppointmentRemoved" />
+                <dxmvvm:EventToCommand Command="{Binding SaveCommand}" EventName="AppointmentRestored" />
+            </dxmvvm:Interaction.Behaviors>
             <dxsch:SchedulerControl.OptionsWindows >
                 <dxsch:OptionsWindows AppointmentWindowType="{x:Type custom:CustomAppointmentWindow}"/>
             </dxsch:SchedulerControl.OptionsWindows>
@@ -115,7 +124,7 @@
                             End="EndTime"
                             Id="idProessDataAppoint"
                             LabelId="StatusId"
-                            StatusId="Priority"
+                            Location="Priority"
                             Description="Notes"/>
                     </dxsch:DataSource.AppointmentMappings>
                     <dxsch:DataSource.ResourceMappings>

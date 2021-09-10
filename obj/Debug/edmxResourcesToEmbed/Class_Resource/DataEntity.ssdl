@@ -18,7 +18,7 @@
     <Property Name="ProcessName" Type="varchar" MaxLength="45" />
     <Property Name="Notes" Type="varchar" MaxLength="45" />
     <Property Name="StatusId" Type="int" />
-    <Property Name="Priority" Type="varchar" MaxLength="45" />
+    <Property Name="Priority" Type="int" />
   </EntityType>
   <EntityContainer Name="savedataModelStoreContainer">
     <EntitySet Name="processdata" EntityType="Self.processdata" Schema="savedata" store:Type="Tables" />

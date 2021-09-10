@@ -86,7 +86,7 @@ namespace WPF_TEST.ViewModel
             savedataEntities.proessdataappointments.Load();
             savedataEntities.processdatas.Load();
             
-            var a = DataProvider.INS.DB.processdatas.ToList();
+            
             Resource = new ObservableCollection<processdata>();
             Appointments = new ObservableCollection<proessdataappointment>();
             Resource = savedataEntities.processdatas.Local;

@@ -15,10 +15,8 @@
     mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="450"
     xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-    xmlns:local1="clr-namespace:WPF_TEST.ViewModel"
-    
-    Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=ThemedWindow}}"
-    x:Name="window">
+    xmlns:local1="clr-namespace:WPF_TEST.ViewModel" xmlns:common="clr-namespace:WPF_TEST.Common" 
+    x:Name="window" ResizeMode="NoResize">
 
     
     <dxmvvm:Interaction.Behaviors>
@@ -27,7 +25,7 @@
         <dxmvvm:KeyToCommand KeyGesture="Esc" EventName="KeyDown" MarkRoutedEventsAsHandled="True" Command="{DXCommand Execute='@e(window).Close()'}"/>
     </dxmvvm:Interaction.Behaviors>
     
-    <DockPanel Width="500" >
+    <DockPanel>
         <dxr:RibbonControl DockPanel.Dock="Top" Style="{DynamicResource {dxscht:AppointmentWindowCommandBarThemeKey ResourceKey=RibbonControl}}" Height="150" >
             <dxr:RibbonControl.ToolbarItems>
                 <dxb:BarButtonItem x:Name="toolbar_barItemSave" Style="{DynamicResource {dxscht:AppointmentWindowCommandBarThemeKey ResourceKey=Items_Actions_Save}}"/>
@@ -46,7 +44,7 @@
             </dxr:RibbonDefaultPageCategory>
         </dxr:RibbonControl>
         
-        <dxlc:LayoutControl x:Name="validationContainer" Orientation="Vertical" dxe:ValidationService.IsValidationContainer="True" Width="500">
+        <dxlc:LayoutControl x:Name="validationContainer" Orientation="Vertical" dxe:ValidationService.IsValidationContainer="True">
             <dxlc:LayoutItem Label="Name">
                 <dxe:TextEdit x:Name="editorSubject" EditValue="{Binding Subject,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=Editor_Subject}}">
                     <dxmvvm:Interaction.Behaviors>
@@ -55,7 +53,10 @@
                 </dxe:TextEdit>
             </dxlc:LayoutItem>
             <dxlc:LayoutItem Label="Priority">
-                <dxe:ComboBoxEdit ItemsSource="{dxe:EnumItemsSource EnumType=local1:TaskPriority,AllowImages=True}" EditValue="{Binding StatusId ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <dxe:ComboBoxEdit ItemsSource="{dxe:EnumItemsSource EnumType=local1:TaskPriority,AllowImages=True,UseNumericEnumValue=True}"
+                                  
+                                  EditValue="{Binding Location,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                  >
                     
                 </dxe:ComboBoxEdit>
             </dxlc:LayoutItem>

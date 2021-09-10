@@ -14,6 +14,9 @@ using System.Windows.Data;
 using System.Globalization;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
+using WPF_TEST.Class_Resource;
+using System.Data.Entity;
+using System.Threading;
 
 namespace WPF_TEST.ViewModel
 {
@@ -29,32 +32,73 @@ namespace WPF_TEST.ViewModel
         //    get { return Enum.GetValues(typeof(TaskPriority)).Cast<TaskPriority>(); }
 
         //}
+        //savedataEntities savedataEntities = new savedataEntities();
+        public virtual ObservableCollection<processdata> Resource { get; set; }
+        public virtual ObservableCollection<proessdataappointment> Appointments { get; set; }
         public ObservableCollection<ImageSource> Images { get; set; }
         ObservableCollection<PlannerTask> assignedTask;
 
         public TaskPriority taskPriority;
         public TaskPriority TaskPriority { get { return taskPriority; } set { SetProperty(ref taskPriority, value, "TaskPriority"); } }
         public ObservableCollection<PlannerTask> AssignedTask { get { return assignedTask; } set { SetProperty(ref assignedTask, value, "AssignedTask"); } }
-
+        //public ObservableCollection<PlannerTask> AssignedTask { get; set; }
         public PlannerModel() 
         {
             GenerateAssignedTasks();
-            Initialize();
-            
+            AssignedTask = new ObservableCollection<PlannerTask>();
+            Thread t = new Thread(() => 
+            {
+                while (true) 
+                {
+                    Initialize();
+                    Thread.Sleep(5000);
+                }
+               
+            });
+            t.Start();
+            t.IsBackground = true;
         }
+
         void Initialize() 
         {
-            //Images = new ObservableCollection<ImageSource>();
-            //Images.Add(new BitmapImage(
-            //    new Uri(@"F:\VISUAL PROJECT\C#\WPF\WPF_TEST\ImageSource\Low.png")));
-            //Images.Add(new BitmapImage(
-            //    new Uri(@"F:\VISUAL PROJECT\C#\WPF\WPF_TEST\ImageSource\Normal.png")));
-            //Images.Add(new BitmapImage(
-            //    new Uri(@"F:\VISUAL PROJECT\C#\WPF\WPF_TEST\ImageSource\Medium.png")));
-            //Images.Add(new BitmapImage(
-            //    new Uri(@"F:\VISUAL PROJECT\C#\WPF\WPF_TEST\ImageSource\High.png")));
+            using(savedataEntities savedataEntities = new savedataEntities()) 
+            {
+                savedataEntities.proessdataappointments.Load();
+                savedataEntities.processdatas.Load();
 
+                Appointments = savedataEntities.proessdataappointments.Local;
+                if (AssignedTask.Count > Appointments.Count)
+                {
+                    var secondNotFirst = AssignedTask.Where(x => !Appointments.Any(z => x.Name == z.ProcessName));
+                    AssignedTask.Remove((PlannerTask)secondNotFirst);
+
+
+                }
+                for (int i = 0; i < Appointments.Count; i++)
+                {
+                    try
+                    {
+                        var a = AssignedTask.ElementAt(i);
+                    }
+                    catch (Exception)
+                    {
+
+                        AssignedTask.Add(new PlannerTask());
+                    }
+                    var item = Appointments.ElementAt(i);
+
+                    AssignedTask.ElementAt(i).Name = item.ProcessName;
+                    AssignedTask.ElementAt(i).StartDate = item.StartTime;
+                    AssignedTask.ElementAt(i).DueDate = item.EndTime;
+                    AssignedTask.ElementAt(i).Priority = (TaskPriority)item.Priority;
+                    AssignedTask.ElementAt(i).Current_Stage = item.Notes;
+                    AssignedTask.ElementAt(i).Name = item.ProcessName;
+                    item.StatusId = (int)AssignedTask.ElementAt(i).Status;
+                }
+            }
+            
         }
+        
         void GenerateAssignedTasks() 
         {
             AssignedTask = new ObservableCollection<PlannerTask>();
@@ -63,7 +107,7 @@ namespace WPF_TEST.ViewModel
             plannerTask.Posting_Time = DateTime.Now ;
             plannerTask.StartDate = DateTime.Now ;
             plannerTask.DueDate = DateTime.Now;
-            plannerTask.Priority = TaskPriority.Normal;
+            plannerTask.Priority = (TaskPriority)1;
             plannerTask.Actual_vs_Liftime = 0.65f;
             plannerTask.Completion = 50;
             plannerTask.Current_Stage = "Inspetion";
@@ -75,7 +119,7 @@ namespace WPF_TEST.ViewModel
             plannerTask1.Posting_Time = DateTime.Now ;
             plannerTask1.StartDate = DateTime.Now ;
             plannerTask1.DueDate = DateTime.Now;
-            plannerTask1.Priority = TaskPriority.High;
+            plannerTask1.Priority = (TaskPriority)2;
             plannerTask1.Actual_vs_Liftime = 0.25f;
             plannerTask1.Completion = 30;
             plannerTask1.Current_Stage = "Inspetion";
@@ -86,7 +130,7 @@ namespace WPF_TEST.ViewModel
             plannerTask2.Posting_Time = DateTime.Now;
             plannerTask2.StartDate = DateTime.Now;
             plannerTask2.DueDate = DateTime.Now;
-            plannerTask2.Priority = TaskPriority.Urgent;
+            plannerTask2.Priority = (TaskPriority)3;
             plannerTask2.Actual_vs_Liftime = 0.25f;
             plannerTask2.Completion = 30;
             plannerTask2.Current_Stage = "Inspetion";
@@ -97,13 +141,14 @@ namespace WPF_TEST.ViewModel
             plannerTask4.Posting_Time = DateTime.Now;
             plannerTask4.StartDate = DateTime.Now;
             plannerTask4.DueDate = DateTime.Now;
-            plannerTask4.Priority = TaskPriority.Low;
+            plannerTask4.Priority = 0;
             plannerTask4.Actual_vs_Liftime = 0.25f;
             plannerTask4.Completion = 30;
             plannerTask4.Current_Stage = "Inspetion";
             AssignedTask.Add(plannerTask4);
 
         }
+        
     }
    
     public class PlannerTask 
@@ -112,11 +157,12 @@ namespace WPF_TEST.ViewModel
         public string Name { get; set; }
         public string  Current_Stage { get; set; }
         public TaskPriority Priority { get; set; }
-        public DateTime DueDate { get; set; }
-        public DateTime StartDate { get; set; }
+        public Status Status { get; set; }
+        public DateTime? DueDate { get; set; }
+        public DateTime? StartDate { get; set; }
         
         public float Actual_vs_Liftime { get; set; }
-        public DateTime Posting_Time { get; set; }
+        public DateTime? Posting_Time { get; set; }
     }
     public enum TaskPriority
     {
@@ -132,9 +178,10 @@ namespace WPF_TEST.ViewModel
     }
     public enum Status 
     {
-        Running,
+        
         Queued,
         Ready,
+        Running,     
         Paused,
         Delayed,
         Done,
