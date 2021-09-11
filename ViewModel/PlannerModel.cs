@@ -26,6 +26,7 @@ namespace WPF_TEST.ViewModel
         public const string ImagePath = "pack://application:,,,/WPF_TEST;component/ImageSource/";
         //public const string ImagePath = @"F:\VISUAL PROJECT\C#\WPF\WPF_TEST\ImageSource\";
     }
+    
     public class PlannerModel:BaseViewModel
     {
         //public IEnumerable<TaskPriority> myPriority
@@ -40,8 +41,17 @@ namespace WPF_TEST.ViewModel
         public virtual ObservableCollection<proessdataappointment> Appointments { get; set; }
         public ObservableCollection<ImageSource> Images { get; set; }
         ObservableCollection<PlannerTask> assignedTask;
+        public int Runnings { get; set; }
+        public int Delayeds { get; set; }
+        public int Plans { get; set; }
+        public int Queueds { get; set; }
+        public int Dones { get; set; }
+        public int Readys { get; set; }
+        public int Pauseds { get; set; }
 
         public TaskPriority taskPriority;
+        public Status status;
+        public Status Status { get { return status; } set { SetProperty(ref status, value, "Status"); } }
         public TaskPriority TaskPriority { get { return taskPriority; } set { SetProperty(ref taskPriority, value, "TaskPriority"); } }
         public ObservableCollection<PlannerTask> AssignedTask { get { return assignedTask; } set { SetProperty(ref assignedTask, value, "AssignedTask"); } }
         //public ObservableCollection<PlannerTask> AssignedTask { get; set; }
@@ -51,15 +61,132 @@ namespace WPF_TEST.ViewModel
             DispatcherTimer.Interval = new TimeSpan(0, 0, 5);
             DispatcherTimer.Tick += DispatcherTimer_Tick;
             DispatcherTimer.Start();
-            
-           
+            Initialize();
+
         }
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
             Initialize();
         }
+        string getColor(Status status) 
+        {
+            
+            switch (status) 
+            {
+                case Status.Plan:
+                    return " : Plan";
+                case Status.Ready:
+                    return " : Ready";
+                case Status.Running:
+                    return " : Running";
+                case Status.Delayed:
+                    return " : Delayed";
+                case Status.Done:
+                    return " : Done";
+                case Status.Paused:
+                    return " : Paused";
+                case Status.Queued:
+                    return " : Queued";
+            }
+            return "";
+        }
+        int GetPlan(Status status)
+        {
+            int count = 0;
+            switch (status)
+            {
+                case Status.Plan:
+                    count++;
+                    break;
+               
+            }
+            return count;
+        }
+        int GetPlan(Status status, ref int count)
+        {
 
+            switch (status)
+            {
+                case Status.Plan:
+                    count++;
+                    break;
+
+            }
+            return count;
+        }
+        int GetRunning(Status status,ref int count)
+        {
+            
+            switch (status)
+            {
+                case Status.Running:
+                    count++;
+                    break;
+
+            }
+            return count;
+        }
+        int GetDelayed(Status status, ref int count)
+        {
+
+            switch (status)
+            {
+                case Status.Delayed:
+                    count++;
+                    break;
+
+            }
+            return count;
+        }
+        int GetDone(Status status, ref int count)
+        {
+
+            switch (status)
+            {
+                case Status.Done:
+                    count++;
+                    break;
+
+            }
+            return count;
+        }
+        int GetPaused(Status status, ref int count)
+        {
+
+            switch (status)
+            {
+                case Status.Paused:
+                    count++;
+                    break;
+
+            }
+            return count;
+        }
+        int GetReady(Status status, ref int count)
+        {
+
+            switch (status)
+            {
+                case Status.Ready:
+                    count++;
+                    break;
+
+            }
+            return count;
+        }
+        int GetQueued(Status status, ref int count)
+        {
+
+            switch (status)
+            {
+                case Status.Queued:
+                    count++;
+                    break;
+
+            }
+            return count;
+        }
         void Initialize() 
         {
             using(savedataEntities savedataEntities = new savedataEntities()) 
@@ -67,7 +194,13 @@ namespace WPF_TEST.ViewModel
                 
                 savedataEntities.proessdataappointments.Load();
                 savedataEntities.processdatas.Load();
-
+                int Ready = 0;
+                int Done = 0;
+                int Running = 0;
+                int Delayed = 0;
+                int Paused = 0;
+                int Plan = 0;
+                int Queued = 0;
                 Appointments = savedataEntities.proessdataappointments.Local;
                 if (AssignedTask.Count > Appointments.Count)
                 {
@@ -92,17 +225,39 @@ namespace WPF_TEST.ViewModel
                     }
                     finally 
                     {
+                        
                         var item = Appointments.ElementAt(i);
                         AssignedTask.ElementAt(i).Name = item.ProcessName;
                         AssignedTask.ElementAt(i).StartDate = item.StartTime;
                         AssignedTask.ElementAt(i).DueDate = item.EndTime;
                         AssignedTask.ElementAt(i).Priority = (TaskPriority)item.Priority;
-                        AssignedTask.ElementAt(i).Current_Stage = item.Notes;
+                        AssignedTask.ElementAt(i).Current_Stage = item.Notes + getColor((Status)item.StatusId);
                         AssignedTask.ElementAt(i).Name = item.ProcessName;
+                        AssignedTask.ElementAt(i).Status = (Status)item.StatusId;
                         item.StatusId = (int)AssignedTask.ElementAt(i).Status;
-                     }
+                        TimeSpan? total = item.EndTime - item.StartTime;
+                        TimeSpan? today = DateTime.Now - item.StartTime;
+                        float percent = (float)((float)today.Value.TotalMinutes / total.Value.TotalMinutes);
+                        AssignedTask.ElementAt(i).Completion = percent*100;
+                        GetDone((Status)item.StatusId, ref Done );
+                        GetDelayed((Status)item.StatusId, ref Delayed);
+                        GetPaused((Status)item.StatusId, ref Paused);
+                        GetReady((Status)item.StatusId, ref Ready);
+                        GetRunning((Status)item.StatusId, ref Running);
+                        GetPlan((Status)item.StatusId, ref Plan);
+                        GetQueued((Status)item.StatusId, ref Queued);
+
+                    }
                     
                 }
+                Readys = Ready;
+                Runnings = Running;
+                Plans = Plan;
+                Queueds = Queued;
+                Delayeds = Delayed;
+                Pauseds = Paused;
+                Dones = Done;
+
             }
             
         }
@@ -186,14 +341,14 @@ namespace WPF_TEST.ViewModel
     }
     public enum Status 
     {
-        
-        Queued,
-        Ready,
-        Running,     
-        Paused,
-        Delayed,
-        Done,
-        Plan
+
+        Queued =0,
+        Ready=1,
+        Running = 2,     
+        Paused = 3,
+        Delayed = 4,
+        Done = 5,
+        Plan = 6
 
     }
     [ValueConversion(typeof(TaskPriority), typeof(string))]
@@ -224,42 +379,76 @@ namespace WPF_TEST.ViewModel
             throw new NotSupportedException();
         }
     }
-    [ValueConversion(typeof(TaskPriority), typeof(string))]
-    public class NameToBackgroundConverter : IValueConverter
+    [ValueConversion(typeof(Status), typeof(string))]
+    public class NameToBackgroundConverter : MarkupExtension, IValueConverter
     {
+       
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            
-            switch ((Status)value)
+            Status status = new Status();
+            if (value.ToString().Contains("Running")) 
+            {
+                status = Status.Running;
+            }
+            else if (value.ToString().Contains("Queued"))
+            {
+                status = Status.Queued;
+            }
+            else if(value.ToString().Contains("Ready"))
+            {
+                status = Status.Ready;
+            }
+            else if(value.ToString().Contains("Paused"))
+            {
+                status = Status.Paused;
+            }
+            else if(value.ToString().Contains("Delayed"))
+            {
+                status = Status.Delayed;
+            }
+            else if(value.ToString().Contains("Done"))
+            {
+                status = Status.Done;
+            }
+            else if(value.ToString().Contains("Plan"))
+            {
+                status = Status.Plan;
+            }
+            switch (status)
             {
                 case Status.Running:
                     return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#05fd00"));
-                    
+                    //return Brushes.Green;
                 case Status.Queued:
                     return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#808080"));
-                    
+                    //return Brushes.Gray;
                 case Status.Ready:
                     return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#7c0080"));
-                   
+                    //return Brushes.DarkViolet;
                 case Status.Paused:
                     return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#fefe00"));
-                   
+                    //return Brushes.Yellow;
                 case Status.Delayed:
-                    return new SolidColorBrush((Color)ColorConverter.ConvertFromString("fd0000"));
-                   
+                    return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#fd0000"));
+                    //return Brushes.Red;
                 case Status.Done:
                     return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#6495e5"));
-                    
+                    //return Brushes.Blue;
                 case Status.Plan:
                     return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ffa204"));
-                   
+                    //return Brushes.Orange;
             }
-            return Enum.GetName(typeof(Status), value);
+            return Brushes.White;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return null;
+        }
+
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return this;
         }
     }
     //public enum TaskPriority
@@ -269,7 +458,7 @@ namespace WPF_TEST.ViewModel
     //    High,
     //    Urgent,
     //}
-
+    
     public class Images 
     {
         public BitmapImage IMG { get; set; }

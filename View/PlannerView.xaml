@@ -13,11 +13,12 @@
              xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              DataContext="{StaticResource Planner}"
-             
+             xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
              d:DesignHeight="1080" d:DesignWidth="1920" Unloaded="UserControl_Unloaded">
 
     <UserControl.Resources>
         <local1:TaskPriorityToIconFilenameConverter x:Key="ImageConvert"/>
+        <local1:NameToBackgroundConverter x:Key="ColorConvert"/>
         <DataTemplate x:Key="Template">
             <Border Background="Transparent">
                 <Image 
@@ -26,58 +27,66 @@
                 
                 HorizontalAlignment="Center"/>
             </Border>
-            
+           
         </DataTemplate>
+        <DataTemplate x:Key="Cell_color">
+            <dxg:GridControl>
+                <dxg:GridColumn>
+                    <dxg:GridColumn.CellStyle>
+                        <Style TargetType="dxg:LightweightCellEditor">
+                            <Setter Property="Background" Value="{Binding Status,Converter={StaticResource ColorConvert}}"/>
+                        </Style>
+                    </dxg:GridColumn.CellStyle>
+                </dxg:GridColumn>
+            </dxg:GridControl>
+        </DataTemplate>
+        
+        <Style x:Key="LB" TargetType="dxlc:LayoutItemLabel">
+            <Setter Property="FontSize" Value="30"></Setter>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+        </Style>
        
     </UserControl.Resources>
 
-    <dxlc:LayoutControl 
-        VerticalAlignment="Top"
-        
-        Orientation="Vertical"
-        TextBlock.FontSize="15" >
-
-        <dxlc:LayoutGroup Orientation="Horizontal">
-
-            <StackPanel Orientation="Horizontal" Height="1046" Width="1920">
-                <Expander
+    <DockPanel>
+        <Expander
                     ExpandDirection="Left" Margin="0,23">
-                    <Expander.Header>
-                        <materialDesign:PackIcon Margin="0,0,-10,0"
+            <Expander.Header>
+                <materialDesign:PackIcon Margin="0,0,-10,0"
                             Kind="ChevronDoubleRight"
                             Height="50"
                             Width="30" RenderTransformOrigin="0.5,0.5"
                             >
-                           
-                        </materialDesign:PackIcon>
-                    </Expander.Header>
-                    <StackPanel
+
+                </materialDesign:PackIcon>
+            </Expander.Header>
+            <StackPanel
                         Orientation="Vertical"
                         TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
                         Margin="8,24,16,24">
-                        <materialDesign:Card
+                <materialDesign:Card
                             Background="CadetBlue"
                             Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
                             Width="250"
                             Padding="8"
                             MouseDown="Card_MouseDown"
                             UniformCornerRadius="6">
-                            <StackPanel Orientation="Horizontal">
-                                <StackPanel Orientation="Vertical">
-                                    <materialDesign:PackIcon Kind="CogTransfer"
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical">
+                            <materialDesign:PackIcon Kind="CogTransfer"
                                                              Width="135"
                                                              Height="50"/>
-                                    <TextBlock Text="All Process" FontSize="25"/>
+                            <TextBlock Text="All Process" FontSize="25"/>
 
-                                </StackPanel>
-                                <TextBlock Text="{Binding AssignedTask.Count}"
+                        </StackPanel>
+                        <TextBlock Text="{Binding AssignedTask.Count}"
                                            FontSize="30"
                                            HorizontalAlignment="Right"
                                            VerticalAlignment="Top"
                                            Margin="0,5,-70,0"/>
-                            </StackPanel>
-                        </materialDesign:Card>
-                        <materialDesign:Card
+                    </StackPanel>
+                </materialDesign:Card>
+                <materialDesign:Card
                             Background="CadetBlue"
                             Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
                             Width="250"
@@ -85,22 +94,22 @@
                             MouseDown="Card_MouseDown_1"
                             Margin="0,10,0,0"
                             UniformCornerRadius="6">
-                            <StackPanel Orientation="Horizontal">
-                                <StackPanel Orientation="Vertical">
-                                    <materialDesign:PackIcon Kind="ProgressClock"
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical">
+                            <materialDesign:PackIcon Kind="ProgressClock"
                                                              Width="135"
                                                              Height="50"/>
-                                    <TextBlock Text="In Process" FontSize="25"/>
+                            <TextBlock Text="In Process" FontSize="25"/>
 
-                                </StackPanel>
-                                <TextBlock Text="{Binding AssignedTask.Count}"
+                        </StackPanel>
+                        <TextBlock Text="{Binding Runnings}"
                                            FontSize="30"
                                            HorizontalAlignment="Right"
                                            VerticalAlignment="Top"
                                            Margin="0,5,-70,0"/>
-                            </StackPanel>
-                        </materialDesign:Card>
-                        <materialDesign:Card
+                    </StackPanel>
+                </materialDesign:Card>
+                <materialDesign:Card
                             Background="CadetBlue"
                             Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
                             Width="250"
@@ -108,25 +117,25 @@
                             MouseDown="Card_MouseDown_2"
                             Margin="0,10,0,0"
                             UniformCornerRadius="6">
-                            <StackPanel Orientation="Horizontal">
-                                <StackPanel Orientation="Vertical">
-                                    <materialDesign:PackIcon Kind="Update"
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical">
+                            <materialDesign:PackIcon Kind="Update"
                                                              Width="135"
                                                              Height="50"/>
-                                    <TextBlock Text="Not Scheduled" 
+                            <TextBlock Text="Not Scheduled" 
                                                FontSize="25"
                                                
                                                />
 
-                                </StackPanel>
-                                <TextBlock Text="{Binding AssignedTask.Count}"
+                        </StackPanel>
+                        <TextBlock Text="{Binding Pauseds}"
                                            FontSize="30"
                                            HorizontalAlignment="Right"
                                            VerticalAlignment="Top"
                                            Margin="0,5,-40,0"/>
-                            </StackPanel>
-                        </materialDesign:Card>
-                        <materialDesign:Card
+                    </StackPanel>
+                </materialDesign:Card>
+                <materialDesign:Card
                             Background="CadetBlue"
                             Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
                             Width="250"
@@ -134,22 +143,22 @@
                             Margin="0,10,0,0"
                             MouseDown="Card_MouseDown_3"
                             UniformCornerRadius="6">
-                            <StackPanel Orientation="Horizontal">
-                                <StackPanel Orientation="Vertical">
-                                    <materialDesign:PackIcon Kind="TimerOutline"
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical">
+                            <materialDesign:PackIcon Kind="TimerOutline"
                                                              Width="135"
                                                              Height="50"/>
-                                    <TextBlock Text="Queued" FontSize="25"/>
+                            <TextBlock Text="Queued" FontSize="25"/>
 
-                                </StackPanel>
-                                <TextBlock Text="{Binding AssignedTask.Count}"
+                        </StackPanel>
+                        <TextBlock Text="{Binding Queueds}"
                                            FontSize="30"
                                            HorizontalAlignment="Right"
                                            VerticalAlignment="Top"
                                            Margin="0,5,-70,0"/>
-                            </StackPanel>
-                        </materialDesign:Card>
-                        <materialDesign:Card
+                    </StackPanel>
+                </materialDesign:Card>
+                <materialDesign:Card
                             Background="CadetBlue"
                             Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
                             Width="250"
@@ -157,89 +166,107 @@
                             MouseDown="Card_MouseDown_4"
                             Margin="0,10,0,0"
                             UniformCornerRadius="6">
-                            <StackPanel Orientation="Horizontal">
-                                <StackPanel Orientation="Vertical">
-                                    <materialDesign:PackIcon Kind="ClockCheckOutline"
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical">
+                            <materialDesign:PackIcon Kind="ClockCheckOutline"
                                                              Width="135"
                                                              Height="50"/>
-                                    <TextBlock Text="Completed" FontSize="25"/>
+                            <TextBlock Text="Completed" FontSize="25"/>
 
-                                </StackPanel>
-                                <TextBlock Text="{Binding AssignedTask.Count}"
+                        </StackPanel>
+                        <TextBlock Text="{Binding Dones}"
                                            FontSize="30"
                                            HorizontalAlignment="Right"
                                            VerticalAlignment="Top"
                                            Margin="0,5,-70,0"/>
-                            </StackPanel>
-                        </materialDesign:Card>
-                        
                     </StackPanel>
-                </Expander>
+                </materialDesign:Card>
 
-                <dxlc:LayoutItem Label="Task" LabelPosition="Top" Margin="0,0,0,0" HorizontalAlignment="Stretch" Width="1700">
-                    <dxg:GridControl x:Name="Grid_data" ItemsSource="{Binding Path=AssignedTask}" Height="1000" Margin="0,0,20,0">
-                        <dxg:GridControl.Columns>
-                            <dxg:GridColumn
+            </StackPanel>
+        </Expander>
+        <dxlc:LayoutControl 
+        VerticalAlignment="Top"
+        
+        Orientation="Vertical"
+        TextBlock.FontSize="15" >
+
+            <dxlc:LayoutGroup Orientation="Horizontal">
+
+                <StackPanel Orientation="Horizontal" Height="1046" Width="1920">
+                    
+
+                    <dxlc:LayoutItem Label="Project" LabelStyle="{StaticResource LB}" LabelPosition="Top" Margin="0,0,0,0" HorizontalAlignment="Stretch" Width="auto" >
+                        <dxg:GridControl x:Name="Grid_data" ItemsSource="{Binding Path=AssignedTask}" Height="1000" Margin="0,0,20,0">
+                            <dxg:GridControl.Columns>
+                                <dxg:GridColumn
                                 FieldName="Name" 
                                 Width="100"
                                 
                                 >
 
-                            </dxg:GridColumn>
-                            <dxg:GridColumn 
+                                </dxg:GridColumn>
+                                <dxg:GridColumn 
                                 Header="Posting Date" 
                                 FieldName="Posting_Time" 
                                 
                                 Width="160">
 
-                            </dxg:GridColumn>
-                            <dxg:GridColumn FieldName="StartDate" Header="Start Date" Width="160" >
-                                
-                            </dxg:GridColumn>
-                            <dxg:GridColumn FieldName="DueDate" Header="Due Date" Width="160">
+                                </dxg:GridColumn>
+                                <dxg:GridColumn FieldName="StartDate" Header="Start Date" Width="160" >
 
-                            </dxg:GridColumn>
-                            <dxg:GridColumn FieldName="Priority" Header="Priority" FixedWidth="True">
-                                <dxg:GridColumn.EditSettings>
-                                    
-                                    <dxe:ComboBoxEditSettings ItemsSource="{dxe:EnumItemsSource EnumType=local1:TaskPriority,AllowImages=True}"
+                                </dxg:GridColumn>
+                                <dxg:GridColumn FieldName="DueDate" Header="Due Date" Width="160">
+
+                                </dxg:GridColumn>
+                                <dxg:GridColumn FieldName="Priority" Header="Priority" FixedWidth="True">
+                                    <dxg:GridColumn.EditSettings>
+
+                                        <dxe:ComboBoxEditSettings ItemsSource="{dxe:EnumItemsSource EnumType=local1:TaskPriority,AllowImages=True}"
                                                           ApplyItemTemplateToSelectedItem="True"
                                                           IsTextEditable="False"
                                                           AllowDefaultButton="False"
                                                           HorizontalContentAlignment="Stretch"
                                                           ItemTemplate="{StaticResource Template}"
                                                       />
-                                    
-                                </dxg:GridColumn.EditSettings>
+
+                                    </dxg:GridColumn.EditSettings>
 
 
-                            </dxg:GridColumn>
-                            <dxg:GridColumn FieldName="Actual_vs_Liftime" Header="Actual vs Plan Lifetime/Days">
+                                </dxg:GridColumn>
+                                <dxg:GridColumn FieldName="Actual_vs_Liftime" Header="Actual vs Plan Lifetime/Days">
 
-                            </dxg:GridColumn>
-                            <dxg:GridColumn FieldName="Completion" Header="% Complete">
-                                <dxg:GridColumn.EditSettings>
-                                    <dxe:ProgressBarEditSettings 
+                                </dxg:GridColumn>
+                                <dxg:GridColumn FieldName="Completion" Header="% Complete">
+                                    <dxg:GridColumn.EditSettings>
+                                        <dxe:ProgressBarEditSettings 
                                     ContentDisplayMode="Value" 
                                     DisplayFormat="p0"
                                     IsPercent="True"/>
-                                </dxg:GridColumn.EditSettings>
-                            </dxg:GridColumn>
-                            <dxg:GridColumn 
-                                FieldName="Current_Stage" 
-                                Header="Curent Stage">
-                                
-                            </dxg:GridColumn>
-                        </dxg:GridControl.Columns>
-                    </dxg:GridControl>
-                    
-                </dxlc:LayoutItem>
-                
-            </StackPanel>
-            
-        </dxlc:LayoutGroup>
+                                    </dxg:GridColumn.EditSettings>
+                                </dxg:GridColumn>
+                                <dxg:GridColumn 
+                                    FieldName="Current_Stage" 
+                                    Header="Current Stage"
+                                    Width="300" 
+                                    >
+                                    <dxg:GridColumn.CellStyle>
+                                        <Style BasedOn="{StaticResource {dxgt:GridRowThemeKey ResourceKey=LightweightCellStyle}}" TargetType="{x:Type dxg:LightweightCellEditor}">
+                                            <Setter Property="Background" Value="{Binding Value , Converter={StaticResource ColorConvert}}"/>
+                                        </Style>
+                                       
+                                    </dxg:GridColumn.CellStyle>
+                                </dxg:GridColumn>
+                            </dxg:GridControl.Columns>
+                        </dxg:GridControl>
+
+                    </dxlc:LayoutItem>
+
+                </StackPanel>
+
+            </dxlc:LayoutGroup>
 
 
-    </dxlc:LayoutControl>
+        </dxlc:LayoutControl>
+    </DockPanel>
 
 </UserControl>
