@@ -14,7 +14,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              DataContext="{StaticResource Planner}"
              
-             d:DesignHeight="1080" d:DesignWidth="1920">
+             d:DesignHeight="1080" d:DesignWidth="1920" Unloaded="UserControl_Unloaded">
 
     <UserControl.Resources>
         <local1:TaskPriorityToIconFilenameConverter x:Key="ImageConvert"/>
@@ -177,16 +177,24 @@
                 </Expander>
 
                 <dxlc:LayoutItem Label="Task" LabelPosition="Top" Margin="0,0,0,0" HorizontalAlignment="Stretch" Width="1700">
-                    <dxg:GridControl ItemsSource="{Binding Path=AssignedTask}" Height="1000" Margin="0,0,20,0">
+                    <dxg:GridControl x:Name="Grid_data" ItemsSource="{Binding Path=AssignedTask}" Height="1000" Margin="0,0,20,0">
                         <dxg:GridControl.Columns>
-                            <dxg:GridColumn FieldName="Name" Width="100">
+                            <dxg:GridColumn
+                                FieldName="Name" 
+                                Width="100"
+                                
+                                >
 
                             </dxg:GridColumn>
-                            <dxg:GridColumn Header="Posting Date" FieldName="Posting_Time" Width="160">
+                            <dxg:GridColumn 
+                                Header="Posting Date" 
+                                FieldName="Posting_Time" 
+                                
+                                Width="160">
 
                             </dxg:GridColumn>
-                            <dxg:GridColumn FieldName="StartDate" Header="Start Date" Width="160">
-
+                            <dxg:GridColumn FieldName="StartDate" Header="Start Date" Width="160" >
+                                
                             </dxg:GridColumn>
                             <dxg:GridColumn FieldName="DueDate" Header="Due Date" Width="160">
 

@@ -17,6 +17,7 @@ using System.Windows.Controls;
 using WPF_TEST.Class_Resource;
 using System.Data.Entity;
 using System.Threading;
+using System.Windows.Threading;
 
 namespace WPF_TEST.ViewModel
 {
@@ -33,6 +34,8 @@ namespace WPF_TEST.ViewModel
 
         //}
         //savedataEntities savedataEntities = new savedataEntities();
+        DispatcherTimer DispatcherTimer = new DispatcherTimer();
+
         public virtual ObservableCollection<processdata> Resource { get; set; }
         public virtual ObservableCollection<proessdataappointment> Appointments { get; set; }
         public ObservableCollection<ImageSource> Images { get; set; }
@@ -44,56 +47,61 @@ namespace WPF_TEST.ViewModel
         //public ObservableCollection<PlannerTask> AssignedTask { get; set; }
         public PlannerModel() 
         {
-            GenerateAssignedTasks();
             AssignedTask = new ObservableCollection<PlannerTask>();
-            Thread t = new Thread(() => 
-            {
-                while (true) 
-                {
-                    Initialize();
-                    Thread.Sleep(5000);
-                }
-               
-            });
-            t.Start();
-            t.IsBackground = true;
+            DispatcherTimer.Interval = new TimeSpan(0, 0, 5);
+            DispatcherTimer.Tick += DispatcherTimer_Tick;
+            DispatcherTimer.Start();
+            
+           
+        }
+
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            Initialize();
         }
 
         void Initialize() 
         {
             using(savedataEntities savedataEntities = new savedataEntities()) 
             {
+                
                 savedataEntities.proessdataappointments.Load();
                 savedataEntities.processdatas.Load();
 
                 Appointments = savedataEntities.proessdataappointments.Local;
                 if (AssignedTask.Count > Appointments.Count)
                 {
-                    var secondNotFirst = AssignedTask.Where(x => !Appointments.Any(z => x.Name == z.ProcessName));
-                    AssignedTask.Remove((PlannerTask)secondNotFirst);
+                    var secondNotFirst = AssignedTask.Where(x => !Appointments.Any(z => x.Name == z.ProcessName)).FirstOrDefault();
+                    AssignedTask.Remove(secondNotFirst);
 
 
                 }
                 for (int i = 0; i < Appointments.Count; i++)
                 {
+                    bool err = false;
                     try
                     {
                         var a = AssignedTask.ElementAt(i);
+                        err = false;
                     }
                     catch (Exception)
                     {
-
+                        err = true;
                         AssignedTask.Add(new PlannerTask());
-                    }
-                    var item = Appointments.ElementAt(i);
 
-                    AssignedTask.ElementAt(i).Name = item.ProcessName;
-                    AssignedTask.ElementAt(i).StartDate = item.StartTime;
-                    AssignedTask.ElementAt(i).DueDate = item.EndTime;
-                    AssignedTask.ElementAt(i).Priority = (TaskPriority)item.Priority;
-                    AssignedTask.ElementAt(i).Current_Stage = item.Notes;
-                    AssignedTask.ElementAt(i).Name = item.ProcessName;
-                    item.StatusId = (int)AssignedTask.ElementAt(i).Status;
+                    }
+                    finally 
+                    {
+                        var item = Appointments.ElementAt(i);
+                        AssignedTask.ElementAt(i).Name = item.ProcessName;
+                        AssignedTask.ElementAt(i).StartDate = item.StartTime;
+                        AssignedTask.ElementAt(i).DueDate = item.EndTime;
+                        AssignedTask.ElementAt(i).Priority = (TaskPriority)item.Priority;
+                        AssignedTask.ElementAt(i).Current_Stage = item.Notes;
+                        AssignedTask.ElementAt(i).Name = item.ProcessName;
+                        item.StatusId = (int)AssignedTask.ElementAt(i).Status;
+                     }
+                    
                 }
             }
             
