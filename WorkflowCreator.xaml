@@ -5,10 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_TEST"
         mc:Ignorable="d"
+        xmlns:local1="clr-namespace:WPF_TEST.ViewModel"
         WindowStartupLocation="CenterScreen"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         DataContext="{StaticResource WorkFlow}"
         Title="WorkflowCreator" Height="1080" Width="1920">
+    <Window.Resources>
+        <local1:BoolToVisibilityConverter x:Key="boolConverter"/>
+    </Window.Resources>
     <Grid>
         <ContentControl Content="{Binding SelectedViewModel}"/>
+        <Border BorderBrush="Black" BorderThickness="1" Background="#80000000" Visibility="{Binding Path=IsBusy, Converter={StaticResource boolConverter}}">
+            <Grid Background="#303030">
+                <materialDesign:Card
+            
+            
+             UniformCornerRadius="50">
+                    <ProgressBar
+                Style="{StaticResource MaterialDesignCircularProgressBar}"
+                Value="50"
+                Margin="0,0,0,15"
+                IsIndeterminate="True" Height="50"  Width="50" />
+
+                </materialDesign:Card>
+                <TextBlock Text="Loading. . ." FontSize="30" Foreground="WhiteSmoke" Margin="0,0,0,440" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

@@ -305,6 +305,7 @@
       <DependentUpon>SchedulerMain.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\BusyIndicatorViewModel.cs" />
     <Compile Include="ViewModel\ConfigurationModel.cs" />
     <Compile Include="ViewModel\AMDashBoardModel.cs" />
     <Compile Include="ViewModel\DataCollectConfigureModel.cs" />
@@ -320,6 +321,9 @@
     <Compile Include="ViewModel\WorkflowCreatorModel.cs" />
     <Compile Include="View\AMDashBoardView.xaml.cs">
       <DependentUpon>AMDashBoardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BusyIndicatorView.xaml.cs">
+      <DependentUpon>BusyIndicatorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DataCollectConfigureView.xaml.cs">
       <DependentUpon>DataCollectConfigureView.xaml</DependentUpon>
@@ -402,6 +406,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AMDashBoardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BusyIndicatorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
