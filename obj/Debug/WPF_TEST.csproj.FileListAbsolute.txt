@@ -999,4 +999,3 @@ F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.exe
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.pdb
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\CustomAppointmentWindow1.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\CustomAppointmentWindow1.g.cs
-F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.csproj.AssemblyReference.cache

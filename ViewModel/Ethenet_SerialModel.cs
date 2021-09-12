@@ -11,6 +11,7 @@ namespace WPF_TEST.ViewModel
 {
     public class Ethenet_SerialModel:BaseViewModel
     {
+        
         public ObservableCollection<string> Comport { get; private set; }
         public ObservableCollection<int> Baud_rate { get; private set; }
         public ObservableCollection<Parity> Paritys { get; private set; }
@@ -42,6 +43,10 @@ namespace WPF_TEST.ViewModel
                 Parity_ = Paritys[0];
                 Baudrate = Baud_rate[0];
             }
+        }
+        ~Ethenet_SerialModel() 
+        {
+            
         }
 
     }

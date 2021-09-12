@@ -41,13 +41,21 @@ namespace WPF_TEST.ViewModel
         public virtual ObservableCollection<proessdataappointment> Appointments { get; set; }
         public ObservableCollection<ImageSource> Images { get; set; }
         ObservableCollection<PlannerTask> assignedTask;
-        public int Runnings { get; set; }
-        public int Delayeds { get; set; }
-        public int Plans { get; set; }
-        public int Queueds { get; set; }
-        public int Dones { get; set; }
-        public int Readys { get; set; }
-        public int Pauseds { get; set; }
+        private int running;
+        private int queued;
+        private int done;
+        private int delayed;
+        private int plan;
+        private int paused;
+        private int ready;
+
+        public int Runnings { get { return this.running; } set { this.running = value; OnPropertyChanged("Runnings"); } }
+        public int Delayeds { get { return this.delayed; } set { this.delayed = value; OnPropertyChanged("Delayeds"); } }
+        public int Plans { get { return this.plan; } set { this.plan = value; OnPropertyChanged("Plans"); } }
+        public int Queueds { get { return this.queued; } set { this.queued = value; OnPropertyChanged("Queueds"); } }
+        public int Dones { get { return this.done; } set { this.done = value; OnPropertyChanged("Dones"); } }
+        public int Readys { get { return this.ready; } set { this.ready = value; OnPropertyChanged("Readys"); } }
+        public int Pauseds { get { return this.paused; } set { this.paused = value; OnPropertyChanged("Pauseds"); } }
 
         public TaskPriority taskPriority;
         public Status status;
@@ -91,18 +99,7 @@ namespace WPF_TEST.ViewModel
             }
             return "";
         }
-        int GetPlan(Status status)
-        {
-            int count = 0;
-            switch (status)
-            {
-                case Status.Plan:
-                    count++;
-                    break;
-               
-            }
-            return count;
-        }
+        
         int GetPlan(Status status, ref int count)
         {
 

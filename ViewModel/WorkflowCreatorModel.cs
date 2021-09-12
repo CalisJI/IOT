@@ -31,12 +31,12 @@ namespace WPF_TEST.ViewModel
             {
                 workflowCreatorModel = this;
                 //workflowCreatorModel.SelectedViewModel = PlannerModel;
-                workflowCreatorModel.SelectedViewModel = EditJobModel;
+                workflowCreatorModel.SelectedViewModel = PlannerModel;
                 loaded = true;
             }
             WorKScope = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                this.workflowCreatorModel.SelectedViewModel = PlannerModel;
+                //this.workflowCreatorModel.SelectedViewModel = PlannerModel;
                 //this.dataStreamCollectionModel.SelectedViewModel = DataCollectConfigureModel;
             });
             Save = new RelayCommand<object>((p) => { return true; }, (p) => 

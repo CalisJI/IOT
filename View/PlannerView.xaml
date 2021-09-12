@@ -79,7 +79,7 @@
                             <TextBlock Text="All Process" FontSize="25"/>
 
                         </StackPanel>
-                        <TextBlock Text="{Binding AssignedTask.Count}"
+                        <TextBlock Text="{Binding AssignedTask.Count, UpdateSourceTrigger=PropertyChanged}"
                                            FontSize="30"
                                            HorizontalAlignment="Right"
                                            VerticalAlignment="Top"
@@ -102,7 +102,7 @@
                             <TextBlock Text="In Process" FontSize="25"/>
 
                         </StackPanel>
-                        <TextBlock Text="{Binding Runnings}"
+                        <TextBlock Text="{Binding Runnings, UpdateSourceTrigger=PropertyChanged}"
                                            FontSize="30"
                                            HorizontalAlignment="Right"
                                            VerticalAlignment="Top"
@@ -128,7 +128,7 @@
                                                />
 
                         </StackPanel>
-                        <TextBlock Text="{Binding Pauseds}"
+                        <TextBlock Text="{Binding Pauseds, UpdateSourceTrigger=PropertyChanged}"
                                            FontSize="30"
                                            HorizontalAlignment="Right"
                                            VerticalAlignment="Top"
@@ -151,7 +151,7 @@
                             <TextBlock Text="Queued" FontSize="25"/>
 
                         </StackPanel>
-                        <TextBlock Text="{Binding Queueds}"
+                        <TextBlock Text="{Binding Queueds, UpdateSourceTrigger=PropertyChanged}"
                                            FontSize="30"
                                            HorizontalAlignment="Right"
                                            VerticalAlignment="Top"
@@ -174,7 +174,7 @@
                             <TextBlock Text="Completed" FontSize="25"/>
 
                         </StackPanel>
-                        <TextBlock Text="{Binding Dones}"
+                        <TextBlock Text="{Binding Dones, UpdateSourceTrigger=PropertyChanged}"
                                            FontSize="30"
                                            HorizontalAlignment="Right"
                                            VerticalAlignment="Top"
@@ -188,9 +188,9 @@
         VerticalAlignment="Top"
         
         Orientation="Vertical"
-        TextBlock.FontSize="15" >
+        TextBlock.FontSize="17" >
 
-            <dxlc:LayoutGroup Orientation="Horizontal">
+            <dxlc:LayoutGroup Orientation="Horizontal" Height="1046" Width="1820">
 
                 <StackPanel Orientation="Horizontal" Height="1046" Width="1920">
                     
@@ -200,6 +200,7 @@
                             <dxg:GridControl.Columns>
                                 <dxg:GridColumn
                                 FieldName="Name" 
+                                Header="Name"
                                 Width="100"
                                 
                                 >
@@ -244,10 +245,11 @@
                                     IsPercent="True"/>
                                     </dxg:GridColumn.EditSettings>
                                 </dxg:GridColumn>
-                                <dxg:GridColumn 
+                                <dxg:GridColumn x:Name="Grid2Filter"
+                                    AllowAutoFilter="True"
                                     FieldName="Current_Stage" 
                                     Header="Current Stage"
-                                    Width="300" 
+                                    Width="300" SortOrder="Ascending" SortIndex="0" 
                                     >
                                     <dxg:GridColumn.CellStyle>
                                         <Style BasedOn="{StaticResource {dxgt:GridRowThemeKey ResourceKey=LightweightCellStyle}}" TargetType="{x:Type dxg:LightweightCellEditor}">

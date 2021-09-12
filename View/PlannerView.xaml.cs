@@ -35,7 +35,32 @@ namespace WPF_TEST.View
             timer.Start();
 
         }
-        
+        void filter(int stautus) 
+        {
+            switch (stautus)
+            {
+                case 1:
+                    
+                    Grid_data.FilterString ="Contains([Current_Stage],'Running')";
+                    break;
+                case 2:
+                    Grid_data.FilterString = "Contains([Current_Stage],'Plan')";
+                   
+                    break;
+                case 3:
+                    Grid_data.FilterString = "Contains([Current_Stage],'Queued')";
+                   
+                    break;
+                case 4:
+                    Grid_data.FilterString = "Contains([Current_Stage],'Done')";
+                    
+                    break;
+                default:
+                    Grid_data.ClearColumnFilter("Current_Stage");
+                    break;
+            }
+            
+        }
         private void Timer_Tick(object sender, EventArgs e)
         {
             Grid_data.RefreshData();
@@ -43,27 +68,27 @@ namespace WPF_TEST.View
 
         private void Card_MouseDown(object sender, MouseButtonEventArgs e)
         {
-           
+            filter(0);
         }
 
         private void Card_MouseDown_1(object sender, MouseButtonEventArgs e)
         {
-
+            filter(1);
         }
 
         private void Card_MouseDown_2(object sender, MouseButtonEventArgs e)
         {
-
+            filter(2);
         }
 
         private void Card_MouseDown_3(object sender, MouseButtonEventArgs e)
         {
-
+            filter(3);
         }
 
         private void Card_MouseDown_4(object sender, MouseButtonEventArgs e)
         {
-
+            filter(4);
         }
 
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
