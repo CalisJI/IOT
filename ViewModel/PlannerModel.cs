@@ -35,10 +35,26 @@ namespace WPF_TEST.ViewModel
 
         //}
         //savedataEntities savedataEntities = new savedataEntities();
-        DispatcherTimer DispatcherTimer = new DispatcherTimer();
+        private static DispatcherTimer _dispatcherTimer;
+        public static DispatcherTimer DispatcherTimer 
+        {
+            get 
+            {
+                if (_dispatcherTimer == null) 
+                {
+                    _dispatcherTimer = new DispatcherTimer();
+                }
+                return _dispatcherTimer;
 
-        public virtual ObservableCollection<processdata> Resource { get; set; }
-        public virtual ObservableCollection<proessdataappointment> Appointments { get; set; }
+            }
+            set 
+            {
+                _dispatcherTimer = value;
+            }
+        }
+        public EditJobModel EditJobModel { get; set; }
+        public  ObservableCollection<processdata> Resource { get; set; }
+        public  ObservableCollection<proessdataappointment> Appointments { get; set; }
         public ObservableCollection<ImageSource> Images { get; set; }
         ObservableCollection<PlannerTask> assignedTask;
         private int running;
@@ -48,7 +64,19 @@ namespace WPF_TEST.ViewModel
         private int plan;
         private int paused;
         private int ready;
-
+        private PlannerTask _plannerTask;
+        public PlannerTask PlannerTask 
+        {
+            get 
+            {
+                return _plannerTask;
+            }
+            set 
+            {
+                _plannerTask = value;
+                OnPropertyChanged("PlannerTask");
+            }
+        }
         public int Runnings { get { return this.running; } set { this.running = value; OnPropertyChanged("Runnings"); } }
         public int Delayeds { get { return this.delayed; } set { this.delayed = value; OnPropertyChanged("Delayeds"); } }
         public int Plans { get { return this.plan; } set { this.plan = value; OnPropertyChanged("Plans"); } }
@@ -65,6 +93,8 @@ namespace WPF_TEST.ViewModel
         //public ObservableCollection<PlannerTask> AssignedTask { get; set; }
         public PlannerModel() 
         {
+           
+            
             AssignedTask = new ObservableCollection<PlannerTask>();
             DispatcherTimer.Interval = new TimeSpan(0, 0, 5);
             DispatcherTimer.Tick += DispatcherTimer_Tick;

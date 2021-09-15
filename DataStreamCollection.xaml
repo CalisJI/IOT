@@ -9,6 +9,7 @@
         xmlns:viewmodels ="clr-namespace:WPF_TEST.ViewModel"
         Title="DataStreamCollection" Height="1080" Width="1920"
         WindowStartupLocation="CenterScreen"
+        Closing="Window_Closing"
         DataContext="{StaticResource DataStr}">
     <!--<Grid>
         <Grid.RowDefinitions>

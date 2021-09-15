@@ -5,9 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF_TEST.View"
              mc:Ignorable="d" 
+             xmlns:Connvert="clr-namespace:WPF_TEST.SerialCommunicate"
              d:DesignHeight="1080" d:DesignWidth="1920"
+             
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             DataContext="{StaticResource DataStr}">
+             >
+    <UserControl.Resources>
+        <Connvert:BoolToIsConnectedConverter x:Key="boolconvert"/>
+    </UserControl.Resources>
     <Grid>
         <TabControl
             TabStripPlacement="Bottom"
@@ -52,25 +57,28 @@
                     </StackPanel>
                 </TabItem.Header>
 
-                <Grid 
+                <StackPanel Orientation="Horizontal">
+                    <Grid 
                     Width="auto"
                     Height="auto">
-                    <Grid
+                        <Grid 
                         VerticalAlignment="Top"
                         HorizontalAlignment="Left"
                         Margin="50,20"
                         Width="150"
                         Height="80">
-                        <Button
+                            <Button
+                            DataContext="{StaticResource DataStr}"
                             Style="{StaticResource MaterialDesignRaisedButton}"
                             Height="60"
                             materialDesign:ButtonAssist.CornerRadius="10"
                             ToolTip="MaterialDesignRaisedButton with Round Corners"
                             Command="{Binding DataStream}">
-                            <materialDesign:PackIcon Kind="StepBackward2" Height="40" Width="80"/>
-                        </Button>
-                    </Grid>
-                    <StackPanel 
+                                <materialDesign:PackIcon Kind="StepBackward2" Height="40" Width="80"/>
+                            </Button>
+                        </Grid>
+                        <StackPanel 
+                      
                     Height="900"
                     Width="500"
                     VerticalAlignment="Top"
@@ -78,137 +86,167 @@
                     Margin="60,100"
                     DataContext="{StaticResource Ethernet_Serial}">
 
-                        <ComboBox
+                            <ComboBox
                         materialDesign:HintAssist.Hint="COM Port"
                         FontSize="20"
                         MinWidth="72"
                         Height="45"
-                        ItemsSource="{Binding Comport}"
-                        SelectedValue="{Binding SelectValueOne}"
+                        ItemsSource="{Binding SerialPort.Settings.AvaliablePorts, Mode=OneTime}"
+                         SelectedItem="{Binding SerialPort.Settings.SelectedCOMPort, UpdateSourceTrigger=PropertyChanged}"
                         VerticalAlignment="Top"
                         Margin="20">
 
-                            <ComboBox.SelectedItem>
-                                <Binding
-                            Path="SelectedValueOne"
-                            Mode="TwoWay"
-                            UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules>
 
-                                    </Binding.ValidationRules>
-                                </Binding>
-                            </ComboBox.SelectedItem>
-                            <ComboBox.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <VirtualizingStackPanel />
-                                </ItemsPanelTemplate>
-                            </ComboBox.ItemsPanel>
-                        </ComboBox>
-                        <ComboBox
+                                <ComboBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel />
+                                    </ItemsPanelTemplate>
+                                </ComboBox.ItemsPanel>
+                            </ComboBox>
+                            <ComboBox
                         materialDesign:HintAssist.Hint="Baud Rate"
                         FontSize="20"
                         MinWidth="72"
                         Height="45"
-                        ItemsSource="{Binding Baud_rate}"
-                        SelectedValue="{Binding Baudrate}"
+                        ItemsSource="{Binding SerialPort.Settings.Baud_rate,Mode=OneTime}"
+                        SelectedItem="{Binding SerialPort.Settings.SelectedBaudRate,UpdateSourceTrigger=PropertyChanged}"
                         VerticalAlignment="Top"
                         Margin="20">
-                            <ComboBox.SelectedItem>
-                                <Binding
-                            Path="SelectedValueOne"
-                            Mode="TwoWay"
-                            UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules>
 
-                                    </Binding.ValidationRules>
-                                </Binding>
-                            </ComboBox.SelectedItem>
-                            <ComboBox.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <VirtualizingStackPanel />
-                                </ItemsPanelTemplate>
-                            </ComboBox.ItemsPanel>
-                        </ComboBox>
-                        <ComboBox
+                                <ComboBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel />
+                                    </ItemsPanelTemplate>
+                                </ComboBox.ItemsPanel>
+                            </ComboBox>
+                            <ComboBox
                         materialDesign:HintAssist.Hint="Parity"
                         FontSize="20"
                         MinWidth="72"
                         Height="45"
-                        ItemsSource="{Binding Paritys}"
-                        SelectedValue="{Binding Parity_}"
+                        ItemsSource="{Binding SerialPort.Settings.Paritys,Mode=OneTime}"
+                        SelectedItem="{Binding SerialPort.Settings.SelectedParity,UpdateSourceTrigger=PropertyChanged}"
                         VerticalAlignment="Top"
                         Margin="20">
-                            <ComboBox.SelectedItem>
-                                <Binding
-                            Path="SelectedValueOne"
-                            Mode="TwoWay"
-                            UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules>
 
-                                    </Binding.ValidationRules>
-                                </Binding>
-                            </ComboBox.SelectedItem>
-                            <ComboBox.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <VirtualizingStackPanel />
-                                </ItemsPanelTemplate>
-                            </ComboBox.ItemsPanel>
-                        </ComboBox>
-                        <ComboBox
+                                <ComboBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel />
+                                    </ItemsPanelTemplate>
+                                </ComboBox.ItemsPanel>
+                            </ComboBox>
+                            <ComboBox
                         materialDesign:HintAssist.Hint="Stop Bits"
                         FontSize="20"
                         MinWidth="72"
                         Height="45"
-                        ItemsSource="{Binding Stop_bits}"
-                        SelectedValue="{Binding StopBits}"
+                        ItemsSource="{Binding SerialPort.Settings.Stop_bits}"
+                        SelectedItem="{Binding SerialPort.Settings.SelectedStopBits,UpdateSourceTrigger=PropertyChanged}"
                         VerticalAlignment="Top"
                         Margin="20">
-                            <ComboBox.SelectedItem>
-                                <Binding
-                            Path="SelectedValueOne"
-                            Mode="TwoWay"
-                            UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules>
 
-                                    </Binding.ValidationRules>
-                                </Binding>
-                            </ComboBox.SelectedItem>
-                            <ComboBox.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <VirtualizingStackPanel />
-                                </ItemsPanelTemplate>
-                            </ComboBox.ItemsPanel>
-                        </ComboBox>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock 
+                                <ComboBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel />
+                                    </ItemsPanelTemplate>
+                                </ComboBox.ItemsPanel>
+                            </ComboBox>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock 
                             Text="Read Time Out (ms):" 
                             FontSize="20" 
                             Width="180" 
                             HorizontalAlignment="Left" 
                             Margin="20,10,5,15"/>
-                            <TextBox 
+                                <TextBox 
                             Text="500"
                             FontSize="20"
                             Width="350"
                             Margin="20,10,5,15"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock 
+                                    Text="Update Rate (ms):" 
+                                    FontSize="20" 
+                                    Width="180" 
+                                    HorizontalAlignment="Left" 
+                                    Margin="20,15,5,5"/>
+                                <TextBox 
+                                    Text="1000"
+                                    FontSize="20"
+                                    Width="350"
+                                    Margin="20,15,5,5"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Grid
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Left"
+                                    Margin="50,20"
+                                    Width="150"
+                                    Height="80">
+                                    <Button
+                                        Style="{StaticResource MaterialDesignRaisedButton}"
+                                        Height="60"
+                                        materialDesign:ButtonAssist.CornerRadius="10"
+                                        IsEnabled="{Binding SerialPort.everIsConnected, UpdateSourceTrigger=PropertyChanged,Converter={StaticResource boolconvert}}"
+                                        ToolTip="MaterialDesignRaisedButton with Round Corners"
+                                        Command="{Binding SerialPort.AutoConnectDisconnectCommand, Mode=OneTime}">
+                                        <materialDesign:PackIcon Kind="PowerPlugOutline" Height="40" Width="80"/>
+                                    </Button>
+                                </Grid>
+                                <Grid
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Left"
+                                    Margin="50,20"
+                                    Width="150"
+                                    Height="80">
+                                    <Button
+                                        Style="{StaticResource MaterialDesignRaisedButton}"
+                                        Height="60"
+                                        IsEnabled="{Binding SerialPort.IsConnected, UpdateSourceTrigger=PropertyChanged,Converter={StaticResource boolconvert}}"
+                                        materialDesign:ButtonAssist.CornerRadius="10"
+                                        ToolTip="MaterialDesignRaisedButton with Round Corners"
+                                        Command="{Binding SerialPort.AutoConnectDisconnectCommand, Mode=OneTime}">
+                                        <materialDesign:PackIcon Kind="PowerPlugOffOutline" Height="40" Width="80"/>
+                                    </Button>
+                                </Grid>
+                            </StackPanel>
+                            <Grid
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Center"
+                                    Margin="50,20"
+                                    Width="150"
+                                    Height="80">
+                                <Button
+                                        Style="{StaticResource MaterialDesignRaisedButton}"
+                                        Height="60"
+                                        materialDesign:ButtonAssist.CornerRadius="10"
+                                        ToolTip="MaterialDesignRaisedButton with Round Corners"
+                                        Command="{Binding }">
+                                    <materialDesign:PackIcon Kind="Send" Height="40" Width="80"/>
+                                </Button>
+                            </Grid>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock 
-                            Text="Update Rate (ms):" 
-                            FontSize="20" 
-                            Width="180" 
-                            HorizontalAlignment="Left" 
-                            Margin="20,15,5,5"/>
-                            <TextBox 
-                            Text="1000"
-                            FontSize="20"
-                            Width="350"
-                            Margin="20,15,5,5"/>
-                        </StackPanel>
-                    </StackPanel>
 
-                </Grid>
-                
+                    </Grid>
+                    <Grid DataContext="{StaticResource Ethernet_Serial}" Width="1250">
+                        
+                            <TextBox Text="{Binding Messages.MessagesText, UpdateSourceTrigger=PropertyChanged}"
+                                     x:Name="RCVtb"
+                                     FontSize="20"
+                                     TextWrapping="Wrap"
+                                     VerticalScrollBarVisibility="Auto"
+                                     
+                                     AcceptsReturn="True"
+                                     IsReadOnly="True"
+                                     Background="Lime"
+                                     Margin="0,100,0,100" TextChanged="RCVtb_TextChanged"/>
+                       
+
+
+                    </Grid>
+                </StackPanel>
+
             </TabItem>
             
         </TabControl>

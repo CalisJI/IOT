@@ -24,5 +24,10 @@ namespace WPF_TEST.View
         {
             InitializeComponent();
         }
+
+        private void RCVtb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            RCVtb.ScrollToEnd();
+        }
     }
 }

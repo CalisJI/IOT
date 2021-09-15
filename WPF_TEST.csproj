@@ -304,6 +304,13 @@
     <Compile Include="SchedulerMain.xaml.cs">
       <DependentUpon>SchedulerMain.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SerialCommunicate\BoolToIsConnectedConverter.cs" />
+    <Compile Include="SerialCommunicate\iModbus.cs" />
+    <Compile Include="SerialCommunicate\MessageReceiver.cs" />
+    <Compile Include="SerialCommunicate\MessageSender.cs" />
+    <Compile Include="SerialCommunicate\MessagesViewModel.cs" />
+    <Compile Include="SerialCommunicate\PortSettingsViewModel.cs" />
+    <Compile Include="SerialCommunicate\SerialPortViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\BusyIndicatorViewModel.cs" />
     <Compile Include="ViewModel\ConfigurationModel.cs" />

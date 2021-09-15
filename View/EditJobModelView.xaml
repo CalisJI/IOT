@@ -137,6 +137,7 @@
                         Background="Red"
                         Height="50"
                         Text="Demo"
+                        
                         FontSize="25"
                          Margin="20,0,0,10"/>
                     <DatePicker 
@@ -188,7 +189,7 @@
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
                     Margin="0,0,20,30"
-                    Command="{Binding Save}"
+                    Command="{Binding Save ,UpdateSourceTrigger=PropertyChanged}"
                     Background="#673ab7"
                     materialDesign:ButtonAssist.CornerRadius="8">
                     <StackPanel Orientation="Vertical">
@@ -200,6 +201,32 @@
                             Foreground="White"/>
                         <TextBlock 
                             Text="Save"
+                            FontSize="15"
+                            HorizontalAlignment="Center"
+                            Foreground="White"/>
+                    </StackPanel>
+
+                </Button>
+                <Button
+                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    Height="70"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                    Width="70"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Margin="0,0,20,150"
+                    Command="{Binding Goback,UpdateSourceTrigger=PropertyChanged}"
+                    Background="#673ab7"
+                    materialDesign:ButtonAssist.CornerRadius="8">
+                    <StackPanel Orientation="Vertical">
+
+                        <materialDesign:PackIcon 
+                            Kind="ArrowLeftCircle"
+                            Height="40"
+                            Width="40"
+                            Foreground="White"/>
+                        <TextBlock 
+                            Text="Back"
                             FontSize="15"
                             HorizontalAlignment="Center"
                             Foreground="White"/>
