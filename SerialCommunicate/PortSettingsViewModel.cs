@@ -16,6 +16,14 @@ namespace WPF_TEST.SerialCommunicate
         private int _baudrate;
         private Parity _parity;
         private StopBits _stopBit;
+        private int _databits;
+        public int DataBit 
+        {
+
+            get { return _databits; }
+            set { _databits = value; OnPropertyChanged("DataBit");}
+        
+        }
         public string SelectedCOMPort
         {
            
@@ -45,7 +53,7 @@ namespace WPF_TEST.SerialCommunicate
         public ObservableCollection<int> Baud_rate { get; private set; }
         public ObservableCollection<Parity> Paritys { get; private set; }
         public ObservableCollection<StopBits> Stop_bits { get; private set; }
-
+        public ObservableCollection<int> DataBits { get; private set; }
         public ICommand RefreshPortsCommand { get; }
 
         public PortSettingsViewModel()
@@ -54,6 +62,7 @@ namespace WPF_TEST.SerialCommunicate
             Baud_rate = new ObservableCollection<int>() { 9600, 14400, 19200, 28800, 38400, 57600, 76800, 115200, 230400 };
             Paritys = new ObservableCollection<Parity>() { Parity.None, Parity.Odd, Parity.Even, Parity.Mark, Parity.Space };
             Stop_bits = new ObservableCollection<StopBits>() { StopBits.One, StopBits.None, StopBits.Two, StopBits.OnePointFive };
+            DataBits = new ObservableCollection<int>() { 7, 8 };
             RefreshPortsCommand = new RelayCommand<object>((p) => { return true; }, (p) => { RefreshPorts(); });
 
             RefreshPorts();

@@ -13,4 +13,5 @@
     <viewmodel:SchedulerViewModel x:Key="ScheduleViewModel"/>
     <viewmodel:OutlookInspiredDemoViewModel x:Key="Outlook"/>
     <viewmodel:BusyIndicatorViewModel x:Key="Busy"/>
+    <viewmodel:ModbusViewModel x:Key="Modbus"/>
 </ResourceDictionary>

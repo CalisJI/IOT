@@ -23,6 +23,7 @@ namespace WPF_TEST.ViewModel
     public class SchedulerViewModel:BaseViewModel
     {
         savedataEntities savedataEntities = new savedataEntities();
+       // ServerData ServerData = new ServerData();
         //public BindingList<processdata> Resource { get; set; }
         //public BindingList<proessdataappointment> Appointments { get; set; }
         public virtual ObservableCollection<processdata> Resource { get; set; }
@@ -61,6 +62,7 @@ namespace WPF_TEST.ViewModel
             {
                 return new RelayCommand<object>((p) => { return true; }, (p)=>{
                     var a = DataProvider.INS.DB.proessdataappointments.ToList();
+                    ///var d = DataProvider.INS.ServerData.Test.ToList();
                     if (Appointments.Count >= a.Count)
                     {
                         Appointments.ElementAt(Appointments.Count - 1).idProessDataAppoint = Appointments.ElementAt(Appointments.Count - 2).idProessDataAppoint + 1;

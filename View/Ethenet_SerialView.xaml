@@ -31,16 +31,6 @@
                             FontWeight="DemiBold"/>
                     </StackPanel>
                 </TabItem.Header>
-                <TextBlock>
-                    <Run
-                        Text="tab 2 content. Default look and behaviors." />
-                        <LineBreak />
-                        <LineBreak />
-                    <Run
-                        FontStyle="Italic">
-      
-                    </Run>
-                </TextBlock>
                 
             </TabItem>
             <TabItem
@@ -91,6 +81,7 @@
                         FontSize="20"
                         MinWidth="72"
                         Height="45"
+                        
                         ItemsSource="{Binding SerialPort.Settings.AvaliablePorts, Mode=OneTime}"
                          SelectedItem="{Binding SerialPort.Settings.SelectedCOMPort, UpdateSourceTrigger=PropertyChanged}"
                         VerticalAlignment="Top"
@@ -181,7 +172,7 @@
                                 <Grid
                                     VerticalAlignment="Top"
                                     HorizontalAlignment="Left"
-                                    Margin="50,20"
+                                    Margin="24,20"
                                     Width="150"
                                     Height="80">
                                     <Button
@@ -189,15 +180,29 @@
                                         Height="60"
                                         materialDesign:ButtonAssist.CornerRadius="10"
                                         IsEnabled="{Binding SerialPort.everIsConnected, UpdateSourceTrigger=PropertyChanged,Converter={StaticResource boolconvert}}"
-                                        ToolTip="MaterialDesignRaisedButton with Round Corners"
+                                        ToolTip="Connect"
                                         Command="{Binding SerialPort.AutoConnectDisconnectCommand, Mode=OneTime}">
                                         <materialDesign:PackIcon Kind="PowerPlugOutline" Height="40" Width="80"/>
                                     </Button>
                                 </Grid>
                                 <Grid
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                                    <Button
+                                        Style="{StaticResource MaterialDesignRaisedButton}"
+                                        Height="60"
+                                        
+                                        materialDesign:ButtonAssist.CornerRadius="10"
+                                        ToolTip="Disconnect"
+                                        Command="{Binding SerialPort.Settings.RefreshPortsCommand, Mode=Default}">
+                                        <materialDesign:PackIcon Kind="Refresh" Height="40" Width="80"/>
+                                    </Button>
+                                    
+                                </Grid>
+                                <Grid
                                     VerticalAlignment="Top"
                                     HorizontalAlignment="Left"
-                                    Margin="50,20"
+                                    Margin="20,20"
                                     Width="150"
                                     Height="80">
                                     <Button
@@ -205,11 +210,12 @@
                                         Height="60"
                                         IsEnabled="{Binding SerialPort.IsConnected, UpdateSourceTrigger=PropertyChanged,Converter={StaticResource boolconvert}}"
                                         materialDesign:ButtonAssist.CornerRadius="10"
-                                        ToolTip="MaterialDesignRaisedButton with Round Corners"
+                                        ToolTip="Disconnect"
                                         Command="{Binding SerialPort.AutoConnectDisconnectCommand, Mode=OneTime}">
                                         <materialDesign:PackIcon Kind="PowerPlugOffOutline" Height="40" Width="80"/>
                                     </Button>
                                 </Grid>
+                                
                             </StackPanel>
                             <Grid
                                     VerticalAlignment="Top"
@@ -221,7 +227,7 @@
                                         Style="{StaticResource MaterialDesignRaisedButton}"
                                         Height="60"
                                         materialDesign:ButtonAssist.CornerRadius="10"
-                                        ToolTip="MaterialDesignRaisedButton with Round Corners"
+                                        ToolTip="Send"
                                         Command="{Binding }">
                                     <materialDesign:PackIcon Kind="Send" Height="40" Width="80"/>
                                 </Button>
@@ -239,7 +245,7 @@
                                      
                                      AcceptsReturn="True"
                                      IsReadOnly="True"
-                                     Background="Lime"
+                                     Background="#ffffff"
                                      Margin="0,100,0,100" TextChanged="RCVtb_TextChanged"/>
                        
 

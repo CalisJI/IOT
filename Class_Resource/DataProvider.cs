@@ -24,9 +24,11 @@ namespace WPF_TEST.Class_Resource
             }
         }
         public savedataEntities DB { get; set; }
+        //public ServerData ServerData { get; set; }
         private DataProvider()
         {
             DB = new savedataEntities();
+            //ServerData = new ServerData();
         }
     }
 }

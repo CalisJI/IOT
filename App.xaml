@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:WPF_TEST"
              xmlns:viewmodels="clr-namespace:WPF_TEST.ViewModel"
              xmlns:views="clr-namespace:WPF_TEST.View"
-             StartupUri="WorkflowCreator.xaml">
+             StartupUri="DataStreamCollection.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -34,6 +34,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:EditJobModel}">
                 <views:EditJobModelView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:ModbusViewModel}">
+                <views:ModbusView/>
             </DataTemplate>
             
             
