@@ -348,6 +348,7 @@
     <Compile Include="SerialCommunicate\MessagesViewModel.cs" />
     <Compile Include="SerialCommunicate\PortSettingsViewModel.cs" />
     <Compile Include="SerialCommunicate\SerialPortViewModel.cs" />
+    <Compile Include="ViewModel\AddNewConnectionViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\BusyIndicatorViewModel.cs" />
     <Compile Include="ViewModel\ConfigurationModel.cs" />
@@ -365,6 +366,9 @@
     <Compile Include="ViewModel\PlannerModel.cs" />
     <Compile Include="ViewModel\SchedulerViewModel.cs" />
     <Compile Include="ViewModel\WorkflowCreatorModel.cs" />
+    <Compile Include="View\AddNewConnectionView.xaml.cs">
+      <DependentUpon>AddNewConnectionView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AMDashBoardView.xaml.cs">
       <DependentUpon>AMDashBoardView.xaml</DependentUpon>
     </Compile>
@@ -455,6 +459,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SchedulerMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddNewConnectionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

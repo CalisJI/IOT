@@ -14,4 +14,5 @@
     <viewmodel:OutlookInspiredDemoViewModel x:Key="Outlook"/>
     <viewmodel:BusyIndicatorViewModel x:Key="Busy"/>
     <viewmodel:ModbusViewModel x:Key="Modbus"/>
+    <viewmodel:AddNewConnectionViewModel x:Key="AddModbusDevice"/>
 </ResourceDictionary>
