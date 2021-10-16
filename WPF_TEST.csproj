@@ -290,28 +290,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Class_Resource\DataEntity.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataEntity.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Class_Resource\DataEntity.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Class_Resource\DataEntity.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataEntity.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Class_Resource\DataProvider.cs" />
-    <Compile Include="Class_Resource\processdata.cs">
-      <DependentUpon>DataEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Class_Resource\proessdataappointment.cs">
-      <DependentUpon>DataEntity.tt</DependentUpon>
-    </Compile>
     <Compile Include="Class_Resource\ServerData.cs" />
     <Compile Include="Class_Resource\Sqlexcute.cs" />
     <Compile Include="Command\UpdateViewCommand.cs" />
@@ -356,10 +335,12 @@
     <Compile Include="ViewModel\DataCollectConfigureModel.cs" />
     <Compile Include="ViewModel\DataStreamCollectionModel.cs" />
     <Compile Include="ViewModel\EditJobModel.cs" />
+    <Compile Include="ViewModel\EditModbusConnectionViewModel.cs" />
     <Compile Include="ViewModel\Ethenet_SerialModel.cs" />
     <Compile Include="ViewModel\MainMenuModel.cs" />
     <Compile Include="ViewModel\MainScreenViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ModbusScreenViewModel.cs" />
     <Compile Include="ViewModel\ModbusViewModel.cs" />
     <Compile Include="ViewModel\OutlookExchangeOptionsWindowViewModel.cs" />
     <Compile Include="ViewModel\OutlookInspiredDemoViewModel.cs" />
@@ -381,6 +362,9 @@
     <Compile Include="View\EditJobModelView.xaml.cs">
       <DependentUpon>EditJobModelView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EditModbusView.xaml.cs">
+      <DependentUpon>EditModbusView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Ethenet_SerialView.xaml.cs">
       <DependentUpon>Ethenet_SerialView.xaml</DependentUpon>
     </Compile>
@@ -389,6 +373,9 @@
     </Compile>
     <Compile Include="View\MainMenuView.xaml.cs">
       <DependentUpon>MainMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ModbusScreenView.xaml.cs">
+      <DependentUpon>ModbusScreenView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ModbusView.xaml.cs">
       <DependentUpon>ModbusView.xaml</DependentUpon>
@@ -482,6 +469,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\EditModbusView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Ethenet_SerialView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -491,6 +482,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ModbusScreenView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -526,13 +521,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Class_Resource\DataEntity.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DataEntity.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Class_Resource\DataEntity.edmx.diagram">
-      <DependentUpon>DataEntity.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -565,16 +553,6 @@
     <Resource Include="ImageSource\Allprocess.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Class_Resource\DataEntity.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DataEntity.edmx</DependentUpon>
-      <LastGenOutput>DataEntity.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Class_Resource\DataEntity.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DataEntity.edmx</DependentUpon>
-      <LastGenOutput>DataEntity.cs</LastGenOutput>
-    </Content>
     <Content Include="Images\OutlookInspired\Svg\CalendarGroup.svg" />
     <Content Include="Images\OutlookInspired\Svg\CalendarPermission.svg" />
     <Content Include="Images\OutlookInspired\Svg\Categorize.svg" />

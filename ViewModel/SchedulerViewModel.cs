@@ -22,12 +22,12 @@ namespace WPF_TEST.ViewModel
     [POCOViewModel]
     public class SchedulerViewModel:BaseViewModel
     {
-        savedataEntities savedataEntities = new savedataEntities();
+        //savedataEntities savedataEntities = new savedataEntities();
        // ServerData ServerData = new ServerData();
         //public BindingList<processdata> Resource { get; set; }
         //public BindingList<proessdataappointment> Appointments { get; set; }
-        public virtual ObservableCollection<processdata> Resource { get; set; }
-        public virtual ObservableCollection<proessdataappointment> Appointments { get; set; }
+        //public virtual ObservableCollection<processdata> Resource { get; set; }
+        //public virtual ObservableCollection<proessdataappointment> Appointments { get; set; }
 
 
         //private BaseViewModel _selectedViewModel;
@@ -61,18 +61,18 @@ namespace WPF_TEST.ViewModel
             get 
             {
                 return new RelayCommand<object>((p) => { return true; }, (p)=>{
-                    var a = DataProvider.INS.DB.proessdataappointments.ToList();
-                    ///var d = DataProvider.INS.ServerData.Test.ToList();
-                    if (Appointments.Count >= a.Count)
-                    {
-                        Appointments.ElementAt(Appointments.Count - 1).idProessDataAppoint = Appointments.ElementAt(Appointments.Count - 2).idProessDataAppoint + 1;
-                    }
+                    //var a = DataProvider.INS.DB.proessdataappointments.ToList();
+                    /////var d = DataProvider.INS.ServerData.Test.ToList();
+                    //if (Appointments.Count >= a.Count)
+                    //{
+                    //    Appointments.ElementAt(Appointments.Count - 1).idProessDataAppoint = Appointments.ElementAt(Appointments.Count - 2).idProessDataAppoint + 1;
+                    //}
 
 
 
-                    var b = Resource;
-                    var c = Appointments;
-                    savedataEntities.SaveChanges();
+                    //var b = Resource;
+                    //var c = Appointments;
+                    //savedataEntities.SaveChanges();
                     //IEnumerable<ObservableCollection<proessdataappointment>> observableCollections = (IEnumerable<ObservableCollection<proessdataappointment>>)Appointments;
                     //using (var reader = ObjectReader.Create(observableCollections)) 
                     //{
@@ -85,14 +85,14 @@ namespace WPF_TEST.ViewModel
         
         public SchedulerViewModel()
         {
-            savedataEntities.proessdataappointments.Load();
-            savedataEntities.processdatas.Load();
+            //savedataEntities.proessdataappointments.Load();
+            //savedataEntities.processdatas.Load();
             
             
-            Resource = new ObservableCollection<processdata>();
-            Appointments = new ObservableCollection<proessdataappointment>();
-            Resource = savedataEntities.processdatas.Local;
-            Appointments = savedataEntities.proessdataappointments.Local;
+            //Resource = new ObservableCollection<processdata>();
+            //Appointments = new ObservableCollection<proessdataappointment>();
+            //Resource = savedataEntities.processdatas.Local;
+            //Appointments = savedataEntities.proessdataappointments.Local;
             //foreach (var item in a)
             //{
             //    Resource.Add(item);

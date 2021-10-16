@@ -53,8 +53,8 @@ namespace WPF_TEST.ViewModel
             }
         }
         public EditJobModel EditJobModel { get; set; }
-        public  ObservableCollection<processdata> Resource { get; set; }
-        public  ObservableCollection<proessdataappointment> Appointments { get; set; }
+        //public  ObservableCollection<processdata> Resource { get; set; }
+        //public  ObservableCollection<proessdataappointment> Appointments { get; set; }
         public ObservableCollection<ImageSource> Images { get; set; }
         ObservableCollection<PlannerTask> assignedTask;
         private int running;
@@ -99,13 +99,13 @@ namespace WPF_TEST.ViewModel
             DispatcherTimer.Interval = new TimeSpan(0, 0, 5);
             DispatcherTimer.Tick += DispatcherTimer_Tick;
             DispatcherTimer.Start();
-            Initialize();
+            //Initialize();
 
         }
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
-            Initialize();
+            //Initialize();
         }
         string getColor(Status status) 
         {
@@ -214,80 +214,80 @@ namespace WPF_TEST.ViewModel
             }
             return count;
         }
-        void Initialize() 
-        {
-            using(savedataEntities savedataEntities = new savedataEntities()) 
-            {
+        //void Initialize() 
+        //{
+        //    using(savedataEntities savedataEntities = new savedataEntities()) 
+        //    {
                 
-                savedataEntities.proessdataappointments.Load();
-                savedataEntities.processdatas.Load();
-                int Ready = 0;
-                int Done = 0;
-                int Running = 0;
-                int Delayed = 0;
-                int Paused = 0;
-                int Plan = 0;
-                int Queued = 0;
-                Appointments = savedataEntities.proessdataappointments.Local;
-                if (AssignedTask.Count > Appointments.Count)
-                {
-                    var secondNotFirst = AssignedTask.Where(x => !Appointments.Any(z => x.Name == z.ProcessName)).FirstOrDefault();
-                    AssignedTask.Remove(secondNotFirst);
+        //        savedataEntities.proessdataappointments.Load();
+        //        savedataEntities.processdatas.Load();
+        //        int Ready = 0;
+        //        int Done = 0;
+        //        int Running = 0;
+        //        int Delayed = 0;
+        //        int Paused = 0;
+        //        int Plan = 0;
+        //        int Queued = 0;
+        //        Appointments = savedataEntities.proessdataappointments.Local;
+        //        if (AssignedTask.Count > Appointments.Count)
+        //        {
+        //            var secondNotFirst = AssignedTask.Where(x => !Appointments.Any(z => x.Name == z.ProcessName)).FirstOrDefault();
+        //            AssignedTask.Remove(secondNotFirst);
 
 
-                }
-                for (int i = 0; i < Appointments.Count; i++)
-                {
-                    bool err = false;
-                    try
-                    {
-                        var a = AssignedTask.ElementAt(i);
-                        err = false;
-                    }
-                    catch (Exception)
-                    {
-                        err = true;
-                        AssignedTask.Add(new PlannerTask());
+        //        }
+        //        for (int i = 0; i < Appointments.Count; i++)
+        //        {
+        //            bool err = false;
+        //            try
+        //            {
+        //                var a = AssignedTask.ElementAt(i);
+        //                err = false;
+        //            }
+        //            catch (Exception)
+        //            {
+        //                err = true;
+        //                AssignedTask.Add(new PlannerTask());
 
-                    }
-                    finally 
-                    {
+        //            }
+        //            finally 
+        //            {
                         
-                        var item = Appointments.ElementAt(i);
-                        AssignedTask.ElementAt(i).Name = item.ProcessName;
-                        AssignedTask.ElementAt(i).StartDate = item.StartTime;
-                        AssignedTask.ElementAt(i).DueDate = item.EndTime;
-                        AssignedTask.ElementAt(i).Priority = (TaskPriority)item.Priority;
-                        AssignedTask.ElementAt(i).Current_Stage = item.Notes + getColor((Status)item.StatusId);
-                        AssignedTask.ElementAt(i).Name = item.ProcessName;
-                        AssignedTask.ElementAt(i).Status = (Status)item.StatusId;
-                        item.StatusId = (int)AssignedTask.ElementAt(i).Status;
-                        TimeSpan? total = item.EndTime - item.StartTime;
-                        TimeSpan? today = DateTime.Now - item.StartTime;
-                        float percent = (float)((float)today.Value.TotalMinutes / total.Value.TotalMinutes);
-                        AssignedTask.ElementAt(i).Completion = percent*100;
-                        GetDone((Status)item.StatusId, ref Done );
-                        GetDelayed((Status)item.StatusId, ref Delayed);
-                        GetPaused((Status)item.StatusId, ref Paused);
-                        GetReady((Status)item.StatusId, ref Ready);
-                        GetRunning((Status)item.StatusId, ref Running);
-                        GetPlan((Status)item.StatusId, ref Plan);
-                        GetQueued((Status)item.StatusId, ref Queued);
+        //                var item = Appointments.ElementAt(i);
+        //                AssignedTask.ElementAt(i).Name = item.ProcessName;
+        //                AssignedTask.ElementAt(i).StartDate = item.StartTime;
+        //                AssignedTask.ElementAt(i).DueDate = item.EndTime;
+        //                AssignedTask.ElementAt(i).Priority = (TaskPriority)item.Priority;
+        //                AssignedTask.ElementAt(i).Current_Stage = item.Notes + getColor((Status)item.StatusId);
+        //                AssignedTask.ElementAt(i).Name = item.ProcessName;
+        //                AssignedTask.ElementAt(i).Status = (Status)item.StatusId;
+        //                item.StatusId = (int)AssignedTask.ElementAt(i).Status;
+        //                TimeSpan? total = item.EndTime - item.StartTime;
+        //                TimeSpan? today = DateTime.Now - item.StartTime;
+        //                float percent = (float)((float)today.Value.TotalMinutes / total.Value.TotalMinutes);
+        //                AssignedTask.ElementAt(i).Completion = percent*100;
+        //                GetDone((Status)item.StatusId, ref Done );
+        //                GetDelayed((Status)item.StatusId, ref Delayed);
+        //                GetPaused((Status)item.StatusId, ref Paused);
+        //                GetReady((Status)item.StatusId, ref Ready);
+        //                GetRunning((Status)item.StatusId, ref Running);
+        //                GetPlan((Status)item.StatusId, ref Plan);
+        //                GetQueued((Status)item.StatusId, ref Queued);
 
-                    }
+        //            }
                     
-                }
-                Readys = Ready;
-                Runnings = Running;
-                Plans = Plan;
-                Queueds = Queued;
-                Delayeds = Delayed;
-                Pauseds = Paused;
-                Dones = Done;
+        //        }
+        //        Readys = Ready;
+        //        Runnings = Running;
+        //        Plans = Plan;
+        //        Queueds = Queued;
+        //        Delayeds = Delayed;
+        //        Pauseds = Paused;
+        //        Dones = Done;
 
-            }
+        //    }
             
-        }
+        //}
         
         void GenerateAssignedTasks() 
         {

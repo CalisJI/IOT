@@ -12,11 +12,12 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
-                <ResourceDictionary Source="/MainResource/MainResource.xaml"/>
-                <ResourceDictionary Source="/MainResource/OutlookInspired.xaml"/>
-                
-               
+                <ResourceDictionary Source="pack://application:,,,/MainResource/MainResource.xaml"/>
+
+
+
             </ResourceDictionary.MergedDictionaries>
+
             <DataTemplate DataType="{x:Type viewmodels:AMDashBoardModel}">
                 <views:AMDashBoard/>
             </DataTemplate>
@@ -41,10 +42,9 @@
             <DataTemplate DataType="{x:Type viewmodels:AddNewConnectionViewModel}">
                 <views:AddNewConnectionView/>
             </DataTemplate>
-            
-            <!--<DataTemplate DataType="{x:Type viewmodels:OutlookInspiredDemoViewModel}">
-                <views:OutlookInspiredDemoModule/>
-            </DataTemplate>-->
+            <DataTemplate DataType="{x:Type viewmodels:ModbusScreenViewModel}">
+                <views:ModbusScreenView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

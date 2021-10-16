@@ -15,4 +15,6 @@
     <viewmodel:BusyIndicatorViewModel x:Key="Busy"/>
     <viewmodel:ModbusViewModel x:Key="Modbus"/>
     <viewmodel:AddNewConnectionViewModel x:Key="AddModbusDevice"/>
+    <viewmodel:ModbusScreenViewModel x:Key="ModbusScreen"/>
+
 </ResourceDictionary>

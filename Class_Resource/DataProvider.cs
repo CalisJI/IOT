@@ -23,11 +23,11 @@ namespace WPF_TEST.Class_Resource
                 _ins = value;
             }
         }
-        public savedataEntities DB { get; set; }
+        //public savedataEntities DB { get; set; }
         //public ServerData ServerData { get; set; }
         private DataProvider()
         {
-            DB = new savedataEntities();
+            //DB = new savedataEntities();
             //ServerData = new ServerData();
         }
     }

@@ -1,0 +1,625 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DlhSoft.OrganizationalChartLibrary.Controls</name>
+    </assembly>
+    <members>
+        <member name="T:DlhSoft.Windows.Controls.Licensing.OrganizationalChartView">
+            <summary>
+            Provides licensing utilities for OrganizationalChartView control.
+            </summary>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.Licensing.OrganizationalChartView.SetLicense(System.String)">
+            <summary>
+            Predefines the license content to be considered for OrganizationalChartView component instances, at initialization time.
+            </summary>
+            <param name="licenseContent">The XML content string of the license to be defined for this component type.</param>
+        </member>
+        <member name="T:DlhSoft.Windows.Controls.OrganizationalChartItem">
+            <summary>
+            Represents an item within a <see cref="P:DlhSoft.Windows.Controls.OrganizationalChartItem.OrganizationalChartView">OrganizationalChartView</see> control.
+            </summary>
+        </member>
+        <member name="P:DlhSoft.Windows.Controls.OrganizationalChartItem.OrganizationalChartView">
+            <summary>
+            Gets the <see cref="P:DlhSoft.Windows.Controls.OrganizationalChartItem.OrganizationalChartView">OrganizationalChartView</see> control instance of the current item.
+            </summary>
+        </member>
+        <member name="F:DlhSoft.Windows.Controls.OrganizationalChartItem.ContentProperty">
+            <summary>
+            Identifies the Content dependency property.
+            </summary>
+        </member>
+        <member name="P:DlhSoft.Windows.Controls.OrganizationalChartItem.Content">
+            <summary>
+            Gets or sets the content of the current item, displayed within the <see cref="P:DlhSoft.Windows.Controls.OrganizationalChartItem.OrganizationalChartView">OrganizationalChartView</see> control.
+            This is a dependency property.
+            </summary>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartItem.OnContentChanged">
+            <summary>
+            Raises the ContentChanged event.
+            </summary>
+        </member>
+        <member name="E:DlhSoft.Windows.Controls.OrganizationalChartItem.ContentChanged">
+            <summary>
+            Occurs when content changes for the current item.
+            </summary>
+        </member>
+        <member name="F:DlhSoft.Windows.Controls.OrganizationalChartItem.IndentationProperty">
+            <summary>
+            Identifies the Indentation dependency property.
+            </summary>
+        </member>
+        <member name="P:DlhSoft.Windows.Controls.OrganizationalChartItem.Indentation">
+            <summary>
+            Gets or sets the hierarchical indentation level of the current item in the containing collection.
+            This is a dependency property.
+            </summary>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartItem.OnIndentationChanged">
+            <summary>
+            Raises the HierarchyChanged event.
+            </summary>
+        </member>
+        <member name="E:DlhSoft.Windows.Controls.OrganizationalChartItem.HierarchyChanged">
+            <summary>
+            Occurs when the hierarchy (i.e. indentation level) changes for the current item.
+            </summary>
+        </member>
+        <member name="F:DlhSoft.Windows.Controls.OrganizationalChartItem.IndentationWidthProperty">
+            <summary>
+            Identifies the IndentationWidth dependency property.
+            </summary>
+        </member>
+        <member name="P:DlhSoft.Windows.Controls.OrganizationalChartItem.IndentationWidth">
+            <summary>
+            Gets the indentation width of the current item, based on Indentation and OrganizationalChart.IndentationUnitSize.
+            This is a dependency property.
+            </summary>
+        </member>
+        <member name="F:DlhSoft.Windows.Controls.OrganizationalChartItem.HasChildrenProperty">
+            <summary>
+            Identifies the HasChildren dependency property.
+            </summary>
+        </member>
+        <member name="P:DlhSoft.Windows.Controls.OrganizationalChartItem.HasChildren">
+            <summary>
+            Gets whether the current item has children within the containing hierarchical collection.
+            This is a dependency property.
+            </summary>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartItem.OnHasChildrenChanged">
+            <summary>
+            Raises the HasChildrenChanged event.
+            </summary>
+        </member>
+        <member name="E:DlhSoft.Windows.Controls.OrganizationalChartItem.HasChildrenChanged">
+            <summary>
+            Occurs when the HasChildren property value of the current item changes.
+            </summary>
+        </member>
+        <member name="F:DlhSoft.Windows.Controls.OrganizationalChartItem.IsExpandedProperty">
+            <summary>
+            Identifies the IsExpanded dependency property.
+            </summary>
+        </member>
+        <member name="P:DlhSoft.Windows.Controls.OrganizationalChartItem.IsExpanded">
+            <summary>
+            Gets or sets a value that indicates whether the current item is expanded or not, if it is a parent node (i.e. has child items).
+            This is a dependency property.
+            </summary>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartItem.OnExpansionChanged">
+            <summary>
+            Raises the ExpansionChanged event.
+            </summary>
+        </member>
+        <member name="E:DlhSoft.Windows.Controls.OrganizationalChartItem.ExpansionChanged">
+            <summary>
+            Occurs when the expansion state of the current item changes.
+            </summary>
+        </member>
+        <member name="F:DlhSoft.Windows.Controls.OrganizationalChartItem.ExpanderVisibilityProperty">
+            <summary>
+            Identifies the ExpanderVisibility dependency property.
+            </summary>
+        </member>
+        <member name="P:DlhSoft.Windows.Controls.OrganizationalChartItem.ExpanderVisibility">
+            <summary>
+            Gets a Visibility value that indicates whether the current item has an expander to be displayed, i.e. it is a parent node.
+            This is a dependency value.
+            </summary>
+        </member>
+        <member name="P:DlhSoft.Windows.Controls.OrganizationalChartItem.Parent">
+            <summary>
+            Gets the direct parent item of the current item in the hierarchical collection.
+            </summary>
+            <returns>The parent item of the current item.</returns>
+        </member>
+        <member name="P:DlhSoft.Windows.Controls.OrganizationalChartItem.AllParents">
+            <summary>
+            Iterates all level parent items of the current item up in the hierarchical collection.
+            </summary>
+            <returns>All level parent items of the current item.</returns>
+        </member>
+        <member name="P:DlhSoft.Windows.Controls.OrganizationalChartItem.Children">
+            <summary>
+            Iterates the direct child items of the current item in the hierarchical collection.
+            </summary>
+            <returns>The child items of the current item.</returns>
+        </member>
+        <member name="P:DlhSoft.Windows.Controls.OrganizationalChartItem.AllChildren">
+            <summary>
+            Iterates all level child items of the current item down in the hierarchical collection.
+            </summary>
+            <returns>All level child items of the current item.</returns>
+        </member>
+        <member name="F:DlhSoft.Windows.Controls.OrganizationalChartItem.IsHiddenProperty">
+            <summary>
+            Identifies the IsHidden dependency property.
+            </summary>
+        </member>
+        <member name="P:DlhSoft.Windows.Controls.OrganizationalChartItem.IsHidden">
+            <summary>
+            Gets or sets a value indicating whether the current item is hidden in the view.
+            This is a dependency property.
+            </summary>
+        </member>
+        <member name="F:DlhSoft.Windows.Controls.OrganizationalChartItem.IsVisibleProperty">
+            <summary>
+            Identifies the IsVisible dependency property.
+            </summary>
+        </member>
+        <member name="P:DlhSoft.Windows.Controls.OrganizationalChartItem.IsVisible">
+            <summary>
+            Gets whether the current item is visible in the view (a parent node that is not expanded would have its child items not visible).
+            This is a dependency property.
+            </summary>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartItem.OnVisibilityChanged">
+            <summary>
+            Raises the VisibilityChanged event.
+            </summary>
+        </member>
+        <member name="E:DlhSoft.Windows.Controls.OrganizationalChartItem.VisibilityChanged">
+            <summary>
+            Occurs when visibility of the current item changes.
+            </summary>
+        </member>
+        <member name="F:DlhSoft.Windows.Controls.OrganizationalChartItem.VisibilityProperty">
+            <summary>
+            Identifies the Visibility dependency property.
+            </summary>
+        </member>
+        <member name="P:DlhSoft.Windows.Controls.OrganizationalChartItem.Visibility">
+            <summary>
+            Gets a Visibility value that indicates whether the current item is visible in the view.
+            This is a dependency property.
+            </summary>
+        </member>
+        <member name="F:DlhSoft.Windows.Controls.OrganizationalChartItem.TagProperty">
+            <summary>
+            Identifies the Tag dependency property.
+            </summary>
+        </member>
+        <member name="P:DlhSoft.Windows.Controls.OrganizationalChartItem.Tag">
+            <summary>
+            Gets or sets an object that contains information that is associated with the current item.
+            </summary>
+        </member>
+        <member name="P:DlhSoft.Windows.Controls.OrganizationalChartItem.Key">
+            <summary>
+            Gets or sets an associated external numeric key for the current item.
+            </summary>
+        </member>
+        <member name="P:DlhSoft.Windows.Controls.OrganizationalChartItem.GlobalKey">
+            <summary>
+            Gets or sets an associated external globally unique key for the current item.
+            </summary>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartItem.ToString">
+            <summary>
+            Returns a string that represents the current item.
+            </summary>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartItem.OnPropertyChanged(System.String)">
+            <summary>
+            Raises the PropertyChanged event.
+            </summary>
+        </member>
+        <member name="E:DlhSoft.Windows.Controls.OrganizationalChartItem.PropertyChanged">
+            <summary>
+            Occurs when a data property value of the item changes.
+            </summary>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartItem.OnManagedDependencyPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Raises the ManagedDependencyPropertyChanged event.
+            </summary>
+        </member>
+        <member name="E:DlhSoft.Windows.Controls.OrganizationalChartItem.ManagedDependencyPropertyChanged">
+            <summary>
+            Occurs when an internally managed data dependency property value of the item changes.
+            </summary>
+        </member>
+        <member name="F:DlhSoft.Windows.Controls.OrganizationalChartItem.IsSelectedProperty">
+            <summary>
+            Identifies IsSelected dependency property.
+            </summary>
+        </member>
+        <member name="P:DlhSoft.Windows.Controls.OrganizationalChartItem.IsSelected">
+            <summary>
+            Indicates whether the item is selected in the organizational chart.
+            </summary>
+        </member>
+        <member name="P:DlhSoft.Windows.Controls.OrganizationalChartItem.ComputedRelativeParentPosition">
+            <summary>
+            Gets the computed relative position of the parent node in the screen coordinates of the internally generated tree view item of this node.
+            </summary>
+        </member>
+        <member name="T:DlhSoft.Windows.Controls.OrganizationalChartItemCollection">
+            <summary>
+            Represents a hierarchical data collection used internally by <see cref="T:DlhSoft.Windows.Controls.OrganizationalChartView">OrganizationalChartView</see> control.
+            </summary>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartItemCollection.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
+            <summary>
+            Raises the CollectionChanged event, and executes internal hierarchical data management operations when collection changes.
+            </summary>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartItemCollection.OnItemPropertyChanged(System.Object,System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+            Raises the ItemmPropertyChanged event.
+            </summary>
+        </member>
+        <member name="E:DlhSoft.Windows.Controls.OrganizationalChartItemCollection.ItemPropertyChanged">
+            <summary>
+            Occurs when a data property value of an item in the collection changes.
+            </summary>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartItemCollection.GetParent(DlhSoft.Windows.Controls.OrganizationalChartItem)">
+            <summary>
+            Gets the direct parent item of the specified item in the hierarchical collection.
+            </summary>
+            <param name="item">The item to get the parent of.</param>
+            <returns>The parent item of the specified item.</returns>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartItemCollection.GetParent(System.Int32)">
+            <summary>
+            Gets the direct parent item of the specified item in the hierarchical collection.
+            </summary>
+            <param name="index">The index of the item to get the parent of.</param>
+            <returns>The parent item of the specified item.</returns>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartItemCollection.GetAllParents(DlhSoft.Windows.Controls.OrganizationalChartItem)">
+            <summary>
+            Iterates all level parent items of the specified item up in the hierarchical collection.
+            </summary>
+            <param name="item">The item to iterate all level parents of.</param>
+            <returns>All level parent items of the specified item.</returns>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartItemCollection.GetAllParents(System.Int32)">
+            <summary>
+            Iterates all level parent items of the specified item up in the hierarchical collection.
+            </summary>
+            <param name="index">The index of the item to iterate all level parents of.</param>
+            <returns>All level parent items of the specified item.</returns>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartItemCollection.GetChildren(DlhSoft.Windows.Controls.OrganizationalChartItem)">
+            <summary>
+            Iterates the direct child items of the specified item in the hierarchical collection.
+            </summary>
+            <param name="item">The item to get the children of.</param>
+            <returns>The child items of the specified item.</returns>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartItemCollection.GetChildren(System.Int32)">
+            <summary>
+            Iterates the direct child items of the specified item in the hierarchical collection.
+            </summary>
+            <param name="index">The index of the item to get the children of.</param>
+            <returns>The child items of the specified item.</returns>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartItemCollection.GetAllChildren(DlhSoft.Windows.Controls.OrganizationalChartItem)">
+            <summary>
+            Iterates all level child items of the specified item down in the hierarchical collection.
+            </summary>
+            <param name="item">The item to iterate all level children of.</param>
+            <returns>All level child items of the specified item.</returns>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartItemCollection.GetAllChildren(System.Int32)">
+            <summary>
+            Iterates all level child items of the specified item down in the hierarchical collection.
+            </summary>
+            <param name="index">The index of the item to iterate all level children of.</param>
+            <returns>All level child items of the specified item.</returns>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartItemCollection.GetRoots">
+            <summary>
+            Iterates the root items in the hierarchical collection.
+            </summary>
+            <returns>The root items in the collection.</returns>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartItemCollection.GetExpandables">
+            <summary>
+            Iterates the expandable items in the hierarchical collection.
+            </summary>
+            <returns>The expandable items in the collection.</returns>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartItemCollection.GetLeaves">
+            <summary>
+            Iterates the leaf items in the hierarchical collection.
+            </summary>
+            <returns>The leaf items in the collection.</returns>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartItemCollection.Dispose">
+            <summary>
+            Performs tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartItemCollection.Dispose(System.Boolean)">
+            <summary>
+            Performs tasks associated with freeing, releasing, or resetting resources.
+            </summary>
+            <param name="dispose">Indicates whether unmanaged </param>
+        </member>
+        <member name="T:DlhSoft.Windows.Controls.NodeItemsConverter">
+            <summary>
+            Converts custom node items to a collection of <see cref="T:DlhSoft.Windows.Controls.OrganizationalChartItem">OrganizationalChartItem</see> objects (as required by <see cref="P:DlhSoft.Windows.Controls.OrganizationalChartView.Items">Items</see> properties of <see cref="T:DlhSoft.Windows.Controls.OrganizationalChartView">OrganizationalChartView</see> component).
+            Use *Member properties of the converter instance to control which properties of custom items are bound to which OrganizationalChartItem properties (undefined/null Member values indicate properties that are not bound and default values are automatically generated for these properties on OrganizationalChartItem objects instead).
+            The converter uses reflection to retreive the appropriate property values from your custom data objects and apply them to the corresponding OrganizationalChartItem instances.
+            Referred member properties of custom items should be public and accessible for reading and optionally writing (property paths are not supported).
+            Set UpdateSourceOnTargetChanges and/or UpdateTargetOnSourceChanges properties to true/false to indicate the directions of internally managed change updates.
+            Note that UpdateTargetOnSourceChanges works only when the custom data source implements INotifyCollectionChanged interface and/or custom data objects implement INotifyPropertyChanged interface.
+            When UpdateSourceOnTargetChanges is set new objects that need to be created are generated by Activator.CreateInstance internal calls, and therefore they need to provide public access to their parameterless constructor (or their default constructor).
+            </summary>
+        </member>
+        <member name="P:DlhSoft.Windows.Controls.NodeItemsConverter.ContentMember">
+            <summary>
+            Gets or sets the property name of custom node items that <see cref="P:DlhSoft.Windows.Controls.OrganizationalChartItem.Content">Content</see> property of <see cref="T:DlhSoft.Windows.Controls.OrganizationalChartItem">OrganizationalChartItem</see> objects should be bound to.
+            Source object values retreived by the custom property may be of any type (including string).
+            This property can be set only at initialization time (an exception is thrown if it is set after having the conversion process started).
+            </summary>
+        </member>
+        <member name="P:DlhSoft.Windows.Controls.NodeItemsConverter.IndentationMember">
+            <summary>
+            Gets or sets the property name of custom node items that <see cref="P:DlhSoft.Windows.Controls.OrganizationalChartItem.Indentation">Indentation</see> property of <see cref="T:DlhSoft.Windows.Controls.OrganizationalChartItem">OrganizationalChartItem</see> objects should be bound to.
+            Source object values retreived by the custom property need to be of integral type.
+            This property can be set only at initialization time (an exception is thrown if it is set after having the conversion process started).
+            </summary>
+        </member>
+        <member name="P:DlhSoft.Windows.Controls.NodeItemsConverter.IsExpandedMember">
+            <summary>
+            Gets or sets the property name of custom node items that <see cref="P:DlhSoft.Windows.Controls.OrganizationalChartItem.IsExpanded">IsExpanded</see> property of <see cref="T:DlhSoft.Windows.Controls.OrganizationalChartItem">OrganizationalChartItem</see> objects should be bound to.
+            Source object values retreived by the custom property need to be of Boolean type.
+            This property can be set only at initialization time (an exception is thrown if it is set after having the conversion process started).
+            </summary>
+        </member>
+        <member name="P:DlhSoft.Windows.Controls.NodeItemsConverter.UpdateSourceOnTargetChanges">
+            <summary>
+            Gets or sets a value that indicates whether data source is automatically updated when target <see cref="T:DlhSoft.Windows.Controls.OrganizationalChartItem">OrganizationalChartItem</see> objects generated by the converter get their internally bound values changed.
+            Set this property to false when the feature is not needed, e.g. when the user interface is read only (by default it is set to true in order to automatically propagate changes back to the data source as expected in most situations).
+            This property can be set only at initialization time (an exception is thrown if it is set after having the conversion process started).
+            </summary>
+        </member>
+        <member name="P:DlhSoft.Windows.Controls.NodeItemsConverter.UpdateTargetOnSourceChanges">
+            <summary>
+            Gets or sets a value that indicates whether target <see cref="T:DlhSoft.Windows.Controls.OrganizationalChartItem">OrganizationalChartItem</see> objects generated by the converter are automatically updated when internally bound data source values change.
+            Set this property to true only when the feature is needed, i.e. when code behind changes the data source while the user interface presents it and all changes should be automatically reflected on screen (by default it is set to false in order to provide increased performance).
+            Note that automatic updates work only when the custom data source implements INotifyCollectionChanged interface and/or custom data objects implement INotifyPropertyChanged interface.
+            This property can be set only at initialization time (an exception is thrown if it is set after having the conversion process started).
+            </summary>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.NodeItemsConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Converts custom node items to a collection of <see cref="T:DlhSoft.Windows.Controls.OrganizationalChartItem">OrganizationalChartItem</see> objects (as required by <see cref="P:DlhSoft.Windows.Controls.OrganizationalChartView.Items">Items</see> properties of <see cref="T:DlhSoft.Windows.Controls.OrganizationalChartView">OrganizationalChartView</see> component).
+            </summary>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.NodeItemsConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Throws a not supported exception as two way conversion is internally implemented and may be configured using the <see cref="P:DlhSoft.Windows.Controls.NodeItemsConverter.UpdateSourceOnTargetChanges">UpdateSourceOnTargetChanges</see> and <see cref="P:DlhSoft.Windows.Controls.NodeItemsConverter.UpdateTargetOnSourceChanges">UpdateTargetOnSourceChanges</see> properties of the converter.
+            </summary>
+        </member>
+        <member name="T:DlhSoft.Windows.Controls.OrganizationalChartView">
+            <summary>
+            Displays hierarchical data in a customizable organizational chart based on <see cref="T:System.Windows.Controls.ItemsControl">ItemsControl</see> control.
+            </summary>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartView.#ctor">
+            <summary>
+            Initializes a new <see cref="T:DlhSoft.Windows.Controls.OrganizationalChartView">OrganizationalChartView</see> instance.
+            </summary>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartView.OnApplyTemplate">
+            <summary>
+            Builds the visual tree for the <see cref="T:DlhSoft.Windows.Controls.OrganizationalChartView">OrganizationalChartView</see> when a new template is applied and updates appropriate internal properties of the control.
+            </summary>
+        </member>
+        <member name="F:DlhSoft.Windows.Controls.OrganizationalChartView.ItemsProperty">
+            <summary>
+            Identifies the Items dependency property.
+            </summary>
+        </member>
+        <member name="P:DlhSoft.Windows.Controls.OrganizationalChartView.Items">
+            <summary>
+            Gets a collection of <see cref="T:DlhSoft.Windows.Controls.OrganizationalChartItem">OrganizationalChartItem</see> objects that represent the individual items in the <see cref="T:DlhSoft.Windows.Controls.OrganizationalChartView">OrganizationalChartView</see> control.
+            This is a dependency property.
+            </summary>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartView.AttachItem(DlhSoft.Windows.Controls.OrganizationalChartItem)">
+            <summary>
+            Attaches the specified item to this control instance.
+            </summary>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartView.BeginUpdateItems">
+            <summary>
+            Signals the beginning of a set of updates within the items collection, in order to temporarily remove automatic user interface refreshes during this time, for optimization purposes.
+            When the updates are complete, call <see cref="M:DlhSoft.Windows.Controls.OrganizationalChartView.EndUpdateItems"/> method to refresh the user inteface and to revert to its standard behavior. 
+            </summary>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartView.EndUpdateItems">
+            <summary>
+            Signals the end of a set of updates within the items collection initiated by a <see cref="M:DlhSoft.Windows.Controls.OrganizationalChartView.BeginUpdateItems"/> call, in order to refresh the user interface.
+            </summary>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartView.OnItemPropertyChanged(System.Object,System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+            Raises the ItemPropertyChanged event.
+            </summary>
+        </member>
+        <member name="E:DlhSoft.Windows.Controls.OrganizationalChartView.ItemPropertyChanged">
+            <summary>
+            Occurs when a data property value of an item within the control changes.
+            </summary>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartView.OnItemCollectionChanged(System.Object,System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
+            <summary>
+            Raises the ItemCollectionChanged event.
+            </summary>
+        </member>
+        <member name="E:DlhSoft.Windows.Controls.OrganizationalChartView.ItemCollectionChanged">
+            <summary>
+            Occurs when the data item collection within the control changes.
+            </summary>
+        </member>
+        <member name="P:DlhSoft.Windows.Controls.OrganizationalChartView.Item(System.Int32)">
+            <summary>
+            Gets the item at the specified index in the collection.
+            </summary>
+            <param name="index">The index to get the item at.</param>
+            <returns>The item at the specified index in the collection.</returns>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartView.IndexOf(DlhSoft.Windows.Controls.OrganizationalChartItem)">
+            <summary>
+            Searches for the specified item and returns its zero-based index in the collection.
+            </summary>
+            <param name="item">The item to get the index of.</param>
+            <returns>The index of the specified item in the collection.</returns>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartView.GetParent(DlhSoft.Windows.Controls.OrganizationalChartItem)">
+            <summary>
+            Gets the direct parent item of the specified item in the hierarchical collection.
+            </summary>
+            <param name="item">The item to get the parent of.</param>
+            <returns>The parent item of the specified item.</returns>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartView.GetParent(System.Int32)">
+            <summary>
+            Gets the direct parent item of the specified item in the hierarchical collection.
+            </summary>
+            <param name="index">The index of the item to get the parent of.</param>
+            <returns>The parent item of the specified item.</returns>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartView.GetAllParents(DlhSoft.Windows.Controls.OrganizationalChartItem)">
+            <summary>
+            Iterates all level parent items of the specified item up in the hierarchical collection.
+            </summary>
+            <param name="item">The item to iterate all level parents of.</param>
+            <returns>All level parent items of the specified item.</returns>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartView.GetAllParents(System.Int32)">
+            <summary>
+            Iterates all level parent items of the specified item up in the hierarchical collection.
+            </summary>
+            <param name="index">The index of the item to iterate all level parents of.</param>
+            <returns>All level parent items of the specified item.</returns>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartView.GetChildren(DlhSoft.Windows.Controls.OrganizationalChartItem)">
+            <summary>
+            Iterates the direct child items of the specified item in the hierarchical collection.
+            </summary>
+            <param name="item">The item to get the children of.</param>
+            <returns>The child items of the specified item.</returns>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartView.GetChildren(System.Int32)">
+            <summary>
+            Iterates the direct child items of the specified item in the hierarchical collection.
+            </summary>
+            <param name="index">The index of the item to get the children of.</param>
+            <returns>The child items of the specified item.</returns>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartView.GetAllChildren(DlhSoft.Windows.Controls.OrganizationalChartItem)">
+            <summary>
+            Iterates all level child items of the specified item down in the hierarchical collection.
+            </summary>
+            <param name="item">The item to iterate all level children of.</param>
+            <returns>All level child items of the specified item.</returns>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartView.GetAllChildren(System.Int32)">
+            <summary>
+            Iterates all level child items of the specified item down in the hierarchical collection.
+            </summary>
+            <param name="index">The index of the item to iterate all level children of.</param>
+            <returns>All level child items of the specified item.</returns>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartView.GetRoots">
+            <summary>
+            Iterates the root items in the hierarchical collection.
+            </summary>
+            <returns>The root items in the collection.</returns>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartView.GetExpandables">
+            <summary>
+            Iterates the expandable items in the hierarchical collection.
+            </summary>
+            <returns>The expandable items in the collection.</returns>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartView.GetLeaves">
+            <summary>
+            Iterates the leaf items in the hierarchical collection.
+            </summary>
+            <returns>The leaf items in the collection.</returns>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartView.ExpandAll">
+            <summary>
+            Expands all parent nodes in the hierarchy.
+            </summary>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartView.CollapseAll">
+            <summary>
+            Collapses all parent nodes in the hierarchy.
+            </summary>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartView.EnsureValidHierarchy">
+            <summary>
+            Resets any invalid indentation values in order to obtain a valid node hierarchy.
+            </summary>
+        </member>
+        <member name="P:DlhSoft.Windows.Controls.OrganizationalChartView.SelectedItem">
+            <summary>
+            Indicates the selected item in the organizational chart.
+            </summary>
+        </member>
+        <member name="E:DlhSoft.Windows.Controls.OrganizationalChartView.SelectedItemChanged">
+            <summary>
+            Occurs when SelectedItem changes.
+            </summary>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartView.OnSelectedItemChanged">
+            <summary>
+            Raises the selection changed event.
+            </summary>
+        </member>
+        <member name="M:DlhSoft.Windows.Controls.OrganizationalChartView.RefreshComputedPositions">
+            <summary>
+            Refreshes oranizational chart relative parent position points.
+            </summary>
+        </member>
+        <member name="T:DlhSoft.Windows.Controls.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:DlhSoft.Windows.Controls.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:DlhSoft.Windows.Controls.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>

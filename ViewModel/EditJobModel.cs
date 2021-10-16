@@ -12,8 +12,8 @@ namespace WPF_TEST.ViewModel
     public class EditJobModel:BaseViewModel
     {
         public PlannerModel PlannerModel { get; set; }
-        public ObservableCollection<processdata> Resource { get; set; }
-        public ObservableCollection<proessdataappointment> Appointments { get; set; }
+        //public ObservableCollection<processdata> Resource { get; set; }
+        //public ObservableCollection<proessdataappointment> Appointments { get; set; }
         public EditJobModel() 
         {
            

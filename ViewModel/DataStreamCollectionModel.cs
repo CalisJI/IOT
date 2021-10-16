@@ -47,7 +47,7 @@ namespace WPF_TEST.ViewModel
             }
             DataStream = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                this.dataStreamCollectionModel.SelectedViewModel = new DataCollectConfigureModel();
+                this.dataStreamCollectionModel.SelectedViewModel = DataCollectConfigureModel;
                 //this.dataStreamCollectionModel.SelectedViewModel = DataCollectConfigureModel;
             });
             

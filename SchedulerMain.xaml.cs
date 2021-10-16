@@ -24,7 +24,7 @@ namespace WPF_TEST
     public partial class SchedulerMain : ThemedWindow
     {
         
-        public virtual ObservableCollection<proessdataappointment> Appointments { get; set; }
+        //public virtual ObservableCollection<proessdataappointment> Appointments { get; set; }
         public SchedulerMain()
         {
             InitializeComponent();

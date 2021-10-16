@@ -21,20 +21,20 @@ namespace WPF_TEST.ViewModel
         public ICommand Goback { get; set; }
         public ICommand Schedule { get; set; }
         public ICommand GotoHome { get; set; }
-        private proessdataappointment _proessdataappointment;
-        public proessdataappointment proessdataappointment
-        {
-            get
-            {
-                return _proessdataappointment;
+        //private proessdataappointment _proessdataappointment;
+        //public proessdataappointment proessdataappointment
+        //{
+        //    get
+        //    {
+        //        return _proessdataappointment;
 
-            }
-            set
-            {
-                _proessdataappointment = value;
-                OnPropertyChanged("proessdataappointment");
-            }
-        }
+        //    }
+        //    set
+        //    {
+        //        _proessdataappointment = value;
+        //        OnPropertyChanged("proessdataappointment");
+        //    }
+        //}
         public BaseViewModel SelectedViewModel
         {
             get { return _selectedViewModel; }
