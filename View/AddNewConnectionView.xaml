@@ -4,14 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF_TEST.View"
-             xmlns:System ="clr-namespace:System;assembly=mscorlib"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
              xmlns:local1="clr-namespace:WPF_TEST.ViewModel"
              mc:Ignorable="d" 
              DataContext="{StaticResource AddModbusDevice}"
               xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"           
              d:DesignHeight="763" d:DesignWidth="1366">
     <UserControl.Resources>
-        <local1:ConnectionTypeToString x:Key="ConnectionType"/>
+        
+        <local1:ConnectionTypeToString x:Key="ConnectionConvert"/>
+        
     </UserControl.Resources>
     <Grid Background="AliceBlue">
         <Grid.ColumnDefinitions>
@@ -36,7 +39,7 @@
                         <TextBlock Text="Name" Margin="3"/>
                         <TextBox
                             DataContext="{StaticResource Modbus}"
-                            Text="{Binding ModbusDevice.DeviceName, Mode=OneWayToSource}"
+                            Text="{Binding DeviceName, Mode=OneWayToSource}"
                             Margin="220,0,0,0"
                            
                             Width="370"/>
@@ -45,15 +48,15 @@
                         <TextBlock Text="Connection Type :" Margin="3"/>
                         <ComboBox
                             DataContext="{StaticResource Modbus}"
-                            ItemsSource="{Binding Path= ConnectionType,Converter={StaticResource ConnectionType}}"
-                            SelectedItem="{Binding ModbusDevice.ConntionType}"
+                            ItemsSource="{Binding ConntionType, Converter={StaticResource ConnectionConvert}}"
+                            SelectedItem="{Binding ConntionType}"
+                           
                             Margin="220,0,0,0"
-                            
                             materialDesign:HintAssist.Hint="Connection Type"
                             Width="370">
                             
                         </ComboBox>
-                        
+                       
                     </Grid>
                     <Grid Margin="0,20,0,0">
                         <TextBlock Text="Port :" Margin="3"/>
@@ -61,24 +64,19 @@
                             DataContext="{StaticResource Modbus}"
                             Margin="220,0,0,0"
                             ItemsSource="{Binding ComportInfo.AvaliablePorts}"
-                            SelectedItem="{Binding ModbusDevice.Port, Mode=OneWayToSource}"
+                            SelectedItem="{Binding Port}"
                             
                             materialDesign:HintAssist.Hint="COM"
                             Width="370"/>
                         
                     </Grid>
-                    <StackPanel
-                        Orientation="Vertical"
-                        DataContext="{Binding TypeConnect}"
-                        >
-                        
-                    </StackPanel>
+                    
                     <Grid  Margin="0,20,0,0">
                         <TextBlock Text="Baud Rate :" Margin="3"/>
                         <ComboBox
                             DataContext="{StaticResource Modbus}"
                             ItemsSource="{Binding ComportInfo.Baud_rate}"
-                            SelectedItem="{Binding ModbusDevice.Baudrate, Mode=OneWayToSource}"
+                            SelectedItem="{Binding Baudrate}"
                             Margin="220,0,0,0"
                           
                             materialDesign:HintAssist.Hint="Baud Rate"
@@ -90,7 +88,7 @@
                             Margin="220,0,0,0"
                             DataContext="{StaticResource Modbus}"
                             ItemsSource="{Binding ComportInfo.DataBits}"
-                            SelectedItem="{Binding ModbusDevice.DataBits, Mode=OneWayToSource}"
+                            SelectedItem="{Binding DataBit}"
                             materialDesign:HintAssist.Hint="Data Bits"
                             Width="370"/>
                     </Grid>
@@ -100,7 +98,7 @@
                             Margin="220,0,0,0"
                             DataContext="{StaticResource Modbus}"
                             ItemsSource="{Binding ComportInfo.Paritys}"
-                            SelectedItem="{Binding ModbusDevice.Parity, Mode=OneWayToSource}"
+                            SelectedItem="{Binding Parity}"
                             materialDesign:HintAssist.Hint="Parity"
                             Width="370"/>
                     </Grid>
@@ -109,7 +107,8 @@
                         <ComboBox
                             Margin="220,0,0,0"
                             DataContext="{StaticResource Modbus}"
-                            SelectedItem="{Binding ModbusDevice, Mode=OneWayToSource}"
+                            ItemsSource="{Binding ComportInfo.Stop_bits}"
+                            SelectedItem="{Binding StopBit}"
                             materialDesign:HintAssist.Hint="Stop Bits"
                             Width="370"/>
                     </Grid>
@@ -117,15 +116,17 @@
                         <TextBlock Text="Read Time Out(ms) :" Margin="3"/>
                         <TextBox
                             Margin="220,0,0,0"
-                           
+                            DataContext="{StaticResource Modbus}"
                             materialDesign:HintAssist.Hint="Read Time Out"
+                            Text="{Binding ReadTimeOut}"
                             Width="370"/>
                     </Grid>
                     <Grid  Margin="0,20,0,20">
                         <TextBlock Text="Update Rate(ms) :" Margin="3"/>
                         <TextBox
                             Margin="220,0,0,0"
-                            
+                            DataContext="{StaticResource Modbus}"
+                            Text="{Binding UpdateRate}"
                             materialDesign:HintAssist.Hint="Update Rate"
                             Width="370"/>
                     </Grid>

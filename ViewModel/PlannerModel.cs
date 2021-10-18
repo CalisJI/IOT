@@ -233,8 +233,6 @@ namespace WPF_TEST.ViewModel
         //        {
         //            var secondNotFirst = AssignedTask.Where(x => !Appointments.Any(z => x.Name == z.ProcessName)).FirstOrDefault();
         //            AssignedTask.Remove(secondNotFirst);
-
-
         //        }
         //        for (int i = 0; i < Appointments.Count; i++)
         //        {
@@ -369,7 +367,7 @@ namespace WPF_TEST.ViewModel
     public enum Status 
     {
 
-        Queued =0,
+        Queued = 0,
         Ready=1,
         Running = 2,     
         Paused = 3,

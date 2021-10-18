@@ -228,14 +228,47 @@
                     Header="Item Information"
                     Margin="5">
                     <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Item Name:"/>
+                        <Grid >
+                            <TextBlock
+                                Text="Item Name:"/>
 
 
-                            <TextBox>
+                            <TextBox
+                                HorizontalAlignment="Right"
+                                Width="450">
 
                             </TextBox>
-                        </StackPanel>
+                        </Grid>
+                        <Grid >
+                            <TextBlock Text="Slave ID:"/>
+
+
+                            <TextBox
+                                HorizontalAlignment="Right"
+                                Width="450">
+
+                            </TextBox>
+                        </Grid>
+                        <Grid >
+                            <TextBlock Text="Register:"/>
+
+
+                            <ComboBox
+                                HorizontalAlignment="Right"
+                                ItemsSource="{Binding}"
+                                SelectedItem="{Binding}"
+                                Width="450">
+
+                            </ComboBox>
+                        </Grid>
+                        <Grid >
+                            <TextBlock Text="Address:"/>
+
+
+                            <TextBox HorizontalAlignment="Right" Width="450">
+
+                            </TextBox>
+                        </Grid>
                     </StackPanel>
                     
                    

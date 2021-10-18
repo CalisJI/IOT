@@ -314,6 +314,7 @@
     <Compile Include="MainScreenView.xaml.cs">
       <DependentUpon>MainScreenView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\ModbusModel.cs" />
     <Compile Include="OutlookExchangeOptionsWindow.xaml.cs">
       <DependentUpon>OutlookExchangeOptionsWindow.xaml</DependentUpon>
     </Compile>
@@ -346,6 +347,7 @@
     <Compile Include="ViewModel\OutlookInspiredDemoViewModel.cs" />
     <Compile Include="ViewModel\PlannerModel.cs" />
     <Compile Include="ViewModel\SchedulerViewModel.cs" />
+    <Compile Include="ViewModel\ValueDescription.cs" />
     <Compile Include="ViewModel\WorkflowCreatorModel.cs" />
     <Compile Include="View\AddNewConnectionView.xaml.cs">
       <DependentUpon>AddNewConnectionView.xaml</DependentUpon>
@@ -535,7 +537,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="Model\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
