@@ -45,6 +45,9 @@
             <DataTemplate DataType="{x:Type viewmodels:ModbusScreenViewModel}">
                 <views:ModbusScreenView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:EditModbusConnectionViewModel}">
+                <views:EditModbusView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

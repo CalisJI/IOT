@@ -1029,3 +1029,4 @@ F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ModbusScreenView.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ModbusScreenView.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\EditModbusView.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\EditModbusView.baml
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.csproj.AssemblyReference.cache

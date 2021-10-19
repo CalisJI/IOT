@@ -63,7 +63,7 @@ namespace WPF_TEST.ViewModel
         private int _read_Time_Out;
         private int _update_Rate;
         private int _id;
-        private ConntionTypes _conntionType;
+        public ConntionTypes _conntionType;
 
         private string _IP_Address;
         private int _TCP_IP_Port;
@@ -221,6 +221,7 @@ namespace WPF_TEST.ViewModel
         }
         ModbusScreenViewModel ModbusScreenViewModel = new ModbusScreenViewModel();
         AddNewConnectionViewModel AddNewConnectionViewModel = new AddNewConnectionViewModel();
+        EditModbusConnectionViewModel EditModbusConnectionViewModel = new EditModbusConnectionViewModel();
         public ModbusViewModel modbusViewModel;
         public ModbusViewModel() 
         {
@@ -244,7 +245,7 @@ namespace WPF_TEST.ViewModel
             });
             EditConnect = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
-            
+                modbusViewModel.SelectedViewModel = EditModbusConnectionViewModel;
             });
             DeleteConnect = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
@@ -294,31 +295,82 @@ namespace WPF_TEST.ViewModel
         }
        
     }
-    public enum ConntionTypes 
+    public enum ConntionTypes
     {
         [Description("Modbus RTU")]
         Modbus_RTU,
         [Description("Modbus TCP/IP")]
         Modbus_TCP_IP
     }
+    public enum ModbusFunction 
+    {
+        [Description("03 : Read Holding")]
+        Read_Holding,
+        Read_Coil,
+        Read_MultiCoil,
+        Weite_Holding,
+    }
     
+    
+    //public class ConnectionTypeToString : IValueConverter
+    //{
+    //    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    //    {
+    //        var type = typeof(ConntionTypes);
+    //        var name = Enum.GetName(type, value);
+    //        FieldInfo fi = type.GetField(name);
+    //        var descriptionAttrib = (DescriptionAttribute)Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute));
+    //        return descriptionAttrib.Description;
+    //    }
+
+    //    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+    //}
     public class ConnectionTypeToString : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        private string GetEnumDescription(Enum enumObj)
         {
-            var type = typeof(ConntionTypes);
-            var name = Enum.GetName(type, value);
-            FieldInfo fi = type.GetField(name);
-            var descriptionAttrib = (DescriptionAttribute)Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute));
-            return descriptionAttrib.Description;
+            if (enumObj == null)
+            {
+                return string.Empty;
+            }
+            FieldInfo fieldInfo = enumObj.GetType().GetField(enumObj.ToString());
+
+            object[] attribArray = fieldInfo.GetCustomAttributes(false);
+
+            if (attribArray.Length == 0)
+            {
+                return enumObj.ToString();
+            }
+            else
+            {
+                DescriptionAttribute attrib = attribArray[0] as DescriptionAttribute;
+                return attrib.Description;
+            }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            Enum myEnum = (Enum)value;
+            if (myEnum == null)
+            {
+                return null;
+            }
+            string description = GetEnumDescription(myEnum);
+            if (!string.IsNullOrEmpty(description))
+            {
+                return description;
+            }
+            return myEnum.ToString();
+        }
+
+        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return string.Empty;
         }
     }
-   
     public class ModbusDevice
     {
         public string DeviceName { get; set; }
