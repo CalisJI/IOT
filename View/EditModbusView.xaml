@@ -16,7 +16,13 @@
                 <x:Type TypeName="local1:ConntionTypes"/>
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
-        <local1:ConnectionTypeToString x:Key="ConnectionType"/>
+        <ObjectDataProvider x:Key="FuntionCode"
+            MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local1:ModbusFunction"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <local1:ConnectionTypeToString x:Key="ConnectionConvert"/>
     </UserControl.Resources>
     <Grid Background="AliceBlue">
         <Grid.ColumnDefinitions>
@@ -262,10 +268,14 @@
 
                             <ComboBox
                                 HorizontalAlignment="Right"
-                                ItemsSource="{Binding}"
-                                SelectedItem="{Binding}"
+                                 ItemsSource="{Binding Source={StaticResource FuntionCode}}"
+                                SelectedItem="{Binding ModbusFunctions}"
                                 Width="450">
-
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Converter={StaticResource ConnectionConvert}}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
                             </ComboBox>
                         </Grid>
                         <Grid >

@@ -20,18 +20,7 @@ namespace WPF_TEST.ViewModel
     {
         private BaseViewModel _selectedViewModel;
         public iModbus iModbus = new iModbus();
-        private DataTable _modbusInfor;
-        public DataTable ModbusInfor
-        {
-            get
-            {
-                return _modbusInfor;
-            }
-            set
-            {
-                SetProperty(ref _modbusInfor, value, "ModbusInfor");
-            }
-        }
+        
         public BaseViewModel SelectedViewModel
         {
             get { return _selectedViewModel; }
@@ -53,8 +42,24 @@ namespace WPF_TEST.ViewModel
                 SetProperty(ref modbusDevices, value, "ModbusDevices");
             }
         }
+        #region Model
+        /// <summary>
+        /// 
+        /// </summary>
+        private DataTable _modbusInfor;
+        public DataTable ModbusInfor
+        {
+            get
+            {
+                return _modbusInfor;
+            }
+            set
+            {
+                SetProperty(ref _modbusInfor, value, "ModbusInfor");
+            }
+        }
         private string _deviceName;
-
+        private int _register;
         private string _port;
         private int _baudrate;
         private int _dataBits;
@@ -63,10 +68,32 @@ namespace WPF_TEST.ViewModel
         private int _read_Time_Out;
         private int _update_Rate;
         private int _id;
-        public ConntionTypes _conntionType;
-
+        private ConntionTypes _conntionType;
+        private ModbusFunction _modbusFunction;
         private string _IP_Address;
         private int _TCP_IP_Port;
+        public  int RegisterAddress 
+        {
+            get 
+            {
+                return _register;
+            }
+            set 
+            {
+                SetProperty(ref _register, value, "RegisterAddress");
+            }
+        }
+        public ModbusFunction ModbusFunctionss 
+        {
+            get 
+            {
+                return _modbusFunction;
+            }
+            set 
+            {
+                SetProperty(ref _modbusFunction, value, "ModbusFunctionss");
+            }
+        }
         public string DeviceName 
         {
             get
@@ -199,6 +226,7 @@ namespace WPF_TEST.ViewModel
                 SetProperty(ref _TCP_IP_Port, value, "TCP_Port");
             }
         }
+        #endregion
         public ICommand NewConnect { get; set; }
         public ICommand EditConnect { get; set; }
         public ICommand DeleteConnect { get; set; }
@@ -246,6 +274,7 @@ namespace WPF_TEST.ViewModel
             EditConnect = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
                 modbusViewModel.SelectedViewModel = EditModbusConnectionViewModel;
+                
             });
             DeleteConnect = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
@@ -258,37 +287,40 @@ namespace WPF_TEST.ViewModel
             Save_NewConnection = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
                 
-                    ModbusDevice = new ModbusDevice();
-                    ModbusDevice.DeviceName = DeviceName;
-                    ModbusDevice.ConntionType = ConntionType;
-                    ModbusDevice.ID = ID;
-                    if (ModbusDevice.ConntionType == ConntionTypes.Modbus_RTU) 
-                    {
-                        ModbusDevice.IP_Address = null;
-                        ModbusDevice.TCP_IP_Port = 0;
-                        ModbusDevice.Port = Port;
-                        ModbusDevice.Baudrate = Baudrate;
-                        ModbusDevice.DataBits = DataBit;
-                        ModbusDevice.StopBits = StopBit;
-                        ModbusDevice.Parity = Parity;
-                        ModbusDevice.Read_Time_Out = ReadTimeOut;
-                        ModbusDevice.Update_Rate = UpdateRate;
-                       
-                    }
-                    else if(ModbusDevice.ConntionType == ConntionTypes.Modbus_TCP_IP)
-                    {
-                        ModbusDevice.IP_Address = IPAddress;
-                        ModbusDevice.TCP_IP_Port = TCP_Port;
-                        ModbusDevice.Update_Rate = UpdateRate;
-                        ModbusDevice.Port = null;
-                        ModbusDevice.Baudrate = 0;
-                        ModbusDevice.DataBits = 8;
-                        ModbusDevice.Parity = Parity.None;
-                        ModbusDevice.StopBits = StopBits.One;
-                        ModbusDevice.Read_Time_Out = ReadTimeOut;
+                ModbusDevice = new ModbusDevice();
+                ModbusDevice.DeviceName = DeviceName;
+                ModbusDevice.ConntionType = ConntionType;
+                ModbusDevice.ID = ID;
+                ModbusDevice.ModbusFunctions = ModbusFunctionss;
+                ModbusDevice.Register_Address = RegisterAddress;
+                if (ModbusDevice.ConntionType == ConntionTypes.Modbus_RTU) 
+                {
+                    ModbusDevice.IP_Address = null;
+                    ModbusDevice.TCP_IP_Port = 0;
+                    ModbusDevice.Port = Port;
+                    ModbusDevice.Baudrate = Baudrate;
+                    ModbusDevice.DataBits = DataBit;
+                    ModbusDevice.StopBits = StopBit;
+                    ModbusDevice.Parity = Parity;
 
-                    }
-                    ModbusDevices.Add(ModbusDevice);
+                    ModbusDevice.Read_Time_Out = ReadTimeOut;
+                    ModbusDevice.Update_Rate = UpdateRate;
+                       
+                }
+                else if(ModbusDevice.ConntionType == ConntionTypes.Modbus_TCP_IP)
+                {
+                    ModbusDevice.IP_Address = IPAddress;
+                    ModbusDevice.TCP_IP_Port = TCP_Port;
+                    ModbusDevice.Update_Rate = UpdateRate;
+                    ModbusDevice.Port = null;
+                    ModbusDevice.Baudrate = 0;
+                    ModbusDevice.DataBits = 8;
+                    ModbusDevice.Parity = Parity.None;
+                    ModbusDevice.StopBits = StopBits.One;
+                    ModbusDevice.Read_Time_Out = ReadTimeOut;
+
+                }
+                ModbusDevices.Add(ModbusDevice);
                
                 modbusViewModel.SelectedViewModel = ModbusScreenViewModel;
             });
@@ -304,11 +336,15 @@ namespace WPF_TEST.ViewModel
     }
     public enum ModbusFunction 
     {
-        [Description("03 : Read Holding")]
-        Read_Holding,
-        Read_Coil,
-        Read_MultiCoil,
-        Weite_Holding,
+        
+        [Description("01 Read Coil")]
+        Read_Coil = 1,
+        [Description("02 Read Descrete Input")]
+        Read_Descrete_Input = 2,
+        [Description("03 Read Holding Register")]
+        Read_Holding_Register = 3,
+        [Description("04 Read Input Registers")]
+        Weite_Holding = 4,
     }
     
     
@@ -382,8 +418,9 @@ namespace WPF_TEST.ViewModel
         public int Read_Time_Out { get; set; }
         public int Update_Rate { get; set; }
         public int ID { get; set; }
+        public int Register_Address { get; set; }
         public ConntionTypes ConntionType { get; set; }
-
+        public ModbusFunction ModbusFunctions { get; set; }
         public string IP_Address { get; set; }
         public int TCP_IP_Port { get; set; }
 

@@ -67,8 +67,6 @@ namespace WPF_TEST.ViewModel
         {
             _exeCute((T)parameter);
         }
-
-        
     }
 
 }
