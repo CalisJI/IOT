@@ -505,13 +505,8 @@ F:\VISUAL PROJECT\C#\WPF\WPF_TEST\bin\Debug\ru\DevExpress.XtraGrid.v19.2.resourc
 F:\VISUAL PROJECT\C#\WPF\WPF_TEST\obj\Debug\WPF_TEST_Content.g.cs
 F:\VISUAL PROJECT\C#\WPF\WPF_TEST\obj\Debug\WPF_TEST.csproj.AssemblyReference.cache
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.exe.config
-F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\CustomAppointmentWindow1.baml
-F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\CustomRecurrenceWindow.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\OutlookExchangeOptionsWindow.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\Configuration.g.cs
-F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\CustomAppointmentWindow.g.cs
-F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\CustomAppointmentWindow1.g.cs
-F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\CustomRecurrenceWindow.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\DataStreamCollection.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\Login_form.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\MainScreenView.g.cs
@@ -997,7 +992,6 @@ F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\bin\Debug\ru\DevExpress.XtraGrid.v19.2.res
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\AddNewConnectionView.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\App.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\Configuration.baml
-F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\CustomAppointmentWindow.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\DataStreamCollection.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\Login_form.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\MainResource\MainResource.baml
@@ -1029,3 +1023,4 @@ F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ModbusScreenView.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ModbusScreenView.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\EditModbusView.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\EditModbusView.baml
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.csproj.AssemblyReference.cache

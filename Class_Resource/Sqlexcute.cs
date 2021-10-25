@@ -1,9 +1,11 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,6 +20,11 @@ namespace WPF_TEST.Class_Resource
         //public static string Server = "127.0.0.1";
         public string Server { get; set; }
         public string UId { get; set; }
+        private string Check_Table_Exits(string Db, string TB) 
+        {
+            string check = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = '"+Db+"' AND table_name = '"+TB+"'";
+            return check;
+        }
         //private string StrCon = "Server = " + Server + "; UId = root; Pwd = " + pwd + "; Pooling = false; Character Set=utf8";
         private string StrCon(string Server, string pwd)
         {
@@ -222,14 +229,95 @@ namespace WPF_TEST.Class_Resource
                 File.Delete(tempCsvFileSpec);
             }
         }
-        public void AutoCreateTable(DataTable dataTable, string database, string TableName) 
+        public void AutoCreateTable(DataTable dataTable, string database, string TableName, ref bool check) 
         {
-            string cmd = @"create table " + TableName + " ()";
+            string cmd;
+            int count = 2;
             //*****************************************************
             // Code for processing
+            using (SQL_Connection = new MySqlConnection(StrCon(Server, pwd))) 
+            {
+                MySqlCommand command = new MySqlCommand(Check_Table_Exits(database, TableName),SQL_Connection);
 
-            //*****************************************************
-            bool auto_create = SQL_command(cmd, database);
+                SQL_Connection.Open();
+
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+
+                {
+
+                    count = reader.GetInt32(0);
+
+                   
+
+                   
+
+                }
+                SQL_Connection.Close();
+            }
+            if (count == 0)
+
+            {
+
+                //MessageBox.Show("No such data table exists!");
+                string sqlsc = string.Empty;
+                sqlsc = "CREATE TABLE " + TableName + " (";
+                for (int i = 0; i < dataTable.Columns.Count; i++)
+                {
+                    sqlsc += "" + dataTable.Columns[i].ColumnName + " ";
+                    string columnType = dataTable.Columns[i].DataType.ToString();
+                    switch (columnType)
+                    {
+                        case "System.Int32":
+                            sqlsc += " INT ";
+                            break;
+                        case "System.Int64":
+                            sqlsc += " BIGINT(50) ";
+                            break;
+                        case "System.Int16":
+                            sqlsc += " SMALLINT(50)";
+                            break;
+                        case "System.Byte":
+                            sqlsc += " TINYINT(50)";
+                            break;
+                        case "System.Decimal":
+                            sqlsc += " DECIMAL(45) ";
+                            break;
+                        case "System.DateTime":
+                            sqlsc += " DATETIME ";
+                            break;
+                        case "System.Double":
+                            sqlsc += " DOUBLE ";
+                            break;
+                        case "System.FLOAT":
+                            sqlsc += " FLOAT ";
+                            break;
+                        case "System.String":
+                        default:
+                            sqlsc += string.Format(" VARCHAR({0}) ", dataTable.Columns[i].MaxLength == -1 ? "45" : dataTable.Columns[i].MaxLength.ToString());
+                            break;
+                    }
+                    if (dataTable.Columns[i].AutoIncrement)
+                        sqlsc += " IDENTITY(" + dataTable.Columns[i].AutoIncrementSeed.ToString() + "," + dataTable.Columns[i].AutoIncrementStep.ToString() + ") ";
+                    if (!dataTable.Columns[i].AllowDBNull)
+                        sqlsc += " NOT NULL ";
+                    sqlsc += ",";
+                }
+                cmd = sqlsc.Substring(0, sqlsc.Length - 1) + ")";
+
+                //*****************************************************
+                check = SQL_command(cmd, database);
+
+            }
+            else if (count == 1)
+
+            {
+
+                // MessageBox.Show("Such data table exists!");
+
+            }
+            
         }
         public void AutoCreat_table(string path, string table, string database)
         {
@@ -277,6 +365,59 @@ namespace WPF_TEST.Class_Resource
             HERE:;
                 bool auto_create = SQL_command(cmd, database);
             }
+        }
+        public static DataTable FillToDataTable<T>(ObservableCollection<T> items)
+        {
+            DataTable dataTable = new DataTable(typeof(T).Name);
+
+            //Get all the properties
+            PropertyInfo[] Props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (PropertyInfo prop in Props)
+            {
+                //Defining type of data column gives proper data table 
+                var type = (prop.PropertyType.IsGenericType && prop.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>) ? Nullable.GetUnderlyingType(prop.PropertyType) : prop.PropertyType);
+                //Setting column names as Property names
+                dataTable.Columns.Add(prop.Name, type);
+            }
+            foreach (T item in items)
+            {
+                var values = new object[Props.Length];
+                for (int i = 0; i < Props.Length; i++)
+                {
+                    //inserting property values to datatable rows
+                    values[i] = Props[i].GetValue(item, null);
+                }
+                dataTable.Rows.Add(values);
+            }
+            //put a breakpoint here and check datatable
+            return dataTable;
+        }
+        public static ObservableCollection<T> ConvertDataTable<T>(DataTable dt)
+        {
+            ObservableCollection<T> data = new ObservableCollection<T>();
+            foreach (DataRow row in dt.Rows)
+            {
+                T item = GetItem<T>(row);
+                data.Add(item);
+            }
+            return data;
+        }
+        private static T GetItem<T>(DataRow dr)
+        {
+            Type temp = typeof(T);
+            T obj = Activator.CreateInstance<T>();
+
+            foreach (DataColumn column in dr.Table.Columns)
+            {
+                foreach (PropertyInfo pro in temp.GetProperties())
+                {
+                    if (pro.Name == column.ColumnName)
+                        pro.SetValue(obj, dr[column.ColumnName], null);
+                    else
+                        continue;
+                }
+            }
+            return obj;
         }
     }
 }

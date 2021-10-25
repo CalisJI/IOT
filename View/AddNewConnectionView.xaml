@@ -54,7 +54,7 @@
                             DataContext="{StaticResource Modbus}"
                             Text="{Binding DeviceName, Mode=OneWayToSource}"
                             Margin="220,0,0,0"
-                           
+                           materialDesign:HintAssist.Hint="Device Name"
                             Width="370"/>
                     </Grid>
                     <Grid Margin="0,25,0,0">
@@ -183,8 +183,8 @@
                     Width="70"
                     Command="{Binding Save_NewConnection }"
                     Style="{StaticResource MaterialDesignIconButton}"
-                    ToolTip="Start"
-                   
+                    ToolTip="Add new"
+                    
                     Background="{DynamicResource MaterialDesignTextFieldBoxBackground}">
                     <materialDesign:PackIcon
                     Height="70"
@@ -212,7 +212,7 @@
                 Width="70"
                 Command="{Binding Cancel_Excute}"
                 Style="{StaticResource MaterialDesignIconButton}"
-                ToolTip="Start"
+                ToolTip="Cancel"
                 Background="{DynamicResource MaterialDesignTextFieldBoxBackground}">
                     <materialDesign:PackIcon
                     Height="70"
@@ -248,6 +248,7 @@
 
                             <TextBox
                                 HorizontalAlignment="Right"
+                                materialDesign:HintAssist.Hint="Slave ID"
                                 Text="{Binding ID}"
                                 Width="450">
 
@@ -261,6 +262,7 @@
                                 HorizontalAlignment="Right"
                                 ItemsSource="{Binding Source={StaticResource FuntionCode}}"
                                 SelectedItem="{Binding ModbusFunctions}"
+                                materialDesign:HintAssist.Hint="Function Code"
                                 Width="450">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
@@ -274,6 +276,7 @@
                             <TextBox 
                                 HorizontalAlignment="Right"
                                 Width="450"
+                                materialDesign:HintAssist.Hint="Register Address"
                                 Text="{Binding RegisterAddress}">
 
                             </TextBox>

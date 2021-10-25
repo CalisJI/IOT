@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:WPF_TEST.View"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
+             xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
              DataContext="{StaticResource Modbus}"
              d:DesignHeight="1000" d:DesignWidth="1920">
     <Grid>
@@ -384,6 +385,48 @@
 
             </GroupBox>
         </StackPanel>
+        <Grid 
+            Grid.Column="1"
+            Grid.Row="1"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Margin="50,20"
+            Width="150"
+            Height="80">
+            <Button
+                x:Name="Home_button"
+                DataContext="{StaticResource DataStr}"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Height="80"
+                materialDesign:ButtonAssist.CornerRadius="10"
+                ToolTip="Back"
+                Click="Home_button_Click"
+                Command="{Binding DataStream}">
+                <materialDesign:PackIcon Kind="StepBackward2" Height="60" Width="100"/>
+                
+            </Button>
+        </Grid>
+        <Grid 
+            Grid.Column="1"
+            Grid.Row="1"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Margin="50,20"
+            Width="150"
+            Height="80">
+            <Button
+                Visibility="Hidden"
+                Name="update_btn"
+                DataContext="{StaticResource Modbus}"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Height="80"
+                materialDesign:ButtonAssist.CornerRadius="10"
+                ToolTip="Back"
+                
+                Command="{Binding Update_Data}">
+                <materialDesign:PackIcon Kind="StepBackward2" Height="60" Width="100"/>
 
+            </Button>
+        </Grid>
     </Grid>
 </UserControl>

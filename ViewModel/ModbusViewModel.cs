@@ -13,6 +13,8 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Markup;
 using WPF_TEST.SerialCommunicate;
+using WPF_TEST.Class_Resource;
+using WPF_TEST.Notyfication;
 
 namespace WPF_TEST.ViewModel
 {
@@ -20,6 +22,8 @@ namespace WPF_TEST.ViewModel
     {
         private BaseViewModel _selectedViewModel;
         public iModbus iModbus = new iModbus();
+        Sqlexcute Sqlexcute = new Sqlexcute();
+        DataTable SQLModbus = new DataTable();
         
         public BaseViewModel SelectedViewModel
         {
@@ -46,6 +50,20 @@ namespace WPF_TEST.ViewModel
         /// <summary>
         /// 
         /// </summary>
+        /// 
+        private ModbusDevice _selectedDevice; //return Selected Item to EDit
+        private ModbusDevice Edit_Item;
+        public ModbusDevice SelectedDevice 
+        {
+            get 
+            {
+                return _selectedDevice;
+            }
+            set 
+            {
+                SetProperty(ref _selectedDevice, value, "SelectedDevice");
+            }
+        }
         private DataTable _modbusInfor;
         public DataTable ModbusInfor
         {
@@ -229,10 +247,12 @@ namespace WPF_TEST.ViewModel
         #endregion
         public ICommand NewConnect { get; set; }
         public ICommand EditConnect { get; set; }
+        public ICommand Save_Edit { get; set; }
         public ICommand DeleteConnect { get; set; }
         public ICommand ConnectionExcute { get; set; }
         public ICommand Save_NewConnection { get; set; }
         public ICommand Cancel_Excute { get; set; }
+        public ICommand Update_Data { get; set; }
         public PortSettingsViewModel ComportInfo { get; set; }
         public bool _load = false;
         ModbusDevice modbusDevice;
@@ -251,6 +271,7 @@ namespace WPF_TEST.ViewModel
         AddNewConnectionViewModel AddNewConnectionViewModel = new AddNewConnectionViewModel();
         EditModbusConnectionViewModel EditModbusConnectionViewModel = new EditModbusConnectionViewModel();
         public ModbusViewModel modbusViewModel;
+        WPFMessageBoxService messageBoxService = new WPFMessageBoxService();
         public ModbusViewModel() 
         {
             if (!_load) 
@@ -259,6 +280,10 @@ namespace WPF_TEST.ViewModel
                 modbusViewModel = this;
                 modbusViewModel.SelectedViewModel = ModbusScreenViewModel;
                 _load = true;
+                Sqlexcute.Server = "112.78.2.9";
+                Sqlexcute.pwd = "Fwd@2021";
+                Sqlexcute.UId = "fwd63823_fwdvina";
+                
             }
             ComportInfo = new PortSettingsViewModel();
             AddNewConnectionViewModel.ModbusDevices = this.modbusDevices;
@@ -273,8 +298,11 @@ namespace WPF_TEST.ViewModel
             });
             EditConnect = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
+                Edit_Item = (ModbusDevice)p;
+                SelectedDevice = Edit_Item;
                 modbusViewModel.SelectedViewModel = EditModbusConnectionViewModel;
                 
+
             });
             DeleteConnect = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
@@ -283,6 +311,13 @@ namespace WPF_TEST.ViewModel
             ConnectionExcute = new RelayCommand<object>((p) => { return true; },(p)=> 
             {
             
+            });
+            Save_Edit = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+
+                ModbusDevices.Where(w => w.DeviceName == Edit_Item.DeviceName && w.ID == Edit_Item.ID).ToList().ForEach(i => i = SelectedDevice);
+                modbusViewModel.SelectedViewModel = ModbusScreenViewModel;
+
             });
             Save_NewConnection = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
@@ -323,6 +358,23 @@ namespace WPF_TEST.ViewModel
                 ModbusDevices.Add(ModbusDevice);
                
                 modbusViewModel.SelectedViewModel = ModbusScreenViewModel;
+            });
+            Update_Data = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                List<string> dataTable = Sqlexcute.Get_table_Name("fwd63823_database");
+                if (Sqlexcute.error_message != string.Empty) 
+                {
+                  
+                        messageBoxService.ShowMessage(Sqlexcute.error_message, "Error Information", System.Messaging.MessageType.Report);
+                   
+                }
+                SQLModbus = Sqlexcute.FillToDataTable<ModbusDevice>(ModbusDevices);
+                bool check = true;
+                Sqlexcute.AutoCreateTable(SQLModbus, "fwd63823_database", "ModbusDevice", ref check);
+                if (!check) 
+                {
+                    messageBoxService.ShowMessage(Sqlexcute.error_message, "Error Information", System.Messaging.MessageType.Report);
+                }
             });
         }
        

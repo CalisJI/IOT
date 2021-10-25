@@ -221,6 +221,7 @@
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
+    <Reference Include="System.Messaging" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
@@ -299,15 +300,6 @@
     <Compile Include="Configuration.xaml.cs">
       <DependentUpon>Configuration.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomAppointmentWindow.xaml.cs">
-      <DependentUpon>CustomAppointmentWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CustomAppointmentWindow1.xaml.cs">
-      <DependentUpon>CustomAppointmentWindow1.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CustomRecurrenceWindow.xaml.cs">
-      <DependentUpon>CustomRecurrenceWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="DataStreamCollection.xaml.cs">
       <DependentUpon>DataStreamCollection.xaml</DependentUpon>
     </Compile>
@@ -315,6 +307,7 @@
       <DependentUpon>MainScreenView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\ModbusModel.cs" />
+    <Compile Include="Notyfication\WPFMessageBoxService.cs" />
     <Compile Include="OutlookExchangeOptionsWindow.xaml.cs">
       <DependentUpon>OutlookExchangeOptionsWindow.xaml</DependentUpon>
     </Compile>
@@ -389,18 +382,6 @@
       <DependentUpon>WorkflowCreator.xaml</DependentUpon>
     </Compile>
     <Page Include="Configuration.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CustomAppointmentWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CustomAppointmentWindow1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CustomRecurrenceWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

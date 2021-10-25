@@ -98,9 +98,9 @@
                 <dxmvvm:EventToCommand Command="{Binding SaveCommand}" EventName="AppointmentRemoved" />
                 <dxmvvm:EventToCommand Command="{Binding SaveCommand}" EventName="AppointmentRestored" />
             </dxmvvm:Interaction.Behaviors>
-            <dxsch:SchedulerControl.OptionsWindows >
+            <!--<dxsch:SchedulerControl.OptionsWindows >
                 <dxsch:OptionsWindows AppointmentWindowType="{x:Type custom:CustomAppointmentWindow}"/>
-            </dxsch:SchedulerControl.OptionsWindows>
+            </dxsch:SchedulerControl.OptionsWindows>-->
 
             <dxsch:SchedulerControl.LabelItems>
                 <dxsch:AppointmentLabelItem Brush="Gray" Caption="Queued" Id="{x:Static dxsch:DefaultItemIds.LabelNone}"/>

@@ -49,6 +49,7 @@ namespace WPF_TEST.ViewModel
             {
                 this.dataStreamCollectionModel.SelectedViewModel = DataCollectConfigureModel;
                 //this.dataStreamCollectionModel.SelectedViewModel = DataCollectConfigureModel;
+                
             });
             
             Sensor_Collection = new RelayCommand<object>((p) => { return true; }, (p) =>
@@ -83,6 +84,7 @@ namespace WPF_TEST.ViewModel
             Main_menu = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 //dataStreamCollectionModel.SelectedViewModel = MainMenu;
+                
                 dataStreamCollectionModel.SelectedViewModel = MainMenu;
             });
         }
