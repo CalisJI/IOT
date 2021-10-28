@@ -27,7 +27,10 @@
                 TextBlock.TextAlignment="Center"
                 TextBlock.FontSize="26">
                 <ListBox 
+                    Height="692"
                     x:Name="Modbus_list"
+                    ScrollViewer.VerticalScrollBarVisibility="Visible"
+                  
                     DataContext="{StaticResource Modbus}"
                     ItemsSource="{Binding ModbusDevices}">
                     <ListBox.ItemTemplate>
@@ -35,6 +38,7 @@
                             <TextBlock Text="{Binding DeviceName}"/>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
+                   
                 </ListBox>
 
             </GroupBox>
@@ -327,7 +331,7 @@
                 Width="80"
                 Margin="70,0,0,0"
                 Style="{StaticResource MaterialDesignIconButton}"
-                ToolTip="Start Service"
+                ToolTip="Delete"
                 Command="{Binding DeleteConnect}"
                 Background="{DynamicResource MaterialDesignTextFieldBoxBackground}">
                 <materialDesign:PackIcon
@@ -341,7 +345,7 @@
                 Width="80"
                 Margin="70,0,0,0"
                 Style="{StaticResource MaterialDesignIconButton}"
-                ToolTip="Stop Servidve"
+                ToolTip="Connect"
                 Command="{Binding ConnectionExcute}"
                 Background="{DynamicResource MaterialDesignTextFieldBoxBackground}">
                 <materialDesign:PackIcon

@@ -8,6 +8,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO.Ports;
+using WPF_TEST.ViewModel;
 
 namespace WPF_TEST.Class_Resource
 {
@@ -30,6 +32,11 @@ namespace WPF_TEST.Class_Resource
         {
             string Set = "Server = " + Server + "; UId = " + UId + "; Pwd = " + pwd + "; Pooling = false; Character Set=utf8; SslMode=none";
             return Set;
+        }
+        private string StrCon_Database(string Server,string pwd,string database) 
+        {
+            string set = "Server = " + Server + ";Database =" + database + "; UId = " + UId + "; Pwd = " + pwd + "; Pooling = false; Character Set=utf8; SslMode=none";
+            return set;
         }
         public DataTable Get_Database_Name()
         {
@@ -229,7 +236,7 @@ namespace WPF_TEST.Class_Resource
                 File.Delete(tempCsvFileSpec);
             }
         }
-        public void AutoCreateTable(DataTable dataTable, string database, string TableName, ref bool check) 
+        public void AutoCreateTable(DataTable dataTable, string database, string TableName, ref bool check,ref bool exist) 
         {
             string cmd;
             int count = 2;
@@ -246,13 +253,7 @@ namespace WPF_TEST.Class_Resource
                 while (reader.Read())
 
                 {
-
-                    count = reader.GetInt32(0);
-
-                   
-
-                   
-
+                     count = reader.GetInt32(0);
                 }
                 SQL_Connection.Close();
             }
@@ -305,19 +306,82 @@ namespace WPF_TEST.Class_Resource
                     sqlsc += ",";
                 }
                 cmd = sqlsc.Substring(0, sqlsc.Length - 1) + ")";
-
+                exist = false;
                 //*****************************************************
                 check = SQL_command(cmd, database);
 
             }
             else if (count == 1)
-
             {
-
+                exist = true;
                 // MessageBox.Show("Such data table exists!");
 
             }
             
+        }
+      
+        //public void UpdateTable_to_MySQlHost( ref DataTable dataTable,string table_Name, string Database) 
+        //{
+        //    using(SQL_Connection = new MySqlConnection(StrCon(Server, pwd))) 
+        //    {
+        //        string Query = "SELECT * FROM " + table_Name + "";
+        //        MySqlDataAdapter mySqlData = new MySqlDataAdapter(Query, SQL_Connection);
+        //        MySqlCommandBuilder mySqlCommand = new MySqlCommandBuilder(mySqlData);
+        //        mySqlData.Fill(dataTable);
+        //        mySqlData.Update(dataTable);
+        //    }
+        //}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dataTable"></param>
+        /// <param name="table_Name"></param>
+        /// <param name="Database"></param>
+        /// <returns></returns>
+        public MySqlDataAdapter GetData_FroM_Database(ref DataTable dataTable , string table_Name, string Database)
+        {
+            MySqlDataAdapter mySqlData;
+            try
+            {
+               
+                using (SQL_Connection = new MySqlConnection(StrCon_Database(Server, pwd, Database)))
+                {
+                    string Query = "SELECT * FROM " + table_Name + "";
+                    mySqlData = new MySqlDataAdapter(Query, SQL_Connection);
+                    MySqlCommandBuilder mySqlCommand = new MySqlCommandBuilder(mySqlData);
+                    mySqlData.Fill(dataTable);
+
+                }
+                error_message = string.Empty;
+                return mySqlData;
+            }
+            catch (Exception ex)
+            {
+
+                error_message = ex.Message;
+                return mySqlData = null;
+            }
+
+           
+           
+        }
+        public void Update_Table_to_Host(ref MySqlDataAdapter mySqlDataAdapter, DataTable dataTable, string Database) 
+        {
+            try
+            {
+               
+                using (SQL_Connection = new MySqlConnection(StrCon_Database(Server, pwd, Database)))
+                {
+                    mySqlDataAdapter.Update(dataTable);
+                    error_message = string.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                error_message = ex.Message;
+              
+            }
+           
         }
         public void AutoCreat_table(string path, string table, string database)
         {
@@ -392,7 +456,7 @@ namespace WPF_TEST.Class_Resource
             //put a breakpoint here and check datatable
             return dataTable;
         }
-        public static ObservableCollection<T> ConvertDataTable<T>(DataTable dt)
+        public static ObservableCollection<T> Conver_From_Data_Table_To_List<T>(DataTable dt)
         {
             ObservableCollection<T> data = new ObservableCollection<T>();
             foreach (DataRow row in dt.Rows)
@@ -401,6 +465,17 @@ namespace WPF_TEST.Class_Resource
                 data.Add(item);
             }
             return data;
+        }
+        public static T ConvertFromDBVal<T>(object obj)
+        {
+            if (obj == null || obj == DBNull.Value)
+            {
+                return default(T); // returns the default value for the type
+            }
+            else
+            {
+                return (T)obj;
+            }
         }
         private static T GetItem<T>(DataRow dr)
         {
@@ -411,8 +486,44 @@ namespace WPF_TEST.Class_Resource
             {
                 foreach (PropertyInfo pro in temp.GetProperties())
                 {
-                    if (pro.Name == column.ColumnName)
-                        pro.SetValue(obj, dr[column.ColumnName], null);
+                    if (pro.Name == column.ColumnName) 
+                    {
+                        if(pro.PropertyType == typeof(System.IO.Ports.Parity)) 
+                        {
+                            pro.SetValue(obj, (Parity)Enum.Parse(typeof(Parity), (string)dr[column.ColumnName]), null);
+                        }
+                        else if (pro.PropertyType == typeof(System.IO.Ports.StopBits)) 
+                        {
+                            pro.SetValue(obj, (StopBits)Enum.Parse(typeof(StopBits), (string)dr[column.ColumnName]), null);
+                        }
+                        else if(pro.PropertyType == typeof(ConntionTypes))
+                        {
+                            pro.SetValue(obj, (ConntionTypes)Enum.Parse(typeof(ConntionTypes), (string)dr[column.ColumnName]), null);
+                        }
+                        else if (pro.PropertyType == typeof(ModbusFunction))
+                        {
+                            pro.SetValue(obj, (ModbusFunction)Enum.Parse(typeof(ModbusFunction), (string)dr[column.ColumnName]), null);
+                        }
+                        else if (column.DataType == typeof(System.DBNull)) 
+                        {
+                            pro.SetValue(obj, ConvertFromDBVal<string>((string)dr[column.ColumnName]), null);
+                        }
+                        else 
+                        {
+                            try
+                            {
+                                pro.SetValue(obj, dr[column.ColumnName], null);
+                            }
+                            catch (Exception)
+                            {
+
+                                pro.SetValue(obj, "", null);
+                            }
+                        }
+                        
+                    }
+
+                       
                     else
                         continue;
                 }

@@ -15,6 +15,7 @@ using System.Windows.Markup;
 using WPF_TEST.SerialCommunicate;
 using WPF_TEST.Class_Resource;
 using WPF_TEST.Notyfication;
+using MySql.Data.MySqlClient;
 
 namespace WPF_TEST.ViewModel
 {
@@ -24,7 +25,7 @@ namespace WPF_TEST.ViewModel
         public iModbus iModbus = new iModbus();
         Sqlexcute Sqlexcute = new Sqlexcute();
         DataTable SQLModbus = new DataTable();
-        
+        MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter();
         public BaseViewModel SelectedViewModel
         {
             get { return _selectedViewModel; }
@@ -283,6 +284,9 @@ namespace WPF_TEST.ViewModel
                 Sqlexcute.Server = "112.78.2.9";
                 Sqlexcute.pwd = "Fwd@2021";
                 Sqlexcute.UId = "fwd63823_fwdvina";
+
+                mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref SQLModbus, "ModbusDevice", "fwd63823_database");
+                ModbusDevices = Sqlexcute.Conver_From_Data_Table_To_List<ModbusDevice>(SQLModbus);
                 
             }
             ComportInfo = new PortSettingsViewModel();
@@ -361,24 +365,32 @@ namespace WPF_TEST.ViewModel
             });
             Update_Data = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
-                List<string> dataTable = Sqlexcute.Get_table_Name("fwd63823_database");
-                if (Sqlexcute.error_message != string.Empty) 
-                {
-                  
-                        messageBoxService.ShowMessage(Sqlexcute.error_message, "Error Information", System.Messaging.MessageType.Report);
-                   
-                }
-                SQLModbus = Sqlexcute.FillToDataTable<ModbusDevice>(ModbusDevices);
-                bool check = true;
-                Sqlexcute.AutoCreateTable(SQLModbus, "fwd63823_database", "ModbusDevice", ref check);
-                if (!check) 
-                {
-                    messageBoxService.ShowMessage(Sqlexcute.error_message, "Error Information", System.Messaging.MessageType.Report);
-                }
+                //List<string> dataTable = Sqlexcute.Get_table_Name("fwd63823_database");
+                Save_Table();
+               
+               
             });
         }
-       
+        public void Save_Table() 
+        {
+            SQLModbus = null;
+            SQLModbus = Sqlexcute.FillToDataTable<ModbusDevice>(ModbusDevices);
+            bool check = true;
+            bool exist = false;
+            Sqlexcute.AutoCreateTable(SQLModbus, "fwd63823_database", "ModbusDevice", ref check, ref exist);
+            if (!check)
+            {
+                messageBoxService.ShowMessage(Sqlexcute.error_message, "Thông tin lỗi", System.Messaging.MessageType.Report);
+            }
+            Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, SQLModbus, "fwd63823_database");
+            if (Sqlexcute.error_message != string.Empty) 
+            {
+                messageBoxService.ShowMessage("Lỗi khi lưu dữ liệu lên đám mây","Thông tin lỗi", System.Messaging.MessageType.Report);
+            }
+
+        }
     }
+
     public enum ConntionTypes
     {
         [Description("Modbus RTU")]
