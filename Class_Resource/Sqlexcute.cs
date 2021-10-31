@@ -365,13 +365,13 @@ namespace WPF_TEST.Class_Resource
            
            
         }
-        public void Update_Table_to_Host(ref MySqlDataAdapter mySqlDataAdapter, DataTable dataTable, string Database) 
+        public void Update_Table_to_Host(ref MySqlDataAdapter mySqlDataAdapter, DataTable dataTable, string Database,string table_Name) 
         {
             try
             {
-               
+                SQL_command("DELETE FROM " + table_Name + "",Database);
                 using (SQL_Connection = new MySqlConnection(StrCon_Database(Server, pwd, Database)))
-                {
+                {                  
                     mySqlDataAdapter.Update(dataTable);
                     error_message = string.Empty;
                 }

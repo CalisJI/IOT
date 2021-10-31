@@ -1,4 +1,4 @@
-﻿
+﻿F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\GeneratedInternalTypeHelper.g.cs
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\App.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\Configuration.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\DataStreamCollection.xaml;;
@@ -20,6 +20,10 @@ FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\FileConfigurateView.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\MainMenuView.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\ModbusScreenView.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\ModbusView.xaml;;
+FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\Modbus_RTU_Frame_View.xaml;;
+FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\Modbus_TCP_IP_Frame_View.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\PlannerView.xaml;;
+FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\RTU_Frame_View.xaml;;
+FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\TCP_IP_Frame_View.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\WorkflowCreator.xaml;;
 

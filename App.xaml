@@ -48,6 +48,18 @@
             <DataTemplate DataType="{x:Type viewmodels:EditModbusConnectionViewModel}">
                 <views:EditModbusView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:Modbus_RTU_Frame_ViewModel}">
+                <views:Modbus_RTU_Frame_View/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:Modbus_TCP_IP_Frame_ViewModel}">
+                <views:Modbus_TCP_IP_Frame_View/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:RTU_Frame_ViewModel}">
+                <views:RTU_Frame_View/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:TCP_IP_Frame_ViewModel}">
+                <views:TCP_IP_Frame_View/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

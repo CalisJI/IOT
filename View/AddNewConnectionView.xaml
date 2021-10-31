@@ -7,7 +7,7 @@
              xmlns:System="clr-namespace:System;assembly=mscorlib"
               xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
              xmlns:local1="clr-namespace:WPF_TEST.ViewModel"
-             
+             xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              DataContext="{StaticResource AddModbusDevice}"
               xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"           
@@ -60,10 +60,11 @@
                     <Grid Margin="0,25,0,0">
                         <TextBlock Text="Connection Type :" Margin="3"/>
                         <ComboBox
+                            x:Name="Select_Type_CBB"
                             DataContext="{StaticResource Modbus}"
                             ItemsSource="{Binding Source={StaticResource enumValues}}"
                             SelectedItem="{Binding ConntionType}"
-                           
+                                
                             Margin="228,0,7,0"
                             materialDesign:HintAssist.Hint="Connection Type"
                             Width="370" VerticalAlignment="Bottom">
@@ -73,80 +74,20 @@
                                         Text="{Binding Converter={StaticResource ConnectionConvert}}"/>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction 
+                                        Command="{Binding Choose_Type}"
+                                        CommandParameter="{Binding ElementName=Select_Type_CBB,Path=SelectedItem}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                         </ComboBox>
 
                     </Grid>
-                    <Grid Margin="0,20,0,0">
-                        <TextBlock Text="Port :" Margin="3"/>
-                        <ComboBox
-                            DataContext="{StaticResource Modbus}"
-                            Margin="220,0,0,0"
-                            ItemsSource="{Binding ComportInfo.AvaliablePorts}"
-                            SelectedItem="{Binding Port}"
-                            
-                            materialDesign:HintAssist.Hint="COM"
-                            Width="370"/>
-
-                    </Grid>
-
-                    <Grid  Margin="0,20,0,0">
-                        <TextBlock Text="Baud Rate :" Margin="3"/>
-                        <ComboBox
-                            DataContext="{StaticResource Modbus}"
-                            ItemsSource="{Binding ComportInfo.Baud_rate}"
-                            SelectedItem="{Binding Baudrate}"
-                            Margin="220,0,0,0"
-                          
-                            materialDesign:HintAssist.Hint="Baud Rate"
-                            Width="370"/>
-                    </Grid>
-                    <Grid  Margin="0,20,0,0">
-                        <TextBlock Text="Data Bits:" Margin="3"/>
-                        <ComboBox
-                            Margin="220,0,0,0"
-                            DataContext="{StaticResource Modbus}"
-                            ItemsSource="{Binding ComportInfo.DataBits}"
-                            SelectedItem="{Binding DataBit}"
-                            materialDesign:HintAssist.Hint="Data Bits"
-                            Width="370"/>
-                    </Grid>
-                    <Grid  Margin="0,20,0,0">
-                        <TextBlock Text="Parity:" Margin="3"/>
-                        <ComboBox
-                            Margin="220,0,0,0"
-                            DataContext="{StaticResource Modbus}"
-                            ItemsSource="{Binding ComportInfo.Paritys}"
-                            SelectedItem="{Binding Parity}"
-                            materialDesign:HintAssist.Hint="Parity"
-                            Width="370"/>
-                    </Grid>
-                    <Grid  Margin="0,20,0,0">
-                        <TextBlock Text="StopBits :" Margin="3"/>
-                        <ComboBox
-                            Margin="220,0,0,0"
-                            DataContext="{StaticResource Modbus}"
-                            ItemsSource="{Binding ComportInfo.Stop_bits}"
-                            SelectedItem="{Binding StopBit}"
-                            materialDesign:HintAssist.Hint="Stop Bits"
-                            Width="370"/>
-                    </Grid>
-                    <Grid  Margin="0,20,0,0">
-                        <TextBlock Text="Read Time Out(ms) :" Margin="3"/>
-                        <TextBox
-                            Margin="220,0,0,0"
-                            DataContext="{StaticResource Modbus}"
-                            materialDesign:HintAssist.Hint="Read Time Out"
-                            Text="{Binding ReadTimeOut}"
-                            Width="370"/>
-                    </Grid>
-                    <Grid  Margin="0,20,0,20">
-                        <TextBlock Text="Update Rate(ms) :" Margin="3"/>
-                        <TextBox
-                            Margin="220,0,0,0"
-                            DataContext="{StaticResource Modbus}"
-                            Text="{Binding UpdateRate}"
-                            materialDesign:HintAssist.Hint="Update Rate"
-                            Width="370"/>
+                    <Grid 
+                        DataContext="{StaticResource Modbus}"
+                        Height="500">
+                        <ContentControl Content="{Binding ChooseTypeModel}"/>
                     </Grid>
                 </StackPanel>
 

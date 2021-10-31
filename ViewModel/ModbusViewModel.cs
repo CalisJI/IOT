@@ -22,10 +22,20 @@ namespace WPF_TEST.ViewModel
     public class ModbusViewModel : BaseViewModel
     {
         private BaseViewModel _selectedViewModel;
+        private BaseViewModel _ChooseTypeModel;
         public iModbus iModbus = new iModbus();
         Sqlexcute Sqlexcute = new Sqlexcute();
         DataTable SQLModbus = new DataTable();
         MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter();
+        public BaseViewModel ChooseTypeModel
+        {
+            get { return _ChooseTypeModel; }
+            set 
+            {
+                _ChooseTypeModel = value;
+                OnPropertyChanged(nameof(ChooseTypeModel));
+            }
+        }
         public BaseViewModel SelectedViewModel
         {
             get { return _selectedViewModel; }
@@ -254,6 +264,7 @@ namespace WPF_TEST.ViewModel
         public ICommand Save_NewConnection { get; set; }
         public ICommand Cancel_Excute { get; set; }
         public ICommand Update_Data { get; set; }
+        public ICommand Choose_Type { get; set; }
         public PortSettingsViewModel ComportInfo { get; set; }
         public bool _load = false;
         ModbusDevice modbusDevice;
@@ -273,6 +284,8 @@ namespace WPF_TEST.ViewModel
         EditModbusConnectionViewModel EditModbusConnectionViewModel = new EditModbusConnectionViewModel();
         public ModbusViewModel modbusViewModel;
         WPFMessageBoxService messageBoxService = new WPFMessageBoxService();
+        Modbus_RTU_Frame_ViewModel Modbus_RTU_Frame_ViewModel = new Modbus_RTU_Frame_ViewModel();
+        Modbus_TCP_IP_Frame_ViewModel Modbus_TCP_IP_Frame_ViewModel = new Modbus_TCP_IP_Frame_ViewModel();
         public ModbusViewModel() 
         {
             if (!_load) 
@@ -310,7 +323,8 @@ namespace WPF_TEST.ViewModel
             });
             DeleteConnect = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
-            
+                var delete = (ModbusDevice)p;
+                ModbusDevices.Remove(delete);
             });
             ConnectionExcute = new RelayCommand<object>((p) => { return true; },(p)=> 
             {
@@ -370,6 +384,17 @@ namespace WPF_TEST.ViewModel
                
                
             });
+            Choose_Type = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                if ((ConntionTypes)p == ConntionTypes.Modbus_RTU) 
+                {
+                    ChooseTypeModel = Modbus_RTU_Frame_ViewModel;
+                }
+                else if ((ConntionTypes)p == ConntionTypes.Modbus_TCP_IP) 
+                {
+                    ChooseTypeModel = Modbus_TCP_IP_Frame_ViewModel;
+                }
+            });
         }
         public void Save_Table() 
         {
@@ -382,10 +407,10 @@ namespace WPF_TEST.ViewModel
             {
                 messageBoxService.ShowMessage(Sqlexcute.error_message, "Thông tin lỗi", System.Messaging.MessageType.Report);
             }
-            Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, SQLModbus, "fwd63823_database");
+            Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, SQLModbus, "fwd63823_database", "ModbusDevice");
             if (Sqlexcute.error_message != string.Empty) 
             {
-                messageBoxService.ShowMessage("Lỗi khi lưu dữ liệu lên đám mây","Thông tin lỗi", System.Messaging.MessageType.Report);
+                messageBoxService.ShowMessage("Lỗi khi lưu dữ liệu lên đám mây:\n " +Sqlexcute.error_message+"","Thông tin lỗi", System.Messaging.MessageType.Report);
             }
 
         }

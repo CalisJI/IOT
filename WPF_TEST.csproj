@@ -336,10 +336,14 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ModbusScreenViewModel.cs" />
     <Compile Include="ViewModel\ModbusViewModel.cs" />
+    <Compile Include="ViewModel\Modbus_RTU_Frame_ViewModel.cs" />
+    <Compile Include="ViewModel\Modbus_TCP_IP_Frame_ViewModel.cs" />
     <Compile Include="ViewModel\OutlookExchangeOptionsWindowViewModel.cs" />
     <Compile Include="ViewModel\OutlookInspiredDemoViewModel.cs" />
     <Compile Include="ViewModel\PlannerModel.cs" />
+    <Compile Include="ViewModel\RTU_Frame_ViewModel.cs" />
     <Compile Include="ViewModel\SchedulerViewModel.cs" />
+    <Compile Include="ViewModel\TCP_IP_Frame_ViewModel.cs" />
     <Compile Include="ViewModel\ValueDescription.cs" />
     <Compile Include="ViewModel\WorkflowCreatorModel.cs" />
     <Compile Include="View\AddNewConnectionView.xaml.cs">
@@ -375,8 +379,20 @@
     <Compile Include="View\ModbusView.xaml.cs">
       <DependentUpon>ModbusView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Modbus_RTU_Frame_View.xaml.cs">
+      <DependentUpon>Modbus_RTU_Frame_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Modbus_TCP_IP_Frame_View.xaml.cs">
+      <DependentUpon>Modbus_TCP_IP_Frame_View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PlannerView.xaml.cs">
       <DependentUpon>PlannerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RTU_Frame_View.xaml.cs">
+      <DependentUpon>RTU_Frame_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TCP_IP_Frame_View.xaml.cs">
+      <DependentUpon>TCP_IP_Frame_View.xaml</DependentUpon>
     </Compile>
     <Compile Include="WorkflowCreator.xaml.cs">
       <DependentUpon>WorkflowCreator.xaml</DependentUpon>
@@ -476,7 +492,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Modbus_RTU_Frame_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Modbus_TCP_IP_Frame_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\PlannerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RTU_Frame_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TCP_IP_Frame_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

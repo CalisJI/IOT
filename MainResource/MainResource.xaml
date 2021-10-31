@@ -17,5 +17,8 @@
     <viewmodel:AddNewConnectionViewModel x:Key="AddModbusDevice"/>
     <viewmodel:ModbusScreenViewModel x:Key="ModbusScreen"/>
     <viewmodel:EditModbusConnectionViewModel x:Key="EditModbus"/>
-
+    <viewmodel:Modbus_RTU_Frame_ViewModel x:Key="RTU_Frame"/>
+    <viewmodel:Modbus_TCP_IP_Frame_ViewModel x:Key="TCP_Frame"/>
+    <viewmodel:RTU_Frame_ViewModel x:Key="Frame_RTU"/>
+    <viewmodel:TCP_IP_Frame_ViewModel x:Key="Frame_TCP"/>
 </ResourceDictionary>
