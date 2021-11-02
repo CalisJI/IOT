@@ -1031,3 +1031,7 @@ F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\RTU_Frame_View.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\TCP_IP_Frame_View.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\RTU_Frame_View.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\TCP_IP_Frame_View.baml
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\EditModbus_Page_View.g.cs
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\EditModbus_RTU_Window_View.g.cs
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\EditModbus_Page_View.baml
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\EditModbus_RTU_Window_View.baml

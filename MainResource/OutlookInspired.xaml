@@ -17,7 +17,7 @@
     <Style x:Key="BarItem.Style" TargetType="dxb:BarItem" x:Shared="False">
         <Setter Property="Tag" Value="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"/>
     </Style>
-    <DataTemplate x:Key="BarButtonItem.Print.Template">
+    <!--<DataTemplate x:Key="BarButtonItem.Print.Template">
         <ContentControl>
             <dxb:BarButtonItem
                 Style="{StaticResource BarItem.Style}"
@@ -25,9 +25,9 @@
                 Command="{DXBinding '@s.Tag.Commands.ShowRibbonPrintPreviewCommand'}"
                 CommandParameter="{Binding Id}"/>
         </ContentControl>
-    </DataTemplate>
+    </DataTemplate>-->
 
-    <Style x:Key="BarSubItem.Print" TargetType="dxb:BarSubItem" x:Shared="False"
+    <!--<Style x:Key="BarSubItem.Print" TargetType="dxb:BarSubItem" x:Shared="False"
            BasedOn="{StaticResource BarItem.Style}">
         <Setter Property="Content" Value="Print"/>
         <Setter Property="Glyph" Value="{dx:SvgImageSource Uri='pack://application:,,,/WPF_TEST;component/Images/OutlookInspired/Svg/Print.svg'}"/>
@@ -138,7 +138,7 @@
         <Setter Property="RibbonStyle" Value="SmallWithText"/>
         <Setter Property="Glyph" Value="{dx:SvgImageSource Uri='pack://application:,,,/WPF_TEST;component/Images/OutlookInspired/Svg/LowImportance.svg'}"/>
         <Setter Property="LargeGlyph" Value="{dx:SvgImageSource Uri='pack://application:,,,/WPF_TEST;component/Images/OutlookInspired/Svg/LowImportance.svg'}"/>
-    </Style>
+    </Style>-->
 
     <DataTemplate x:Key="Ribbon">
         <dxr:RibbonControl RibbonStyle="Office2010" ApplicationButtonText="File" ApplicationButtonSmallIcon="{x:Null}" AllowDrop="False">
@@ -156,11 +156,11 @@
                     <dxr:RibbonPageGroup Style="{DynamicResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Groups_Home_Arrange}}">
                         <dxb:BarLinkContainerItem Style="{DynamicResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Items_Home_Arrange_Views}}" />
                     </dxr:RibbonPageGroup>
-                    <dxr:RibbonPageGroup Caption="Share">
+                    <!--<dxr:RibbonPageGroup Caption="Share">
                         <dxb:BarSubItem Style="{StaticResource BarSubItem.Print}"/>
                         <dxb:BarSubItem Style="{StaticResource BarSubItem.Import}"/>
                         <dxb:BarSubItem Style="{StaticResource BarSubItem.Export}"/>
-                    </dxr:RibbonPageGroup>
+                    </dxr:RibbonPageGroup>-->
                 </dxr:RibbonPage>
                 <dxr:RibbonPage Caption="View">
                     <dxr:RibbonPageGroup Caption="Global Settings">
@@ -177,9 +177,9 @@
                         <dxb:BarSubItem RibbonStyle="SmallWithText" Style="{DynamicResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Items_Home_TimeScale_SwitchTimeScale}}" />
                         <dxb:BarCheckItem RibbonStyle="SmallWithText" Style="{DynamicResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Items_Home_Layout_ShowWorkTimeOnly}}" />
                     </dxr:RibbonPageGroup>
-                    <dxr:RibbonPageGroup Caption="Window">
+                    <!--<dxr:RibbonPageGroup Caption="Window">
                         <dxb:BarButtonItem Style="{StaticResource BarButtonItem.Reminders}" />
-                    </dxr:RibbonPageGroup>
+                    </dxr:RibbonPageGroup>-->
                 </dxr:RibbonPage>
             </dxr:RibbonDefaultPageCategory>
             <dxr:RibbonPageCategory Style="{DynamicResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Categories_Appointment}}">
@@ -188,7 +188,7 @@
                         <dxb:BarButtonItem Style="{DynamicResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Items_Appointment_Actions_Open}}" />
                         <dxb:BarButtonItem Style="{DynamicResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Items_Appointment_Actions_Delete}}" />
                     </dxr:RibbonPageGroup>
-                    <dxr:RibbonPageGroup Style="{DynamicResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Groups_Appointment_Options}}">
+                    <!--<dxr:RibbonPageGroup Style="{DynamicResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Groups_Appointment_Options}}">
                         <dxb:BarSubItem Style="{StaticResource BarSubItem.ShowAs}" />
                         <dxb:BarSubItem Style="{StaticResource BarSubItem.Reminder}" />
                         <dxb:BarCheckItem Style="{DynamicResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Items_Appointment_Options_Recurrence}}" />
@@ -198,7 +198,7 @@
                         <dxb:BarCheckItem Style="{StaticResource BarCheckItem.Private}"/>
                         <dxb:BarCheckItem Style="{StaticResource BarCheckItem.HighImportance}" />
                         <dxb:BarCheckItem Style="{StaticResource BarCheckItem.LowImportance}" />
-                    </dxr:RibbonPageGroup>
+                    </dxr:RibbonPageGroup>-->
                 </dxr:RibbonPage>
             </dxr:RibbonPageCategory>
         </dxr:RibbonControl>

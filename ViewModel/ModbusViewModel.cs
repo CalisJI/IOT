@@ -23,10 +23,30 @@ namespace WPF_TEST.ViewModel
     {
         private BaseViewModel _selectedViewModel;
         private BaseViewModel _ChooseTypeModel;
+        private BaseViewModel _DisplayType;
+        private BaseViewModel _Edit_Type;
         public iModbus iModbus = new iModbus();
         Sqlexcute Sqlexcute = new Sqlexcute();
         DataTable SQLModbus = new DataTable();
         MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter();
+        public BaseViewModel Edit_Type
+        {
+            get { return _Edit_Type; }
+            set
+            {
+                _Edit_Type = value;
+                OnPropertyChanged(nameof(Edit_Type));
+            }
+        }
+        public BaseViewModel DisplayType
+        {
+            get { return _DisplayType; }
+            set
+            {
+                _DisplayType = value;
+                OnPropertyChanged(nameof(DisplayType));
+            }
+        }
         public BaseViewModel ChooseTypeModel
         {
             get { return _ChooseTypeModel; }
@@ -265,6 +285,7 @@ namespace WPF_TEST.ViewModel
         public ICommand Cancel_Excute { get; set; }
         public ICommand Update_Data { get; set; }
         public ICommand Choose_Type { get; set; }
+        public ICommand Display_Type { get; set; }
         public PortSettingsViewModel ComportInfo { get; set; }
         public bool _load = false;
         ModbusDevice modbusDevice;
@@ -286,6 +307,10 @@ namespace WPF_TEST.ViewModel
         WPFMessageBoxService messageBoxService = new WPFMessageBoxService();
         Modbus_RTU_Frame_ViewModel Modbus_RTU_Frame_ViewModel = new Modbus_RTU_Frame_ViewModel();
         Modbus_TCP_IP_Frame_ViewModel Modbus_TCP_IP_Frame_ViewModel = new Modbus_TCP_IP_Frame_ViewModel();
+        RTU_Frame_ViewModel RTU_Frame_ViewModel = new RTU_Frame_ViewModel();
+        TCP_IP_Frame_ViewModel TCP_IP_Frame_ViewModel = new TCP_IP_Frame_ViewModel();
+        EditModbus_TCP_Window_ViewModel EditModbus_TCP_Window_ViewModel = new EditModbus_TCP_Window_ViewModel();
+        EditModbus_Window_ViewModel EditModbus_Window_ViewModel = new EditModbus_Window_ViewModel();
         public ModbusViewModel() 
         {
             if (!_load) 
@@ -317,6 +342,14 @@ namespace WPF_TEST.ViewModel
             {
                 Edit_Item = (ModbusDevice)p;
                 SelectedDevice = Edit_Item;
+                if(Edit_Item.ConntionType== ConntionTypes.Modbus_RTU) 
+                {
+                    Edit_Type = EditModbus_Window_ViewModel;
+                }
+                else if(Edit_Item.ConntionType == ConntionTypes.Modbus_TCP_IP) 
+                {
+                    Edit_Type = EditModbus_TCP_Window_ViewModel;
+                }
                 modbusViewModel.SelectedViewModel = EditModbusConnectionViewModel;
                 
 
@@ -393,6 +426,18 @@ namespace WPF_TEST.ViewModel
                 else if ((ConntionTypes)p == ConntionTypes.Modbus_TCP_IP) 
                 {
                     ChooseTypeModel = Modbus_TCP_IP_Frame_ViewModel;
+                }
+            });
+            Display_Type = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                var a = (ModbusDevice)p;
+                if(a.ConntionType == ConntionTypes.Modbus_RTU) 
+                {
+                    DisplayType = RTU_Frame_ViewModel;
+                }
+                else if(a.ConntionType == ConntionTypes.Modbus_TCP_IP) 
+                {
+                    DisplayType = TCP_IP_Frame_ViewModel;
                 }
             });
         }

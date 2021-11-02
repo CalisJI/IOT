@@ -330,6 +330,8 @@
     <Compile Include="ViewModel\DataStreamCollectionModel.cs" />
     <Compile Include="ViewModel\EditJobModel.cs" />
     <Compile Include="ViewModel\EditModbusConnectionViewModel.cs" />
+    <Compile Include="ViewModel\EditModbus_TCP_Window_ViewModel.cs" />
+    <Compile Include="ViewModel\EditModbus_Window_ViewModel.cs" />
     <Compile Include="ViewModel\Ethenet_SerialModel.cs" />
     <Compile Include="ViewModel\MainMenuModel.cs" />
     <Compile Include="ViewModel\MainScreenViewModel.cs" />
@@ -363,6 +365,12 @@
     </Compile>
     <Compile Include="View\EditModbusView.xaml.cs">
       <DependentUpon>EditModbusView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditModbus_Page_View.xaml.cs">
+      <DependentUpon>EditModbus_Page_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditModbus_RTU_Window_View.xaml.cs">
+      <DependentUpon>EditModbus_RTU_Window_View.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Ethenet_SerialView.xaml.cs">
       <DependentUpon>Ethenet_SerialView.xaml</DependentUpon>
@@ -469,6 +477,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EditModbusView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditModbus_Page_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditModbus_RTU_Window_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

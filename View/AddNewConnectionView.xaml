@@ -202,7 +202,7 @@
                             <ComboBox
                                 HorizontalAlignment="Right"
                                 ItemsSource="{Binding Source={StaticResource FuntionCode}}"
-                                SelectedItem="{Binding ModbusFunctions}"
+                                SelectedItem="{Binding ModbusFunctionss}"
                                 materialDesign:HintAssist.Hint="Function Code"
                                 Width="450">
                                 <ComboBox.ItemTemplate>

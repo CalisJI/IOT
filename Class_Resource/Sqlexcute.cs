@@ -236,6 +236,26 @@ namespace WPF_TEST.Class_Resource
                 File.Delete(tempCsvFileSpec);
             }
         }
+        public void Check_Table(string database, string TableName,ref int check) 
+        {
+            int count = 2;
+            using (SQL_Connection = new MySqlConnection(StrCon(Server, pwd)))
+            {
+                MySqlCommand command = new MySqlCommand(Check_Table_Exits(database, TableName), SQL_Connection);
+
+                SQL_Connection.Open();
+
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+
+                {
+                    count = reader.GetInt32(0);
+                }
+                SQL_Connection.Close();
+            }
+            check = count;
+        }
         public void AutoCreateTable(DataTable dataTable, string database, string TableName, ref bool check,ref bool exist) 
         {
             string cmd;

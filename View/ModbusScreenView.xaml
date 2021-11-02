@@ -38,7 +38,15 @@
                             <TextBlock Text="{Binding DeviceName}"/>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
-                   
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction
+                                Command="{Binding Display_Type}"
+                                CommandParameter="{Binding ElementName=Modbus_list, Path=SelectedItem}"/>
+
+
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </ListBox>
 
             </GroupBox>
@@ -50,20 +58,12 @@
                 TextBlock.TextAlignment="Center"
                 TextBlock.FontSize="26">
                 <StackPanel Orientation="Vertical" Margin="0,10,0,0">
-                    <Grid>
-                        <TextBlock 
-                            Text="Name:"
-                            FontSize="20" 
-                            HorizontalAlignment="Left"
-                            Margin="5"/>
-                        <TextBox 
-                            IsReadOnly="True"
-                            Margin="190,0,0,0"
-                            HorizontalAlignment="Left" 
-                            FontSize="20"
-                            Text="{Binding ElementName=Modbus_list, Path=SelectedItem.DeviceName}"/>
-                    </Grid>
-                    <Grid Height="340">
+                   
+                    <Grid 
+                        Height="380"
+                        DataContext="{StaticResource Modbus}"
+                        ScrollViewer.VerticalScrollBarVisibility="Visible">
+                        <ContentControl Content="{Binding DisplayType}"/>
                         
                     </Grid>
 

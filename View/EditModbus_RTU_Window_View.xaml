@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="WPF_TEST.View.EditModbus_RTU_Window_View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPF_TEST.View"
+             mc:Ignorable="d" 
+              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"     
+             d:DesignHeight="450" d:DesignWidth="600">
+    <StackPanel Background="AliceBlue">
+        <Grid Margin="0,20,0,0">
+            <TextBlock Text="Port :" Margin="3"/>
+            <ComboBox
+                            DataContext="{StaticResource Modbus}"
+                            Margin="220,0,0,0"
+                            ItemsSource="{Binding ComportInfo.AvaliablePorts}"
+                            SelectedItem="{Binding SelectedDevice.Port}"
+                            
+                            materialDesign:HintAssist.Hint="COM"
+                            Width="370"/>
+
+        </Grid>
+
+        <Grid  Margin="0,20,0,0">
+            <TextBlock Text="Baud Rate :" Margin="3"/>
+            <ComboBox
+                            DataContext="{StaticResource Modbus}"
+                            ItemsSource="{Binding ComportInfo.Baud_rate}"
+                            SelectedItem="{Binding SelectedDevice.Baudrate}"
+                            Margin="220,0,0,0"
+                          
+                            materialDesign:HintAssist.Hint="Baud Rate"
+                            Width="370"/>
+        </Grid>
+        <Grid  Margin="0,20,0,0">
+            <TextBlock Text="Data Bits:" Margin="3"/>
+            <ComboBox
+                            Margin="220,0,0,0"
+                            DataContext="{StaticResource Modbus}"
+                            ItemsSource="{Binding ComportInfo.DataBits}"
+                            SelectedItem="{Binding SelectedDevice.DataBits}"
+                            materialDesign:HintAssist.Hint="Data Bits"
+                            Width="370"/>
+        </Grid>
+        <Grid  Margin="0,20,0,0">
+            <TextBlock Text="Parity:" Margin="3"/>
+            <ComboBox
+                            Margin="220,0,0,0"
+                            DataContext="{StaticResource Modbus}"
+                            ItemsSource="{Binding ComportInfo.Paritys}"
+                            SelectedItem="{Binding SelectedDevice.Parity}"
+                            materialDesign:HintAssist.Hint="Parity"
+                            Width="370"/>
+        </Grid>
+        <Grid  Margin="0,20,0,0">
+            <TextBlock Text="StopBits :" Margin="3"/>
+            <ComboBox
+                            Margin="220,0,0,0"
+                            DataContext="{StaticResource Modbus}"
+                            ItemsSource="{Binding ComportInfo.Stop_bits}"
+                            SelectedItem="{Binding SelectedDevice.StopBits}"
+                            materialDesign:HintAssist.Hint="Stop Bits"
+                            Width="370"/>
+        </Grid>
+        <Grid  Margin="0,20,0,0">
+            <TextBlock Text="Read Time Out(ms) :" Margin="3"/>
+            <TextBox
+                            Margin="220,0,0,0"
+                            DataContext="{StaticResource Modbus}"
+                            materialDesign:HintAssist.Hint="Read Time Out"
+                            Text="{Binding SelectedDevice.Read_Time_Out}"
+                            Width="370"/>
+        </Grid>
+        <Grid  Margin="0,20,0,20">
+            <TextBlock Text="Update Rate(ms) :" Margin="3"/>
+            <TextBox
+                            Margin="220,0,0,0"
+                            DataContext="{StaticResource Modbus}"
+                            Text="{Binding SelectedDevice.Update_Rate}"
+                            materialDesign:HintAssist.Hint="Update Rate"
+                            Width="370"/>
+        </Grid>
+    </StackPanel>
+</UserControl>

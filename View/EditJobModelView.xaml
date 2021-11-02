@@ -30,7 +30,7 @@
                            FontWeight="Bold"
                            Margin="50,10,0,0"
                            Foreground="Gray"/>
-                <TextBox Text="Test"
+                <TextBox Text="{Binding SelectedJob.SaleOrder}"
                          FontSize="30"
                          Margin="20,0,10,0"
                          Foreground="Gray"
@@ -52,15 +52,26 @@
                                     FontWeight="Bold"
                                     Margin="20,5,0,0"/>
                                     <ComboBox Margin="52,5,10,0"
+                                              Name="Customer_cbb"
+                                              
                                           Width="420"
                                           FontSize="20"
-                                          ItemsSource="{Binding}"/>
+                                          SelectedItem="{Binding SelectedJob.Customer}"
+                                          ItemsSource="{Binding CustomerInfo}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Customer_Info}"/>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                    
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock 
                                         Text="Customer Details"
                                         Margin="20,10,0,0"/>
                                     <TextBox 
+                                        Text="{Binding SelectedJob.Customer_Details}"
                                         Margin="20,0,0,0"
                                         TextWrapping="Wrap"
                                         AcceptsReturn="True"
@@ -184,12 +195,13 @@
                 <Button
                     Style="{StaticResource MaterialDesignRaisedLightButton}"
                     Height="70"
+                    DataContext="{StaticResource EditJob}"
                     materialDesign:ShadowAssist.ShadowDepth="Depth3"
                     Width="70"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
                     Margin="0,0,20,30"
-                    Command="{Binding Save ,UpdateSourceTrigger=PropertyChanged}"
+                    Command="{Binding Save_EditJob}"
                     Background="#673ab7"
                     materialDesign:ButtonAssist.CornerRadius="8">
                     <StackPanel Orientation="Vertical">

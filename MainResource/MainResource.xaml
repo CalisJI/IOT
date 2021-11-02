@@ -21,4 +21,6 @@
     <viewmodel:Modbus_TCP_IP_Frame_ViewModel x:Key="TCP_Frame"/>
     <viewmodel:RTU_Frame_ViewModel x:Key="Frame_RTU"/>
     <viewmodel:TCP_IP_Frame_ViewModel x:Key="Frame_TCP"/>
+    <viewmodel:EditModbus_Window_ViewModel x:Key="Edit_RTU"/>
+    <viewmodel:EditModbus_TCP_Window_ViewModel x:Key="Edit_TCP"/>
 </ResourceDictionary>

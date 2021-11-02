@@ -66,82 +66,8 @@
                         </ComboBox>
 
                     </Grid>
-                    <Grid Margin="0,20,0,0">
-                        <TextBlock Text="Port :" Margin="3"/>
-                        <ComboBox
-                            DataContext="{StaticResource Modbus}"
-                            Margin="220,0,0,0"
-                            ItemsSource="{Binding ComportInfo.AvaliablePorts}"
-                            SelectedItem="{Binding SelectedDevice.Port, Mode=TwoWay}"
-                            
-                            materialDesign:HintAssist.Hint="COM"
-                            Width="370"/>
-
-                    </Grid>
-                    <StackPanel
-                        Orientation="Vertical"
-                        DataContext="{Binding TypeConnect}"
-                        >
-
-                    </StackPanel>
-                    <Grid  Margin="0,20,0,0">
-                        <TextBlock Text="Baud Rate :" Margin="3"/>
-                        <ComboBox
-                            DataContext="{StaticResource Modbus}"
-                            ItemsSource="{Binding ComportInfo.Baud_rate}"
-                            SelectedItem="{Binding SelectedDevice.Baudrate, Mode=TwoWay}"
-                            Margin="220,0,0,0"
-                          
-                            materialDesign:HintAssist.Hint="Baud Rate"
-                            Width="370"/>
-                    </Grid>
-                    <Grid  Margin="0,20,0,0">
-                        <TextBlock Text="Data Bits:" Margin="3"/>
-                        <ComboBox
-                            Margin="220,0,0,0"
-                            DataContext="{StaticResource Modbus}"
-                            ItemsSource="{Binding ComportInfo.DataBits}"
-                            SelectedItem="{Binding SelectedDevice.DataBits, Mode=TwoWay}"
-                            materialDesign:HintAssist.Hint="Data Bits"
-                            Width="370"/>
-                    </Grid>
-                    <Grid  Margin="0,20,0,0">
-                        <TextBlock Text="Parity:" Margin="3"/>
-                        <ComboBox
-                            Margin="220,0,0,0"
-                            DataContext="{StaticResource Modbus}"
-                            ItemsSource="{Binding ComportInfo.Paritys}"
-                            SelectedItem="{Binding SelectedDevice.Parity, Mode=TwoWay}"
-                            materialDesign:HintAssist.Hint="Parity"
-                            Width="370"/>
-                    </Grid>
-                    <Grid  Margin="0,20,0,0">
-                        <TextBlock Text="StopBits :" Margin="3"/>
-                        <ComboBox
-                            Margin="220,0,0,0"
-                            DataContext="{StaticResource Modbus}"
-                            ItemsSource="{Binding ComportInfo.Stop_bits}"
-                            SelectedItem="{Binding SelectedDevice.StopBits, Mode=TwoWay}"
-                            materialDesign:HintAssist.Hint="Stop Bits"
-                            Width="370"/>
-                    </Grid>
-                    <Grid  Margin="0,20,0,0">
-                        <TextBlock Text="Read Time Out(ms) :" Margin="3"/>
-                        <TextBox
-                            DataContext="{StaticResource Modbus}"
-                            Margin="220,0,0,0"
-                            Text="{Binding SelectedDevice.Read_Time_Out, Mode=TwoWay}"
-                            materialDesign:HintAssist.Hint="Read Time Out"
-                            Width="370"/>
-                    </Grid>
-                    <Grid  Margin="0,20,0,20">
-                        <TextBlock Text="Update Rate(ms) :" Margin="3"/>
-                        <TextBox
-                            DataContext="{StaticResource Modbus}"
-                            Margin="220,0,0,0"
-                            Text="{Binding SelectedDevice.Update_Rate, Mode=TwoWay}"
-                            materialDesign:HintAssist.Hint="Update Rate"
-                            Width="370"/>
+                    <Grid Height="470" DataContext="{StaticResource Modbus}">
+                        <ContentControl Content="{Binding Edit_Type}"/>
                     </Grid>
                 </StackPanel>
 

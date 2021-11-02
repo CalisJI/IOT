@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace WPF_TEST.ViewModel
 {
-    public class TCP_IP_Frame_ViewModel:BaseViewModel
+    public class EditModbus_Window_ViewModel:BaseViewModel
     {
-        public TCP_IP_Frame_ViewModel() 
+        public EditModbus_Window_ViewModel() 
         {
-            
+        
         }
     }
 }

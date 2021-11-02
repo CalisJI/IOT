@@ -296,6 +296,7 @@
                    
                     
                     Command="{Binding GotoEditJob}"
+                    CommandParameter="{Binding ElementName=Grid_data, Path=SelectedItem}"
                     Background="#673ab7"
                     materialDesign:ButtonAssist.CornerRadius="8">
                     <StackPanel Orientation="Vertical">

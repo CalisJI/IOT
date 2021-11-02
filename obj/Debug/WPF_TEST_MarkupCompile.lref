@@ -1,4 +1,4 @@
-﻿F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\GeneratedInternalTypeHelper.g.cs
+﻿
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\App.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\Configuration.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\DataStreamCollection.xaml;;
@@ -15,6 +15,8 @@ FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\BusyIndicatorView.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\DataCollectConfigureView.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\EditJobModelView.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\EditModbusView.xaml;;
+FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\EditModbus_Page_View.xaml;;
+FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\EditModbus_RTU_Window_View.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\Ethenet_SerialView.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\FileConfigurateView.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\MainMenuView.xaml;;

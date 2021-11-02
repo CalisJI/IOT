@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -35,6 +36,19 @@ namespace WPF_TEST.ViewModel
         //        OnPropertyChanged("proessdataappointment");
         //    }
         //}
+        private JobOrder Edit_JobItem;
+        private JobOrder _SelectedJob;
+        public JobOrder SelectedJob 
+        {
+            get 
+            {
+                return _SelectedJob;
+            }
+            set 
+            {
+                SetProperty(ref _SelectedJob, value, nameof(SelectedJob));
+            }
+        }
         public BaseViewModel SelectedViewModel
         {
             get { return _selectedViewModel; }
@@ -55,6 +69,7 @@ namespace WPF_TEST.ViewModel
             }
         }
         public bool loaded = false;
+        public ObservableCollection<Customer> CustomerInfo { get; set; }
         public PlannerModel PlannerModel { get; set; }
         public EditJobModel EditJobModel { get; set; }
        
@@ -64,7 +79,7 @@ namespace WPF_TEST.ViewModel
         {
             PlannerModel = new PlannerModel();
             EditJobModel = new EditJobModel();
-            EditJobModel.PlannerModel = PlannerModel;
+            CustomerInfo = EditJobModel.CustomerInfo;
             
             if (!loaded) 
             {
@@ -94,7 +109,9 @@ namespace WPF_TEST.ViewModel
             
             });
             GotoEditJob = new RelayCommand<object>((p) => { return true; }, (p) => 
-            { 
+            {
+                Edit_JobItem = (JobOrder)p;
+                SelectedJob = Edit_JobItem;
                 this.workflowCreatorModel.SelectedViewModel = EditJobModel; 
             });
             Schedule = new RelayCommand<object>((p) => { return true; }, (p) => 
@@ -108,6 +125,7 @@ namespace WPF_TEST.ViewModel
             });
         }
     }
+    
     public class BoolToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
