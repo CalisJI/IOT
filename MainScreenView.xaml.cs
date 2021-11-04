@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPF_TEST.SerialCommunicate;
 
 namespace WPF_TEST
 {
@@ -19,9 +20,18 @@ namespace WPF_TEST
     /// </summary>
     public partial class MainScreenView : Window
     {
+        public static bool Main_quit { get; set; }
+        public MessageReceiver MessageReceiver { get; set; }
         public MainScreenView()
         {
+            Main_quit = false;
             InitializeComponent();
+            Closing += MainScreenView_Closing;
+        }
+
+        private void MainScreenView_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Main_quit = true;
         }
     }
 }

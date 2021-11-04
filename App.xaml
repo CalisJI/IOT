@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:WPF_TEST"
              xmlns:viewmodels="clr-namespace:WPF_TEST.ViewModel"
              xmlns:views="clr-namespace:WPF_TEST.View"
-             StartupUri="SchedulerMain.xaml">
+             StartupUri="MainScreenView.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -28,6 +28,13 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:MainMenuModel}">
                 <views:MainMenu/>
+            </DataTemplate>
+            <!--<DataTemplate DataType="{x:Type viewmodels:SchedulerViewModel}">
+                <views:Schedular_View/>
+            </DataTemplate>-->
+            
+            <DataTemplate DataType="{x:Type viewmodels:WorkflowCreatorModel}">
+                <views:WorkFlow_View/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:Ethenet_SerialModel}">
                 <views:Ethenet_Serial/>
@@ -68,6 +75,13 @@
             <DataTemplate DataType="{x:Type viewmodels:EditModbus_TCP_Window_ViewModel}">
                 <views:EditModbus_Page_View/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:WorkScope_ViewModel}">
+                <views:WorkScope_View/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:MainAll_ViewModel}">
+                <views:MainAll_View/>
+            </DataTemplate>
+           
         </ResourceDictionary>
     </Application.Resources>
 </Application>

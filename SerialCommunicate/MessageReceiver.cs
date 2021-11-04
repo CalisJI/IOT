@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace WPF_TEST.SerialCommunicate
 {
@@ -45,6 +46,11 @@ namespace WPF_TEST.SerialCommunicate
             while (true)
             {
                 // Used for when exiting the application
+                if (MainScreenView.Main_quit) 
+                {
+                    break;
+                }
+                    
                 if (ShouldShutDownPermanently)
                 {
                     return;

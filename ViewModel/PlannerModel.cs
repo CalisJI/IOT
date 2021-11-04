@@ -291,10 +291,7 @@ namespace WPF_TEST.ViewModel
         {
             AssignedTask = new ObservableCollection<PlannerTask>();
             PlannerTask plannerTask = new PlannerTask();
-            plannerTask.Name = "Mã số 1";
-            plannerTask.Posting_Time = DateTime.Now ;
-            plannerTask.StartDate = DateTime.Now ;
-            plannerTask.DueDate = DateTime.Now;
+            
             plannerTask.Priority = (TaskPriority)1;
             plannerTask.Actual_vs_Liftime = 0.65f;
             plannerTask.Completion = 50;
@@ -303,10 +300,7 @@ namespace WPF_TEST.ViewModel
 
 
             PlannerTask plannerTask1 = new PlannerTask();
-            plannerTask1.Name = "Mã số 2";
-            plannerTask1.Posting_Time = DateTime.Now ;
-            plannerTask1.StartDate = DateTime.Now ;
-            plannerTask1.DueDate = DateTime.Now;
+         
             plannerTask1.Priority = (TaskPriority)2;
             plannerTask1.Actual_vs_Liftime = 0.25f;
             plannerTask1.Completion = 30;
@@ -314,10 +308,7 @@ namespace WPF_TEST.ViewModel
             AssignedTask.Add(plannerTask1);
 
             PlannerTask plannerTask2 = new PlannerTask();
-            plannerTask2.Name = "Mã số 3";
-            plannerTask2.Posting_Time = DateTime.Now;
-            plannerTask2.StartDate = DateTime.Now;
-            plannerTask2.DueDate = DateTime.Now;
+          
             plannerTask2.Priority = (TaskPriority)3;
             plannerTask2.Actual_vs_Liftime = 0.25f;
             plannerTask2.Completion = 30;
@@ -325,10 +316,7 @@ namespace WPF_TEST.ViewModel
             AssignedTask.Add(plannerTask2);
 
             PlannerTask plannerTask4 = new PlannerTask();
-            plannerTask4.Name = "Mã số 3";
-            plannerTask4.Posting_Time = DateTime.Now;
-            plannerTask4.StartDate = DateTime.Now;
-            plannerTask4.DueDate = DateTime.Now;
+          
             plannerTask4.Priority = 0;
             plannerTask4.Actual_vs_Liftime = 0.25f;
             plannerTask4.Completion = 30;
@@ -341,16 +329,12 @@ namespace WPF_TEST.ViewModel
    
     public class PlannerTask 
     {
-        public float Completion { get; set; }
-        public string Name { get; set; }
+        public float Completion { get; set; }     
         public string  Current_Stage { get; set; }
         public TaskPriority Priority { get; set; }
-        public Status Status { get; set; }
-        public DateTime? DueDate { get; set; }
-        public DateTime? StartDate { get; set; }
-        
+        public Status Status { get; set; }    
         public float Actual_vs_Liftime { get; set; }
-        public DateTime? Posting_Time { get; set; }
+     
     }
     public enum TaskPriority
     {

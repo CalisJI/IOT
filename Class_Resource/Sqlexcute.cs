@@ -316,7 +316,7 @@ namespace WPF_TEST.Class_Resource
                             break;
                         case "System.String":
                         default:
-                            sqlsc += string.Format(" VARCHAR({0}) ", dataTable.Columns[i].MaxLength == -1 ? "45" : dataTable.Columns[i].MaxLength.ToString());
+                            sqlsc += string.Format(" VARCHAR({0}) ", dataTable.Columns[i].MaxLength == -1 ? "200" : dataTable.Columns[i].MaxLength.ToString());
                             break;
                     }
                     if (dataTable.Columns[i].AutoIncrement)
@@ -389,9 +389,11 @@ namespace WPF_TEST.Class_Resource
         {
             try
             {
+                
                 SQL_command("DELETE FROM " + table_Name + "",Database);
                 using (SQL_Connection = new MySqlConnection(StrCon_Database(Server, pwd, Database)))
-                {                  
+                {
+                    
                     mySqlDataAdapter.Update(dataTable);
                     error_message = string.Empty;
                 }

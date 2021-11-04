@@ -96,9 +96,9 @@
                 <dxmvvm:EventToCommand Command="{Binding SaveCommand}" EventName="AppointmentRemoved" />
                 <dxmvvm:EventToCommand Command="{Binding SaveCommand}" EventName="AppointmentRestored" />
             </dxmvvm:Interaction.Behaviors>
-            <!--<dxsch:SchedulerControl.OptionsWindows >
+            <dxsch:SchedulerControl.OptionsWindows >
                 <dxsch:OptionsWindows AppointmentWindowType="{x:Type custom:CustomAppointmentWindow}"/>
-            </dxsch:SchedulerControl.OptionsWindows>-->
+            </dxsch:SchedulerControl.OptionsWindows>
 
             <dxsch:SchedulerControl.LabelItems>
                 <dxsch:AppointmentLabelItem Brush="Gray" Caption="Queued" Id="{x:Static dxsch:DefaultItemIds.LabelNone}"/>
@@ -112,24 +112,19 @@
             
             <dxsch:SchedulerControl.DataSource>
                 <dxsch:DataSource
-                    AppointmentsSource="{Binding Appointments,Mode=TwoWay}"
-                    ResourcesSource="{Binding Resource,Mode=TwoWay}">
-                    <dxsch:DataSource.AppointmentMappings
-                        >
+                    DataContext="{StaticResource EditJob}"
+                    AppointmentsSource="{Binding JobOrders}">
+                    <dxsch:DataSource.AppointmentMappings>
                         <dxsch:AppointmentMappings
-                            Subject="ProcessName"
-                            Start="StartTime"
-                            End="EndTime"
-                            Id="idProessDataAppoint"
-                            LabelId="StatusId"
-                            Location="Priority"
-                            Description="Notes"/>
+                            Subject="SaleOrder"
+                            Start="Requested_Start"
+                            End="Requested_End"/>
                     </dxsch:DataSource.AppointmentMappings>
-                    <dxsch:DataSource.ResourceMappings>
+                    <!--<dxsch:DataSource.ResourceMappings>
                         <dxsch:ResourceMappings
                             Id="idProcessData"
                             Caption="Name"/>
-                    </dxsch:DataSource.ResourceMappings>
+                    </dxsch:DataSource.ResourceMappings>-->
 
                 </dxsch:DataSource>
             </dxsch:SchedulerControl.DataSource>

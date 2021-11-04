@@ -300,9 +300,15 @@
     <Compile Include="Configuration.xaml.cs">
       <DependentUpon>Configuration.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomAppointmentWindow.xaml.cs">
+      <DependentUpon>CustomAppointmentWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DataStreamCollection.xaml.cs">
       <DependentUpon>DataStreamCollection.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data\Customer.cs" />
+    <Compile Include="Data\JobOrder.cs" />
+    <Compile Include="Data\Works.cs" />
     <Compile Include="MainScreenView.xaml.cs">
       <DependentUpon>MainScreenView.xaml</DependentUpon>
     </Compile>
@@ -333,6 +339,7 @@
     <Compile Include="ViewModel\EditModbus_TCP_Window_ViewModel.cs" />
     <Compile Include="ViewModel\EditModbus_Window_ViewModel.cs" />
     <Compile Include="ViewModel\Ethenet_SerialModel.cs" />
+    <Compile Include="ViewModel\MainAll_ViewModel.cs" />
     <Compile Include="ViewModel\MainMenuModel.cs" />
     <Compile Include="ViewModel\MainScreenViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -348,6 +355,7 @@
     <Compile Include="ViewModel\TCP_IP_Frame_ViewModel.cs" />
     <Compile Include="ViewModel\ValueDescription.cs" />
     <Compile Include="ViewModel\WorkflowCreatorModel.cs" />
+    <Compile Include="ViewModel\WorkScope_ViewModel.cs" />
     <Compile Include="View\AddNewConnectionView.xaml.cs">
       <DependentUpon>AddNewConnectionView.xaml</DependentUpon>
     </Compile>
@@ -378,6 +386,9 @@
     <Compile Include="View\FileConfigurateView.xaml.cs">
       <DependentUpon>FileConfigurateView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\MainAll_View.xaml.cs">
+      <DependentUpon>MainAll_View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainMenuView.xaml.cs">
       <DependentUpon>MainMenuView.xaml</DependentUpon>
     </Compile>
@@ -402,10 +413,20 @@
     <Compile Include="View\TCP_IP_Frame_View.xaml.cs">
       <DependentUpon>TCP_IP_Frame_View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\WorkFlow_View.xaml.cs">
+      <DependentUpon>WorkFlow_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WorkScope_View.xaml.cs">
+      <DependentUpon>WorkScope_View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WorkflowCreator.xaml.cs">
       <DependentUpon>WorkflowCreator.xaml</DependentUpon>
     </Compile>
     <Page Include="Configuration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomAppointmentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -496,6 +517,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\MainAll_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainMenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -525,6 +550,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\TCP_IP_Frame_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WorkFlow_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WorkScope_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -564,9 +597,7 @@
   <ItemGroup>
     <Resource Include="ImageSource\Home.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>

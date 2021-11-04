@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF_TEST.View"
              mc:Ignorable="d" 
+              xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
              DataContext="{StaticResource WorkFlow}"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="1080" d:DesignWidth="1920">
@@ -24,53 +25,64 @@
                    FontWeight="DemiBold"
                    Foreground="Gray"
                    Margin="50,30,0,30"/>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Sales Order #*"
+            <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
+                <StackPanel Orientation="Vertical" Height="700">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Sales Order #*"
                            FontSize="22"
                            FontWeight="Bold"
                            Margin="50,10,0,0"
                            Foreground="Gray"/>
-                <TextBox Text="{Binding SelectedJob.SaleOrder}"
+                        <TextBox Text="{Binding SelectedJob.SaleOrder}"
                          FontSize="30"
                          Margin="20,0,10,0"
                          Foreground="Gray"
                          Width="723"
                          Background="White" 
                          />
-            </StackPanel>
-            <Grid>
-                <Border BorderBrush="Black" >
-                    <StackPanel Margin="300,0,20,0">
-                        <GroupBox Header="Customer"
+                    </StackPanel>
+                    <Grid>
+                        <Border BorderBrush="Black" >
+                            <StackPanel Margin="300,0,20,0">
+                                <GroupBox Header="Customer"
                                   Background="WhiteSmoke"
                                   FontSize="22">
-                            <StackPanel Orientation="Vertical">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock 
+                                    <StackPanel Orientation="Vertical">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock 
                                     Text="Custommer*"
                                     Foreground="Black"
                                     FontWeight="Bold"
                                     Margin="20,5,0,0"/>
-                                    <ComboBox Margin="52,5,10,0"
+                                            <ComboBox Margin="52,5,10,0"
                                               Name="Customer_cbb"
                                               
                                           Width="420"
                                           FontSize="20"
                                           SelectedItem="{Binding SelectedJob.Customer}"
                                           ItemsSource="{Binding CustomerInfo}">
-                                        <ComboBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Customer_Info}"/>
-                                            </DataTemplate>
-                                        </ComboBox.ItemTemplate>
-                                    </ComboBox>
-                                    
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock 
+                                                <ComboBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding Customer_Info}"/>
+                                                    </DataTemplate>
+                                                </ComboBox.ItemTemplate>
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="SelectionChanged">
+                                                        <i:InvokeCommandAction 
+                                                            Command="{Binding ChangeCustomer}"
+                                                            CommandParameter="{Binding ElementName=Customer_cbb, Path=SelectedItem}">
+                                                            
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </ComboBox>
+
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock 
                                         Text="Customer Details"
                                         Margin="20,10,0,0"/>
-                                    <TextBox 
+                                            <TextBox 
                                         Text="{Binding SelectedJob.Customer_Details}"
                                         Margin="20,0,0,0"
                                         TextWrapping="Wrap"
@@ -79,79 +91,84 @@
                                         Width="420"
                                         Height="170"/>
 
-                                </StackPanel>
-                                <CheckBox Content="Check to change delivery details if different from above"
+                                        </StackPanel>
+                                        <CheckBox Content="Check to change delivery details if different from above"
                                               IsChecked="False"
                                               FontSize="12"
                                           Margin="190,0,0,0"/>
+                                    </StackPanel>
+                                </GroupBox>
                             </StackPanel>
-                        </GroupBox>
-                    </StackPanel>
-                </Border>
-            </Grid>
-            <Grid Background="White" Margin="0,0,20,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="2.2*"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Orientation="Vertical" Grid.Column="0">
-                    <TextBlock 
+                        </Border>
+                    </Grid>
+                    <Grid Background="White" Margin="0,0,20,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="2.2*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Vertical" Grid.Column="0">
+                            <TextBlock 
                         Text="Quotation #" 
                         FontSize="22"
                         Margin="50,0,0,30"
                         Width="auto"/>
-                    <TextBlock 
+                            <TextBlock 
                         Text="Customer PO #" 
                         FontSize="22"
                         Margin="50,0,0,30"
                         Width="auto"/>
-                    <TextBlock 
+                            <TextBlock 
                         Text="Requested Start*" 
                         FontSize="22"
                         Margin="50,0,0,30"
                         Width="auto"
                         FontWeight="Bold"/>
-                    <TextBlock 
+                            <TextBlock 
                         Text="Requested End*" 
                         FontSize="22"
                         Margin="50,0,0,30"
                         Width="auto"
                         FontWeight="Bold"/>
-                    <TextBlock 
+                            <TextBlock 
                         Text="Requested Report Date*" 
                         FontSize="22"
                         Margin="50,0,0,30"
                         Width="auto"/>
-                    <TextBlock 
+                            <TextBlock 
                         Text="*Required Fields" 
                         FontSize="20"
                         Margin="50,10,0,30"
                         Width="auto"
                         FontWeight="Bold"/>
-                </StackPanel>
-                <StackPanel Orientation="Vertical" Grid.Column="1">
-                    <TextBox 
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Column="1">
+                            <TextBox 
+                        Text="{Binding SelectedJob.Quotation}"
                         Height="50"
                         FontSize="25"
                          Margin="20,0,0,10"/>
-                    <TextBox 
+                            <TextBox 
+                        Text="{Binding SelectedJob.Customer_PO}"
                         Height="50"
                         FontSize="25"
                          Margin="20,0,0,10"/>
-                    <DatePicker 
+                            <DatePicker 
+                        SelectedDate="{Binding SelectedJob.Requested_Start.Date}"
                         Background="Red"
                         Height="50"
                         Text="Demo"
                         FontSize="25"
                          Margin="20,0,0,10"/>
-                    <DatePicker 
+                            <DatePicker 
+                        SelectedDate="{Binding SelectedJob.Requested_End.Date}"
                         Background="Red"
                         Height="50"
                         Text="Demo"
                         
                         FontSize="25"
                          Margin="20,0,0,10"/>
-                    <DatePicker 
+                            <DatePicker 
+                        SelectedDate="{Binding SelectedJob.Requested_Report_Date.Date}"
                         Background="Red"
                         Height="50"
                         Text="Demo"
@@ -159,8 +176,10 @@
                          Margin="20,0,0,10"/>
 
 
+                        </StackPanel>
+                    </Grid>
                 </StackPanel>
-            </Grid>
+            </ScrollViewer>
 
         </StackPanel>
         <Grid Grid.Column="1">
@@ -248,8 +267,56 @@
             </Grid>
             <Grid Margin="10,140,110,30">
                 <GroupBox Header="Work" FontSize="22">
-                    <ListView>
-                        
+                    <ListView 
+                        ScrollViewer.VerticalScrollBarVisibility="Auto"
+                        ItemsSource="{Binding WorksList}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <materialDesign:Card Width="780" Height="160">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="0.6*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel
+                                            Grid.Column="0"
+                                            Orientation="Vertical"
+                                            HorizontalAlignment="Stretch" Width="Auto" Margin="33,0,0,0">
+                                            <Grid Margin="5">
+                                                <TextBlock Text="Work Order Name:" FontSize="22"/>
+                                                <TextBlock 
+                                                        FontSize="22"
+                                                    Text="{Binding WorkOrderName}"
+                                                    Margin="220,0,0,0"/>
+                                            </Grid>
+                                            <Grid Margin="5">
+                                                <TextBlock Text="Work Order Name:" FontSize="22"/>
+                                                <TextBlock 
+                                                        FontSize="22"
+                                                    Text="{Binding Product}"
+                                                    Margin="220,0,0,0"/>
+                                            </Grid>
+                                            <Grid Margin="5">
+                                                <TextBlock Text="Work Order Name:" FontSize="22"/>
+                                                <TextBlock 
+                                                        FontSize="22"
+                                                    Text="{Binding Remark}"
+                                                    Margin="220,0,0,0"/>
+                                            </Grid>
+                                        </StackPanel>
+                                        <Grid Grid.Column="1">
+                                            <Image 
+                                                    Source="{Binding ImageProduct}" 
+                                                    Width="200"
+                                                    Stretch="Fill" 
+                                                    Margin="10"
+                                                    HorizontalAlignment="Right"/>
+                                        </Grid>
+                                    </Grid>
+                                </materialDesign:Card>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+
                     </ListView>
                 </GroupBox>
             </Grid>

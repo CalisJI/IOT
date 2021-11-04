@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using WPF_TEST.Class_Resource;
+using WPF_TEST.Data;
 using WPF_TEST.View;
 
 namespace WPF_TEST.ViewModel
@@ -22,20 +23,11 @@ namespace WPF_TEST.ViewModel
         public ICommand Goback { get; set; }
         public ICommand Schedule { get; set; }
         public ICommand GotoHome { get; set; }
-        //private proessdataappointment _proessdataappointment;
-        //public proessdataappointment proessdataappointment
-        //{
-        //    get
-        //    {
-        //        return _proessdataappointment;
-
-        //    }
-        //    set
-        //    {
-        //        _proessdataappointment = value;
-        //        OnPropertyChanged("proessdataappointment");
-        //    }
-        //}
+        public ICommand ChangeCustomer { get; set; }
+      
+        private string _detail;
+        public string Details 
+        { get { return _detail; } set { SetProperty(ref _detail, value, nameof(Details)); } }
         private JobOrder Edit_JobItem;
         private JobOrder _SelectedJob;
         public JobOrder SelectedJob 
@@ -70,16 +62,19 @@ namespace WPF_TEST.ViewModel
         }
         public bool loaded = false;
         public ObservableCollection<Customer> CustomerInfo { get; set; }
+        public ObservableCollection<Works> WorksList { get; set; }
         public PlannerModel PlannerModel { get; set; }
         public EditJobModel EditJobModel { get; set; }
+        WorkScope_ViewModel WorkScope_ViewModel = new WorkScope_ViewModel();
        
         public WorkflowCreatorModel workflowCreatorModel;
-        
+       
         public WorkflowCreatorModel() 
         {
             PlannerModel = new PlannerModel();
             EditJobModel = new EditJobModel();
             CustomerInfo = EditJobModel.CustomerInfo;
+            WorksList = EditJobModel.WorksList;
             
             if (!loaded) 
             {
@@ -87,18 +82,11 @@ namespace WPF_TEST.ViewModel
                 //workflowCreatorModel.SelectedViewModel = EditJobModel;
                 workflowCreatorModel.SelectedViewModel = PlannerModel;
                 loaded = true;
+              
             }
             WorKScope = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                //this.IsBusy = true;
-
-                //await Task.Run(() =>
-                //{                   
-                //    this.workflowCreatorModel.SelectedViewModel = PlannerModel;
-                //});
-                //this.IsBusy = false;
-
-                //this.dataStreamCollectionModel.SelectedViewModel = DataCollectConfigureModel;
+                workflowCreatorModel.SelectedViewModel = WorkScope_ViewModel;
             });
             Goback = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
@@ -122,6 +110,11 @@ namespace WPF_TEST.ViewModel
             GotoHome = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
                 
+            });
+            ChangeCustomer = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                var d = (Customer)p;
+                //SelectedJob.Customer_Details = d.Customer_Details;
             });
         }
     }

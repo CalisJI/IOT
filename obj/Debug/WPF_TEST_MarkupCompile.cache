@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\App.xaml
-29-438778649
+33-1965263457
 351532045269
-72376880921
+81-1779490915
 1381038372221
-Configuration.xaml;DataStreamCollection.xaml;Login_form.xaml;MainResource\MainResource.xaml;MainResource\OutlookInspired.xaml;MainResource\Ribbon.xaml;MainScreenView.xaml;MainWindow.xaml;OutlookExchangeOptionsWindow.xaml;SchedulerMain.xaml;View\AddNewConnectionView.xaml;View\AMDashBoardView.xaml;View\BusyIndicatorView.xaml;View\DataCollectConfigureView.xaml;View\EditJobModelView.xaml;View\EditModbusView.xaml;View\EditModbus_Page_View.xaml;View\EditModbus_RTU_Window_View.xaml;View\Ethenet_SerialView.xaml;View\FileConfigurateView.xaml;View\MainMenuView.xaml;View\ModbusScreenView.xaml;View\ModbusView.xaml;View\Modbus_RTU_Frame_View.xaml;View\Modbus_TCP_IP_Frame_View.xaml;View\PlannerView.xaml;View\RTU_Frame_View.xaml;View\TCP_IP_Frame_View.xaml;WorkflowCreator.xaml;
+Configuration.xaml;CustomAppointmentWindow.xaml;DataStreamCollection.xaml;Login_form.xaml;MainResource\MainResource.xaml;MainResource\OutlookInspired.xaml;MainResource\Ribbon.xaml;MainScreenView.xaml;MainWindow.xaml;OutlookExchangeOptionsWindow.xaml;SchedulerMain.xaml;View\AddNewConnectionView.xaml;View\AMDashBoardView.xaml;View\BusyIndicatorView.xaml;View\DataCollectConfigureView.xaml;View\EditJobModelView.xaml;View\EditModbusView.xaml;View\EditModbus_Page_View.xaml;View\EditModbus_RTU_Window_View.xaml;View\Ethenet_SerialView.xaml;View\FileConfigurateView.xaml;View\MainAll_View.xaml;View\MainMenuView.xaml;View\ModbusScreenView.xaml;View\ModbusView.xaml;View\Modbus_RTU_Frame_View.xaml;View\Modbus_TCP_IP_Frame_View.xaml;View\PlannerView.xaml;View\RTU_Frame_View.xaml;View\TCP_IP_Frame_View.xaml;View\WorkFlow_View.xaml;View\WorkScope_View.xaml;WorkflowCreator.xaml;
 
 False
 

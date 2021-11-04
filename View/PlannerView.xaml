@@ -48,45 +48,46 @@
        
     </UserControl.Resources>
 
-    <DockPanel>
-        <Expander DockPanel.Dock="Left"
+    <ScrollViewer HorizontalScrollBarVisibility="Visible">
+        <DockPanel>
+            <Expander DockPanel.Dock="Left"
                     ExpandDirection="Left" Margin="0,23">
-            <Expander.Header>
-                <materialDesign:PackIcon Margin="0,0,-10,0"
+                <Expander.Header>
+                    <materialDesign:PackIcon Margin="0,0,-10,0"
                             Kind="ChevronDoubleRight"
                             Height="50"
                             Width="30" RenderTransformOrigin="0.5,0.5"
                             >
 
-                </materialDesign:PackIcon>
-            </Expander.Header>
-            <StackPanel
+                    </materialDesign:PackIcon>
+                </Expander.Header>
+                <StackPanel
                         Orientation="Vertical"
                         TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
                         Margin="8,24,16,24">
-                <materialDesign:Card
+                    <materialDesign:Card
                             Background="CadetBlue"
                             Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
                             Width="250"
                             Padding="8"
                             MouseDown="Card_MouseDown"
                             UniformCornerRadius="6">
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel Orientation="Vertical">
-                            <materialDesign:PackIcon Kind="CogTransfer"
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Vertical">
+                                <materialDesign:PackIcon Kind="CogTransfer"
                                                              Width="135"
                                                              Height="50"/>
-                            <TextBlock Text="All Process" FontSize="25"/>
+                                <TextBlock Text="All Process" FontSize="25"/>
 
-                        </StackPanel>
-                        <TextBlock Text="{Binding AssignedTask.Count, UpdateSourceTrigger=PropertyChanged}"
+                            </StackPanel>
+                            <TextBlock Text="{Binding AssignedTask.Count, UpdateSourceTrigger=PropertyChanged}"
                                            FontSize="30"
                                            HorizontalAlignment="Right"
                                            VerticalAlignment="Top"
                                            Margin="0,5,-70,0"/>
-                    </StackPanel>
-                </materialDesign:Card>
-                <materialDesign:Card
+                        </StackPanel>
+                    </materialDesign:Card>
+                    <materialDesign:Card
                             Background="CadetBlue"
                             Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
                             Width="250"
@@ -94,22 +95,22 @@
                             MouseDown="Card_MouseDown_1"
                             Margin="0,10,0,0"
                             UniformCornerRadius="6">
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel Orientation="Vertical">
-                            <materialDesign:PackIcon Kind="ProgressClock"
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Vertical">
+                                <materialDesign:PackIcon Kind="ProgressClock"
                                                              Width="135"
                                                              Height="50"/>
-                            <TextBlock Text="In Process" FontSize="25"/>
+                                <TextBlock Text="In Process" FontSize="25"/>
 
-                        </StackPanel>
-                        <TextBlock Text="{Binding Runnings, UpdateSourceTrigger=PropertyChanged}"
+                            </StackPanel>
+                            <TextBlock Text="{Binding Runnings, UpdateSourceTrigger=PropertyChanged}"
                                            FontSize="30"
                                            HorizontalAlignment="Right"
                                            VerticalAlignment="Top"
                                            Margin="0,5,-70,0"/>
-                    </StackPanel>
-                </materialDesign:Card>
-                <materialDesign:Card
+                        </StackPanel>
+                    </materialDesign:Card>
+                    <materialDesign:Card
                             Background="CadetBlue"
                             Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
                             Width="250"
@@ -117,25 +118,25 @@
                             MouseDown="Card_MouseDown_2"
                             Margin="0,10,0,0"
                             UniformCornerRadius="6">
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel Orientation="Vertical">
-                            <materialDesign:PackIcon Kind="Update"
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Vertical">
+                                <materialDesign:PackIcon Kind="Update"
                                                              Width="135"
                                                              Height="50"/>
-                            <TextBlock Text="Not Scheduled" 
+                                <TextBlock Text="Not Scheduled" 
                                                FontSize="25"
                                                
                                                />
 
-                        </StackPanel>
-                        <TextBlock Text="{Binding Pauseds, UpdateSourceTrigger=PropertyChanged}"
+                            </StackPanel>
+                            <TextBlock Text="{Binding Pauseds, UpdateSourceTrigger=PropertyChanged}"
                                            FontSize="30"
                                            HorizontalAlignment="Right"
                                            VerticalAlignment="Top"
                                            Margin="0,5,-40,0"/>
-                    </StackPanel>
-                </materialDesign:Card>
-                <materialDesign:Card
+                        </StackPanel>
+                    </materialDesign:Card>
+                    <materialDesign:Card
                             Background="CadetBlue"
                             Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
                             Width="250"
@@ -143,22 +144,22 @@
                             Margin="0,10,0,0"
                             MouseDown="Card_MouseDown_3"
                             UniformCornerRadius="6">
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel Orientation="Vertical">
-                            <materialDesign:PackIcon Kind="TimerOutline"
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Vertical">
+                                <materialDesign:PackIcon Kind="TimerOutline"
                                                              Width="135"
                                                              Height="50"/>
-                            <TextBlock Text="Queued" FontSize="25"/>
+                                <TextBlock Text="Queued" FontSize="25"/>
 
-                        </StackPanel>
-                        <TextBlock Text="{Binding Queueds, UpdateSourceTrigger=PropertyChanged}"
+                            </StackPanel>
+                            <TextBlock Text="{Binding Queueds, UpdateSourceTrigger=PropertyChanged}"
                                            FontSize="30"
                                            HorizontalAlignment="Right"
                                            VerticalAlignment="Top"
                                            Margin="0,5,-70,0"/>
-                    </StackPanel>
-                </materialDesign:Card>
-                <materialDesign:Card
+                        </StackPanel>
+                    </materialDesign:Card>
+                    <materialDesign:Card
                             Background="CadetBlue"
                             Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
                             Width="250"
@@ -166,34 +167,34 @@
                             MouseDown="Card_MouseDown_4"
                             Margin="0,10,0,0"
                             UniformCornerRadius="6">
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel Orientation="Vertical">
-                            <materialDesign:PackIcon Kind="ClockCheckOutline"
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Vertical">
+                                <materialDesign:PackIcon Kind="ClockCheckOutline"
                                                              Width="135"
                                                              Height="50"/>
-                            <TextBlock Text="Completed" FontSize="25"/>
+                                <TextBlock Text="Completed" FontSize="25"/>
 
-                        </StackPanel>
-                        <TextBlock Text="{Binding Dones, UpdateSourceTrigger=PropertyChanged}"
+                            </StackPanel>
+                            <TextBlock Text="{Binding Dones, UpdateSourceTrigger=PropertyChanged}"
                                            FontSize="30"
                                            HorizontalAlignment="Right"
                                            VerticalAlignment="Top"
                                            Margin="0,5,-70,0"/>
-                    </StackPanel>
-                </materialDesign:Card>
+                        </StackPanel>
+                    </materialDesign:Card>
 
-            </StackPanel>
-        </Expander>
-        <dxlc:LayoutControl 
+                </StackPanel>
+            </Expander>
+            <dxlc:LayoutControl 
         VerticalAlignment="Top"
         Width="auto"
         Orientation="Vertical"
         TextBlock.FontSize="17" >
 
-            <dxlc:LayoutGroup Orientation="Horizontal" Height="1046" Width="auto" dxlc:DockLayoutControl.Dock="Left">
+                <dxlc:LayoutGroup Orientation="Horizontal" Height="1046" Width="auto" dxlc:DockLayoutControl.Dock="Left">
 
-                <!--<StackPanel Orientation="Horizontal" Height="1046" Width="auto">-->
-                    
+                    <!--<StackPanel Orientation="Horizontal" Height="1046" Width="auto">-->
+
 
                     <dxlc:LayoutItem Label="Project" LabelStyle="{StaticResource LB}" LabelPosition="Top"  HorizontalAlignment="Left" Width="auto" >
                         <dxg:GridControl x:Name="Grid_data" ItemsSource="{Binding Path=AssignedTask}" Height="1000" Width="auto" dxlc:DockLayoutControl.Dock="Left"
@@ -256,7 +257,7 @@
                                         <Style BasedOn="{StaticResource {dxgt:GridRowThemeKey ResourceKey=LightweightCellStyle}}" TargetType="{x:Type dxg:LightweightCellEditor}">
                                             <Setter Property="Background" Value="{Binding Value , Converter={StaticResource ColorConvert}}"/>
                                         </Style>
-                                       
+
                                     </dxg:GridColumn.CellStyle>
                                 </dxg:GridColumn>
                             </dxg:GridControl.Columns>
@@ -264,29 +265,29 @@
 
                     </dxlc:LayoutItem>
 
-                <!--</StackPanel>-->
+                    <!--</StackPanel>-->
 
-            </dxlc:LayoutGroup>
+                </dxlc:LayoutGroup>
 
 
-        </dxlc:LayoutControl>
-        <Grid  Width="auto" DockPanel.Dock="Right">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            
-            <Grid 
+            </dxlc:LayoutControl>
+            <Grid  Width="auto" DockPanel.Dock="Right">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid 
                   Height="80" 
                   Width="120" 
                   Grid.Row="5"
                   VerticalAlignment="Center">
-                <Button
+                    <Button
                     DataContext="{StaticResource WorkFlow}"
                     Style="{StaticResource MaterialDesignRaisedLightButton}"
                     Height="80"
@@ -299,28 +300,28 @@
                     CommandParameter="{Binding ElementName=Grid_data, Path=SelectedItem}"
                     Background="#673ab7"
                     materialDesign:ButtonAssist.CornerRadius="8">
-                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Vertical">
 
-                        <materialDesign:PackIcon 
+                            <materialDesign:PackIcon 
                             Kind="PlaylistEdit"
                             Height="50"
                             Width="50"
                             Foreground="White"/>
-                        <TextBlock 
+                            <TextBlock 
                             Text="Edit"
                             FontSize="20"
                             HorizontalAlignment="Center"
                             Foreground="White"/>
-                    </StackPanel>
+                        </StackPanel>
 
-                </Button>
-            </Grid>
-            <Grid 
+                    </Button>
+                </Grid>
+                <Grid 
                   Height="80" 
                   Width="120" 
                   Grid.Row="4"
                   VerticalAlignment="Center">
-                <Button
+                    <Button
                     DataContext="{StaticResource WorkFlow}"
                     Style="{StaticResource MaterialDesignRaisedLightButton}"
                     Height="80"
@@ -332,58 +333,57 @@
                     Command="{Binding Schedule}"
                     Background="#673ab7"
                     materialDesign:ButtonAssist.CornerRadius="8">
-                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Vertical">
 
-                        <materialDesign:PackIcon 
+                            <materialDesign:PackIcon 
                             Kind="CalendarClockOutline"
                             Height="50"
                             Width="50"
                             HorizontalAlignment="Center"
                             Foreground="White"/>
-                        <TextBlock 
+                            <TextBlock 
                             Text="Schedule"
                             FontSize="20"
                             HorizontalAlignment="Center"
                             Foreground="White"/>
-                    </StackPanel>
+                        </StackPanel>
 
-                </Button>
-            </Grid>
-            <Grid 
+                    </Button>
+                </Grid>
+                <Grid 
                   Height="80" 
                   Width="120" 
                   Grid.Row="6"
                   VerticalAlignment="Center">
-                <Button
-                    DataContext="{StaticResource WorkFlow}"
+                    <Button
+                    DataContext="{StaticResource MenuMainAll}"
                     Style="{StaticResource MaterialDesignRaisedLightButton}"
                     Height="80"
                     materialDesign:ShadowAssist.ShadowDepth="Depth3"
                     Width="120"
                     HorizontalAlignment="Center"
-                   
-                    
                     Command="{Binding GotoHome}"
                     Background="#673ab7"
                     materialDesign:ButtonAssist.CornerRadius="8">
-                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Vertical">
 
-                        <materialDesign:PackIcon 
+                            <materialDesign:PackIcon 
                             Kind="Home"
                             Height="50"
                             Width="50"
                             HorizontalAlignment="Center"
                             Foreground="White"/>
-                        <TextBlock 
+                            <TextBlock 
                             Text="Home"
                             FontSize="20"
                             HorizontalAlignment="Center"
                             Foreground="White"/>
-                    </StackPanel>
+                        </StackPanel>
 
-                </Button>
+                    </Button>
+                </Grid>
             </Grid>
-        </Grid>
-    </DockPanel>
+        </DockPanel>
+    </ScrollViewer>
 
 </UserControl>
