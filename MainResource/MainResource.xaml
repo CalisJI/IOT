@@ -25,6 +25,12 @@
     <viewmodel:EditModbus_TCP_Window_ViewModel x:Key="Edit_TCP"/>
     <viewmodel:WorkScope_ViewModel x:Key="WorkScope"/>
     <viewmodel:MainScreenViewModel x:Key="MenuMainAll"/>
+    <viewmodel:Content_Manager_ViewModel x:Key="ContenMedia"/>
+    <viewmodel:ImageManager_ViewModel x:Key="ImageManager"/>
+    <viewmodel:AudioManager_ViewModel x:Key="AudioManager"/>
+    <viewmodel:VideoManager_ViewModel x:Key="VideoManager"/>
+    <viewmodel:DocumentManager_ViewModel x:Key="DocumentManger"/>
+
 
 
 </ResourceDictionary>

@@ -340,17 +340,26 @@ namespace WPF_TEST.ViewModel
             });
             EditConnect = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
-                Edit_Item = (ModbusDevice)p;
-                SelectedDevice = Edit_Item;
-                if(Edit_Item.ConntionType== ConntionTypes.Modbus_RTU) 
+                try
                 {
-                    Edit_Type = EditModbus_Window_ViewModel;
+                    Edit_Item = (ModbusDevice)p;
+                    SelectedDevice = Edit_Item;
+                    if (Edit_Item.ConntionType == ConntionTypes.Modbus_RTU)
+                    {
+                        Edit_Type = EditModbus_Window_ViewModel;
+                    }
+                    else if (Edit_Item.ConntionType == ConntionTypes.Modbus_TCP_IP)
+                    {
+                        Edit_Type = EditModbus_TCP_Window_ViewModel;
+                    }
+                    modbusViewModel.SelectedViewModel = EditModbusConnectionViewModel;
                 }
-                else if(Edit_Item.ConntionType == ConntionTypes.Modbus_TCP_IP) 
+                catch (Exception ex)
                 {
-                    Edit_Type = EditModbus_TCP_Window_ViewModel;
+
+                    messageBoxService.ShowMessage(ex.Message, "WARNING!", System.Messaging.MessageType.Report);
                 }
-                modbusViewModel.SelectedViewModel = EditModbusConnectionViewModel;
+              
                 
 
             });

@@ -1003,7 +1003,6 @@ F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\bin\Debug\de\DevExpress.XtraGrid.v19.2.res
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\bin\Debug\es\DevExpress.XtraGrid.v19.2.resources.dll
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\bin\Debug\ja\DevExpress.XtraGrid.v19.2.resources.dll
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\bin\Debug\ru\DevExpress.XtraGrid.v19.2.resources.dll
-F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.csproj.AssemblyReference.cache
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\App.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\Configuration.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\DataStreamCollection.baml
@@ -1044,3 +1043,14 @@ F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.csproj.CoreCompileInput
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.csproj.CopyComplete
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.exe
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.pdb
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.csproj.AssemblyReference.cache
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ContentManager_View.g.cs
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ContentManager_View.baml
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\AudioManager_View.g.cs
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\DocumentManager_View.g.cs
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ImageManager_View.g.cs
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\VideoManager_View.g.cs
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\AudioManager_View.baml
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\DocumentManager_View.baml
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ImageManager_View.baml
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\VideoManager_View.baml

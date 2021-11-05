@@ -1,0 +1,173 @@
+﻿<UserControl x:Class="WPF_TEST.View.ImageManager_View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPF_TEST.View"
+             mc:Ignorable="d" 
+             DataContext="{StaticResource MenuMainAll}"
+             xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DesignHeight="1080" d:DesignWidth="1920">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Column="0">
+            <Grid
+                        Margin="0,50,0,0"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <Button
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            Height="100" Width="100"
+                            materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="#FFF08011">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="White" Offset="0"/>
+                            <GradientStop Color="#FF65C6CB" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <StackPanel Orientation="Vertical" Height="90" Width="90" HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                        <Image Height="50"
+                               HorizontalAlignment="Center"
+                                       Margin="0,5,0,0"
+                                       Width="50"
+                                       Source="pack://application:,,,/ImageSource/Add.png"/>
+                        <TextBlock
+                                    HorizontalAlignment="Center"
+                                    Text="Add"
+                                    FontWeight="Bold"
+                                    Margin="0,10,0,0"
+                                    FontSize="16"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
+            <Grid
+                        Margin="0,15,0,0"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <Button
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            Height="100" Width="100"
+                            materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="#FFF08011">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="White" Offset="0"/>
+                            <GradientStop Color="#FF65C6CB" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <StackPanel Orientation="Vertical" Height="90" Width="90" HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                        <Image Height="50"
+                               HorizontalAlignment="Center"
+                                       Margin="0,5,0,0"
+                                       Width="50"
+                                       Source="pack://application:,,,/ImageSource/Edit.png"/>
+                        <TextBlock
+                                    HorizontalAlignment="Center"
+                                    Text="Edit"
+                                    FontWeight="Bold"
+                                    Margin="0,10,0,0"
+                                    FontSize="16"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
+            <Grid
+                        Margin="0,15,0,0"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <Button
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            Height="100" Width="100"
+                            materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="#FFF08011">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="White" Offset="0"/>
+                            <GradientStop Color="#FF65C6CB" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <StackPanel Orientation="Vertical" Height="90" Width="90" HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                        <Image Height="50"
+                               HorizontalAlignment="Center"
+                                       Margin="0,5,0,0"
+                                       Width="50"
+                                       Source="pack://application:,,,/ImageSource/Delete.png"/>
+                        <TextBlock
+                                    HorizontalAlignment="Center"
+                                    Text="Delete"
+                                    FontWeight="Bold"
+                                    Margin="0,10,0,0"
+                                    FontSize="16"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
+            <Grid
+                        Margin="0,15,0,0"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <Button
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            Height="100" Width="100"
+                            materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="#FFF08011">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="White" Offset="0"/>
+                            <GradientStop Color="#FF65C6CB" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <StackPanel Orientation="Vertical" Height="90" Width="90" HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                        <Image Height="50"
+                               HorizontalAlignment="Center"
+                                       Margin="0,5,0,0"
+                                       Width="50"
+                                       Source="pack://application:,,,/ImageSource/View.png"/>
+                        <TextBlock
+                                    HorizontalAlignment="Center"
+                                    Text="View"
+                                    FontWeight="Bold"
+                                    Margin="0,10,0,0"
+                                    FontSize="16"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
+            <Grid
+                        Margin="0,15,0,0"
+               
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <Button
+                    Command="{Binding Media}"
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            Height="100" Width="100"
+                            materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="#FFF08011">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="White" Offset="0"/>
+                            <GradientStop Color="#FF65C6CB" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <StackPanel Orientation="Vertical" Height="90" Width="90" HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                        <Image Height="50"
+                               HorizontalAlignment="Center"
+                                       Margin="0,5,0,0"
+                                       Width="50"
+                                       Source="pack://application:,,,/ImageSource/Back.png"/>
+                        <TextBlock
+                                    HorizontalAlignment="Center"
+                                    Text="Back"
+                                    FontWeight="Bold"
+                                    Margin="0,10,0,0"
+                                    FontSize="16"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -81,7 +81,22 @@
             <DataTemplate DataType="{x:Type viewmodels:MainAll_ViewModel}">
                 <views:MainAll_View/>
             </DataTemplate>
-           
+            <DataTemplate DataType="{x:Type viewmodels:Content_Manager_ViewModel}">
+                <views:ContentManager_View/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:ImageManager_ViewModel}">
+                <views:ImageManager_View/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:AudioManager_ViewModel}">
+                <views:AudioManager_View/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:VideoManager_ViewModel}">
+                <views:VideoManager_View/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:DocumentManager_ViewModel}">
+                <views:DocumentManager_View/>
+            </DataTemplate>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

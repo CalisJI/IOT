@@ -328,17 +328,21 @@
     <Compile Include="SerialCommunicate\PortSettingsViewModel.cs" />
     <Compile Include="SerialCommunicate\SerialPortViewModel.cs" />
     <Compile Include="ViewModel\AddNewConnectionViewModel.cs" />
+    <Compile Include="ViewModel\AudioManager_ViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\BusyIndicatorViewModel.cs" />
     <Compile Include="ViewModel\ConfigurationModel.cs" />
     <Compile Include="ViewModel\AMDashBoardModel.cs" />
+    <Compile Include="ViewModel\Content_Manager_ViewModel.cs" />
     <Compile Include="ViewModel\DataCollectConfigureModel.cs" />
     <Compile Include="ViewModel\DataStreamCollectionModel.cs" />
+    <Compile Include="ViewModel\DocumentManager_ViewModel.cs" />
     <Compile Include="ViewModel\EditJobModel.cs" />
     <Compile Include="ViewModel\EditModbusConnectionViewModel.cs" />
     <Compile Include="ViewModel\EditModbus_TCP_Window_ViewModel.cs" />
     <Compile Include="ViewModel\EditModbus_Window_ViewModel.cs" />
     <Compile Include="ViewModel\Ethenet_SerialModel.cs" />
+    <Compile Include="ViewModel\ImageManager_ViewModel.cs" />
     <Compile Include="ViewModel\MainAll_ViewModel.cs" />
     <Compile Include="ViewModel\MainMenuModel.cs" />
     <Compile Include="ViewModel\MainScreenViewModel.cs" />
@@ -354,6 +358,7 @@
     <Compile Include="ViewModel\SchedulerViewModel.cs" />
     <Compile Include="ViewModel\TCP_IP_Frame_ViewModel.cs" />
     <Compile Include="ViewModel\ValueDescription.cs" />
+    <Compile Include="ViewModel\VideoManager_ViewModel.cs" />
     <Compile Include="ViewModel\WorkflowCreatorModel.cs" />
     <Compile Include="ViewModel\WorkScope_ViewModel.cs" />
     <Compile Include="View\AddNewConnectionView.xaml.cs">
@@ -362,11 +367,20 @@
     <Compile Include="View\AMDashBoardView.xaml.cs">
       <DependentUpon>AMDashBoardView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\AudioManager_View.xaml.cs">
+      <DependentUpon>AudioManager_View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\BusyIndicatorView.xaml.cs">
       <DependentUpon>BusyIndicatorView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ContentManager_View.xaml.cs">
+      <DependentUpon>ContentManager_View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DataCollectConfigureView.xaml.cs">
       <DependentUpon>DataCollectConfigureView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DocumentManager_View.xaml.cs">
+      <DependentUpon>DocumentManager_View.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EditJobModelView.xaml.cs">
       <DependentUpon>EditJobModelView.xaml</DependentUpon>
@@ -385,6 +399,9 @@
     </Compile>
     <Compile Include="View\FileConfigurateView.xaml.cs">
       <DependentUpon>FileConfigurateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ImageManager_View.xaml.cs">
+      <DependentUpon>ImageManager_View.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainAll_View.xaml.cs">
       <DependentUpon>MainAll_View.xaml</DependentUpon>
@@ -412,6 +429,9 @@
     </Compile>
     <Compile Include="View\TCP_IP_Frame_View.xaml.cs">
       <DependentUpon>TCP_IP_Frame_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VideoManager_View.xaml.cs">
+      <DependentUpon>VideoManager_View.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WorkFlow_View.xaml.cs">
       <DependentUpon>WorkFlow_View.xaml</DependentUpon>
@@ -485,11 +505,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\AudioManager_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\BusyIndicatorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ContentManager_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\DataCollectConfigureView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DocumentManager_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -514,6 +546,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FileConfigurateView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ImageManager_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -550,6 +586,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\TCP_IP_Frame_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\VideoManager_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -614,6 +654,19 @@
     <Resource Include="ImageSource\Allprocess.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="ImageSource\Video.png" />
+    <Resource Include="ImageSource\folder-131964752817880876_512.png" />
+    <Resource Include="ImageSource\Images.jpg" />
+    <Resource Include="ImageSource\audio+itunes+itunes+logo+itunes+store+music+music+note+icon-1320196076849257893_512.png" />
+    <Resource Include="ImageSource\Audio.png" />
+    <Resource Include="ImageSource\Document.png" />
+    <Resource Include="ImageSource\Picture.png" />
+    <Resource Include="ImageSource\Speaker.png" />
+    <Resource Include="ImageSource\Edit.png" />
+    <Resource Include="ImageSource\Delete.png" />
+    <Resource Include="ImageSource\View.png" />
+    <Resource Include="ImageSource\Add.png" />
+    <Resource Include="ImageSource\Back.png" />
     <Content Include="Images\OutlookInspired\Svg\CalendarGroup.svg" />
     <Content Include="Images\OutlookInspired\Svg\CalendarPermission.svg" />
     <Content Include="Images\OutlookInspired\Svg\Categorize.svg" />

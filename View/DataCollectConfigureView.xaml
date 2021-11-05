@@ -8,7 +8,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:viewmodels ="clr-namespace:WPF_TEST.ViewModel"
              d:DesignHeight="1080" d:DesignWidth="1920"
-             DataContext="{StaticResource DataStr}">
+             DataContext="{StaticResource MenuMainAll}">
     <Grid Background="WhiteSmoke">
         <Grid.RowDefinitions>
             <RowDefinition Height="1.5*"/>
@@ -265,6 +265,7 @@
             </Grid>
         </StackPanel>
         <Grid
+            DataContext="{StaticResource MenuMainAll}"
             Width="250" 
             Height="100" Grid.Row="3"
             HorizontalAlignment="Center">
@@ -275,7 +276,7 @@
                 materialDesign:ButtonAssist.CornerRadius="5"
                 ToolTip="MaterialDesignRaisedLightButton with Round Corners"
                 Background="#673cb2"
-                Command="{Binding Main_menu}">
+                Command="{Binding Home}">
                 <StackPanel 
                             Orientation="Horizontal"
                             Width="250" Height="100" 

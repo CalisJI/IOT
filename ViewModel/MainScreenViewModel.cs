@@ -24,12 +24,27 @@ namespace WPF_TEST.ViewModel
        
         public ICommand Schedular { get; set; }
         public ICommand Home { get; set; }
-
+        public ICommand UpdateViewCommand { get; set; }
+        public ICommand DataStream { get; set; }
+        public ICommand Sensor_Collection { get; set; }
+        public ICommand Raw_Sensor_Collection { get; set; }
+        public ICommand Ethernet_Collection { get; set; }
+        public ICommand Modbus_Connection { get; set; }
+        public ICommand Web_API { get; set; }
+        public ICommand Configure_File { get; set; }
+        public ICommand PLC_data { get; set; }
+        public ICommand Main_menu { get; set; }
+        public ICommand Media { get; set; }
+       
         //DataStreamCollectionModel DataStreamCollectionModel = new DataStreamCollectionModel();
         MainMenuModel MainMenuModel = new MainMenuModel();
         WorkflowCreatorModel WorkflowCreatorModel = new WorkflowCreatorModel();
         SchedulerViewModel SchedulerViewModel = new SchedulerViewModel();
         MainAll_ViewModel MainAll_ViewModel = new MainAll_ViewModel();
+        DataCollectConfigureModel DataCollectConfigureModel = new DataCollectConfigureModel();
+        Ethenet_SerialModel ethenet_SerialModel = new Ethenet_SerialModel();
+        ModbusViewModel ModbusViewModel = new ModbusViewModel();
+        Content_Manager_ViewModel Content_Manager_ViewModel = new Content_Manager_ViewModel();
         public MainScreenViewModel mainScreenViewModel;
         public bool loadMain = false;
         public MainScreenViewModel() 
@@ -40,9 +55,25 @@ namespace WPF_TEST.ViewModel
                 mainScreenViewModel.SelectedViewModel = MainAll_ViewModel;
                 loadMain = true;
             }
-            DataStreamCollectionModel_Command = new RelayCommand<object>((p) => { return true; }, (p) =>
+            //Image_Manager = new RelayCommand<object>((p) => { return true; }, (p) => 
+            //{
+            //    mainScreenViewModel.SelectedViewModel = Content_Manager_ViewModel.ImageManager_ViewModel;
+            //});
+            //Audio_Manager = new RelayCommand<object>((p) => { return true; }, (p) => 
+            //{
+            //    mainScreenViewModel.SelectedViewModel = Content_Manager_ViewModel.AudioManager_ViewModel;
+            //});
+            //Video_Manager = new RelayCommand<object>((p) => { return true; }, (p) => 
+            //{
+            //    mainScreenViewModel.SelectedViewModel = Content_Manager_ViewModel.VideoManager_ViewModel;
+            //});
+            //Document_Manager = new RelayCommand<object>((p) => { return true; }, (p) =>
+            //{
+            //    mainScreenViewModel.SelectedViewModel = Content_Manager_ViewModel.DocumentManager_ViewModel;
+            //});
+            DataStream = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
-                mainScreenViewModel.SelectedViewModel = MainMenuModel;
+                mainScreenViewModel.SelectedViewModel = MainAll_ViewModel;
             });
             WorkFlow = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
@@ -55,8 +86,54 @@ namespace WPF_TEST.ViewModel
             });
             Home = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                mainScreenViewModel = this;
+               
                 mainScreenViewModel.SelectedViewModel = MainAll_ViewModel;
+            });
+            DataStream = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                this.mainScreenViewModel.SelectedViewModel = DataCollectConfigureModel;
+
+
+            });
+
+            Sensor_Collection = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                //this.dataCollectConfigureModel.SelectedViewModel = new AMDashBoard();
+            });
+            Raw_Sensor_Collection = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                //this.dataCollectConfigureModel.SelectedViewModel = new AMDashBoard();
+            });
+            Ethernet_Collection = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                this.mainScreenViewModel.SelectedViewModel = ethenet_SerialModel;
+            });
+            Modbus_Connection = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                this.mainScreenViewModel.SelectedViewModel = ModbusViewModel;
+            });
+            Web_API = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                //this.dataCollectConfigureModel.SelectedViewModel = new AMDashBoard();
+            });
+            Configure_File = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                //this.dataCollectConfigureModel.SelectedViewModel = new AMDashBoard();
+            });
+
+            PLC_data = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                //this.dataCollectConfigureModel.SelectedViewModel = new AMDashBoard();
+            });
+            Main_menu = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                //dataStreamCollectionModel.SelectedViewModel = MainMenu;
+
+                mainScreenViewModel.SelectedViewModel = this;
+            });
+            Media = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                mainScreenViewModel.SelectedViewModel = Content_Manager_ViewModel;
             });
 
 

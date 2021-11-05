@@ -163,15 +163,31 @@
                                 </StackPanel>
                             </Button>
                         </Grid>
-                        <Grid Grid.Row="0" Grid.Column="2">
+                        <Grid Grid.Row="0" Grid.Column="2" DataContext="{StaticResource MenuMainAll}">
                             <Button
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"
                                 Margin="10"
+                                Background="White"
                                 Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                Command="{Binding Media}"
                                 materialDesign:ButtonAssist.CornerRadius="8" Height="Auto">
-                                <TextBlock
-                                Text="4" />
+                                <StackPanel 
+                                    Orientation="Vertical"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" Height="150" Width="150">
+                                    <materialDesign:PackIcon 
+                                        HorizontalAlignment="Center"
+                                        Foreground="Gray"
+                                        Kind="FolderMultipleImage"
+                                        Height="100"
+                                        Width="100"/>
+                                    <TextBlock
+                                        Text="Scheduler"
+                                        Foreground="Black"
+                                        HorizontalAlignment="Center"
+                                        FontSize="30"/>
+                                </StackPanel>
                             </Button>
                         </Grid>
                         <Grid Grid.Row="0" Grid.Column="3">
@@ -190,6 +206,7 @@
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"
                                 Margin="10"
+                                Command="{Binding DataStreamCollectionModel_Command}"
                                 Style="{StaticResource MaterialDesignRaisedLightButton}"
                                 materialDesign:ButtonAssist.CornerRadius="8" Height="Auto">
                                 <TextBlock

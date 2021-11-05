@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF_TEST.View"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             
              mc:Ignorable="d" 
              xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              DataContext="{StaticResource Modbus}"
              d:DesignHeight="1000" d:DesignWidth="1920">
     <Grid>
@@ -312,7 +313,7 @@
             Height="80">
             <Button
                 x:Name="Home_button"
-                DataContext="{StaticResource DataStr}"
+                DataContext="{StaticResource MenuMainAll}"
                 Style="{StaticResource MaterialDesignRaisedButton}"
                 Height="80"
                 materialDesign:ButtonAssist.CornerRadius="10"
