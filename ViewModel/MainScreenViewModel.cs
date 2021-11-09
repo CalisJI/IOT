@@ -19,6 +19,11 @@ namespace WPF_TEST.ViewModel
                 OnPropertyChanged(nameof(SelectedViewModel));
             }
         }
+        public ICommand Image_Manager { get; set; }
+        public ICommand Audio_Manager { get; set; }
+        public ICommand Video_Manager { get; set; }
+        public ICommand Document_Manager { get; set; }
+
         public ICommand DataStreamCollectionModel_Command { get; set; }
         public ICommand WorkFlow { get; set; }
        
@@ -55,25 +60,25 @@ namespace WPF_TEST.ViewModel
                 mainScreenViewModel.SelectedViewModel = MainAll_ViewModel;
                 loadMain = true;
             }
-            //Image_Manager = new RelayCommand<object>((p) => { return true; }, (p) => 
-            //{
-            //    mainScreenViewModel.SelectedViewModel = Content_Manager_ViewModel.ImageManager_ViewModel;
-            //});
-            //Audio_Manager = new RelayCommand<object>((p) => { return true; }, (p) => 
-            //{
-            //    mainScreenViewModel.SelectedViewModel = Content_Manager_ViewModel.AudioManager_ViewModel;
-            //});
-            //Video_Manager = new RelayCommand<object>((p) => { return true; }, (p) => 
-            //{
-            //    mainScreenViewModel.SelectedViewModel = Content_Manager_ViewModel.VideoManager_ViewModel;
-            //});
-            //Document_Manager = new RelayCommand<object>((p) => { return true; }, (p) =>
-            //{
-            //    mainScreenViewModel.SelectedViewModel = Content_Manager_ViewModel.DocumentManager_ViewModel;
-            //});
-            DataStream = new RelayCommand<object>((p) => { return true; }, (p) => 
+            Image_Manager = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                mainScreenViewModel.SelectedViewModel = MainAll_ViewModel;
+                mainScreenViewModel.SelectedViewModel = Content_Manager_ViewModel.ImageManager_ViewModel;
+            });
+            Audio_Manager = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                mainScreenViewModel.SelectedViewModel = Content_Manager_ViewModel.AudioManager_ViewModel;
+            });
+            Video_Manager = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                mainScreenViewModel.SelectedViewModel = Content_Manager_ViewModel.VideoManager_ViewModel;
+            });
+            Document_Manager = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                mainScreenViewModel.SelectedViewModel = Content_Manager_ViewModel.DocumentManager_ViewModel;
+            });
+            DataStreamCollectionModel_Command = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                mainScreenViewModel.SelectedViewModel = MainMenuModel;
             });
             WorkFlow = new RelayCommand<object>((p) => { return true; }, (p) =>
             {

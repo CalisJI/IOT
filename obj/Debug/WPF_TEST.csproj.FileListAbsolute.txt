@@ -1043,7 +1043,6 @@ F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.csproj.CoreCompileInput
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.csproj.CopyComplete
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.exe
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.pdb
-F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.csproj.AssemblyReference.cache
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ContentManager_View.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ContentManager_View.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\AudioManager_View.g.cs
@@ -1054,3 +1053,8 @@ F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\AudioManager_View.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\DocumentManager_View.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ImageManager_View.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\VideoManager_View.baml
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\CloudManager_View.g.cs
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\CloudManager_View.baml
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Document_Docx_View.g.cs
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Document_Docx_View.baml
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.csproj.AssemblyReference.cache

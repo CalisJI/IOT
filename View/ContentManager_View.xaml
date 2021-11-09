@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF_TEST.View"
              mc:Ignorable="d" 
-             DataContext="{StaticResource ContenMedia}"
+             DataContext="{StaticResource MenuMainAll}"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="1080" d:DesignWidth="1920">
     <Grid>
@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <GroupBox 
-                Header="Conten Manager"
+                Header="Content Manager"
                 TextBlock.TextAlignment="Center"
                 FontSize="30"
                 Height="600"

@@ -206,11 +206,25 @@
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"
                                 Margin="10"
+                                Background="White"
                                 Command="{Binding DataStreamCollectionModel_Command}"
-                                Style="{StaticResource MaterialDesignRaisedLightButton}"
                                 materialDesign:ButtonAssist.CornerRadius="8" Height="Auto">
-                                <TextBlock
-                                Text="4" />
+                                <StackPanel 
+                                    Orientation="Vertical"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" Height="150" Width="150">
+                                    <materialDesign:PackIcon 
+                                        HorizontalAlignment="Center"
+                                        Foreground="Gray"
+                                        Kind="Input"
+                                        Height="100"
+                                        Width="100"/>
+                                    <TextBlock
+                                        Text="Data Collection"
+                                        Foreground="Black"
+                                        HorizontalAlignment="Center"
+                                        FontSize="30"/>
+                                </StackPanel>
                             </Button>
                         </Grid>
                         <Grid Grid.Row="1" Grid.Column="1">

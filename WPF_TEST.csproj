@@ -307,7 +307,9 @@
       <DependentUpon>DataStreamCollection.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\Customer.cs" />
+    <Compile Include="Data\ImageObject.cs" />
     <Compile Include="Data\JobOrder.cs" />
+    <Compile Include="Data\VideoObject.cs" />
     <Compile Include="Data\Works.cs" />
     <Compile Include="MainScreenView.xaml.cs">
       <DependentUpon>MainScreenView.xaml</DependentUpon>
@@ -373,6 +375,9 @@
     <Compile Include="View\BusyIndicatorView.xaml.cs">
       <DependentUpon>BusyIndicatorView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\CloudManager_View.xaml.cs">
+      <DependentUpon>CloudManager_View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ContentManager_View.xaml.cs">
       <DependentUpon>ContentManager_View.xaml</DependentUpon>
     </Compile>
@@ -381,6 +386,9 @@
     </Compile>
     <Compile Include="View\DocumentManager_View.xaml.cs">
       <DependentUpon>DocumentManager_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Document_Docx_View.xaml.cs">
+      <DependentUpon>Document_Docx_View.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EditJobModelView.xaml.cs">
       <DependentUpon>EditJobModelView.xaml</DependentUpon>
@@ -513,6 +521,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\CloudManager_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ContentManager_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -522,6 +534,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DocumentManager_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Document_Docx_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -93,11 +93,12 @@
 
             </GroupBox>
             <CheckBox 
+                DataContext="{StaticResource Modbus}"
                 Margin="30,0,5,0"
                 materialDesign:CheckBoxAssist.CheckBoxSize="30"
                 Content="Run by Service" 
                 FontWeight="DemiBold"
-                
+                IsChecked="{Binding Start_Byserver}"
                 FontSize="23"
                 >
 
@@ -176,7 +177,7 @@
                 FontSize="23"
                 VerticalAlignment="Top"
                 Margin="0,30,0,0"
-                Height="300">
+                Height="340">
                 <GroupBox
                     
                     Header="Item Information"
@@ -219,6 +220,16 @@
                                 Width="450"
                                 materialDesign:HintAssist.Hint="Register Address"
                                 Text="{Binding RegisterAddress}">
+
+                            </TextBox>
+                        </Grid>
+                        <Grid Margin="0,10,0,0">
+                            <TextBlock Text="Quantity:"/>
+                            <TextBox 
+                                HorizontalAlignment="Right"
+                                Width="450"
+                                materialDesign:HintAssist.Hint="Quantity"
+                                Text="{Binding Quantity}">
 
                             </TextBox>
                         </Grid>

@@ -4,13 +4,24 @@ using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WPF_TEST.ViewModel;
 
 namespace WPF_TEST.SerialCommunicate
 {
     public class iModbus
     {
-        private SerialPort _RS485 = new SerialPort();
+        public SerialPort _RS485 { get; set; }
+        public string _RS485Port { get; set; }
+        public StopBits _Rs485StopBit { get; set; }
+        public Parity _RS485Parity { get; set; }
+        public int _RS485BaudRate { get; set; }
+        public int _RS485Databit { get; set; }
+        public int _RS485_Readtimeout { get; set; }
+        public bool Start_by_service { get; set; }
+
         public string Modbus_status;
+        public ModbusFunction Modbusfunction { get; set; }
+        public ConntionTypes conntionTypes { get; set; }
 
         #region Constructor/Deconstructor
         /// <summary>
@@ -18,7 +29,7 @@ namespace WPF_TEST.SerialCommunicate
         /// </summary>
         public iModbus()
         {
-
+            _RS485 = new SerialPort();
         }
         ~iModbus()
         {
@@ -36,7 +47,7 @@ namespace WPF_TEST.SerialCommunicate
         /// <param name="_parity"></param>
         /// <param name="_stopBits"></param>
         /// <returns></returns>
-        public bool Opened(string _portName, int _baudRate, int _dataBits, Parity _parity, StopBits _stopBits)
+        public bool Opened(string _portName, int _baudRate, int _dataBits, Parity _parity, StopBits _stopBits,int _readtimeout)
         {
             //Check status port
             try
@@ -49,7 +60,7 @@ namespace WPF_TEST.SerialCommunicate
                     _RS485.Parity = _parity;
                     _RS485.StopBits = _stopBits;
 
-                    _RS485.ReadTimeout = 1000;
+                    _RS485.ReadTimeout = _readtimeout;
                     _RS485.WriteTimeout = 1000;
                     try
                     {
@@ -78,7 +89,46 @@ namespace WPF_TEST.SerialCommunicate
             }
 
         }
+        public  bool Opened() 
+        {
+            try
+            {
+                if (!_RS485.IsOpen || _RS485 ==null)
+                {
+                    _RS485.PortName = this._RS485Port;
+                    _RS485.BaudRate = _RS485BaudRate;
+                    _RS485.DataBits = _RS485Databit;
+                    _RS485.Parity = _RS485Parity;
+                    _RS485.StopBits = _Rs485StopBit;
 
+                    _RS485.ReadTimeout = 1000;
+                    _RS485.WriteTimeout = 1000;
+                    try
+                    {
+                        _RS485.Open();
+                    }
+                    catch (Exception er)
+                    {
+
+                        Modbus_status = "Error Opening " + _RS485Port + er.Message;
+                        return false;
+                    }
+                    Modbus_status = _RS485Port + " : Opened successfully";
+                    return true;
+                }
+                else
+                {
+                    Modbus_status = _RS485Port + " : Already Open";
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Modbus_status = "Serial Connect error :" + ex.Message;
+                return false;
+            }
+        }
         public bool Closed()
         {
             //Check port status before close

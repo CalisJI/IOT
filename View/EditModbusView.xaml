@@ -73,13 +73,13 @@
 
             </GroupBox>
             <CheckBox 
+                DataContext="{StaticResource Modbus}"
                 Margin="30,0,5,0"
                 materialDesign:CheckBoxAssist.CheckBoxSize="30"
                 Content="Run by Service" 
                 FontWeight="DemiBold"
-                
-                FontSize="23"
-                >
+                IsChecked="{Binding Start_Byserver}"
+                FontSize="23">
 
             </CheckBox>
         </StackPanel>
@@ -219,6 +219,18 @@
                             <TextBox
                                 DataContext="{StaticResource Modbus}"
                                 Text="{Binding SelectedDevice.Register_Address, Mode=TwoWay}"
+                                HorizontalAlignment="Right"
+                                Width="450">
+
+                            </TextBox>
+                        </Grid>
+                        <Grid >
+                            <TextBlock Text="Quantity:"/>
+
+
+                            <TextBox
+                                DataContext="{StaticResource Modbus}"
+                                Text="{Binding SelectedDevice.Quantity, Mode=TwoWay}"
                                 HorizontalAlignment="Right"
                                 Width="450">
 

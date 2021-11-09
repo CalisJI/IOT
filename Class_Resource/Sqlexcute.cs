@@ -302,6 +302,9 @@ namespace WPF_TEST.Class_Resource
                         case "System.Byte":
                             sqlsc += " TINYINT(50)";
                             break;
+                        case "System.Boolean":
+                            sqlsc += " TINYINT(1)";
+                            break;
                         case "System.Decimal":
                             sqlsc += " DECIMAL(45) ";
                             break;
@@ -393,6 +396,12 @@ namespace WPF_TEST.Class_Resource
                 SQL_command("DELETE FROM " + table_Name + "",Database);
                 using (SQL_Connection = new MySqlConnection(StrCon_Database(Server, pwd, Database)))
                 {
+                    if (mySqlDataAdapter == null) 
+                    {
+                        string Query = "SELECT * FROM " + table_Name + "";
+                        mySqlDataAdapter = new MySqlDataAdapter(Query, SQL_Connection);
+                        MySqlCommandBuilder mySqlCommand = new MySqlCommandBuilder(mySqlDataAdapter);
+                    }
                     
                     mySqlDataAdapter.Update(dataTable);
                     error_message = string.Empty;

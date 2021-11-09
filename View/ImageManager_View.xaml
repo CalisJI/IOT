@@ -169,5 +169,214 @@
                 </Button>
             </Grid>
         </StackPanel>
+        <Grid Grid.Column="1">
+            <StackPanel Orientation="Vertical">
+                <ComboBox
+                    Margin="20,20,0,0"
+                    Height="25"
+                    Width="200"
+                    HorizontalAlignment="Left"
+                    materialDesign:HintAssist.Hint="Search">
+
+                </ComboBox>
+                <ListView Margin="0,10,0,0" 
+                          Height="1000"
+                          x:Name="imageList"
+                          DataContext="{StaticResource ContenMedia}"
+                          ItemsSource="{Binding ImageObjects}"
+                          
+                          ScrollViewer.VerticalScrollBarVisibility="Visible"
+                          ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction
+                                Command="{Binding SelectImageItem}" 
+                                CommandParameter="{Binding ElementName=imageList, Path=SelectedItem}"/>
+
+
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ListView.View>
+
+                        <GridView>
+                            <GridView.ColumnHeaderContainerStyle>
+                                <Style TargetType="{x:Type GridViewColumnHeader}">
+                                    <!-- Set any properties you want to set -->
+                                    <Setter Property="Background" Value="LightBlue" />
+                                    <Setter Property="Foreground" Value="Black" />
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                </Style>
+                            </GridView.ColumnHeaderContainerStyle>
+                            <GridViewColumn
+                                Width="150" 
+                                Header="Preview"
+                                TextBlock.TextAlignment="Right">
+
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image 
+                                            Source="{Binding LinkImage}"
+                                            Width="120"
+                                            Height="100"
+                                            Stretch="Fill"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center"
+                                            />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn 
+                                Header="Name"
+                                Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                            Text="{Binding ImageName}"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn 
+                                Header="Image Type"
+                                Width="110">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock 
+                                            Text="{Binding ImageType}"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn
+                                Header="Image Group"
+                                Width="120">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                            Text="{Binding ImageGroup}"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Date Modify" Width="200">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock 
+                                            Text="{Binding ImageDateUpLoad}"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Image Version" Width="100">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock 
+                                            Text="{Binding ImageVersion}"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="2">
+            <GroupBox Header="Image Details" FontSize="22" FontWeight="Bold" Margin="15">
+                <Grid>
+                    <GroupBox Margin="10,10,10,0" Height="200" VerticalAlignment="Top" DataContext="{StaticResource ContenMedia}">
+                        <StackPanel Orientation="Vertical">
+                            <Grid >
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    Text="Original File Name"
+                                    FontSize="16" Margin="10"
+                                    FontWeight="Normal"/>
+                                <TextBox
+                                    Margin="200,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding Image_.LinkImage}" 
+                                    FontSize="16" 
+                                    
+                                    Width="550"
+                                    FontWeight="Normal"/>
+                            </Grid>
+                            <Grid >
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    Text="Image Name"
+                                    FontSize="16" Margin="10"
+                                    FontWeight="Normal"/>
+                                <TextBox
+                                    Margin="200,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding Image_.ImageName}"
+                                    FontSize="16" 
+                                    
+                                    Width="550"
+                                    FontWeight="Normal"/>
+                            </Grid>
+                            <Grid >
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    Text="Image Type"
+                                    FontSize="16" Margin="10"
+                                    FontWeight="Normal"/>
+                                <TextBox
+                                    Margin="200,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding Image_.ImageType}" 
+                                    FontSize="16" 
+                                    
+                                    Width="550"
+                                    FontWeight="Normal"/>
+                            </Grid>
+                            <Grid >
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    Text="Image Group"
+                                    FontSize="16" Margin="10"
+                                    FontWeight="Normal"/>
+                                <TextBox
+                                    Margin="200,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding Image_.ImageGroup}" 
+                                    FontSize="16" 
+                                    
+                                    Width="550"
+                                    FontWeight="Normal"/>
+                            </Grid>
+                            <Grid >
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    Text="Image Category"
+                                    FontSize="16" Margin="10"
+                                    FontWeight="Normal"/>
+                                <TextBox
+                                    Margin="200,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding Image_.ImgaeCategory}" 
+                                    FontSize="16" 
+                                    
+                                    Width="550"
+                                    FontWeight="Normal"/>
+                            </Grid>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox DataContext="{StaticResource ContenMedia}" Margin="10,220,10,0" Header="Image Preview">
+                        <Image
+                            Source="{Binding Image_.LinkImage}"
+                            Stretch="Fill"/>
+
+                    </GroupBox>
+                </Grid>
+            </GroupBox>
+        </Grid>
     </Grid>
 </UserControl>
