@@ -22,6 +22,8 @@ namespace WPF_TEST.ViewModel
 {
     public class ModbusViewModel : BaseViewModel
     {
+        bool temp_run = true;
+        bool server_run = true;
         private BaseViewModel _selectedViewModel;
         private BaseViewModel _ChooseTypeModel;
         private BaseViewModel _DisplayType;
@@ -318,6 +320,8 @@ namespace WPF_TEST.ViewModel
         public ICommand Display_Type { get; set; }
         public ICommand Start_Service { get; set; }
         public ICommand Stop_Service { get; set; }
+        public ICommand Stop { get; set; }
+        public ICommand Start { get; set; }
         public PortSettingsViewModel ComportInfo { get; set; }
         public bool _load = false;
         ModbusDevice modbusDevice;
@@ -418,24 +422,36 @@ namespace WPF_TEST.ViewModel
             });
             ConnectionExcute = new RelayCommand<object>((p) => { return true; },(p)=> 
             {
+                
+                bool check1 = test.Closed();
+                if (!check1)
+                {
+                    messageBoxService.ShowMessage(test.Modbus_status, string.Format("Lỗi Ngắt Kết Nối Thiết Bị {0}", test_Connection.DeviceName), System.Messaging.MessageType.Report);
+                }
+
                 var e = (ModbusDevice)p;
                 test_Connection = e;
+
                 var c = List_Server.Where(m => m._RS485Port == e.Port 
                                                 && m._RS485BaudRate == e.Baudrate 
                                                 && m._RS485Parity == e.Parity
                                                 && m._Rs485StopBit == e.StopBits
-                                                &&m.Modbusfunction == e.ModbusFunctions).FirstOrDefault();
+                                                && m.Modbusfunction == e.ModbusFunctions).FirstOrDefault();
                 test = c;
-                bool mo = c.Opened(); //mở một port
-                if (!mo) 
+                bool mo = test.Opened(); //mở một port
+                if (!Temp_Test_thread.IsBusy)
                 {
-                    messageBoxService.ShowMessage(c.Modbus_status, "Lỗi Kết Nối", System.Messaging.MessageType.Report);
-                }
-                else 
-                {
-                    messageBoxService.ShowMessage(string.Format("Kết Nối Thiết Bị {0} Thành Công",test_Connection.DeviceName), "Connecttion Status", System.Messaging.MessageType.Report);
-                    Temp_Test_thread.RunWorkerAsync();
-                }
+                    if (!mo)
+                    {
+                        messageBoxService.ShowMessage(c.Modbus_status, "Lỗi Kết Nối", System.Messaging.MessageType.Report);
+                    }
+                    else
+                    {
+                        messageBoxService.ShowMessage(string.Format("Kết Nối Thiết Bị {0} Thành Công", test_Connection.DeviceName), "Connecttion Status", System.Messaging.MessageType.Report);
+                        
+                    }
+                };
+               
                 
             });
             Save_Edit = new RelayCommand<object>((p) => { return true; }, (p) =>
@@ -543,6 +559,7 @@ namespace WPF_TEST.ViewModel
                             {
                                 messageBoxService.ShowMessage(item.Modbus_status, string.Format("Lỗi Kết Nối (Thiết Bị {0})",dem), System.Messaging.MessageType.Report);
                             }
+                            dem++;
                         }
                         
                     }
@@ -559,13 +576,24 @@ namespace WPF_TEST.ViewModel
             });
             Stop_Service = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
-                if (Temp_Test_thread.IsBusy) 
-                {
-                    Temp_Test_thread.CancelAsync();
-                }
+               
                 if (Modbus_Service.IsBusy) 
                 {
                     Modbus_Service.CancelAsync();
+                }
+            });
+            Stop = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                if (Temp_Test_thread.IsBusy)
+                {
+                    Temp_Test_thread.CancelAsync();
+                }
+            });
+            Start = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                if (!Temp_Test_thread.IsBusy)
+                {
+                    Temp_Test_thread.RunWorkerAsync();
                 }
             });
 
@@ -575,42 +603,51 @@ namespace WPF_TEST.ViewModel
         {
             if (MainScreenView.Main_quit)
             {
-                Temp_Test_thread.CancelAsync();
+                //Temp_Test_thread.CancelAsync();
             }
             else 
             {
-                if (!Temp_Test_thread.IsBusy) 
+                if (!temp_run) 
+                {
+                
+                }
+                else if (!Temp_Test_thread.IsBusy) 
                 {
                     Temp_Test_thread.RunWorkerAsync();
                 }
             }
         }
-
+       
         private void Temp_Test_thread_DoWork(object sender, DoWorkEventArgs e)
         {
             if (Temp_Test_thread.CancellationPending) 
             {
                 e.Cancel = true;
+                temp_run = false;
             }
-            if (test.Modbusfunction == ModbusFunction.Read_Coil) 
+            else 
             {
-                short[] read01 = new short[2];
-                test.SendFc01((byte)test_Connection.ID, (ushort)test_Connection.Register_Address, 16, ref read01);
+                temp_run = true;
+                if (test.Modbusfunction == ModbusFunction.Read_Coil)
+                {
+                    short[] read01 = new short[2];
+                    test.SendFc01((byte)test_Connection.ID, (ushort)test_Connection.Register_Address, 16, ref read01);
+                }
+                else if (test.Modbusfunction == ModbusFunction.Read_Descrete_Input)
+                {
+                    short[] read01 = new short[2];
+                    test.SendFc02((byte)test_Connection.ID, (ushort)test_Connection.Register_Address, 16, ref read01);
+                }
+                else if (test.Modbusfunction == ModbusFunction.Read_Holding_Register)
+                {
+
+                }
+                else if (test.Modbusfunction == ModbusFunction.Read_Input_Register)
+                {
+
+                }
+                Thread.Sleep(test_Connection.Update_Rate);
             }
-            else if(test.Modbusfunction == ModbusFunction.Read_Descrete_Input)
-            {
-                short[] read01 = new short[2];
-                test.SendFc02((byte)test_Connection.ID, (ushort)test_Connection.Register_Address, 16, ref read01);
-            }
-            else if(test.Modbusfunction == ModbusFunction.Read_Holding_Register) 
-            {
-            
-            }
-            else if(test.Modbusfunction == ModbusFunction.Read_Input_Register) 
-            {
-                
-            }
-            Thread.Sleep(test_Connection.Update_Rate);
             
         }
 
@@ -660,6 +697,7 @@ namespace WPF_TEST.ViewModel
                     {
                         List_Server.Add(iModbus);
                         
+                        
                     }
                    
                 }
@@ -696,19 +734,33 @@ namespace WPF_TEST.ViewModel
                     Int16[] read4 = new Int16[] { };
                     Read04.Add(read4);
                 }
+                check = false;
             }
+            
             Comport = new string[List_Server.Count];
             for (int i = 0; i < List_Server.Count; i++)
             {
                 Comport[i] = List_Server.ElementAt(i)._RS485Port;
             }
+            
         }
         
         private void Modbus_Service_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (MainScreenView.Main_quit)
             {
-                Modbus_Service.CancelAsync();
+                //Modbus_Service.CancelAsync();
+            }
+            else 
+            {
+                if (!server_run) 
+                {
+                
+                }
+                else if (!Modbus_Service.IsBusy) 
+                {
+                    Modbus_Service.RunWorkerAsync();
+                }
             }
         }
         public static List<bool[]> Read01 { get; set; }
@@ -721,109 +773,102 @@ namespace WPF_TEST.ViewModel
             {
                 e.Cancel = true;
             }
-            foreach (var item in List_Server)
+            else 
             {
-                try
+                int dem = 0;
+                foreach (var item in ModbusDevices)
                 {
-                    if (item.conntionTypes == ConntionTypes.Modbus_RTU)
+                    try
                     {
-                        if (item.Modbusfunction == ModbusFunction.Read_Coil)
+                        ModbusDevice modbusDevice = new ModbusDevice();
+                        if (item.ModbusFunctions == ModbusFunction.Read_Coil && item.Start_by_Service) 
                         {
+                            
+                            var o = List_Server.Where(m => m._RS485Port == item.Port
+                                                      && m._RS485BaudRate == item.Baudrate
+                                                      && m._RS485Databit == item.DataBits
+                                                      && m._RS485Parity == item.Parity
+                                                      && m._Rs485StopBit == item.StopBits).FirstOrDefault();
+                            short[] read1 = new short[2];
+                            bool check = o.SendFc01((byte)item.ID, (ushort)item.Register_Address, (ushort)item.Quantity, ref read1);
+                            if (!check && o.Modbus_status.Contains("out")) 
+                            {
+                                try
+                                {
+                                    o.Closed();
+                                }
+                                catch (Exception)
+                                {
 
-                            var s = ModbusDevices.Where(m => m.Port == item._RS485Port
-                                                            && m.ModbusFunctions == item.Modbusfunction
-                                                            && m.Baudrate == item._RS485BaudRate
-                                                            && m.ConntionType == ConntionTypes.Modbus_RTU
-                                                            && m.DataBits == item._RS485Databit
-                                                            && m.Parity == item._RS485Parity
-                                                            && m.StopBits == item._Rs485StopBit).ToList();
-                            int dem = 0;
-                            if (s != null)
-                            {
-                                foreach (var obj in s)
+                                    
+                                }
+                                bool check2 = o.Opened();
+                                if (check2) 
                                 {
-                                    short[] read1 = new short[2];
-                                    item.SendFc01((byte)obj.ID, (ushort)obj.Register_Address, 16, ref read1);
-                                    var r = Read01.ElementAt(dem);
-                                    dem++;
+                                    o.SendFc01((byte)item.ID, (ushort)item.Register_Address, (ushort)item.Quantity, ref read1);
+                                }
+                            }
+                            
+                        }
+                        else if(item.ModbusFunctions == ModbusFunction.Read_Descrete_Input && item.Start_by_Service) 
+                        {
+                            var o = List_Server.Where(m => m._RS485Port == item.Port
+                                                      && m._RS485BaudRate == item.Baudrate
+                                                      && m._RS485Databit == item.DataBits
+                                                      && m._RS485Parity == item.Parity
+                                                      && m._Rs485StopBit == item.StopBits).FirstOrDefault();
+                            short[] read1 = new short[2];
+                            bool check = o.SendFc02((byte)item.ID, (ushort)item.Register_Address, (ushort)item.Quantity, ref read1);
+                            if (!check && o.Modbus_status.Contains("out"))
+                            {
+                                try
+                                {
+                                    o.Closed();
+                                }
+                                catch (Exception)
+                                {
+
+
+                                }
+                                bool check2 = o.Opened();
+                                if (check2)
+                                {
+                                    o.SendFc02((byte)item.ID, (ushort)item.Register_Address, (ushort)item.Quantity, ref read1);
                                 }
                             }
 
-
                         }
-                        else if (item.Modbusfunction == ModbusFunction.Read_Descrete_Input)
+                        else if(item.ModbusFunctions == ModbusFunction.Read_Holding_Register && item.Start_by_Service) 
                         {
-                            var s = ModbusDevices.Where(m => m.Port == item._RS485Port
-                                                           && m.ModbusFunctions == item.Modbusfunction
-                                                           && m.Baudrate == item._RS485BaudRate
-                                                           && m.ConntionType == ConntionTypes.Modbus_RTU
-                                                           && m.DataBits == item._RS485Databit
-                                                           && m.Parity == item._RS485Parity
-                                                           && m.StopBits == item._Rs485StopBit).ToList();
-                            int dem = 0;
-                            if (s != null)
-                            {
-                                foreach (var obj in s)
-                                {
-                                    short[] read1 = new short[2];
-                                    item.SendFc02((byte)obj.ID, (ushort)obj.Register_Address, 16, ref read1);
-                                    var r = Read02.ElementAt(dem);
-                                    dem++;
-                                }
-                            }
+                            var o = List_Server.Where(m => m._RS485Port == item.Port
+                                                      && m._RS485BaudRate == item.Baudrate
+                                                      && m._RS485Databit == item.DataBits
+                                                      && m._RS485Parity == item.Parity
+                                                      && m._Rs485StopBit == item.StopBits).FirstOrDefault();
+                            short[] read1 = new short[2];
+                            o.SendFc3((byte)item.ID, (ushort)item.Register_Address, (ushort)item.Quantity, ref read1);
                         }
-                        else if (item.Modbusfunction == ModbusFunction.Read_Holding_Register)
+                        else if(item.ModbusFunctions == ModbusFunction.Read_Input_Register && item.Start_by_Service) 
                         {
-                            var s = ModbusDevices.Where(m => m.Port == item._RS485Port
-                                                           && m.ModbusFunctions == item.Modbusfunction
-                                                           && m.Baudrate == item._RS485BaudRate
-                                                           && m.ConntionType == ConntionTypes.Modbus_RTU
-                                                           && m.DataBits == item._RS485Databit
-                                                           && m.Parity == item._RS485Parity
-                                                           && m.StopBits == item._Rs485StopBit).ToList();
-                            int dem = 0;
-                            if (s != null)
-                            {
-                                foreach (var obj in s)
-                                {
-                                    short[] read1 = new short[2];
-                                    item.SendFc3((byte)obj.ID, (ushort)obj.Register_Address, 16, ref read1);
-                                    var r = Read03.ElementAt(dem);
-                                    r = read1;
-                                    dem++;
-                                }
-                            }
+                            var o = List_Server.Where(m => m._RS485Port == item.Port
+                                                      && m._RS485BaudRate == item.Baudrate
+                                                      && m._RS485Databit == item.DataBits
+                                                      && m._RS485Parity == item.Parity
+                                                      && m._Rs485StopBit == item.StopBits).FirstOrDefault();
+                            short[] read1 = new short[2];
+                            o.SendFc04((byte)item.ID, (ushort)item.Register_Address, (ushort)item.Quantity, ref read1);
                         }
-                        else if (item.Modbusfunction == ModbusFunction.Read_Input_Register)
-                        {
-                            var s = ModbusDevices.Where(m => m.Port == item._RS485Port
-                                                           && m.ModbusFunctions == item.Modbusfunction
-                                                           && m.Baudrate == item._RS485BaudRate
-                                                           && m.ConntionType == ConntionTypes.Modbus_RTU
-                                                           && m.DataBits == item._RS485Databit
-                                                           && m.Parity == item._RS485Parity
-                                                           && m.StopBits == item._Rs485StopBit).ToList();
-                            int dem = 0;
-                            if (s != null)
-                            {
-                                foreach (var obj in s)
-                                {
-                                    short[] read1 = new short[2];
-                                    item.SendFc04((byte)obj.ID, (ushort)obj.Register_Address, 16, ref read1);
-                                    var r = Read04.ElementAt(dem);
-                                    r = read1;
-                                    dem++;
-                                }
-                            }
-                        }
+                        
+                       
                     }
+                    catch (Exception)
+                    {
 
+                        //throw;
+                    }
                 }
-                catch (Exception)
-                {
-
-                    throw;
-                }
+                var max = ModbusDevices.Max(d => d.Update_Rate);
+                Thread.Sleep(max);
             }
         }
 

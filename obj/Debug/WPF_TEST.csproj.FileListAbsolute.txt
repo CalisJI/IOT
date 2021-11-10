@@ -1058,3 +1058,9 @@ F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\CloudManager_View.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Document_Docx_View.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Document_Docx_View.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.csproj.AssemblyReference.cache
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\bin\Debug\DevExpress.Xpf.RichEdit.v19.2.dll
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\bin\Debug\DevExpress.Xpf.RichEdit.v19.2.xml
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\bin\Debug\de\DevExpress.Xpf.RichEdit.v19.2.resources.dll
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\bin\Debug\es\DevExpress.Xpf.RichEdit.v19.2.resources.dll
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\bin\Debug\ja\DevExpress.Xpf.RichEdit.v19.2.resources.dll
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\bin\Debug\ru\DevExpress.Xpf.RichEdit.v19.2.resources.dll

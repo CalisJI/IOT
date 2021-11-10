@@ -78,7 +78,7 @@
                 materialDesign:CheckBoxAssist.CheckBoxSize="30"
                 Content="Run by Service" 
                 FontWeight="DemiBold"
-                IsChecked="{Binding Start_Byserver}"
+                IsChecked="{Binding SelectedDevice.Start_by_Service}"
                 FontSize="23">
 
             </CheckBox>

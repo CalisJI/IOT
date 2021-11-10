@@ -94,7 +94,7 @@
                 <views:VideoManager_View/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:DocumentManager_ViewModel}">
-                <views:DocumentManager_View/>
+                <views:Document_Docx_View/>
             </DataTemplate>
 
         </ResourceDictionary>

@@ -22,6 +22,7 @@ namespace WPF_TEST.SerialCommunicate
         public string Modbus_status;
         public ModbusFunction Modbusfunction { get; set; }
         public ConntionTypes conntionTypes { get; set; }
+        public TimeSpan Update_Time { get; set; }
 
         #region Constructor/Deconstructor
         /// <summary>

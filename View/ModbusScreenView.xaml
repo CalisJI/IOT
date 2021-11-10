@@ -148,6 +148,8 @@
                 Margin="70,0,0,0"
                 Style="{StaticResource MaterialDesignIconButton}"
                 ToolTip="Start"
+                Command="{Binding Start}"
+                CommandParameter="{Binding ElementName=Modbus_list, Path=SelectedItem}"
                 Background="{DynamicResource MaterialDesignTextFieldBoxBackground}">
                 <materialDesign:PackIcon
                     Height="80"
@@ -161,6 +163,7 @@
                 Margin="70,0,0,0"
                 Style="{StaticResource MaterialDesignIconButton}"
                 ToolTip="Stop"
+                Command="{Binding Stop}"
                 Background="{DynamicResource MaterialDesignTextFieldBoxBackground}">
                 <materialDesign:PackIcon
                     Height="80"
@@ -175,8 +178,8 @@
                 Margin="70,0,0,0"
                 Style="{StaticResource MaterialDesignIconButton}"
                 ToolTip="Start Service"
-                Command="{Binding ConnectionExcute}"
-                CommandParameter="{Binding ElementName=Modbus_list, Path=SelectedItem}"
+                Command="{Binding Start_Service}"
+                
                 Background="{DynamicResource MaterialDesignTextFieldBoxBackground}">
                 <materialDesign:PackIcon
                     Height="80"
@@ -189,7 +192,7 @@
                 Width="80"
                 Margin="70,0,0,0"
                 Style="{StaticResource MaterialDesignIconButton}"
-                
+                Command="{Binding Stop_Service}"
                 Background="{DynamicResource MaterialDesignTextFieldBoxBackground}">
                 <materialDesign:PackIcon
                     Foreground="Red"
