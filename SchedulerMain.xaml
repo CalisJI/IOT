@@ -13,7 +13,7 @@
     xmlns:custom="clr-namespace:WPF_TEST"
     xmlns:dxscht="http://schemas.devexpress.com/winfx/2008/xaml/scheduling/themekeys"
     x:Class="WPF_TEST.SchedulerMain"
-    DataContext="{StaticResource ScheduleViewModel}"
+    DataContext="{StaticResource EditJob}"
     Title="SchedulerMain" Height="1000" Width="1920"
     WindowStartupLocation="CenterScreen"
     >
@@ -21,9 +21,7 @@
     <DockPanel>
         
         <ContentControl
-            
-            Content="{Binding}"
-            
+           
             ContentTemplate="{StaticResource Ribbon}"
             dxsch:SchedulerControl.Scheduler="{Binding ElementName=schedule}"
             DockPanel.Dock="Top"/>
@@ -88,13 +86,11 @@
             HorizontalAlignment="Left" 
             VerticalAlignment="Top">
             <dxmvvm:Interaction.Behaviors>
-                <dxmvvm:EventToCommand Command="{Binding SaveCommand , RelativeSource={RelativeSource AncestorType=dxb:BarButtonItem}}" EventName="AppointmentAdded" >
-
-                </dxmvvm:EventToCommand>
-                <dxmvvm:EventToCommand Command="{Binding SaveCommand}" EventName="AppointmentAdded" />
-                <dxmvvm:EventToCommand Command="{Binding SaveCommand}" EventName="AppointmentEdited" />
-                <dxmvvm:EventToCommand Command="{Binding SaveCommand}" EventName="AppointmentRemoved" />
-                <dxmvvm:EventToCommand Command="{Binding SaveCommand}" EventName="AppointmentRestored" />
+                
+                <dxmvvm:EventToCommand Command="{Binding Save_EditJob}" EventName="AppointmentAdded" />
+                <dxmvvm:EventToCommand Command="{Binding Save_EditJob}" EventName="AppointmentEdited" />
+                <dxmvvm:EventToCommand Command="{Binding Save_EditJob}" EventName="AppointmentRemoved" />
+                <dxmvvm:EventToCommand Command="{Binding Save_EditJob}" EventName="AppointmentRestored" />
             </dxmvvm:Interaction.Behaviors>
             <dxsch:SchedulerControl.OptionsWindows >
                 <dxsch:OptionsWindows AppointmentWindowType="{x:Type custom:CustomAppointmentWindow}"/>

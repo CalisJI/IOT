@@ -11,21 +11,19 @@
     xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon" 
     xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
-    mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
-    xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
-    DataContext="{StaticResource ScheduleViewModel}"
+    mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+     xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"         
+    Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=ThemedWindow}}"
     x:Name="window">
-   
+
     <dxmvvm:Interaction.Behaviors>
         <dxmvvm:CurrentWindowService ClosingCommand="{Binding WindowClosingCommand}"/>
         <dxmvvm:KeyToCommand KeyGesture="Esc" EventName="KeyDown" MarkRoutedEventsAsHandled="True" Command="{DXCommand Execute='@e(window).Close()'}"/>
     </dxmvvm:Interaction.Behaviors>
-    
-    <Grid>
-      
-        <!--<dxr:RibbonControl DockPanel.Dock="Top" Style="{DynamicResource {dxscht:AppointmentWindowCommandBarThemeKey ResourceKey=RibbonControl}}">
+
+    <DockPanel>
+        <dxr:RibbonControl DockPanel.Dock="Top" Style="{DynamicResource {dxscht:AppointmentWindowCommandBarThemeKey ResourceKey=RibbonControl}}">
             <dxr:RibbonControl.ToolbarItems>
                 <dxb:BarButtonItem x:Name="toolbar_barItemSave" Style="{DynamicResource {dxscht:AppointmentWindowCommandBarThemeKey ResourceKey=Items_Actions_Save}}"/>
                 <dxb:BarButtonItem x:Name="toolbar_barItemPrevious" Style="{DynamicResource {dxscht:AppointmentWindowCommandBarThemeKey ResourceKey=Items_Actions_Previous}}"/>
@@ -38,297 +36,101 @@
                         <dxb:BarButtonItem x:Name="barItemSaveAndClose" Style="{DynamicResource {dxscht:AppointmentWindowCommandBarThemeKey ResourceKey=Items_Actions_SaveAndClose}}"/>
                         <dxb:BarButtonItem x:Name="barItemDelete" Style="{DynamicResource {dxscht:AppointmentWindowCommandBarThemeKey ResourceKey=Items_Actions_Delete}}"/>
                     </dxr:RibbonPageGroup>
-                    <dxr:RibbonPageGroup Style="{DynamicResource {dxscht:AppointmentWindowCommandBarThemeKey ResourceKey=Groups_Options}}">
-                        <dxb:BarEditItem x:Name="barItemLabel" Style="{DynamicResource {dxscht:AppointmentWindowCommandBarThemeKey ResourceKey=Items_Options_Label}}"/>
-                        <dxb:BarEditItem x:Name="barItemStatus" Style="{DynamicResource {dxscht:AppointmentWindowCommandBarThemeKey ResourceKey=Items_Options_Status}}"/>
-                        <dxb:BarEditItem x:Name="barItemResources" Style="{DynamicResource {dxscht:AppointmentWindowCommandBarThemeKey ResourceKey=Items_Options_Resources}}"/>
-                        <dxb:BarEditItem x:Name="barItemResource" Style="{DynamicResource {dxscht:AppointmentWindowCommandBarThemeKey ResourceKey=Items_Options_Resource}}"/>
-                        <dxb:BarEditItem x:Name="barItemReminder" Style="{DynamicResource {dxscht:AppointmentWindowCommandBarThemeKey ResourceKey=Items_Options_Reminder}}"/>
-                        <dxb:BarCheckItem x:Name="barItemRecurrence" Style="{DynamicResource {dxscht:AppointmentWindowCommandBarThemeKey ResourceKey=Items_Options_Recurrence}}"/>
-                        <dxb:BarCheckItem x:Name="barItemTimeZones" Style="{DynamicResource {dxscht:AppointmentWindowCommandBarThemeKey ResourceKey=Items_Options_TimeZones}}"/>
-                    </dxr:RibbonPageGroup>
+
                 </dxr:RibbonPage>
             </dxr:RibbonDefaultPageCategory>
-        </dxr:RibbonControl>-->
-        
-        <!--<dxlc:LayoutControl x:Name="validationContainer" Orientation="Vertical" dxe:ValidationService.IsValidationContainer="True">
-            <dxlc:LayoutItem Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=LayoutItem_Subject}}">
-                <dxe:TextEdit x:Name="editorSubject" Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=Editor_Subject}}">
-                    <dxmvvm:Interaction.Behaviors>
-                        <dxmvvm:FocusBehavior/>
-                    </dxmvvm:Interaction.Behaviors>
-                </dxe:TextEdit>
-            </dxlc:LayoutItem>
-            <dxlc:LayoutItem Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=LayoutItem_Location}}">
-                <dxe:TextEdit x:Name="editorLocation" Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=Editor_Location}}" />
-            </dxlc:LayoutItem>
-            <dxlc:LayoutItem x:Name="layoutStartTime"  Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=LayoutItem_StartTime}}">
-                <DockPanel>
-                    <dxe:DateEdit x:Name="editorStartDate" DockPanel.Dock="Left" Width="150" Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=Editor_StartDate}}"/>
-                    <dxe:TextEdit x:Name="editorStartTime" DockPanel.Dock="Left" Width="150" Margin="4,0,0,0" Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=Editor_StartTime}}"/>
-                    --><!--<dxe:CheckEdit x:Name="editorAllDay" Margin="16,0,0,0" Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=Editor_AllDay}}"/>--><!--
-                </DockPanel>
-            </dxlc:LayoutItem>
-            <dxlc:LayoutItem x:Name="layoutEndTime"  Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=LayoutItem_EndTime}}">
-                <DockPanel>
-                    <dxe:DateEdit x:Name="editorEndDate" DockPanel.Dock="Left" Width="150" Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=Editor_EndDate}}"/>
-                    <dxe:TextEdit x:Name="editorEndTime" DockPanel.Dock="Left" Width="150" Margin="4,0,0,0" Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=Editor_EndTime}}"/>
-                    <dxsch:TimeZoneEdit x:Name="editorTimeZone" Margin="16,0,0,0" Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=Editor_TimeZone}}"/>
-                </DockPanel>
-            </dxlc:LayoutItem>
-            --><!--<dxlc:LayoutItem Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=LayoutItem_Description}}">
-                <dxe:TextEdit x:Name="editorDescription" Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=Editor_Description}}"/>
-            </dxlc:LayoutItem>--><!--
-        </dxlc:LayoutControl>-->
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="5*"/>
-                <RowDefinition Height="0.2*"/>
-            </Grid.RowDefinitions>
-            <ScrollViewer Grid.Row="0" Grid.Column="0" VerticalScrollBarVisibility="Visible">
-                <StackPanel Grid.Column="0" 
-                        
-                        Height="1000"
-                        
-                        DataContext="{StaticResource EditJob}"
-                    Orientation="Vertical">
+        </dxr:RibbonControl>
 
-                    <Label Content="Scheduler Creating" 
-                   FontSize="50"
-                   FontWeight="DemiBold"
-                   Foreground="Gray"
-                   Margin="50,30,0,30"/>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Sales Order #*"
-                           FontSize="22"
-                           FontWeight="Bold"
-                           Margin="50,10,0,0"
-                           Foreground="Gray"/>
-                        <TextBox Text="{Binding SelectedJob.SalesOrder}"
-                         FontSize="30"
-                         Margin="20,0,10,0"
-                         Foreground="Gray"
-                         Width="723"
-                         Background="White" 
-                         />
-                    </StackPanel>
-                    <Grid DataContext="{StaticResource WorkFlow}">
-                        <Border BorderBrush="Black" >
-                            <StackPanel Margin="300,0,20,0">
-                                <GroupBox Header="Customer"
-                                  Background="WhiteSmoke"
-                                  FontSize="22">
-                                    <StackPanel Orientation="Vertical">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock 
-                                    Text="Custommer*"
-                                    Foreground="Black"
-                                    FontWeight="Bold"
-                                    Margin="20,5,0,0"/>
-                                            <ComboBox Margin="52,5,10,0"
-                                              Name="Customer_cbb"
-                                              
-                                          Width="420"
-                                          FontSize="20"
-                                          SelectedItem="{Binding SelectedJob.Customer}"
-                                          ItemsSource="{Binding CustomerInfo}">
-                                                <ComboBox.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock Text="{Binding Customer_Info}"/>
-                                                    </DataTemplate>
-                                                </ComboBox.ItemTemplate>
-                                            </ComboBox>
-
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock 
-                                        Text="Customer Details"
-                                        Margin="20,10,0,0"/>
-                                            <TextBox 
-                                        Text="{Binding SelectedJob.Customer_Details}"
-                                        Margin="20,0,0,0"
-                                        TextWrapping="Wrap"
-                                        AcceptsReturn="True"
-                                        VerticalScrollBarVisibility="Auto"
-                                        Width="420"
-                                        Height="170"/>
-
-                                        </StackPanel>
-                                        <CheckBox Content="Check to change delivery details if different from above"
-                                              IsChecked="False"
-                                              FontSize="12"
-                                          Margin="190,0,0,0"/>
-                                    </StackPanel>
-                                </GroupBox>
-                            </StackPanel>
-                        </Border>
-                    </Grid>
-                    <Grid Background="White" Margin="0,0,20,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="2.2*"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Orientation="Vertical" Grid.Column="0">
-                            <TextBlock 
-                        Text="Quotation #" 
-                        FontSize="22"
-                        Margin="50,0,0,30"
-                        Width="auto"/>
-                            <TextBlock 
-                        Text="Customer PO #" 
-                        FontSize="22"
-                        Margin="50,0,0,30"
-                        Width="auto"/>
-                            <TextBlock 
-                        Text="Requested Start*" 
-                        FontSize="22"
-                        Margin="50,0,0,30"
-                        Width="auto"
-                        FontWeight="Bold"/>
-                            <TextBlock 
-                        Text="Requested End*" 
-                        FontSize="22"
-                        Margin="50,0,0,30"
-                        Width="auto"
-                        FontWeight="Bold"/>
-                            <TextBlock 
-                        Text="Requested Report Date*" 
-                        FontSize="22"
-                        Margin="50,0,0,30"
-                        Width="auto"/>
-                            <TextBlock 
-                        Text="*Priority" 
-                        FontSize="20"
-                        Margin="50,10,0,30"
-                        Width="auto"
-                        FontWeight="Bold"/>
-                            <TextBlock 
-                        Text="*Required Fields" 
-                        FontSize="20"
-                        Margin="50,10,0,30"
-                        Width="auto"
-                        FontWeight="Bold"/>
-
-                        </StackPanel>
-                        <StackPanel Orientation="Vertical" Grid.Column="1">
-                            <TextBox 
-                        Text="{Binding SelectedJob.Quotation}"
-                        Height="50"
-                        FontSize="25"
-                         Margin="20,0,0,10"/>
-                            <TextBox 
-                        Text="{Binding SelectedJob.Customer_PO}"
-                        Height="50"
-                        FontSize="25"
-                         Margin="20,0,0,10"/>
-                            <DatePicker 
-                        SelectedDate="{Binding SelectedJob.Requested_Start.Date}"
-                        Background="Red"
-                        Height="50"
-                        Text="Demo"
-                        FontSize="25"
-                         Margin="20,0,0,10"/>
-                            <DatePicker 
-                        SelectedDate="{Binding SelectedJob.Requested_End.Date}"
-                        Background="Red"
-                        Height="50"
-                        Text="Demo"
-                        
-                        FontSize="25"
-                         Margin="20,0,0,10"/>
-                            <DatePicker 
-                        SelectedDate="{Binding SelectedJob.Requested_Report_Date.Date}"
-                        Background="Red"
-                        Height="50"
-                        Text="Demo"
-                        FontSize="25"
-                         Margin="20,0,0,10"/>
-                            <ComboBox 
-                            
-                        
-                        Height="50"
-                        Text="Demo"
-                        FontSize="25"
-                         Margin="20,0,0,10"/>
-
-
-                        </StackPanel>
-                    </Grid>
-
-                </StackPanel>
-            </ScrollViewer>
-            <Grid Grid.Column="1">
-               
-                <Grid>
-                    <Button
-                    Style="{StaticResource MaterialDesignRaisedLightButton}"
-                    Height="70"
+        <StackPanel>
+            <DockPanel>
+                <TextBlock 
                     DataContext="{StaticResource EditJob}"
-                    materialDesign:ShadowAssist.ShadowDepth="Depth3"
-                    Width="80"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Bottom"
-                    Margin="0,0,20,30"
-                   
-                    Background="#673ab7"
-                    materialDesign:ButtonAssist.CornerRadius="8">
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                    Text="Sale Order"
+                    Margin="5" 
+                    FontSize="14"/>
+                <TextBox />
+            </DockPanel>
+            <DockPanel>
+                <TextBlock 
+                    Text="Customer"
+                    Margin="5" 
+                    FontSize="14"/>
+                <ComboBox
+                    Name="editcbbox"
+                    Margin="5"
+                    DataContext="{StaticResource EditJob}"
+                    ItemsSource="{Binding CustomerInfo}"
+                    SelectedItem="{Binding Custommer}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Customer_Info}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction
+                                Command="{Binding SelectToEditcbbox}"
+                                CommandParameter="{Binding ElementName=editcbbox, Path=SelectedValue}"/>
 
-                            <materialDesign:PackIcon 
-                            Kind="ContentSave"
-                            Height="40"
-                            Width="50"
-                            Foreground="Lime"/>
-                            <TextBlock 
-                            Text="Save"
-                            FontSize="15"
-                            HorizontalAlignment="Center"
-                            Foreground="Black"/>
-                        </StackPanel>
 
-                    </Button>
-                    <Button
-                    Style="{StaticResource MaterialDesignRaisedLightButton}"
-                    Height="70"
-                    materialDesign:ShadowAssist.ShadowDepth="Depth3"
-                    Width="80"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Bottom"
-                    Margin="0,0,20,150"
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock 
+                    DataContext="{StaticResource EditJob}"
+                    Text="Customer Details"
+                    Margin="5" 
+                    FontSize="14"/>
+                <TextBox
+                    DataContext="{StaticResource EditJob}"
+                    TextWrapping="Wrap"
+                    Margin="5"
+                    Text="{Binding CustomerSelected.Customer_Details}"
+                    Height="80" >
+
+
+                </TextBox>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock 
+                    DataContext="{StaticResource EditJob}"
+                    Text="Quotation"
+                    Margin="5" 
+                    FontSize="14"/>
+                <TextBox />
+            </DockPanel>
+            <DockPanel>
+                <TextBlock 
+                    DataContext="{StaticResource EditJob}"
+                    Text="Request Start"
+                    Margin="5" 
+                    FontSize="14"/>
+                <dxe:DateEdit x:Name="editorStartDate" DockPanel.Dock="Left" Width="300" Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=Editor_StartDate}}"/>
+                <dxe:TextEdit x:Name="editorStartTime" DockPanel.Dock="Left" Width="300"  Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=Editor_StartTime}}"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock 
+                    DataContext="{StaticResource EditJob}"
+                    Text="Request End"
+                    Margin="5" 
+                    FontSize="14"/>
+                <dxe:DateEdit x:Name="editorEndDate" DockPanel.Dock="Left" Width="300" Margin="5,0,0,0" Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=Editor_EndDate}}"/>
+                <dxe:TextEdit x:Name="editorEndTime" DockPanel.Dock="Left" Width="300" Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=Editor_EndTime}}"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock 
+                    DataContext="{StaticResource EditJob}"
+                    Text="Request End"
+                    Margin="5" 
+                    FontSize="14"/>
+                <dxe:DateEdit Width="300" Margin="5,0,0,0">
                     
-                    Background="#673ab7"
-                    materialDesign:ButtonAssist.CornerRadius="8">
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-
-                            <materialDesign:PackIcon 
-                                HorizontalAlignment="Center"
-                            Kind="CloseCircle"
-                            Height="40"
-                            Width="40"
-                            Foreground="Red"/>
-                            <TextBlock 
-                            Text="Cancel"
-                            FontSize="15"
-                            HorizontalAlignment="Center"
-                            Foreground="Black"/>
-                        </StackPanel>
-
-                    </Button>
-                </Grid>
-                <Grid Margin="10,140,110,30">
-                    <GroupBox Header="Work" FontSize="22">
-                        <ListView>
-
-                        </ListView>
-                    </GroupBox>
-                </Grid>
-            </Grid>
-           
-        </Grid>
-    </Grid>
+                </dxe:DateEdit>
+                <dxe:TextEdit IsEnabled="False"/>
+            </DockPanel>
+        </StackPanel>
+    </DockPanel>
 </dx:ThemedWindow>
 

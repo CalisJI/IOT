@@ -362,7 +362,7 @@
                     materialDesign:ShadowAssist.ShadowDepth="Depth3"
                     Width="120"
                     HorizontalAlignment="Center"
-                    Command="{Binding GotoHome}"
+                    Command="{Binding Home}"
                     Background="#673ab7"
                     materialDesign:ButtonAssist.CornerRadius="8">
                         <StackPanel Orientation="Vertical">

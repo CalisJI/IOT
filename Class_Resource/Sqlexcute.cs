@@ -16,12 +16,12 @@ namespace WPF_TEST.Class_Resource
     public class Sqlexcute
     {
         private static MySqlConnection SQL_Connection;
-        public string pwd { get; set; }
+        public static string pwd { get; set; }
         //public static string pwd = "12345678";
         public string error_message;
         //public static string Server = "127.0.0.1";
-        public string Server { get; set; }
-        public string UId { get; set; }
+        public static string Server { get; set; }
+        public static string UId { get; set; }
         private string Check_Table_Exits(string Db, string TB) 
         {
             string check = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = '"+Db+"' AND table_name = '"+TB+"'";

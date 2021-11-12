@@ -30,6 +30,8 @@
     <viewmodel:AudioManager_ViewModel x:Key="AudioManager"/>
     <viewmodel:VideoManager_ViewModel x:Key="VideoManager"/>
     <viewmodel:DocumentManager_ViewModel x:Key="DocumentManger"/>
+    <viewmodel:FileConnfig_Main_ViewModel x:Key="FileProcess"/>
+    <viewmodel:MenuFileConfig_ViewModel x:Key="menufileconfig"/>
 
 
 

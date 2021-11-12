@@ -96,7 +96,12 @@
             <DataTemplate DataType="{x:Type viewmodels:DocumentManager_ViewModel}">
                 <views:Document_Docx_View/>
             </DataTemplate>
-
+            <DataTemplate DataType="{x:Type viewmodels:FileConnfig_Main_ViewModel}">
+                <views:FileConfig_Main_View/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:ExcelFileConfig_ViewModel}">
+                <views:ExcelFileConfig_View/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -10,9 +10,11 @@ using System.Data;
 using MySql.Data.MySqlClient;
 using WPF_TEST.Notyfication;
 using WPF_TEST.Data;
+using DevExpress.Mvvm.DataAnnotations;
 
 namespace WPF_TEST.ViewModel
 {
+    [POCOViewModel]
     public class EditJobModel:BaseViewModel
     {
         WPFMessageBoxService messageBoxService = new WPFMessageBoxService();
@@ -120,29 +122,57 @@ namespace WPF_TEST.ViewModel
         private DateTime _request_report;
         public DateTime Request_Report { get { return _request_report; } set { SetProperty(ref _request_report, value, nameof(Request_Report)); } }
 
+        private Customer _customerSelected;
+        public Customer CustomerSelected 
+        { get { return _customerSelected; }
+            set 
+            {
+                SetProperty(ref _customerSelected, value, nameof(CustomerSelected));
+            }
+        }
+
+        //public Customer CustomerSelected
+        //{
+        //    get { return _customerSelected; }
+        //    set
+        //    {
+        //        SetProperty(ref _customerSelected, value, nameof(CustomerSelected));
+        //    }
+        //}
         #endregion
         public PlannerModel PlannerModel { get; set; }
         #region Commmand
-        public ICommand Save_EditJob { get; set; }
+        public ICommand Save_EditJob 
+        {
+            get 
+            {
+                return new RelayCommand<object>((p) => { return true; }, (p) =>
+                {
+                    Save_Table();
+                });
+            }
+        }
+        
+        public ICommand SelectToEditcbbox { get; set; }
         private bool load_edit = false;
         #endregion
         public EditJobModel editJobModel;
         private MySqlDataAdapter mySqlDataAdapter;
         private void Add()
         {
-            Works works = new Works();
-            works.WorkOrderName = "Test1";
-            works.Product = "Product1";
-            works.Remark = "Something";
-            works.ImageProduct = @"F:\IMAGE\ELECTRONICS_machine_technology_circuit_electronic_computer_technics_detail_psychedelic_abstract_pattern_6160x4106.jpg";
+            //Works works = new Works();
+            //works.WorkOrderName = "Test1";
+            //works.Product = "Product1";
+            //works.Remark = "Something";
+            //works.ImageProduct = @"F:\IMAGE\ELECTRONICS_machine_technology_circuit_electronic_computer_technics_detail_psychedelic_abstract_pattern_6160x4106.jpg";
 
-            Works works1 = new Works();
-            works1.WorkOrderName = "Test2";
-            works1.Product = "Product2";
-            works1.Remark = "Something2";
-            works1.ImageProduct = @"F:\IMAGE\ELECTRONICS_machine_technology_circuit_electronic_computer_technics_detail_psychedelic_abstract_pattern_6160x4106.jpg";
-            WorksList.Add(works);
-            WorksList.Add(works1);
+            //Works works1 = new Works();
+            //works1.WorkOrderName = "Test2";
+            //works1.Product = "Product2";
+            //works1.Remark = "Something2";
+            //works1.ImageProduct = @"F:\IMAGE\ELECTRONICS_machine_technology_circuit_electronic_computer_technics_detail_psychedelic_abstract_pattern_6160x4106.jpg";
+            //WorksList.Add(works);
+            //WorksList.Add(works1);
         }
         private void Add_Customer() 
         {
@@ -250,11 +280,18 @@ namespace WPF_TEST.ViewModel
                 }
                 
             }
-            Save_EditJob = new RelayCommand<object>((p) => { return true; }, (p) => 
+            //Save_EditJob = new RelayCommand<object>((p) => { return true; }, (p) => 
+            //{
+            //    Save_Table();
+            //});
+            SelectToEditcbbox = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
-                Save_Table();
+                var a = (WPF_TEST.Data.Customer)p;
+                var b = CustomerInfo.Where(cc => cc.Customer_Info == a.Customer_Info).FirstOrDefault();
+                
+                CustomerSelected = b;
+                
             });
-
         }
         public void Save_Table()
         {

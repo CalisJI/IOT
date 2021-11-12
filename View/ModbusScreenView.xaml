@@ -54,7 +54,7 @@
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0" >
             <GroupBox 
-                Margin="30,40,30,10" 
+                Margin="10,40,10,10" 
                 Header="Controller Details"
                 TextBlock.TextAlignment="Center"
                 TextBlock.FontSize="26">
@@ -72,7 +72,7 @@
 
             </GroupBox>
             <GroupBox
-                Margin="30,20,30,0" 
+                Margin="10,20,10,0" 
                 Header="Data Exportation"
                 TextBlock.TextAlignment="Center">
                 <StackPanel Orientation="Vertical">
@@ -290,7 +290,7 @@
             Grid.Row="0"
             Grid.Column="2">
             <GroupBox 
-                Margin="30,40,30,10" 
+                Margin="10,40,10,10" 
                 Header="Modbus Item"
                 TextBlock.TextAlignment="Left"
                 TextBlock.FontSize="26">

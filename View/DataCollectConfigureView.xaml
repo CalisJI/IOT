@@ -99,10 +99,12 @@
                             Width="250" Height="180" 
                             HorizontalAlignment="Center" 
                             VerticalAlignment="Center">
-                        <materialDesign:PackIcon Kind="Ethernet"
-                                                     Width="100" Height="100" 
-                                                     HorizontalAlignment="Center" 
-                                                     Margin="10"/>
+                        <Image
+                            Height="100"
+                            Width="100"
+                            Margin="10"
+                            Source="/ImageSource/Ethernet.png"
+                            Stretch="Fill" />
                         <TextBlock Text="Ethenet/Serial"
                                        HorizontalAlignment="Center" FontSize="20"/>
                     </StackPanel>
@@ -124,10 +126,13 @@
                             Width="250" Height="180" 
                             HorizontalAlignment="Center" 
                             VerticalAlignment="Center">
-                        <materialDesign:PackIcon Kind="CloudDownload"
-                                                     Width="100" Height="100" 
-                                                     HorizontalAlignment="Center" 
-                                                     Margin="10"/>
+                        <Image
+                            Height="100"
+                            Width="100"
+                            Margin="10"
+                            Source="/ImageSource/Modbus.png"
+                            Stretch="Fill" />
+
                         <TextBlock Text="Modbus Connection"
                                        HorizontalAlignment="Center" FontSize="20"/>
                     </StackPanel>
@@ -149,10 +154,12 @@
                             Width="250" Height="180" 
                             HorizontalAlignment="Center" 
                             VerticalAlignment="Center">
-                        <materialDesign:PackIcon Kind="CloudDownload"
-                                                     Width="100" Height="100" 
-                                                     HorizontalAlignment="Center" 
-                                                     Margin="10"/>
+                        <Image
+                            Height="100"
+                            Width="100"
+                            Margin="10"
+                            Source="/ImageSource/WebAPI.png"
+                            Stretch="Fill" />
                         <TextBlock Text="Web API"
                                        HorizontalAlignment="Center" FontSize="20"/>
                     </StackPanel>
@@ -192,7 +199,7 @@
                     Width="1000">
 
             <Grid
-                    Width="250" Height="200"  Margin="85,0,0,0">
+                    Width="250" Height="200"  Margin="220,0,0,0">
                 <Button
                         Style="{StaticResource MaterialDesignRaisedLightButton}"
                         Height="180" Width="250"
@@ -207,10 +214,12 @@
                             Width="250" Height="180" 
                             HorizontalAlignment="Center" 
                             VerticalAlignment="Center">
-                        <materialDesign:PackIcon Kind="FileSend"
-                                                     Width="100" Height="100" 
-                                                     HorizontalAlignment="Center" 
-                                                     Margin="10"/>
+                        <Image
+                            Height="100"
+                            Width="100"
+                            Margin="10"
+                            Source="/ImageSource/FileProcess.png"
+                            Stretch="Fill" />
                         <TextBlock Text="Configure File Processor"
                                        HorizontalAlignment="Center" FontSize="20"/>
                     </StackPanel>
@@ -218,6 +227,31 @@
                 </Button>
             </Grid>
             <Grid
+                    Width="250" Height="200"  Margin="60,0,0,0">
+                <Button
+                        Style="{StaticResource MaterialDesignRaisedLightButton}"
+                        Height="180" Width="250"
+                        materialDesign:ButtonAssist.CornerRadius="5"
+                        ToolTip="MaterialDesignRaisedLightButton with Round Corners"
+                        Background="#673cb2">
+                    <StackPanel 
+                            Orientation="Vertical"
+                            Width="250" Height="180" 
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center">
+                        <Image
+                            Height="100"
+                            Width="100"
+                            Margin="10"
+                            Source="/ImageSource/SensorData.png"
+                            Stretch="Fill" />
+                        <TextBlock Text="Senor Data Collection"
+                                       HorizontalAlignment="Center" FontSize="20"/>
+                    </StackPanel>
+
+                </Button>
+            </Grid>
+            <!--<Grid
                     Width="250" Height="200"  Margin="40,0,0,0">
                 <Button
                         Style="{StaticResource MaterialDesignRaisedLightButton}"
@@ -239,30 +273,7 @@
                     </StackPanel>
 
                 </Button>
-            </Grid>
-            <Grid
-                    Width="250" Height="200"  Margin="40,0,0,0">
-                <Button
-                        Style="{StaticResource MaterialDesignRaisedLightButton}"
-                        Height="180" Width="250"
-                        materialDesign:ButtonAssist.CornerRadius="5"
-                        ToolTip="MaterialDesignRaisedLightButton with Round Corners"
-                        Background="#673cb2">
-                    <StackPanel 
-                            Orientation="Vertical"
-                            Width="250" Height="180" 
-                            HorizontalAlignment="Center" 
-                            VerticalAlignment="Center">
-                        <materialDesign:PackIcon Kind="CloudDownload"
-                                                     Width="100" Height="100" 
-                                                     HorizontalAlignment="Center" 
-                                                     Margin="10"/>
-                        <TextBlock Text="Senor Data Collection"
-                                       HorizontalAlignment="Center" FontSize="20"/>
-                    </StackPanel>
-
-                </Button>
-            </Grid>
+            </Grid>-->
         </StackPanel>
         <Grid
             DataContext="{StaticResource MenuMainAll}"

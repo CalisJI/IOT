@@ -102,11 +102,11 @@ namespace WPF_TEST.ViewModel
                 SelectedJob = Edit_JobItem;
                 this.workflowCreatorModel.SelectedViewModel = EditJobModel; 
             });
-            Schedule = new RelayCommand<object>((p) => { return true; }, (p) => 
-            {
-                SchedulerMain schedulerMain = new SchedulerMain();
-                schedulerMain.ShowDialog();
-            });
+            //Schedule = new RelayCommand<object>((p) => { return true; }, (p) => 
+            //{
+            //    SchedulerMain schedulerMain = new SchedulerMain();
+            //    schedulerMain.ShowDialog();
+            //});
             GotoHome = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
                 
