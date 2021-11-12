@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:viewmodel="clr-namespace:WPF_TEST.ViewModel"                 
-                    xmlns:local="clr-namespace:WPF_TEST">
+                    xmlns:viewmodel="clr-namespace:WPF_TEST.ViewModel"
+                    xmlns:FileConfig ="clr-namespace:WPF_TEST.ViewModel.FileConfig"
+                     xmlns:local="clr-namespace:WPF_TEST">
     <viewmodel:MainMenuModel x:Key="MainVM"/>
     <viewmodel:ConfigurationModel x:Key="CFGMain"/>
     <viewmodel:DataStreamCollectionModel x:Key="DataStr"/>
@@ -32,7 +33,9 @@
     <viewmodel:DocumentManager_ViewModel x:Key="DocumentManger"/>
     <viewmodel:FileConnfig_Main_ViewModel x:Key="FileProcess"/>
     <viewmodel:MenuFileConfig_ViewModel x:Key="menufileconfig"/>
-
-
+    <FileConfig:ExcelFileConfig_ViewModel x:Key="excel"/>
+    <FileConfig:JSONData_ViewModel x:Key="Json"/>
+    <FileConfig:XMLData_ViewModel x:Key="xml"/>
+    <FileConfig:TXTData_ViewModel x:Key="txt"/>
 
 </ResourceDictionary>

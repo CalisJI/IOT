@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="WPF_TEST.View.ExcelFileConfig_View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPF_TEST.View"
+             mc:Ignorable="d" 
+             DataContext="{StaticResource FileProcess}"
+             xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DesignHeight="1000" d:DesignWidth="1920">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid
+                        Margin="0,50,0,0"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Center">
+                <Button
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            Height="80" Width="80"
+                            Command="{Binding Openfolder}"
+                            materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="#FFF08011">
+
+                    <StackPanel Orientation="Vertical" Height="90" Width="90" HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                        <Image Height="40"
+                               HorizontalAlignment="Center"
+                                       Margin="0,10,0,0"
+                                       Width="40"
+                                       Source="pack://application:,,,/ImageSource/Openfolder.png"/>
+                        <TextBlock
+                                    HorizontalAlignment="Center"
+                                    Text="Open"
+                                    FontWeight="Bold"
+                                    Margin="0,5,0,0"
+                                    FontSize="16"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="0.4*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <TextBlock 
+                    FontSize="25"
+                    FontWeight="DemiBold"
+                    Margin="20,10,0,0" 
+                    VerticalAlignment="Top" 
+                    HorizontalAlignment="Left">
+                    <Run Text="Sheet"/>
+                    <Run Text="{Binding ElementName=CbSheet, Path=SelectedIndex}"/>
+                    <Run Text="/"/>
+                    <Run Text="{Binding PageSheet.Count, Mode=OneWay}"/>
+                </TextBlock>
+                <ComboBox 
+                    Name="CbSheet"
+                    ItemsSource="{Binding PageSheet}"
+                Width="350"
+                Height="50"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="250,0,0,0">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding Changedtable}" CommandParameter="{Binding ElementName=CbSheet, Path=SelectedItem}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+                <DataGrid
+                    Grid.Row="0" 
+                    Margin="0,60,0,0"
+                    ItemsSource="{Binding DatatableExcel}">
+
+                </DataGrid>
+            </Grid>
+            <Grid Grid.Row="1">
+
+                <ProgressBar
+                Grid.Row="1"
+                Value="25"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Width="1600"
+                 Margin="20,0,20,0"
+                Height="20">
+
+                </ProgressBar>
+                <TextBlock 
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                   
+                    Text="25%"
+                    FontSize="16" 
+                    FontWeight="DemiBold"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

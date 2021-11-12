@@ -89,6 +89,7 @@
     <Reference Include="DevExpress.Xpf.Themes.Office2007Blue.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Themes.Office2007Silver.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Themes.Office2010Black.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Themes.Office2016Black.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Themes.Office2016BlackSE.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Themes.Office2016Colorful.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Themes.Office2016ColorfulSE.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -351,8 +352,8 @@
     <Compile Include="SerialCommunicate\MessagesViewModel.cs" />
     <Compile Include="SerialCommunicate\PortSettingsViewModel.cs" />
     <Compile Include="SerialCommunicate\SerialPortViewModel.cs" />
-    <Compile Include="ViewModel\AddNewConnectionViewModel.cs" />
-    <Compile Include="ViewModel\AudioManager_ViewModel.cs" />
+    <Compile Include="ViewModel\ModbusConfig\AddNewConnectionViewModel.cs" />
+    <Compile Include="ViewModel\Media\AudioManager_ViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\BusyIndicatorViewModel.cs" />
     <Compile Include="ViewModel\ConfigurationModel.cs" />
@@ -360,41 +361,53 @@
     <Compile Include="ViewModel\Content_Manager_ViewModel.cs" />
     <Compile Include="ViewModel\DataCollectConfigureModel.cs" />
     <Compile Include="ViewModel\DataStreamCollectionModel.cs" />
-    <Compile Include="ViewModel\DocumentManager_ViewModel.cs" />
-    <Compile Include="ViewModel\EditJobModel.cs" />
-    <Compile Include="ViewModel\EditModbusConnectionViewModel.cs" />
-    <Compile Include="ViewModel\EditModbus_TCP_Window_ViewModel.cs" />
-    <Compile Include="ViewModel\EditModbus_Window_ViewModel.cs" />
+    <Compile Include="ViewModel\Media\DocumentManager_ViewModel.cs" />
+    <Compile Include="ViewModel\Workflow\EditJobModel.cs" />
+    <Compile Include="ViewModel\ModbusConfig\EditModbusConnectionViewModel.cs" />
+    <Compile Include="ViewModel\ModbusConfig\EditModbus_TCP_Window_ViewModel.cs" />
+    <Compile Include="ViewModel\ModbusConfig\EditModbus_Window_ViewModel.cs" />
     <Compile Include="ViewModel\Ethenet_SerialModel.cs" />
-    <Compile Include="ViewModel\ExcelFileConfig_ViewModel.cs" />
+    <Compile Include="ViewModel\FileConfig\ExcelFileConfig_ViewModel.cs" />
     <Compile Include="ViewModel\FileConnfig_Main_ViewModel.cs" />
-    <Compile Include="ViewModel\ImageManager_ViewModel.cs" />
+    <Compile Include="ViewModel\Media\ImageManager_ViewModel.cs" />
+    <Compile Include="ViewModel\FileConfig\JSONData_ViewModel.cs" />
     <Compile Include="ViewModel\MainAll_ViewModel.cs" />
     <Compile Include="ViewModel\MainMenuModel.cs" />
     <Compile Include="ViewModel\MainScreenViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\MenuFileConfig_ViewModel.cs" />
-    <Compile Include="ViewModel\ModbusScreenViewModel.cs" />
+    <Compile Include="ViewModel\FileConfig\MenuFileConfig_ViewModel.cs" />
+    <Compile Include="ViewModel\ModbusConfig\ModbusScreenViewModel.cs" />
     <Compile Include="ViewModel\ModbusViewModel.cs" />
-    <Compile Include="ViewModel\Modbus_RTU_Frame_ViewModel.cs" />
-    <Compile Include="ViewModel\Modbus_TCP_IP_Frame_ViewModel.cs" />
+    <Compile Include="ViewModel\ModbusConfig\Modbus_RTU_Frame_ViewModel.cs" />
+    <Compile Include="ViewModel\ModbusConfig\Modbus_TCP_IP_Frame_ViewModel.cs" />
     <Compile Include="ViewModel\OutlookExchangeOptionsWindowViewModel.cs" />
     <Compile Include="ViewModel\OutlookInspiredDemoViewModel.cs" />
-    <Compile Include="ViewModel\PlannerModel.cs" />
-    <Compile Include="ViewModel\RTU_Frame_ViewModel.cs" />
+    <Compile Include="ViewModel\Workflow\PlannerModel.cs" />
+    <Compile Include="ViewModel\ModbusConfig\RTU_Frame_ViewModel.cs" />
     <Compile Include="ViewModel\SchedulerViewModel.cs" />
-    <Compile Include="ViewModel\TCP_IP_Frame_ViewModel.cs" />
+    <Compile Include="ViewModel\ModbusConfig\TCP_IP_Frame_ViewModel.cs" />
+    <Compile Include="ViewModel\FileConfig\TXTData_ViewModel.cs" />
     <Compile Include="ViewModel\ValueDescription.cs" />
-    <Compile Include="ViewModel\VideoManager_ViewModel.cs" />
-    <Compile Include="ViewModel\WorkflowCreatorModel.cs" />
-    <Compile Include="ViewModel\WorkScope_ViewModel.cs" />
-    <Compile Include="View\AddNewConnectionView.xaml.cs">
+    <Compile Include="ViewModel\Media\VideoManager_ViewModel.cs" />
+    <Compile Include="ViewModel\Workflow\WorkflowCreatorModel.cs" />
+    <Compile Include="ViewModel\Workflow\WorkScope_ViewModel.cs" />
+    <Compile Include="ViewModel\FileConfig\XMLData_ViewModel.cs" />
+    <Compile Include="View\FileConfig\ExcelFileConfig_View.xaml.cs">
+      <DependentUpon>ExcelFileConfig_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FileConfig\XMLFileConfig_View.xaml.cs">
+      <DependentUpon>XMLFileConfig_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FileConfig\JSONFileConfig_View.xaml.cs">
+      <DependentUpon>JSONFileConfig_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ModbusConfig\AddNewConnectionView.xaml.cs">
       <DependentUpon>AddNewConnectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AMDashBoardView.xaml.cs">
       <DependentUpon>AMDashBoardView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\AudioManager_View.xaml.cs">
+    <Compile Include="View\Media\AudioManager_View.xaml.cs">
       <DependentUpon>AudioManager_View.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\BusyIndicatorView.xaml.cs">
@@ -403,82 +416,79 @@
     <Compile Include="View\CloudManager_View.xaml.cs">
       <DependentUpon>CloudManager_View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ContentManager_View.xaml.cs">
+    <Compile Include="View\Media\ContentManager_View.xaml.cs">
       <DependentUpon>ContentManager_View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\DataCollectConfigureView.xaml.cs">
+    <Compile Include="View\DataInput\DataCollectConfigureView.xaml.cs">
       <DependentUpon>DataCollectConfigureView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\DocumentManager_View.xaml.cs">
+    <Compile Include="View\Media\DocumentManager_View.xaml.cs">
       <DependentUpon>DocumentManager_View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Document_Docx_View.xaml.cs">
+    <Compile Include="View\Media\Document_Docx_View.xaml.cs">
       <DependentUpon>Document_Docx_View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EditJobModelView.xaml.cs">
+    <Compile Include="View\FileConfig\TXTFileConfig_View.xaml.cs">
+      <DependentUpon>TXTFileConfig_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Workflow\EditJobModelView.xaml.cs">
       <DependentUpon>EditJobModelView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EditModbusView.xaml.cs">
+    <Compile Include="View\ModbusConfig\EditModbusView.xaml.cs">
       <DependentUpon>EditModbusView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EditModbus_Page_View.xaml.cs">
+    <Compile Include="View\ModbusConfig\EditModbus_Page_View.xaml.cs">
       <DependentUpon>EditModbus_Page_View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EditModbus_RTU_Window_View.xaml.cs">
+    <Compile Include="View\ModbusConfig\EditModbus_RTU_Window_View.xaml.cs">
       <DependentUpon>EditModbus_RTU_Window_View.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Ethenet_SerialView.xaml.cs">
       <DependentUpon>Ethenet_SerialView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ExcelFileConfig_View.xaml.cs">
-      <DependentUpon>ExcelFileConfig_View.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\FileConfigurateView.xaml.cs">
-      <DependentUpon>FileConfigurateView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\FileConfig_Main_View.xaml.cs">
+    <Compile Include="View\FileConfig\FileConfig_Main_View.xaml.cs">
       <DependentUpon>FileConfig_Main_View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ImageManager_View.xaml.cs">
+    <Compile Include="View\Media\ImageManager_View.xaml.cs">
       <DependentUpon>ImageManager_View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MainAll_View.xaml.cs">
+    <Compile Include="View\Main\MainAll_View.xaml.cs">
       <DependentUpon>MainAll_View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MainMenuView.xaml.cs">
+    <Compile Include="View\DataInput\MainMenuView.xaml.cs">
       <DependentUpon>MainMenuView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MenuFileConfig_View.xaml.cs">
+    <Compile Include="View\FileConfig\MenuFileConfig_View.xaml.cs">
       <DependentUpon>MenuFileConfig_View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ModbusScreenView.xaml.cs">
+    <Compile Include="View\ModbusConfig\ModbusScreenView.xaml.cs">
       <DependentUpon>ModbusScreenView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ModbusView.xaml.cs">
+    <Compile Include="View\ModbusConfig\ModbusView.xaml.cs">
       <DependentUpon>ModbusView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Modbus_RTU_Frame_View.xaml.cs">
+    <Compile Include="View\ModbusConfig\Modbus_RTU_Frame_View.xaml.cs">
       <DependentUpon>Modbus_RTU_Frame_View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Modbus_TCP_IP_Frame_View.xaml.cs">
+    <Compile Include="View\ModbusConfig\Modbus_TCP_IP_Frame_View.xaml.cs">
       <DependentUpon>Modbus_TCP_IP_Frame_View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PlannerView.xaml.cs">
+    <Compile Include="View\Workflow\PlannerView.xaml.cs">
       <DependentUpon>PlannerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\RTU_Frame_View.xaml.cs">
+    <Compile Include="View\ModbusConfig\RTU_Frame_View.xaml.cs">
       <DependentUpon>RTU_Frame_View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\TCP_IP_Frame_View.xaml.cs">
+    <Compile Include="View\ModbusConfig\TCP_IP_Frame_View.xaml.cs">
       <DependentUpon>TCP_IP_Frame_View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\VideoManager_View.xaml.cs">
+    <Compile Include="View\Media\VideoManager_View.xaml.cs">
       <DependentUpon>VideoManager_View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\WorkFlow_View.xaml.cs">
+    <Compile Include="View\Workflow\WorkFlow_View.xaml.cs">
       <DependentUpon>WorkFlow_View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\WorkScope_View.xaml.cs">
+    <Compile Include="View\Workflow\WorkScope_View.xaml.cs">
       <DependentUpon>WorkScope_View.xaml</DependentUpon>
     </Compile>
     <Compile Include="WorkflowCreator.xaml.cs">
@@ -543,7 +553,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\AddNewConnectionView.xaml">
+    <Page Include="View\FileConfig\ExcelFileConfig_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FileConfig\XMLFileConfig_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FileConfig\JSONFileConfig_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ModbusConfig\AddNewConnectionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -551,7 +573,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\AudioManager_View.xaml">
+    <Page Include="View\Media\AudioManager_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -563,35 +585,39 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ContentManager_View.xaml">
+    <Page Include="View\Media\ContentManager_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\DataCollectConfigureView.xaml">
+    <Page Include="View\DataInput\DataCollectConfigureView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\DocumentManager_View.xaml">
+    <Page Include="View\Media\DocumentManager_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Document_Docx_View.xaml">
+    <Page Include="View\Media\Document_Docx_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EditJobModelView.xaml">
+    <Page Include="View\FileConfig\TXTFileConfig_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EditModbusView.xaml">
+    <Page Include="View\Workflow\EditJobModelView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EditModbus_Page_View.xaml">
+    <Page Include="View\ModbusConfig\EditModbusView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EditModbus_RTU_Window_View.xaml">
+    <Page Include="View\ModbusConfig\EditModbus_Page_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ModbusConfig\EditModbus_RTU_Window_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -599,71 +625,63 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ExcelFileConfig_View.xaml">
+    <Page Include="View\FileConfig\FileConfig_Main_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\FileConfigurateView.xaml">
+    <Page Include="View\Media\ImageManager_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\FileConfig_Main_View.xaml">
+    <Page Include="View\Main\MainAll_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ImageManager_View.xaml">
+    <Page Include="View\DataInput\MainMenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainAll_View.xaml">
+    <Page Include="View\FileConfig\MenuFileConfig_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainMenuView.xaml">
+    <Page Include="View\ModbusConfig\ModbusScreenView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MenuFileConfig_View.xaml">
+    <Page Include="View\ModbusConfig\ModbusView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ModbusScreenView.xaml">
+    <Page Include="View\ModbusConfig\Modbus_RTU_Frame_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ModbusView.xaml">
+    <Page Include="View\ModbusConfig\Modbus_TCP_IP_Frame_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Modbus_RTU_Frame_View.xaml">
+    <Page Include="View\Workflow\PlannerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Modbus_TCP_IP_Frame_View.xaml">
+    <Page Include="View\ModbusConfig\RTU_Frame_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PlannerView.xaml">
+    <Page Include="View\ModbusConfig\TCP_IP_Frame_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\RTU_Frame_View.xaml">
+    <Page Include="View\Media\VideoManager_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\TCP_IP_Frame_View.xaml">
+    <Page Include="View\Workflow\WorkFlow_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\VideoManager_View.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\WorkFlow_View.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\WorkScope_View.xaml">
+    <Page Include="View\Workflow\WorkScope_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -703,7 +721,10 @@
   <ItemGroup>
     <Resource Include="ImageSource\Home.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewModel\Scheduler\" />
+    <Folder Include="View\Scheduler\" />
+  </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
@@ -738,6 +759,13 @@
     <Resource Include="ImageSource\WebAPI.png" />
     <Resource Include="ImageSource\FileProcess.png" />
     <Resource Include="ImageSource\SensorData.png" />
+    <Resource Include="ImageSource\CSV.png" />
+    <Resource Include="ImageSource\Excel.png" />
+    <Resource Include="ImageSource\JSON.png" />
+    <Resource Include="ImageSource\XML.png" />
+    <Resource Include="ImageSource\TXT.png" />
+    <Resource Include="ImageSource\txt1.png" />
+    <Resource Include="ImageSource\Openfolder.png" />
     <Content Include="Images\OutlookInspired\Svg\CalendarGroup.svg" />
     <Content Include="Images\OutlookInspired\Svg\CalendarPermission.svg" />
     <Content Include="Images\OutlookInspired\Svg\Categorize.svg" />

@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:WPF_TEST"
              xmlns:viewmodels="clr-namespace:WPF_TEST.ViewModel"
+             xmlns:viewmodel_FileConfig ="clr-namespace:WPF_TEST.ViewModel.FileConfig"
              xmlns:views="clr-namespace:WPF_TEST.View"
+             
              StartupUri="MainScreenView.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -15,9 +17,6 @@
                 <ResourceDictionary Source="pack://application:,,,/MainResource/MainResource.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MainResource/Ribbon.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MainResource/OutlookInspired.xaml"/>
-
-
-
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewmodels:AMDashBoardModel}">
@@ -99,7 +98,21 @@
             <DataTemplate DataType="{x:Type viewmodels:FileConnfig_Main_ViewModel}">
                 <views:FileConfig_Main_View/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodels:ExcelFileConfig_ViewModel}">
+          
+            <DataTemplate DataType="{x:Type viewmodels:MenuFileConfig_ViewModel}">
+                <views:MenuFileConfig_View/>
+            </DataTemplate>
+          
+            <DataTemplate DataType="{x:Type viewmodel_FileConfig:JSONData_ViewModel}">
+                <views:JSONFileConfig_View/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodel_FileConfig:XMLData_ViewModel}">
+                <views:XMLFileConfig_View/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodel_FileConfig:TXTData_ViewModel}">
+                <views:TXTFileConfig_View/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodel_FileConfig:ExcelFileConfig_ViewModel}">
                 <views:ExcelFileConfig_View/>
             </DataTemplate>
         </ResourceDictionary>

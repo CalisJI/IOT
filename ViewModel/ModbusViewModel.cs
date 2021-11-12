@@ -354,6 +354,8 @@ namespace WPF_TEST.ViewModel
         private string[] ComName;
         iModbus test = new iModbus();
         ModbusDevice test_Connection = new ModbusDevice();
+
+        //MenuFileConfig_ViewModel MenuFileConfig_ViewModel = new MenuFileConfig_ViewModel();
         public ModbusViewModel() 
         {
             if (!_load) 
@@ -373,6 +375,7 @@ namespace WPF_TEST.ViewModel
                 Temp_Test_thread.WorkerReportsProgress = true;
                 modbusViewModel = this;
                 modbusViewModel.SelectedViewModel = ModbusScreenViewModel;
+                //modbusViewModel.SelectedViewModel = MenuFileConfig_ViewModel;
                 _load = true;
                 List_Server = new ObservableCollection<iModbus>();
                 Read01 = new List<bool[]>();
