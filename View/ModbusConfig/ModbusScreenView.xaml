@@ -308,6 +308,7 @@
                 </ListView>
 
             </GroupBox>
+          
         </StackPanel>
         <Grid 
             Grid.Column="1"

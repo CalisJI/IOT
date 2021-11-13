@@ -29,6 +29,8 @@ namespace WPF_TEST.ViewModel
         private BaseViewModel _ChooseTypeModel;
         private BaseViewModel _DisplayType;
         private BaseViewModel _Edit_Type;
+
+      
         public iModbus iModbus = new iModbus();
 
         public static BackgroundWorker Modbus_Service = new BackgroundWorker();
@@ -91,6 +93,16 @@ namespace WPF_TEST.ViewModel
             {
                 SetProperty(ref modbusDevices, value, "ModbusDevices");
             }
+        }
+
+        private string _str;
+        public string Valuestr 
+        {
+
+            get { return _str; }
+            set
+            { SetProperty(ref _str, value, nameof(Valuestr));
+            } 
         }
         #region Model
         /// <summary>
@@ -312,6 +324,9 @@ namespace WPF_TEST.ViewModel
             }
         }
         #endregion
+
+      
+
         public ICommand NewConnect { get; set; }
         public ICommand EditConnect { get; set; }
         public ICommand Save_Edit { get; set; }
@@ -355,7 +370,6 @@ namespace WPF_TEST.ViewModel
         iModbus test = new iModbus();
         ModbusDevice test_Connection = new ModbusDevice();
 
-        //MenuFileConfig_ViewModel MenuFileConfig_ViewModel = new MenuFileConfig_ViewModel();
         public ModbusViewModel() 
         {
             if (!_load) 
@@ -390,8 +404,11 @@ namespace WPF_TEST.ViewModel
                 ModbusDevices = Sqlexcute.Conver_From_Data_Table_To_List<ModbusDevice>(SQLModbus);
                 Get_Thread(ref ComName);
                 GetmodbusTCP();
-                
+
+              
             }
+
+         
             ComportInfo = new PortSettingsViewModel();
             AddNewConnectionViewModel.ModbusDevices = this.modbusDevices;
            
