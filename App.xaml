@@ -28,9 +28,9 @@
             <DataTemplate DataType="{x:Type viewmodels:MainMenuModel}">
                 <views:MainMenu/>
             </DataTemplate>
-            <!--<DataTemplate DataType="{x:Type viewmodels:SchedulerViewModel}">
-                <views:Schedular_View/>
-            </DataTemplate>-->
+            <DataTemplate DataType="{x:Type viewmodels:SchedulerViewModel}">
+                <views:SchedulerMain_View/>
+            </DataTemplate>
             
             <DataTemplate DataType="{x:Type viewmodels:WorkflowCreatorModel}">
                 <views:WorkFlow_View/>
@@ -114,6 +114,15 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodel_FileConfig:ExcelFileConfig_ViewModel}">
                 <views:ExcelFileConfig_View/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:PartSchedulrt_ViewModel}">
+                <views:PartScheduler_View/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:ScheduleListTime_ViewModel}">
+                <views:ScheduleListTime_View/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:AddProjectSchedule_ViewModel}">
+                <views:AddProjectSchedule_View/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

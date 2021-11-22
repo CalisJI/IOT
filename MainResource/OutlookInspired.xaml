@@ -144,10 +144,10 @@
         <dxr:RibbonControl RibbonStyle="Office2010" ApplicationButtonText="File" ApplicationButtonSmallIcon="{x:Null}" AllowDrop="False">
             <dxr:RibbonDefaultPageCategory Style="{DynamicResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Categories_Default}}">
                 <dxr:RibbonPage Style="{DynamicResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Pages_Home}}">
-                    <dxr:RibbonPageGroup Caption="New" Style="{DynamicResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Groups_Home_Appointment}}">
-                        <dxb:BarButtonItem Style="{DynamicResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Items_Home_Appointment_NewAppointment}}" />
-                        <dxb:BarButtonItem Style="{DynamicResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Items_Home_Appointment_NewRecurringAppointment}}" />
-                    </dxr:RibbonPageGroup>
+                    <!--<dxr:RibbonPageGroup Caption="New" Style="{DynamicResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Groups_Home_Appointment}}">
+                        --><!--<dxb:BarButtonItem Style="{DynamicResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Items_Home_Appointment_NewAppointment}}" />-->
+                        <!--<dxb:BarButtonItem Style="{DynamicResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Items_Home_Appointment_NewRecurringAppointment}}" />--><!--
+                    </dxr:RibbonPageGroup>-->
                     <dxr:RibbonPageGroup Caption="Go To">
                         <dxb:BarButtonItem Style="{DynamicResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Items_Home_Navigate_Backward}}" />
                         <dxb:BarButtonItem Style="{DynamicResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Items_Home_Navigate_Forward}}" />
@@ -182,12 +182,12 @@
                     </dxr:RibbonPageGroup>-->
                 </dxr:RibbonPage>
             </dxr:RibbonDefaultPageCategory>
-            <dxr:RibbonPageCategory Style="{DynamicResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Categories_Appointment}}">
-                <dxr:RibbonPage Style="{DynamicResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Pages_Appointment}}">
-                    <dxr:RibbonPageGroup Style="{DynamicResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Groups_Appointment_Actions}}">
+            <!--<dxr:RibbonPageCategory Style="{DynamicResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Categories_Appointment}}">
+                --><!--<dxr:RibbonPage Style="{DynamicResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Pages_Appointment}}">
+                    --><!--<dxr:RibbonPageGroup Style="{DynamicResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Groups_Appointment_Actions}}">
                         <dxb:BarButtonItem Style="{DynamicResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Items_Appointment_Actions_Open}}" />
                         <dxb:BarButtonItem Style="{DynamicResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Items_Appointment_Actions_Delete}}" />
-                    </dxr:RibbonPageGroup>
+                    </dxr:RibbonPageGroup>-->
                     <!--<dxr:RibbonPageGroup Style="{DynamicResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Groups_Appointment_Options}}">
                         <dxb:BarSubItem Style="{StaticResource BarSubItem.ShowAs}" />
                         <dxb:BarSubItem Style="{StaticResource BarSubItem.Reminder}" />
@@ -198,9 +198,9 @@
                         <dxb:BarCheckItem Style="{StaticResource BarCheckItem.Private}"/>
                         <dxb:BarCheckItem Style="{StaticResource BarCheckItem.HighImportance}" />
                         <dxb:BarCheckItem Style="{StaticResource BarCheckItem.LowImportance}" />
-                    </dxr:RibbonPageGroup>-->
-                </dxr:RibbonPage>
-            </dxr:RibbonPageCategory>
+                    </dxr:RibbonPageGroup>--><!--
+                </dxr:RibbonPage>--><!--
+            </dxr:RibbonPageCategory>-->
         </dxr:RibbonControl>
     </DataTemplate>
 

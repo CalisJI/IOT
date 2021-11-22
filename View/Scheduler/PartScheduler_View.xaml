@@ -1,0 +1,358 @@
+﻿<UserControl x:Class="WPF_TEST.View.PartScheduler_View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPF_TEST.View"
+             mc:Ignorable="d" 
+              xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DesignHeight="1080" d:DesignWidth="1920">
+    <Grid Background="AliceBlue">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="6*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <DockPanel DataContext="{StaticResource ScheduleViewModel}">
+                <TextBlock Text="Scheduler For" VerticalAlignment="Center" Margin="30,0,0,0" FontSize="30"  FontWeight="DemiBold"/>
+                <TextBlock VerticalAlignment="Center" Margin="20,0,0,0" FontWeight="Bold">
+                    
+                    <Run Text="Order Name:"/>
+                    <Run Text="{Binding SelectedJob.SaleOrder}" FontWeight="Normal" Foreground="Gray"/>
+
+                </TextBlock>
+                <TextBlock VerticalAlignment="Center" Margin="30,0,0,0" FontWeight="Bold">
+                    
+                    <Run Text="Request Start:"/>
+                    <Run Text="{Binding SelectedJob.Requested_Start, StringFormat='{}{0:dd/MM/yyyy}'}" FontWeight="Normal" Foreground="Gray"/>
+
+                </TextBlock>
+                <TextBlock VerticalAlignment="Center" Margin="30,0,0,0" FontWeight="Bold">
+                    
+                    <Run Text="Request End:"/>
+                    <Run Text="{Binding SelectedJob.Requested_End, StringFormat='{}{0:dd/MM/yyyy}'}" FontWeight="Normal" Foreground="Gray"/>
+
+                </TextBlock>
+                <Button
+                    Margin="60,0,0,0"
+                    Height="20"
+                    Width="20"
+                    Background="Blue"
+                   VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}">
+                    <materialDesign:PackIcon
+                        Kind="InformationVariant"
+                        Foreground="Yellow"
+                        />
+                    <Button.ToolTip>
+                        <ToolTip>
+                            <Grid>
+                                <GroupBox Height="350" Width="800" Header="Order Details" TextBlock.TextAlignment="Center">
+                                    <Grid >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Vertical" Grid.Column="0">
+                                            <TextBlock Margin="10,0,0,0" FontSize="20" FontWeight="DemiBold">
+                                                    <Run Text="Create By:"/>
+                                                    <Run Text="Binding.."/>
+                                            </TextBlock>
+                                            <GroupBox Header="Persional Details">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="0.3*"/>
+                                                        <ColumnDefinition/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image 
+                                                            Height="60"
+                                                            Width="60"
+                                                            Source="pack://application:,,,/ImageSource/User.png"
+                                                            Grid.Column="0" />
+                                                    <StackPanel Orientation="Vertical" Grid.Column="1">
+                                                        <TextBlock Margin="10,5,0,0" HorizontalAlignment="Left" FontWeight="DemiBold"> 
+                                                                <Run Text="Name:" />
+                                                                <Run Text="Binding..."/>
+                                                        </TextBlock>
+                                                        <TextBlock Margin="10,5,0,0" HorizontalAlignment="Left" FontWeight="DemiBold"> 
+                                                                <Run Text="Position:" />
+                                                                <Run Text="Binding..."/>
+                                                        </TextBlock>
+
+                                                    </StackPanel>
+
+                                                </Grid>
+                                            </GroupBox>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" Grid.Column="1">
+                                            <TextBlock Margin="10,0,0,0" FontSize="20" FontWeight="DemiBold">
+                                                    <Run Text="Assigned To:"/>
+                                                    <Run Text="Binding.."/>
+                                            </TextBlock>
+                                            <GroupBox Header="Persional Details">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="0.3*"/>
+                                                        <ColumnDefinition/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image 
+                                                            Height="60"
+                                                            Width="60"
+                                                            Source="pack://application:,,,/ImageSource/User.png"
+                                                            Grid.Column="0" />
+                                                    <StackPanel Orientation="Vertical" Grid.Column="1">
+                                                        <TextBlock Margin="10,5,0,0" HorizontalAlignment="Left" FontWeight="DemiBold"> 
+                                                                <Run Text="Name:" />
+                                                                <Run Text="Binding..."/>
+                                                        </TextBlock>
+                                                        <TextBlock Margin="10,5,0,0" HorizontalAlignment="Left" FontWeight="DemiBold"> 
+                                                                <Run Text="Position:" />
+                                                                <Run Text="Binding..."/>
+                                                        </TextBlock>
+
+                                                    </StackPanel>
+
+                                                </Grid>
+                                            </GroupBox>
+                                        </StackPanel>
+                                    </Grid>
+                                </GroupBox>
+                            </Grid>
+                        </ToolTip>
+                    </Button.ToolTip>
+                </Button>
+            </DockPanel>
+
+        </Grid>
+        <Grid Width="600" HorizontalAlignment="Right">
+            <Button
+                DataContext="{StaticResource ScheduleViewModel}"
+                HorizontalAlignment="Right"
+                Margin="0,0,350,0"
+                BorderBrush="Blue"
+                BorderThickness="2"
+                Command="{Binding Backschedule}"
+                Style="{StaticResource MaterialDesignFlatButton}"
+                Width="200"
+                Height="60"
+                >
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <materialDesign:PackIcon 
+                    Height="40"
+                    Width="40"
+                Kind="ArrowBackCircle"
+                    Foreground="Purple"
+                VerticalAlignment="Center"/>
+                    <TextBlock 
+                    Text="Back"
+                    FontWeight="DemiBold"
+                    VerticalAlignment="Center"
+                    FontSize="30" Margin="10,0,0,0"/>
+                </StackPanel>
+            </Button>
+            <Button
+                DataContext="{StaticResource ScheduleViewModel}"
+                HorizontalAlignment="Right"
+                Margin="0,0,100,0"
+                Command="{Binding ViewSchedule}"
+                BorderBrush="Blue"
+                BorderThickness="2"
+                Style="{StaticResource MaterialDesignFlatButton}"
+                Width="200"
+                Height="60"
+                >
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Image Source="pack://application:,,,/ImageSource/schedule.png" Width="30" Height="30"/>
+                    <TextBlock 
+                    Text="Schedule"
+                    FontWeight="DemiBold"
+                    VerticalAlignment="Center"
+                    FontSize="30" Margin="10,0,0,0"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                    Text="Templates"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Margin="20,20,0,0" Height="20" ></TextBlock>
+                    <ComboBox
+                   
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Stretch"
+                    Margin="20,20,0,0" Height="20" Width="800"></ComboBox>
+                </StackPanel>
+
+                <Expander
+                    HorizontalAlignment="Stretch"
+                    
+                    Header="Templates Details" TextBlock.FontWeight="DemiBold" >
+
+                    <StackPanel
+                        Orientation="Vertical"
+                        TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                        Margin="24,8,24,16">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Name:" Width="100"/>
+                            <TextBlock Margin="20,0,0,0" Text="*Binding----"/>
+                            <TextBlock Text="Created On:" Width="100" Margin="450,0,0,0"/>
+                            <TextBlock Margin="20,0,0,0" Text="*Binding----"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Short Description:" Width="100"/>
+                            <TextBlock Margin="20,0,0,0" Text="*Binding----"/>
+                            <TextBlock Text="Modify On:" Width="100" Margin="450,0,0,0"/>
+                            <TextBlock Margin="20,0,0,0" Text="*Binding----"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock Text="Create By:" Width="100"/>
+                            <TextBlock Margin="20,0,0,0" Text="*Binding----"/>
+
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock Text="Runtime:" Width="100"/>
+                            <TextBlock Margin="20,0,0,0" Text="*Binding----"/>
+
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock Text="Category:" Width="100"/>
+                            <TextBlock Margin="20,0,0,0" Text="*Binding----"/>
+
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+                <Expander
+                    HorizontalAlignment="Stretch"
+                    
+                    Header="Templates Details" TextBlock.FontWeight="DemiBold" >
+
+                    <StackPanel
+                        Orientation="Vertical"
+                        TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                        Margin="24,8,24,16">
+                        <ComboBox Height="30">
+
+                        </ComboBox>
+                        <ScrollViewer Margin="0,20,0,0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+                            <ListView Height="700">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="" Width="120">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <CheckBox>
+
+                                                    </CheckBox>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Name" Width="120">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding}"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Runtime" Width="160">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <ProgressBar Value="{Binding}">
+
+                                                    </ProgressBar>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Persional Requirement" Width="150">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding}"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Qualification Requirement" Width="150">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding}"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Machine Requirement" Width="150">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding}"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Machine Type Requirement" Width="150">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding}"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </ScrollViewer>
+                    </StackPanel>
+                </Expander>
+            </StackPanel>
+            <Grid Grid.Column="1">
+                <Border Margin="6" BorderThickness="2" BorderBrush="Gray">
+
+                    <StackPanel>
+                        <TextBlock Text="Selected Step" Margin="20,10,0,0" FontWeight="DemiBold"/>
+                        <GroupBox Height="150" Header="General Ìnormation">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                <StackPanel>
+
+                                </StackPanel>
+                            </ScrollViewer>
+                        </GroupBox>
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <StackPanel Orientation="Vertical">
+                                <Expander
+                    HorizontalAlignment="Stretch"
+                    
+                    Header="Expander" TextBlock.FontWeight="DemiBold" >
+
+                                    <Image Source="{Binding}" Width="800" Height="750"/>
+                                </Expander>
+                                <Expander
+                    HorizontalAlignment="Stretch"
+                    
+                    Header="Expander" TextBlock.FontWeight="DemiBold" >
+
+                                    <Image Source="{Binding}" Width="800" Height="750"/>
+                                </Expander>
+
+                                <Expander
+                    HorizontalAlignment="Stretch"
+                    
+                    Header="Expander" TextBlock.FontWeight="DemiBold" >
+
+                                    <Image Source="{Binding}" Width="800" Height="750"/>
+                                </Expander>
+                                <Grid>
+
+                                </Grid>
+                            </StackPanel>
+
+                        </ScrollViewer>
+                    </StackPanel>
+
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1005,7 +1005,6 @@ F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\DataInput\DataCollectConfig
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Media\DocumentManager_View.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Media\Document_Docx_View.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\FileConfig\TXTFileConfig_View.g.cs
-F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Workflow\EditJobModelView.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ModbusConfig\EditModbusView.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ModbusConfig\EditModbus_Page_View.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ModbusConfig\EditModbus_RTU_Window_View.g.cs
@@ -1019,7 +1018,6 @@ F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ModbusConfig\ModbusScreenVi
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ModbusConfig\ModbusView.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ModbusConfig\Modbus_RTU_Frame_View.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ModbusConfig\Modbus_TCP_IP_Frame_View.g.cs
-F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Workflow\PlannerView.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ModbusConfig\RTU_Frame_View.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ModbusConfig\TCP_IP_Frame_View.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Media\VideoManager_View.g.cs
@@ -1053,7 +1051,6 @@ F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\DataInput\DataCollectConfig
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Media\DocumentManager_View.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Media\Document_Docx_View.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\FileConfig\TXTFileConfig_View.baml
-F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Workflow\EditJobModelView.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ModbusConfig\EditModbusView.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ModbusConfig\EditModbus_Page_View.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ModbusConfig\EditModbus_RTU_Window_View.baml
@@ -1067,7 +1064,6 @@ F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ModbusConfig\ModbusScreenVi
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ModbusConfig\ModbusView.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ModbusConfig\Modbus_RTU_Frame_View.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ModbusConfig\Modbus_TCP_IP_Frame_View.baml
-F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Workflow\PlannerView.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ModbusConfig\RTU_Frame_View.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ModbusConfig\TCP_IP_Frame_View.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Media\VideoManager_View.baml
@@ -1084,4 +1080,22 @@ F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.exe
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.pdb
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\FileConfig\ExcelFileConfig_View.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\FileConfig\ExcelFileConfig_View.baml
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Scheduler\EditJobModelView.g.cs
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Scheduler\PartScheduler_View.g.cs
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Scheduler\PlannerView.g.cs
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Scheduler\SchedulerMain_View.g.cs
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Scheduler\EditJobModelView.baml
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Scheduler\PartScheduler_View.baml
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Scheduler\PlannerView.baml
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Scheduler\SchedulerMain_View.baml
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\bin\Debug\Newtonsoft.Json.dll
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\bin\Debug\System.Text.Encodings.Web.dll
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\bin\Debug\System.Text.Json.dll
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\bin\Debug\Newtonsoft.Json.xml
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\bin\Debug\System.Text.Encodings.Web.xml
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\bin\Debug\System.Text.Json.xml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.csproj.AssemblyReference.cache
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Scheduler\ScheduleListTime_View.g.cs
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Scheduler\ScheduleListTime_View.baml
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Scheduler\AddProjectSchedule_View.g.cs
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Scheduler\AddProjectSchedule_View.baml

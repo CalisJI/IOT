@@ -307,8 +307,8 @@ namespace WPF_TEST.ViewModel
                 VideoObjects = new ObservableCollection<VideoObject>();
                 DocumentObjects = new ObservableCollection<DocumentObject>();
                 AudioObjects = new ObservableCollection<AudioObject>();
-                AddVideo();
-                AddImage();
+                //AddVideo();
+                //AddImage();
                 Sqlexcute.Server = "112.78.2.9";
                 Sqlexcute.pwd = "Fwd@2021";
                 Sqlexcute.UId = "fwd63823_fwdvina";

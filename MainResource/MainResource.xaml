@@ -37,5 +37,7 @@
     <FileConfig:JSONData_ViewModel x:Key="Json"/>
     <FileConfig:XMLData_ViewModel x:Key="xml"/>
     <FileConfig:TXTData_ViewModel x:Key="txt"/>
+    <viewmodel:Login_ViewModel x:Key="Login"/>
+    <viewmodel:AddProjectSchedule_ViewModel x:Key="AddJobProject"/>
 
 </ResourceDictionary>

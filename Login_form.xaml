@@ -6,11 +6,12 @@
         xmlns:local="clr-namespace:WPF_TEST"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-       
+        
         Title="Login" Height="500" Width="350" 
         ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen" 
         WindowStyle="None" 
+        DataContext="{StaticResource Login}"
         FontFamily="Segoe UI Emoji">
     <Grid>
         <Rectangle Height="280" VerticalAlignment="Top" >
@@ -21,7 +22,7 @@
                     <GradientStop Color="#FF33288B" Offset="0.645"/>
                 </LinearGradientBrush>
             </Rectangle.Fill>
-            
+
         </Rectangle>
         <Rectangle Width="280" Height="240" VerticalAlignment="Bottom" Margin="0,80" RadiusY="12" RadiusX="12" Fill="WhiteSmoke">
             <Rectangle.Effect>
@@ -31,14 +32,48 @@
         <Grid VerticalAlignment="Bottom" Margin="35,80" Height="240">
             <Label Content="LOGIN" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="6" Foreground="DarkGray" FontSize="20"/>
             <StackPanel VerticalAlignment="Center" Margin="15">
-                <TextBox x:Name="tb_user" Margin="0,10" materialDesign:HintAssist.Hint="USER" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp;Limousines" FontSize="18">
-                    
+                <TextBox
+                    x:Name="tb_user"
+                    Margin="0,10"
+                    Text="{Binding UserID}"
+                    materialDesign:HintAssist.Hint="USER"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                    FontFamily="Champagne &amp;Limousines"
+                    FontSize="18">
+
                 </TextBox>
-                <PasswordBox x:Name="pass_box" Margin="0,10" materialDesign:HintAssist.Hint="PASSWORD" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" />
+                <PasswordBox 
+                    x:Name="pass_box" 
+                    Margin="0,10"
+                    PasswordChanged="pass_box_PasswordChanged"
+                   
+                    materialDesign:HintAssist.Hint="PASSWORD" 
+                    Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" 
+                    FontFamily="Champagne &amp;
+                    Limousines" FontSize="18" />
             </StackPanel>
         </Grid>
-        <Button Width="150" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,65" Content="LOGIN"/>
+        <Button 
+            Width="150"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Margin="0,65"
+            Click="Button_Click"
+            Command="{Binding Login}"
+            Content="LOGIN"/>
         <TextBlock Text="FORGOT PASSWORD?" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="30" Foreground="Gray" Cursor="Hand"/>
+        <Button
+            VerticalAlignment="Top"
+            HorizontalAlignment="Right"
+            Height="40"
+            Width="40"
+            Click="Button_Click_1"
+            Style="{StaticResource MaterialDesignIconButton}"
+            ToolTip="Close">
+            <materialDesign:PackIcon
+                Kind="Close" Width="30"
+                Height="30" Foreground="AliceBlue"/>
+        </Button>
     </Grid>
-   
+
 </Window>

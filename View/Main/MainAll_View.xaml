@@ -183,7 +183,7 @@
                                         Height="100"
                                         Width="100"/>
                                     <TextBlock
-                                        Text="Scheduler"
+                                        Text="Content"
                                         Foreground="Black"
                                         HorizontalAlignment="Center"
                                         FontSize="30"/>

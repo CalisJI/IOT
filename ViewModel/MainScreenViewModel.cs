@@ -45,7 +45,7 @@ namespace WPF_TEST.ViewModel
         //DataStreamCollectionModel DataStreamCollectionModel = new DataStreamCollectionModel();
         MainMenuModel MainMenuModel = new MainMenuModel();
         WorkflowCreatorModel WorkflowCreatorModel = new WorkflowCreatorModel();
-        //SchedulerViewModel SchedulerViewModel = new SchedulerViewModel();
+        SchedulerViewModel SchedulerViewModel = new SchedulerViewModel();
         MainAll_ViewModel MainAll_ViewModel = new MainAll_ViewModel();
         DataCollectConfigureModel DataCollectConfigureModel = new DataCollectConfigureModel();
         Ethenet_SerialModel ethenet_SerialModel = new Ethenet_SerialModel();
@@ -87,8 +87,9 @@ namespace WPF_TEST.ViewModel
             });
             Schedular = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                SchedulerMain schedulerMain = new SchedulerMain();
-                schedulerMain.ShowDialog();
+                //SchedulerMain schedulerMain = new SchedulerMain();
+                //schedulerMain.ShowDialog();
+                mainScreenViewModel.SelectedViewModel = SchedulerViewModel;
             });
             Home = new RelayCommand<object>((p) => { return true; }, (p) =>
             {

@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO.Ports;
 using WPF_TEST.ViewModel;
+using System.Security.Cryptography;
 
 namespace WPF_TEST.Class_Resource
 {
@@ -22,6 +23,7 @@ namespace WPF_TEST.Class_Resource
         //public static string Server = "127.0.0.1";
         public static string Server { get; set; }
         public static string UId { get; set; }
+        public static string Database { get { return "fwd63823_database"; } }
         private string Check_Table_Exits(string Db, string TB) 
         {
             string check = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = '"+Db+"' AND table_name = '"+TB+"'";
@@ -38,6 +40,51 @@ namespace WPF_TEST.Class_Resource
             string set = "Server = " + Server + ";Database =" + database + "; UId = " + UId + "; Pwd = " + pwd + "; Pooling = false; Character Set=utf8; SslMode=none";
             return set;
         }
+
+        #region *******************************************PERMISSION*************************************************
+        public string MD5Genrate(string pass) 
+        {
+            string MD5String = string.Empty;
+            byte[] temp = ASCIIEncoding.ASCII.GetBytes(pass);
+            byte[] hasData = new MD5CryptoServiceProvider().ComputeHash(temp);
+            foreach (byte item in hasData)
+            {
+                MD5String += item;
+            }
+            return MD5String;
+        }
+
+        public string getID_user(string userid, string pass)
+        {
+            string ID = "";
+            SQL_Connection = new MySqlConnection(StrCon(Server, pwd));
+            SQL_Connection.Open();
+            try
+            {
+
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM UserAccount WHERE [User] = '" + userid + "' AND Pass = '" + pass + "'", SQL_Connection);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                if (dt != null)
+                {
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        ID = dr["UserID"].ToString();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                error_message = e.Message;
+            }
+            // StrCon.Close();
+            SQL_Connection.Close();
+
+            return ID;
+        }
+
+        #endregion
         public DataTable Get_Database_Name()
         {
             DataTable dt = new DataTable();
@@ -387,6 +434,41 @@ namespace WPF_TEST.Class_Resource
 
            
            
+        }
+        public void Create_JSon_Table(DataTable dataTable, string database, string TableName) 
+        {
+            string cmd;
+            int count = 2;
+            //*****************************************************
+            // Code for processing
+            using (SQL_Connection = new MySqlConnection(StrCon(Server, pwd)))
+            {
+                MySqlCommand command = new MySqlCommand(Check_Table_Exits(database, TableName), SQL_Connection);
+
+                SQL_Connection.Open();
+
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+
+                {
+                    count = reader.GetInt32(0);
+                }
+                SQL_Connection.Close();
+            }
+            if (count == 0)
+            {
+                string sqlsc = string.Empty;
+                sqlsc = "CREATE TABLE " + TableName + " (";
+                for (int i = 0; i < dataTable.Columns.Count; i++)
+                {
+                    sqlsc += "" + dataTable.Columns[i].ColumnName + " ";
+                    sqlsc += "JSON";
+                    sqlsc += ",";
+                }
+                cmd = sqlsc.Substring(0, sqlsc.Length - 1) + ")";
+                var check = SQL_command(cmd, database);
+            }
         }
         public void Update_Table_to_Host(ref MySqlDataAdapter mySqlDataAdapter, DataTable dataTable, string Database,string table_Name) 
         {

@@ -99,6 +99,7 @@ namespace WPF_TEST.ViewModel
             {
                 fileConnfig_Main_ViewModel.SelectedViewModel = XMLData_ViewModel;
             });
+            #region =====================================================Open Excel===================================================================
             Openfolder = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
                 using (OpenFileDialog openFileDialog = new OpenFileDialog() { Filter = "Excel 97-2003 Workbook|*.xls|Excel Workbook|*.xlsx|Excel Comma Seprate|*.csv" })
@@ -126,6 +127,7 @@ namespace WPF_TEST.ViewModel
                 var c = p.ToString();
                 DatatableExcel = ExcelProcess.DataTableCollection[c];
             });
+            #endregion
         }
     }
 }

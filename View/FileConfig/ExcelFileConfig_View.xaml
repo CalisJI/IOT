@@ -85,6 +85,7 @@
                 <ProgressBar
                 Grid.Row="1"
                 Value="25"
+                    Visibility="Hidden"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Width="1600"
@@ -95,7 +96,8 @@
                 <TextBlock 
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                   
+                   Visibility="Hidden"
+                    
                     Text="25%"
                     FontSize="16" 
                     FontWeight="DemiBold"/>

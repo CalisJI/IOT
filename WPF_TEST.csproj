@@ -148,8 +148,8 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=4.1.0.2556, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>packages\MaterialDesignThemes.4.1.0\lib\net452\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Bcl.HashCode.1.1.1\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
@@ -208,6 +208,9 @@
     <Reference Include="MySql.Web, Version=8.0.26.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>packages\MySql.Web.8.0.26\lib\net48\MySql.Web.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="S7.Net, Version=0.13.0.0, Culture=neutral, PublicKeyToken=d5812d469e84c693, processorArchitecture=MSIL">
       <HintPath>packages\S7netplus.0.13.0\lib\net452\S7.Net.dll</HintPath>
     </Reference>
@@ -243,11 +246,17 @@
       <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
     <Reference Include="System.Printing" />
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Text.Encodings.Web, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Encodings.Web.6.0.0\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Json.6.0.0\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
@@ -331,6 +340,7 @@
     <Compile Include="Data\DocumentObject.cs" />
     <Compile Include="Data\ImageObject.cs" />
     <Compile Include="Data\JobOrder.cs" />
+    <Compile Include="Data\UserAccount.cs" />
     <Compile Include="Data\VideoObject.cs" />
     <Compile Include="Data\Works.cs" />
     <Compile Include="FileProcess\ExcelProcess.cs" />
@@ -352,6 +362,7 @@
     <Compile Include="SerialCommunicate\MessagesViewModel.cs" />
     <Compile Include="SerialCommunicate\PortSettingsViewModel.cs" />
     <Compile Include="SerialCommunicate\SerialPortViewModel.cs" />
+    <Compile Include="ViewModel\Login_ViewModel.cs" />
     <Compile Include="ViewModel\ModbusConfig\AddNewConnectionViewModel.cs" />
     <Compile Include="ViewModel\Media\AudioManager_ViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
@@ -362,7 +373,10 @@
     <Compile Include="ViewModel\DataCollectConfigureModel.cs" />
     <Compile Include="ViewModel\DataStreamCollectionModel.cs" />
     <Compile Include="ViewModel\Media\DocumentManager_ViewModel.cs" />
-    <Compile Include="ViewModel\Workflow\EditJobModel.cs" />
+    <Compile Include="ViewModel\Scheduler\AddProjectSchedule_ViewModel.cs" />
+    <Compile Include="ViewModel\Scheduler\PartSchedulrt_ViewModel.cs" />
+    <Compile Include="ViewModel\Scheduler\ScheduleListTime_ViewModel.cs" />
+    <Compile Include="ViewModel\Scheduler\EditJobModel.cs" />
     <Compile Include="ViewModel\ModbusConfig\EditModbusConnectionViewModel.cs" />
     <Compile Include="ViewModel\ModbusConfig\EditModbus_TCP_Window_ViewModel.cs" />
     <Compile Include="ViewModel\ModbusConfig\EditModbus_Window_ViewModel.cs" />
@@ -377,12 +391,12 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\FileConfig\MenuFileConfig_ViewModel.cs" />
     <Compile Include="ViewModel\ModbusConfig\ModbusScreenViewModel.cs" />
-    <Compile Include="ViewModel\ModbusViewModel.cs" />
+    <Compile Include="ViewModel\ModbusConfig\ModbusViewModel.cs" />
     <Compile Include="ViewModel\ModbusConfig\Modbus_RTU_Frame_ViewModel.cs" />
     <Compile Include="ViewModel\ModbusConfig\Modbus_TCP_IP_Frame_ViewModel.cs" />
     <Compile Include="ViewModel\OutlookExchangeOptionsWindowViewModel.cs" />
     <Compile Include="ViewModel\OutlookInspiredDemoViewModel.cs" />
-    <Compile Include="ViewModel\Workflow\PlannerModel.cs" />
+    <Compile Include="ViewModel\Scheduler\PlannerModel.cs" />
     <Compile Include="ViewModel\ModbusConfig\RTU_Frame_ViewModel.cs" />
     <Compile Include="ViewModel\SchedulerViewModel.cs" />
     <Compile Include="ViewModel\ModbusConfig\TCP_IP_Frame_ViewModel.cs" />
@@ -431,7 +445,10 @@
     <Compile Include="View\FileConfig\TXTFileConfig_View.xaml.cs">
       <DependentUpon>TXTFileConfig_View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Workflow\EditJobModelView.xaml.cs">
+    <Compile Include="View\Scheduler\AddProjectSchedule_View.xaml.cs">
+      <DependentUpon>AddProjectSchedule_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Scheduler\EditJobModelView.xaml.cs">
       <DependentUpon>EditJobModelView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ModbusConfig\EditModbusView.xaml.cs">
@@ -473,7 +490,10 @@
     <Compile Include="View\ModbusConfig\Modbus_TCP_IP_Frame_View.xaml.cs">
       <DependentUpon>Modbus_TCP_IP_Frame_View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Workflow\PlannerView.xaml.cs">
+    <Compile Include="View\Scheduler\PartScheduler_View.xaml.cs">
+      <DependentUpon>PartScheduler_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Scheduler\PlannerView.xaml.cs">
       <DependentUpon>PlannerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ModbusConfig\RTU_Frame_View.xaml.cs">
@@ -484,6 +504,12 @@
     </Compile>
     <Compile Include="View\Media\VideoManager_View.xaml.cs">
       <DependentUpon>VideoManager_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Scheduler\ScheduleListTime_View.xaml.cs">
+      <DependentUpon>ScheduleListTime_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Scheduler\SchedulerMain_View.xaml.cs">
+      <DependentUpon>SchedulerMain_View.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Workflow\WorkFlow_View.xaml.cs">
       <DependentUpon>WorkFlow_View.xaml</DependentUpon>
@@ -605,7 +631,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Workflow\EditJobModelView.xaml">
+    <Page Include="View\Scheduler\AddProjectSchedule_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Scheduler\EditJobModelView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -661,7 +691,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Workflow\PlannerView.xaml">
+    <Page Include="View\Scheduler\PartScheduler_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Scheduler\PlannerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -674,6 +708,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Media\VideoManager_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Scheduler\ScheduleListTime_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Scheduler\SchedulerMain_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -721,10 +763,7 @@
   <ItemGroup>
     <Resource Include="ImageSource\Home.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModel\Scheduler\" />
-    <Folder Include="View\Scheduler\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
@@ -766,6 +805,8 @@
     <Resource Include="ImageSource\TXT.png" />
     <Resource Include="ImageSource\txt1.png" />
     <Resource Include="ImageSource\Openfolder.png" />
+    <Resource Include="ImageSource\User.png" />
+    <Resource Include="ImageSource\schedule.png" />
     <Content Include="Images\OutlookInspired\Svg\CalendarGroup.svg" />
     <Content Include="Images\OutlookInspired\Svg\CalendarPermission.svg" />
     <Content Include="Images\OutlookInspired\Svg\Categorize.svg" />
@@ -811,6 +852,8 @@
     <Error Condition="!Exists('packages\MaterialDesignThemes.4.1.0\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\MaterialDesignThemes.4.1.0\build\MaterialDesignThemes.targets'))" />
     <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
     <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('packages\System.Text.Json.6.0.0\build\System.Text.Json.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\System.Text.Json.6.0.0\build\System.Text.Json.targets'))" />
   </Target>
   <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <Import Project="packages\System.Text.Json.6.0.0\build\System.Text.Json.targets" Condition="Exists('packages\System.Text.Json.6.0.0\build\System.Text.Json.targets')" />
 </Project>
