@@ -24,6 +24,7 @@ using WPF_TEST.Data;
 using System.Windows.Input;
 using WPF_TEST.Notyfication;
 using System.Text.Json;
+using WPF_TEST.View;
 
 namespace WPF_TEST.ViewModel
 {
@@ -45,6 +46,10 @@ namespace WPF_TEST.ViewModel
         //public static DataTable JobOrder_Table = new DataTable("Job Information");
         //public static DataTable Customer_Table = new DataTable("Customer_Details");
         //public static DataTable Work_Table = new DataTable("Work Information");
+        #region =================================Data Table ================================
+        DataTable JobOrderRuntime_Table = new DataTable("JobOrderRuntime");
+        #endregion
+
         public ICommand Save_EditJob { get; set; }
        // public ICommand Save_work { get; set; }
 
@@ -86,6 +91,19 @@ namespace WPF_TEST.ViewModel
         public  ObservableCollection<Works> WorksList { get { return _work; } set { SetProperty(ref _work, value, nameof(WorksList)); } }
         public static ObservableCollection<Customer> _customerInfo;
         public  ObservableCollection<Customer> CustomerInfo { get { return _customerInfo; } set { SetProperty(ref _customerInfo, value, nameof(CustomerInfo)); } }
+
+        public static ObservableCollection<JobOrderRuntime> _jobOrderRuntime;
+        public ObservableCollection<JobOrderRuntime> JobOrdersRumtimes
+        {
+            get
+            {
+                return _jobOrderRuntime;
+            }
+            set
+            {
+                SetProperty(ref _jobOrderRuntime, value, nameof(JobOrdersRumtimes));
+            }
+        }
 
         public static ObservableCollection<JobOrder> _jobOrder;
         public  ObservableCollection<JobOrder> JobOrders
@@ -132,7 +150,10 @@ namespace WPF_TEST.ViewModel
         public Status status;
         public Status Status { get { return status; } set { SetProperty(ref status, value, "Status"); } }
         public TaskPriority TaskPriority { get { return taskPriority; } set { SetProperty(ref taskPriority, value, "TaskPriority"); } }
-        
+
+
+        public static BackgroundWorker Runtime = new BackgroundWorker();
+
 
         public static bool load = false;
         //public ObservableCollection<PlannerTask> AssignedTask { get; set; }
@@ -143,23 +164,103 @@ namespace WPF_TEST.ViewModel
             JobOrder jobOrder = new JobOrder();
             JobOrders.Add(jobOrder);
         }
+
+        // thêm runrime thủ công
+        public void adruntime()
+        {
+            foreach (var item in JobOrders)
+            {
+                JobOrderRuntime jobOrderRuntime = new JobOrderRuntime();
+                jobOrderRuntime.OrderName = item.SaleOrder;
+                jobOrderRuntime.ActualvsLife = item.ActualvsPlan;
+                jobOrderRuntime.CurrentStage = item.Stage;
+                jobOrderRuntime.PercentComplete = item.Complete;
+
+                if (JobOrdersRumtimes == null) JobOrdersRumtimes = new ObservableCollection<JobOrderRuntime>();
+                JobOrdersRumtimes.Add(jobOrderRuntime);
+            }
+
+        }
+
+        //Cập nhật giá trị runtime
+        private void updateruntime()
+        {
+            try
+            {
+                JobOrderRuntime_Table = new DataTable("JobOrderRuntime");
+                mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref JobOrderRuntime_Table, JobOrderRuntime_Table.TableName, Sqlexcute.Database);
+                JobOrdersRumtimes = new ObservableCollection<JobOrderRuntime>();
+                JobOrdersRumtimes = Sqlexcute.Conver_From_Data_Table_To_List<JobOrderRuntime>(JobOrderRuntime_Table);
+                if (JobOrdersRumtimes.Count != JobOrders.Count)
+                {
+                    JobOrdersRumtimes = new ObservableCollection<JobOrderRuntime>();
+
+                    adruntime();
+                }
+                else
+                {
+                    foreach (var item in JobOrdersRumtimes)
+                    {
+                        var ss = JobOrders.Where(i => i.SaleOrder == item.OrderName).FirstOrDefault();
+                        if (ss != null)
+                        {
+                            ss.Complete = item.PercentComplete;
+                            ss.ActualvsPlan = item.ActualvsLife;
+                            ss.Stage = item.CurrentStage;
+                            ss.Current_Stage = getColor(item.CurrentStage);
+                        }
+
+                    }
+                }
+               
+                
+                JobOrderRuntime_Table = new DataTable("JobOrderRuntime");
+                JobOrderRuntime_Table = Sqlexcute.FillToDataTable(JobOrdersRumtimes);
+                Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, JobOrderRuntime_Table, Sqlexcute.Database, JobOrderRuntime_Table.TableName);
+                DatatableScheduler = new DataTable("JobOrder");
+                var Json = JsonSerializer.Serialize(JobOrders);
+                ToJson = new ObservableCollection<ConvertoJson>();
+                ToJson.Add(new ConvertoJson { Code = Json });
+                DatatableScheduler = Sqlexcute.FillToDataTable(ToJson);
+                if (ToJson.ElementAt(0).Code != "") 
+                {
+                    Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, DatatableScheduler, "fwd63823_database", "JobOrder");
+                }
+                
+            }
+            catch (Exception ex)
+            {
+
+               
+            }
+           
+        }
+        Thread Thread1 = null;
         public PlannerModel() 
         {
-
+            AddProjectSchedule_ViewModel._jobOrderRuntime = JobOrdersRumtimes;
             if (!load) 
             {
+                Runtime.DoWork += Runtime_DoWork;
+                Runtime.RunWorkerCompleted += Runtime_RunWorkerCompleted;
+                Runtime.WorkerSupportsCancellation = true;
                 //JobOrders = new ObservableCollection<JobOrder>();
                 ////PlannerModel.JobOrders = new ObservableCollection<JobOrder>();
                 //CustomerInfo = new ObservableCollection<Customer>();
                 //WorksList = new ObservableCollection<Works>();
-                //int check = 2;
-                //bool check_ = true;
-                //bool exist_ = true;
+                JobOrdersRumtimes = new ObservableCollection<JobOrderRuntime>();
+                Thread1 = new Thread(updatedata);
+                Thread1.IsBackground = true;
+                int check = 2;
+                bool check_ = true;
+                bool exist_ = true;
                 ToJson = new ObservableCollection<ConvertoJson>();
                 load = true;
                 Sqlexcute.Server = "112.78.2.9";
                 Sqlexcute.pwd = "Fwd@2021";
                 Sqlexcute.UId = "fwd63823_fwdvina";
+                AddProjectSchedule_ViewModel.jobOrders = JobOrders;
+                Sqlexcute.Check_Table(Sqlexcute.Database, JobOrderRuntime_Table.TableName, ref check);
                 //Sqlexcute.Check_Table("fwd63823_database", DatatableScheduler.TableName, ref check);
                 //if (check == 0)
                 //{
@@ -177,45 +278,108 @@ namespace WPF_TEST.ViewModel
                 //    mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref DatatableScheduler, DatatableScheduler.TableName, Sqlexcute.Database);
                 //    JobOrders = Sqlexcute.Conver_From_Data_Table_To_List<JobOrder>(DatatableScheduler);
                 //}
+
+                if (check == 0)
+                {
+                    try
+                    {
+                        adruntime();
+                        JobOrderRuntime_Table = Sqlexcute.FillToDataTable(JobOrdersRumtimes);
+                        Sqlexcute.AutoCreateTable(JobOrderRuntime_Table, Sqlexcute.Database, JobOrderRuntime_Table.TableName, ref check_, ref exist_);
+                        mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref JobOrderRuntime_Table, JobOrderRuntime_Table.TableName, Sqlexcute.Database);
+
+                        JobOrderRuntime_Table = Sqlexcute.FillToDataTable(JobOrdersRumtimes);
+                        Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, JobOrderRuntime_Table, Sqlexcute.Database, JobOrderRuntime_Table.TableName);
+                    }
+                    catch (Exception)
+                    {
+
+                        
+                    }
+                   
+                }
+                else if (check == 1)
+                {
+                    try
+                    {
+                        mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref JobOrderRuntime_Table, JobOrderRuntime_Table.TableName, Sqlexcute.Database);
+                        JobOrdersRumtimes = Sqlexcute.Conver_From_Data_Table_To_List<JobOrderRuntime>(JobOrderRuntime_Table);
+
+                        if (JobOrdersRumtimes.Count != JobOrders.Count)
+                        {
+                            JobOrdersRumtimes = new ObservableCollection<JobOrderRuntime>();
+
+                            adruntime();
+                        }
+                        else
+                        {
+                            foreach (var item in JobOrders)
+                            {
+                                var ss = JobOrdersRumtimes.Where(i => i.OrderName == item.SaleOrder).FirstOrDefault();
+                                ss.ActualvsLife = item.ActualvsPlan;
+                                ss.CurrentStage = item.Stage;
+                                ss.PercentComplete = item.Complete;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+
+                        string aaa = ex.Message;
+                    }
+                   
+                   
+                }
                 var a = JobOrders;
                 GetStage(ref ready, ref done, ref running, ref delayed, ref paused, ref plan, ref queued);
             }
             Save_EditJob = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                Save_Table();
+                Thread thread = new Thread(() => 
+                {
+                    Save_Table();
+                });thread.Start();
+                
             });
+            
+
             DispatcherTimer.Interval = new TimeSpan(0, 0, 5);
             DispatcherTimer.Tick += DispatcherTimer_Tick;
-            DispatcherTimer.Start();
+            if (!DispatcherTimer.IsEnabled) 
+            {
+               DispatcherTimer.IsEnabled = true;
+               DispatcherTimer.Start();
+            }
+            
             //Initialize();
 
         }
+
+        private void Runtime_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+          
+        }
+
+        private void Runtime_DoWork(object sender, DoWorkEventArgs e)
+        {
+            updatedata();
+        }
+
+        private void updatedata() 
+        {
+            GetStage(ref ready, ref done, ref running, ref delayed, ref paused, ref plan, ref queued);
+            updateruntime();
+            
+            
+        }
         public void Save_Table()
         {
-            //DatatableScheduler = new DataTable();
-            //DatatableScheduler = Sqlexcute.FillToDataTable(JobOrders);
-            //bool check = true;
-            //bool exist = false;
-            //Sqlexcute.AutoCreateTable(DatatableScheduler, "fwd63823_database", DatatableScheduler.TableName, ref check, ref exist);
-            //if (!check)
-            //{
-            //    messageBoxService.ShowMessage(Sqlexcute.error_message, "Thông tin lỗi", System.Messaging.MessageType.Report);
-            //}
-            //Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, DatatableScheduler, "fwd63823_database", DatatableScheduler.TableName);
-            //if (Sqlexcute.error_message != string.Empty)
-            //{
-            //    messageBoxService.ShowMessage("Lỗi khi lưu dữ liệu lên đám mây:\n " + Sqlexcute.error_message + "", "Thông tin lỗi", System.Messaging.MessageType.Report);
-            //}
-
-
+           
             DatatableScheduler = new DataTable();
             var Json = JsonSerializer.Serialize(JobOrders);
             try
             {
-                if (ToJson != null || ToJson.Count != 0)
-                {
-                    ToJson.Clear();
-                }
+                ToJson = new ObservableCollection<ConvertoJson>();
                 ToJson.Add(new ConvertoJson { Code = Json });
             }
             catch (Exception)
@@ -228,14 +392,7 @@ namespace WPF_TEST.ViewModel
            
             
             DatatableScheduler = Sqlexcute.FillToDataTable(ToJson);
-            //bool check = true;
-            //bool exist = false;
-            //Sqlexcute.AutoCreateTable(JobOrder_Table, Sqlexcute.Database, "JobOrder", ref check, ref exist);
-            //if (!check)
-            //{
-            //    messageBoxService.ShowMessage(Sqlexcute.error_message, "Thông tin lỗi", System.Messaging.MessageType.Report);
-            //}
-
+        
             Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, DatatableScheduler, "fwd63823_database", "JobOrder");
             if (Sqlexcute.error_message != string.Empty)
             {
@@ -249,7 +406,44 @@ namespace WPF_TEST.ViewModel
         }
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
-            //Initialize();
+            if(MainScreenView.Main_quit) 
+            {
+                DispatcherTimer.Stop();
+                DispatcherTimer.IsEnabled = false;
+            }
+            else 
+            {
+                if (PlannerView.timerStage) 
+                {
+                    try
+                    {
+
+                        ////Dispatcher.CurrentDispatcher.BeginInvoke(new Action(delegate 
+                        ////{
+
+                        ////    updatedata();
+                        ////}));
+                        //Thread thread = new Thread(() =>
+                        //{
+                        //    updatedata();
+                        //}); thread.Start();
+                        //thread.IsBackground = true;
+                        if (!Runtime.IsBusy) 
+                        {
+                            Runtime.RunWorkerAsync();
+                        }
+
+                    }
+                    catch (Exception)
+                    {
+
+
+                    }
+                }
+
+     
+            }
+            
         }
         public static string getColor(Status status) 
         {

@@ -23,16 +23,16 @@ namespace WPF_TEST.View
     /// </summary>
     public partial class PlannerView : UserControl
     {
-        DispatcherTimer timer = new DispatcherTimer();
+        public static DispatcherTimer timer = new DispatcherTimer();
+        public static bool timerStage = false;
         public PlannerView()
         {
             InitializeComponent();
 
-            timer.Interval = new TimeSpan(0, 0, 1);
+            timer.Interval = new TimeSpan(0, 0, 3);
             timer.Tick += Timer_Tick;
-            
-            timer.IsEnabled = true;
-            timer.Start();
+
+
 
         }
         void filter(int stautus) 
@@ -95,6 +95,14 @@ namespace WPF_TEST.View
         {
             timer.Stop();
             timer.IsEnabled = false;
+            timerStage = false;
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            timer.IsEnabled = true;
+            timer.Start();
+            timerStage = true;
         }
     }
 }

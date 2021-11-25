@@ -5,10 +5,40 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF_TEST.View"
              mc:Ignorable="d" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+             xmlns:local1="clr-namespace:WPF_TEST.ViewModel"
              xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              DataContext="{StaticResource AddJobProject}"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
              d:DesignHeight="1080" d:DesignWidth="1920">
+    <UserControl.Resources>
+        <!--<local1:TaskPriorityToIconFilenameConverter x:Key="ImageConvert"/>-->
+        <local1:TaskPriorityToIconFilenameConverter x:Key="ImageConvert"/>
+        <DataTemplate x:Key="Template">
+            <Border Background="Transparent" Height="40" Width="40" HorizontalAlignment="Center">
+                <Image 
+                    Source="{Binding TaskPriority,Converter={StaticResource ImageConvert}}"
+                    Stretch="Fill"
+                    Height="30"
+                    Width="30"
+                    HorizontalAlignment="Center"/>
+            </Border>
+
+        </DataTemplate>
+        <ObjectDataProvider 
+            x:Key="dataFromEnum" 
+            MethodName="GetValues"
+            ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local1:TaskPriority"/>
+            </ObjectDataProvider.MethodParameters>
+            
+        </ObjectDataProvider>
+    </UserControl.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -33,7 +63,7 @@
                            FontWeight="Bold"
                            Margin="50,10,0,0"
                            Foreground="Gray"/>
-                        <TextBox Text="{Binding SelectedJob.SaleOrder}"
+                        <TextBox Text="{Binding SaleOrder}"
                          FontSize="30"
                          Margin="20,0,10,0"
                          Foreground="Gray"
@@ -43,10 +73,37 @@
                     </StackPanel>
                     <Grid>
                         <Border BorderBrush="Black" >
-                            <StackPanel Margin="300,0,20,0">
-                                <GroupBox Header="Customer"
-                                  Background="WhiteSmoke"
-                                  FontSize="22">
+                            <Grid >
+                                <Button 
+                                    DataContext="{StaticResource ScheduleViewModel}"
+                                    Height="100"
+                                    Width="200"
+                                    HorizontalAlignment="Left"
+                                    Margin="20,0,0,0"
+                                    Command="{Binding OpenBarcode}"
+                                    materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                    materialDesign:ButtonAssist.CornerRadius="8"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    BorderBrush="Blue"
+                                    BorderThickness="2">
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Image 
+                                            Source="pack://application:,,,/ImageSource/Barcode.png"
+                                            Stretch="Fill"
+                                            Width="150"
+                                            Height="75"/>
+                                        <TextBlock 
+                                            Foreground="Black"
+                                            Text="Barcode"
+                                            HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                    
+                                </Button>
+                                <GroupBox 
+                                    Header="Customer"
+                                    Margin="250,0,20,0"
+                                    Background="WhiteSmoke"
+                                    FontSize="20">
                                     <StackPanel Orientation="Vertical">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock 
@@ -55,12 +112,13 @@
                                     FontWeight="Bold"
                                     Margin="20,5,0,0"/>
                                             <ComboBox Margin="52,5,10,0"
-                                              Name="Customer_cbb"
+                                              Name="Customeradd_cbb"
                                               
                                           Width="420"
                                           FontSize="20"
-                                          SelectedItem="{Binding SelectedJob.Customer}"
-                                          ItemsSource="{Binding CustomerInfo}">
+                                          SelectedItem="{Binding CustomerName}"
+                                                     
+                                          ItemsSource="{Binding CustomerInfor}">
                                                 <ComboBox.ItemTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Text="{Binding Customer_Info}"/>
@@ -69,8 +127,8 @@
                                                 <i:Interaction.Triggers>
                                                     <i:EventTrigger EventName="SelectionChanged">
                                                         <i:InvokeCommandAction 
-                                                            Command="{Binding ChangeCustomer}"
-                                                            CommandParameter="{Binding ElementName=Customer_cbb, Path=SelectedValue}">
+                                                            Command="{Binding ChooseCustomer}"
+                                                            CommandParameter="{Binding ElementName=Customeradd_cbb, Path=SelectedValue}">
 
                                                         </i:InvokeCommandAction>
                                                     </i:EventTrigger>
@@ -83,13 +141,13 @@
                                         Text="Customer Details"
                                         Margin="20,10,0,0"/>
                                             <TextBox 
-                                        Text="{Binding SelectedJob.Customer_Details}"
-                                        Margin="20,0,0,0"
-                                        TextWrapping="Wrap"
-                                        AcceptsReturn="True"
-                                        VerticalScrollBarVisibility="Auto"
-                                        Width="420"
-                                        Height="170"/>
+                                            Text="{Binding Customer_Infor}"      
+                                            Margin="20,0,0,0"
+                                            TextWrapping="Wrap"
+                                            AcceptsReturn="True"
+                                            VerticalScrollBarVisibility="Auto"
+                                            Width="420"
+                                            Height="120"/>
 
                                         </StackPanel>
                                         <CheckBox Content="Check to change delivery details if different from above"
@@ -98,7 +156,7 @@
                                           Margin="190,0,0,0"/>
                                     </StackPanel>
                                 </GroupBox>
-                            </StackPanel>
+                            </Grid>
                         </Border>
                     </Grid>
                     <Grid Background="White" Margin="0,0,20,0">
@@ -109,29 +167,41 @@
                         <StackPanel Orientation="Vertical" Grid.Column="0">
                             <TextBlock 
                         Text="Quotation #" 
-                        FontSize="22"
+                        FontSize="20"
                         Margin="50,0,0,30"
                         Width="auto"/>
                             <TextBlock 
                         Text="Customer PO #" 
-                        FontSize="22"
+                        FontSize="20"
                         Margin="50,0,0,30"
                         Width="auto"/>
                             <TextBlock 
-                        Text="Requested Start*" 
-                        FontSize="22"
+                        
+                        FontSize="20"
                         Margin="50,0,0,30"
                         Width="auto"
-                        FontWeight="Bold"/>
+                        FontWeight="Bold">
+                                <Run Text="Requested Start*"/>
+                                <Run Text="(mm/dd/yyy)" FontSize="15" FontWeight="Normal"/>
+                            </TextBlock>
+
                             <TextBlock 
-                        Text="Requested End*" 
-                        FontSize="22"
+                        
+                        FontSize="20"
                         Margin="50,0,0,30"
                         Width="auto"
-                        FontWeight="Bold"/>
-                            <TextBlock 
+                        FontWeight="Bold">
+                                <Run Text="Requested End*"/>
+                                <Run Text="(mm/dd/yyy)" FontSize="15" FontWeight="Normal"/>
+                            </TextBlock>
+                            <!--<TextBlock 
                         Text="Requested Report Date*" 
-                        FontSize="22"
+                        FontSize="20"
+                        Margin="50,0,0,30"
+                        Width="auto"/>-->
+                            <TextBlock 
+                        Text="Priority:" 
+                        FontSize="20"
                         Margin="50,0,0,30"
                         Width="auto"/>
                             <TextBlock 
@@ -143,41 +213,118 @@
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Grid.Column="1">
                             <TextBox 
-                        Text="{Binding SelectedJob.Quotation}"
-                        Height="50"
-                        FontSize="25"
-                         Margin="20,0,0,10"/>
+                        Text="{Binding Quotation}"
+                        Height="40"
+                        FontSize="20"
+                         Margin="20,0,0,15"/>
                             <TextBox 
-                        Text="{Binding SelectedJob.Customer_PO}"
-                        Height="50"
+                        Text="{Binding Customer_PO}"
+                        Height="40"
                         FontSize="25"
-                         Margin="20,0,0,10"/>
-                            <DatePicker 
-                        SelectedDate="{Binding SelectedJob.Requested_Start}"
-             
-                        Background="Red"
-                        Height="50"
-                        Text="Demo"
-                        FontSize="25"
-                         Margin="20,0,0,10"/>
-                            <DatePicker 
-                        SelectedDate="{Binding SelectedJob.Requested_End}"
-                        Background="Red"
-                        Height="50"
-                        Text="Demo"
-                        
-                        FontSize="25"
-                         Margin="20,0,0,10"/>
-                            <DatePicker 
+                         Margin="20,0,0,15"/>
+                            <StackPanel
+                                Orientation="Horizontal"
+                                Height="40"
+                                Margin="20,0,0,15">
+                                <DatePicker 
+                                    
+                                    SelectedDate="{Binding Request_Start}"
+                                    
+                                    Background="Red"
+                                    Height="40"
+                                    Width="260"
+                                    FontSize="25"
+                                    />
+                                
+                                <materialDesign:TimePicker 
+                                    Margin="20,0,0,0"
+                                     Height="40"
+                                    Is24Hours="True"
+                                    Width="260"
+                                    FontSize="25"
+                                    SelectedTime="{Binding Request_Start}"/>
+                                <!--<xctk:DateTimePicker
+                                    Margin="20,0,0,0"
+                                    Format="Custom" 
+                                    Height="40"
+                                    Width="260"
+                                    Value="{Binding Request_Start, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                        
+                                    FormatString="HH:mm tt"/>-->
+
+
+                            </StackPanel>
+                            <StackPanel
+                                Orientation="Horizontal"
+                                Height="40"
+                                Margin="20,0,0,15">
+                                <DatePicker 
+                                   
+                                    SelectedDate="{Binding Request_End}"
+                                    
+                                    DisplayDateStart="2020/01/01"
+                                    DisplayDateEnd="2050/01/01"
+                                    IsTodayHighlighted="True"
+                                    Focusable="True"
+                                    
+                                    Background="Red"
+                                    Height="40"
+                                    Width="260"
+                                    FontSize="25"
+                                    >
+                                   
+                                </DatePicker>
+                                <materialDesign:TimePicker 
+                                    Margin="20,0,0,0"
+                                    Height="40"
+                                    Width="260"
+                                    Is24Hours="True"
+                                    FontSize="25"
+                                    UseLayoutRounding="False"
+                                    
+                                    SelectedTime="{Binding Request_End}"/>
+                            </StackPanel>
+                            <!--<DatePicker 
                         SelectedDate="{Binding SelectedJob.Requested_Report_Date}"
                         Background="Red"
-                        Height="50"
+                        Height="40"
                         Text="Demo"
                         FontSize="25"
                          Margin="20,0,0,10"/>
-
-
+                            --><!--<ComboBox 
+                                Height="40"
+                                Margin="20,0,0,10"
+                                ItemsSource="{Binding Source={StaticResource dataFromEnum}}"
+                                >
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate >
+                                        <Image Source="{Binding Source={StaticResource Template}}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                                
+                            </ComboBox>-->
+                            <dxe:ComboBoxEdit 
+                                Grid.Column="1"
+                                ItemsSource="{dxe:EnumItemsSource EnumType=local1:TaskPriority,AllowImages=True}"
+                                ApplyItemTemplateToSelectedItem="True"
+                                IsTextEditable="False"
+                                IsEnabled="True"
+                                Name="cbbPrioriry"
+                                AllowDefaultButton="False"
+                                HorizontalContentAlignment="Stretch"
+                                ItemTemplate="{StaticResource Template}"
+                                Margin="20,0,0,10"
+                                Height="40" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectedIndexChanged">
+                                        <i:InvokeCommandAction 
+                                            Command="{Binding selectpriority}"
+                                            CommandParameter="{Binding ElementName=cbbPrioriry, Path=SelectedItem}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </dxe:ComboBoxEdit>
                         </StackPanel>
+                        
                     </Grid>
                 </StackPanel>
             </ScrollViewer>
@@ -186,27 +333,34 @@
         <Grid Grid.Column="1">
             <Grid>
                 <Button
-                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    DataContext="{StaticResource ScheduleViewModel}"
+                    Style="{StaticResource MaterialDesignFlatButton}"
                     Height="100"
                     materialDesign:ShadowAssist.ShadowDepth="Depth3"
                     Width="250"
+                    BorderBrush="Blue"
+                    BorderThickness="2"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
                     Margin="0,30,70,0"
-                    Command="{Binding WorKScope}"
-                    Background="#673ab7"
+                    Command="{Binding AddworkScope}"
+                    Background="AliceBlue"
                     materialDesign:ButtonAssist.CornerRadius="8">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock 
-                        Text="Work Scope"
+                        Text="Thêm Công Việc"
+                            TextWrapping="Wrap"
+                            Width="150"
+                            TextAlignment="Center"
                         FontSize="25"
-                        Foreground="White"/>
+                        Foreground="Black"/>
                         <materialDesign:PackIcon 
                             Kind="ArrowRight"
                             Height="35"
                             Width="30"
-                            Foreground="White"
-                            Margin="50,0,0,0"/>
+                            VerticalAlignment="Center"
+                            Foreground="Black"
+                            Margin="10,0,0,0"/>
                     </StackPanel>
 
                 </Button>
@@ -215,15 +369,15 @@
                 <Button
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Height="70"
-                    DataContext="{StaticResource Planner}"
+                    DataContext="{StaticResource AddJobProject}"
                     materialDesign:ShadowAssist.ShadowDepth="Depth3"
-                    Width="70"
+                    Width="80"
                     BorderBrush="Blue"
                     BorderThickness="2"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
-                    Margin="0,0,20,30"
-                    Command="{Binding Save_EditJob}"
+                    Margin="0,0,20,150"
+                    Command="{Binding AddJob}"
                     Background="AliceBlue"
                     materialDesign:ButtonAssist.CornerRadius="8">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
@@ -233,7 +387,7 @@
                             Kind="ContentSaveOutline"
                             Height="35"
                             Width="35"
-                            Foreground="CadetBlue"/>
+                            Foreground="RoyalBlue"/>
                         <TextBlock 
                             Text="Save"
                             FontSize="15"
@@ -242,104 +396,46 @@
                     </StackPanel>
 
                 </Button>
+                
                 <Button
-                    Style="{StaticResource MaterialDesignFlatButton}"
-                    Height="70"
-                    DataContext="{StaticResource Planner}"
-                    materialDesign:ShadowAssist.ShadowDepth="Depth3"
-                    Width="70"
-                    BorderBrush="Blue"
-                    BorderThickness="2"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Bottom"
-                    Margin="0,0,20,390"
-                    Command="{Binding Add_Project}"
-                    Background="AliceBlue"
-                    materialDesign:ButtonAssist.CornerRadius="8">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-
-                        <materialDesign:PackIcon 
-                            HorizontalAlignment="Center"
-                            Kind="PlusCircle"
-                            Height="35"
-                            Width="35"
-                            Foreground="LawnGreen"/>
-                        <TextBlock 
-                            Text="Add"
-                            FontSize="15"
-                            HorizontalAlignment="Center"
-                            Foreground="Black"/>
-                    </StackPanel>
-
-                </Button>
-                <Button
+                    DataContext="{StaticResource ScheduleViewModel}"
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Height="70"
                     BorderBrush="Blue"
                     BorderThickness="2"
                     materialDesign:ShadowAssist.ShadowDepth="Depth3"
-                    Width="70"
+                    Width="80"
+                   
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
-                    Margin="0,0,20,270"
+                    Margin="0,0,20,30"
                     Command="{Binding Goback,UpdateSourceTrigger=PropertyChanged}"
                     Background="AliceBlue"
                     materialDesign:ButtonAssist.CornerRadius="8">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
 
                         <materialDesign:PackIcon 
-                            Kind="ArrowLeftCircle"
+                            Kind="CloseCircle"
                             HorizontalAlignment="Center"
                             Height="35"
                             Width="35"
-                            Foreground="Purple"/>
+                            Foreground="Red"/>
                         <TextBlock 
-                            Text="Back"
+                            Text="Cancel"
                             FontSize="15"
                             HorizontalAlignment="Center"
                             Foreground="Black"/>
                     </StackPanel>
 
                 </Button>
-                <Button
-                    Style="{StaticResource MaterialDesignFlatButton}"
-                    Height="70"
-                    materialDesign:ShadowAssist.ShadowDepth="Depth3"
-                    Width="70"
-                    BorderBrush="Blue"
-                    BorderThickness="2"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Bottom"
-                    Margin="0,0,20,150"
-                    Command="{Binding StartSchedule,UpdateSourceTrigger=PropertyChanged}"
-                    Background="AliceBlue"
-                    materialDesign:ButtonAssist.CornerRadius="8">
-                    <StackPanel Orientation="Vertical"
-                               
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center">
-
-                        <materialDesign:PackIcon 
-                            HorizontalAlignment="Center"
-                            Kind="AlarmClock"
-                            Height="35"
-                            Width="35"
-                            Foreground="Green"/>
-                        <TextBlock 
-                            Text="Schedule"
-                            FontSize="15"
-                            HorizontalAlignment="Center"
-                            Foreground="Black"/>
-                    </StackPanel>
-
-                </Button>
+                
             </Grid>
             <Grid Margin="10,140,110,30">
                 <GroupBox Header="Work" FontSize="22">
                     <ListView 
-                       
+                        DataContext="{StaticResource AddJobProject}"
                         ScrollViewer.VerticalScrollBarVisibility="Auto"
-                        ItemsSource="{Binding SelectedJob.Works}">
+                        ItemsSource="{Binding WorksList}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <materialDesign:Card Width="780" Height="160">
@@ -395,7 +491,7 @@
             <Button
                 DataContext="{StaticResource MenuMainAll}"
                 Command="{Binding Home}"
-                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    Style="{StaticResource MaterialDesignFlatButton}"
                     Height="100"
                     materialDesign:ShadowAssist.ShadowDepth="Depth3"
                     Width="250"

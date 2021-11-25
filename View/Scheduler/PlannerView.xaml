@@ -13,18 +13,22 @@
              xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              DataContext="{StaticResource Planner}"
+             Loaded="UserControl_Loaded"
              xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
              d:DesignHeight="1080" d:DesignWidth="1920" Unloaded="UserControl_Unloaded">
 
     <UserControl.Resources>
         <local1:TaskPriorityToIconFilenameConverter x:Key="ImageConvert"/>
+        
         <local1:NameToBackgroundConverter x:Key="ColorConvert"/>
         <DataTemplate x:Key="Template">
-            <Border Background="Transparent">
+            <Border Background="Transparent" Height="40" Width="40" HorizontalAlignment="Center">
                 <Image 
                 Source="{Binding TaskPriority,Converter={StaticResource ImageConvert}}"
-                Stretch="None"
-                
+                Stretch="Fill"
+                Height="30"
+                Width="30"
+                VerticalAlignment="Center"
                 HorizontalAlignment="Center"/>
             </Border>
 
@@ -202,14 +206,14 @@
                                 <dxg:GridColumn
                                 FieldName="SaleOrder" 
                                 Header="Name"
-                                Width="300"
+                                Width="200"
                                 
                                 >
 
                                 </dxg:GridColumn>
                                 <dxg:GridColumn 
                                 Header="Posting Date" 
-                                FieldName="Posting_Date" 
+                                FieldName="Requested_Report_Date" 
                                 
                                 Width="160">
 
@@ -220,7 +224,7 @@
                                 <dxg:GridColumn FieldName="Requested_End" Header="Due Date" Width="200">
 
                                 </dxg:GridColumn>
-                                <dxg:GridColumn FieldName="Priority" Header="Priority" FixedWidth="True" >
+                                <dxg:GridColumn FieldName="Priority" Header="Priority" Width="70" FixedWidth="True" >
                                     <dxg:GridColumn.EditSettings>
 
                                         <dxe:ComboBoxEditSettings ItemsSource="{dxe:EnumItemsSource EnumType=local1:TaskPriority,AllowImages=True}"
@@ -229,14 +233,13 @@
                                                           IsEnabled="False"
                                                           AllowDefaultButton="False"
                                                           HorizontalContentAlignment="Stretch"
-                                                          ItemTemplate="{StaticResource Template}"
-                                                      />
+                                                          ItemTemplate="{StaticResource Template}"/>
 
                                     </dxg:GridColumn.EditSettings>
 
 
                                 </dxg:GridColumn>
-                                <dxg:GridColumn FieldName="ActualvsPlan" Header="Actual vs Plan Lifetime/Days">
+                                <dxg:GridColumn FieldName="ActualvsPlan" Header="Actual vs Plan Lifetime/Days" Width="230">
 
                                 </dxg:GridColumn>
                                 <dxg:GridColumn FieldName="Complete" Header="% Complete">
@@ -281,7 +284,38 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
+                <Grid Grid.Row="3">
+                    <Button
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    Height="80"
+                    DataContext="{StaticResource ScheduleViewModel}"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                    Width="120"
+                    BorderBrush="Blue"
+                    BorderThickness="2"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    
+                    Command="{Binding Add_Project}"
+                    Background="AliceBlue"
+                    materialDesign:ButtonAssist.CornerRadius="8">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
 
+                            <materialDesign:PackIcon 
+                            HorizontalAlignment="Center"
+                            Kind="PlusCircle"
+                            Height="50"
+                            Width="50"
+                            Foreground="LawnGreen"/>
+                            <TextBlock 
+                            Text="Add"
+                            FontSize="16"
+                            HorizontalAlignment="Center"
+                            Foreground="Black"/>
+                        </StackPanel>
+
+                    </Button>
+                </Grid>
                 <Grid 
                   Height="80" 
                   Width="120" 
@@ -289,29 +323,30 @@
                   VerticalAlignment="Center">
                     <Button
                     DataContext="{StaticResource ScheduleViewModel}"
-                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    Style="{StaticResource MaterialDesignFlatButton}"
                     Height="80"
                     materialDesign:ShadowAssist.ShadowDepth="Depth3"
                     Width="120"
                     HorizontalAlignment="Center"
-                   
+                    BorderBrush="Blue"
+                        BorderThickness="2"
                     
                     Command="{Binding GotoEditJob}"
                     CommandParameter="{Binding ElementName=Grid_data, Path=SelectedItem}"
-                    Background="#673ab7"
+                    Background="AliceBlue"
                     materialDesign:ButtonAssist.CornerRadius="8">
                         <StackPanel Orientation="Vertical">
 
                             <materialDesign:PackIcon 
                             Kind="PlaylistEdit"
-                            Height="50"
+                            Height="40"
                             Width="50"
-                            Foreground="White"/>
+                            Foreground="Purple"/>
                             <TextBlock 
                             Text="Edit"
                             FontSize="20"
                             HorizontalAlignment="Center"
-                            Foreground="White"/>
+                            Foreground="Black"/>
                         </StackPanel>
 
                     </Button>
@@ -323,29 +358,30 @@
                   VerticalAlignment="Center">
                     <Button
                     DataContext="{StaticResource ScheduleViewModel}"
-                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    Style="{StaticResource MaterialDesignFlatButton}"
                     Height="80"
                     materialDesign:ShadowAssist.ShadowDepth="Depth3"
                     Width="120"
                     HorizontalAlignment="Center"
-                   
+                    BorderBrush="Blue"
+                        BorderThickness="2"
                     
                     Command="{Binding Schedule}"
-                    Background="#673ab7"
+                    Background="AliceBlue"
                     materialDesign:ButtonAssist.CornerRadius="8">
                         <StackPanel Orientation="Vertical">
 
                             <materialDesign:PackIcon 
                             Kind="CalendarClockOutline"
-                            Height="50"
+                            Height="45"
                             Width="50"
                             HorizontalAlignment="Center"
-                            Foreground="White"/>
+                            Foreground="Green"/>
                             <TextBlock 
                             Text="Schedule"
                             FontSize="20"
                             HorizontalAlignment="Center"
-                            Foreground="White"/>
+                            Foreground="Black"/>
                         </StackPanel>
 
                     </Button>
@@ -357,27 +393,29 @@
                   VerticalAlignment="Center">
                     <Button
                     DataContext="{StaticResource MenuMainAll}"
-                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    Style="{StaticResource MaterialDesignFlatButton}"
                     Height="80"
                     materialDesign:ShadowAssist.ShadowDepth="Depth3"
                     Width="120"
                     HorizontalAlignment="Center"
                     Command="{Binding Home}"
-                    Background="#673ab7"
+                    Background="AliceBlue"
+                        BorderBrush="Blue"
+                        BorderThickness="2"
                     materialDesign:ButtonAssist.CornerRadius="8">
                         <StackPanel Orientation="Vertical">
 
                             <materialDesign:PackIcon 
                             Kind="Home"
-                            Height="50"
+                            Height="40"
                             Width="50"
                             HorizontalAlignment="Center"
-                            Foreground="White"/>
+                            Foreground="DarkCyan"/>
                             <TextBlock 
                             Text="Home"
                             FontSize="20"
                             HorizontalAlignment="Center"
-                            Foreground="White"/>
+                            Foreground="Black"/>
                         </StackPanel>
 
                     </Button>

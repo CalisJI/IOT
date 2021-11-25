@@ -43,8 +43,22 @@ namespace WPF_TEST.ViewModel
         public ICommand WorkScope_Back { get; set; }
         public ICommand SelectedWork { get; set; }
         public ICommand Save_work { get; set; }
+        public ICommand OpenBarCode { get; set; }
+        public ICommand Add_Project { get; set; }
+        public ICommand AddworkScope { get; set; }
 
+        public ICommand SaveNewJob { get; set; }
 
+        public ICommand selectpriority { get; set; }
+
+        public ICommand BackAddJob { get; set; }
+
+        private string _customer_Infor;
+        public string Customer_Infor
+        {
+            get { return _customer_Infor; }
+            set { SetProperty(ref _customer_Infor, value, nameof(Customer_Infor)); }
+        }
 
         private ObservableCollection<Customer> _customerInfo;
         public ObservableCollection<Customer> CustomerInfo { get { return _customerInfo; } set { SetProperty(ref _customerInfo, value, nameof(CustomerInfo)); } }
@@ -69,7 +83,12 @@ namespace WPF_TEST.ViewModel
         { get { return _detail; } set { SetProperty(ref _detail, value, nameof(Details)); } }
         private JobOrder Edit_JobItem;
         private JobOrder _SelectedJob;
-        
+        private Customer _singleCustomer;
+        public Customer SingleCustomer
+        {
+            get { return _singleCustomer; }
+            set { SetProperty(ref _singleCustomer, value, nameof(SingleCustomer)); }
+        }
         private Works _work;
         public Works GetWorks
         {
@@ -120,6 +139,8 @@ namespace WPF_TEST.ViewModel
         ScheduleListTime_ViewModel ScheduleListTime_ViewModel = new ScheduleListTime_ViewModel();
         PlannerModel PlannerModel = new PlannerModel();
         WorkScope_ViewModel WorkScope_ViewModel = new WorkScope_ViewModel();
+        AddProjectSchedule_ViewModel AddProjectSchedule_ViewModel;
+        FrameWorkscope_ViewModel FrameWorkscope_ViewModel = new FrameWorkscope_ViewModel();
         public ICommand SaveCommand
         {
             get
@@ -171,6 +192,52 @@ namespace WPF_TEST.ViewModel
             //    aa = GetWorks;
 
             //});
+            selectpriority = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                try
+                {
+
+                    string bb = p.ToString();
+                    switch (bb)
+                    {
+                        case "High":
+                            SelectedJob.Priority = TaskPriority.High;
+                            break;
+                        case "Urgent":
+                            SelectedJob.Priority = TaskPriority.Urgent;
+                            break;
+                        case "Low":
+                            SelectedJob.Priority = TaskPriority.Low;
+                            break;
+                        case "Normal":
+                            SelectedJob.Priority = TaskPriority.Normal;
+                            break;
+
+                    }
+                }
+                catch (Exception)
+                {
+
+
+                }
+            });
+            SaveNewJob = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                
+            });
+            Add_Project = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                AddProjectSchedule_ViewModel = new AddProjectSchedule_ViewModel();
+                schedulerViewModel.SelectedViewModel = AddProjectSchedule_ViewModel;
+            });
+            BackAddJob = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                schedulerViewModel.SelectedViewModel = AddProjectSchedule_ViewModel;
+            });
+            OpenBarCode = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                
+            });
             SelectedWork = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
                 var aa = SelectedJob.Works.Where(s => s == (Works)p).FirstOrDefault();
@@ -193,16 +260,25 @@ namespace WPF_TEST.ViewModel
             });
             WorKScope = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                if (SelectedJob.Works.Count == 1) 
+                try
                 {
-                    GetWorks = SelectedJob.Works.ElementAt(0);
+                    if (SelectedJob.Works.Count == 1)
+                    {
+                        GetWorks = SelectedJob.Works.ElementAt(0);
+                    }
+                    schedulerViewModel.SelectedViewModel = WorkScope_ViewModel;
                 }
-                schedulerViewModel.SelectedViewModel = WorkScope_ViewModel;
+                catch (Exception)
+                {
+
+                    schedulerViewModel.SelectedViewModel = WorkScope_ViewModel;
+                }
+             
                 
             });
             Goback = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                this.schedulerViewModel.SelectedViewModel = PlannerModel;
+                schedulerViewModel.SelectedViewModel = PlannerModel;
             });
             Save = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
@@ -219,7 +295,7 @@ namespace WPF_TEST.ViewModel
                     Edit_JobItem = (JobOrder)p;
                     var dd = JobOrders.Where(x => x == Edit_JobItem).FirstOrDefault();
                     SelectedJob = Edit_JobItem;
-                    this.schedulerViewModel.SelectedViewModel = EditJobModel;
+                    schedulerViewModel.SelectedViewModel = EditJobModel;
                 }
                 catch (Exception )
                 {
@@ -246,6 +322,8 @@ namespace WPF_TEST.ViewModel
                 try
                 {
                     var d = (Customer)p;
+                    SingleCustomer = d;
+                    Customer_Infor = d.Customer_Details;
                 }
                 catch (Exception)
                 {
@@ -259,7 +337,10 @@ namespace WPF_TEST.ViewModel
              {
                  schedulerViewModel.SelectedViewModel = PartSchedulrt_ViewModel;
              });
-            
+            AddworkScope = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                schedulerViewModel.SelectedViewModel = FrameWorkscope_ViewModel;
+            });
 
         }
         

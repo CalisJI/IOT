@@ -32,9 +32,9 @@
                 <views:SchedulerMain_View/>
             </DataTemplate>
             
-            <DataTemplate DataType="{x:Type viewmodels:WorkflowCreatorModel}">
+            <!--<DataTemplate DataType="{x:Type viewmodels:WorkflowCreatorModel}">
                 <views:WorkFlow_View/>
-            </DataTemplate>
+            </DataTemplate>-->
             <DataTemplate DataType="{x:Type viewmodels:Ethenet_SerialModel}">
                 <views:Ethenet_Serial/>
             </DataTemplate>
@@ -123,6 +123,12 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:AddProjectSchedule_ViewModel}">
                 <views:AddProjectSchedule_View/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:FrameWorkscope_ViewModel}">
+                <views:FrameAddWork_View/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:loading_ViewModel}">
+                <views:loading_view/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

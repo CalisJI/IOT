@@ -13,5 +13,6 @@ namespace WPF_TEST.Data
         public string Product { get; set; }
         public string Remark { get; set; }
         public string ImageProduct { get; set; }
+        public bool Selected { get; set; }
     }
 }

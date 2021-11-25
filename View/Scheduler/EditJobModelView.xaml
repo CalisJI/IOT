@@ -5,10 +5,37 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF_TEST.View"
              mc:Ignorable="d" 
-              xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
+              xmlns:local1="clr-namespace:WPF_TEST.ViewModel"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
              DataContext="{StaticResource ScheduleViewModel}"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="1080" d:DesignWidth="1920">
+    <UserControl.Resources>
+        <!--<local1:TaskPriorityToIconFilenameConverter x:Key="ImageConvert"/>-->
+        <local1:TaskPriorityToIconFilenameConverter x:Key="ImageConvert"/>
+        <DataTemplate x:Key="Template">
+            <Border Background="Transparent" Height="40" Width="40" HorizontalAlignment="Center">
+                <Image 
+                    Source="{Binding TaskPriority,Converter={StaticResource ImageConvert}}"
+                    Stretch="Fill"
+                    Height="30"
+                    Width="30"
+                    HorizontalAlignment="Center"/>
+            </Border>
+
+        </DataTemplate>
+        <ObjectDataProvider 
+            x:Key="dataFromEnum" 
+            MethodName="GetValues"
+            ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local1:TaskPriority"/>
+            </ObjectDataProvider.MethodParameters>
+
+        </ObjectDataProvider>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -26,7 +53,7 @@
                    Foreground="Gray"
                    Margin="50,30,0,30"/>
             <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
-                <StackPanel Orientation="Vertical" Height="700">
+                <StackPanel Orientation="Vertical" Height="800">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Sales Order #*"
                            FontSize="22"
@@ -50,17 +77,16 @@
                                     <StackPanel Orientation="Vertical">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock 
-                                    Text="Custommer*"
-                                    Foreground="Black"
-                                    FontWeight="Bold"
-                                    Margin="20,5,0,0"/>
+                                                Text="Custommer*"
+                                                Foreground="Black"
+                                                FontWeight="Bold"
+                                                Margin="20,5,0,0"/>
                                             <ComboBox Margin="52,5,10,0"
-                                              Name="Customer_cbb"
-                                              
-                                          Width="420"
-                                          FontSize="20"
-                                          SelectedItem="{Binding SelectedJob.Customer}"
-                                          ItemsSource="{Binding CustomerInfo}">
+                                                Name="Customer_cbb"
+                                                Width="420"
+                                                FontSize="20"
+                                                ItemsSource="{Binding CustomerInfo}"
+                                                SelectedItem="{Binding SelectedJob.Customerinformation}">
                                                 <ComboBox.ItemTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Text="{Binding Customer_Info}"/>
@@ -70,7 +96,7 @@
                                                     <i:EventTrigger EventName="SelectionChanged">
                                                         <i:InvokeCommandAction 
                                                             Command="{Binding ChangeCustomer}"
-                                                            CommandParameter="{Binding ElementName=Customer_cbb, Path=SelectedValue}">
+                                                            CommandParameter="{Binding ElementName=Customer_cbb, Path=SelectedItem}">
                                                             
                                                         </i:InvokeCommandAction>
                                                     </i:EventTrigger>
@@ -83,7 +109,7 @@
                                         Text="Customer Details"
                                         Margin="20,10,0,0"/>
                                             <TextBox 
-                                        Text="{Binding SelectedJob.Customer_Details}"
+                                        Text="{Binding SingleCustomer.Customer_Details}"
                                         Margin="20,0,0,0"
                                         TextWrapping="Wrap"
                                         AcceptsReturn="True"
@@ -118,19 +144,31 @@
                         Margin="50,0,0,30"
                         Width="auto"/>
                             <TextBlock 
-                        Text="Requested Start*" 
+                        
                         FontSize="22"
                         Margin="50,0,0,30"
                         Width="auto"
-                        FontWeight="Bold"/>
+                        FontWeight="Bold">
+                                <Run Text="Requested Start*"/>
+                                <Run Text="(mm/dd/yyy)" FontSize="15" FontWeight="Normal"/>
+                            </TextBlock>
                             <TextBlock 
-                        Text="Requested End*" 
+                        
                         FontSize="22"
                         Margin="50,0,0,30"
                         Width="auto"
-                        FontWeight="Bold"/>
+                        FontWeight="Bold">
+                                <Run Text="Requested End*"/>
+                                <Run Text="(mm/dd/yyy)" FontSize="15" FontWeight="Normal"/>
+                            </TextBlock>
+                           
                             <TextBlock 
                         Text="Requested Report Date*" 
+                        FontSize="22"
+                        Margin="50,0,0,30"
+                        Width="auto"/>
+                            <TextBlock 
+                        Text="Priority:" 
                         FontSize="22"
                         Margin="50,0,0,30"
                         Width="auto"/>
@@ -152,7 +190,97 @@
                         Height="50"
                         FontSize="25"
                          Margin="20,0,0,10"/>
-                            <DatePicker 
+                            <StackPanel
+                                Orientation="Horizontal"
+                                Height="40"
+                                Margin="20,0,0,15">
+                                <DatePicker 
+                                    Name="Start_Piker"
+                                    SelectedDate="{Binding SelectedJob.Requested_Start}"
+                                    DisplayDateStart="01/01/2019"
+                                    Background="Red"
+                                    Height="40"
+                                    Width="260"
+                                    FontSize="25"
+                                    />
+                                <materialDesign:TimePicker 
+                                    Margin="20,0,0,0"
+                                     Height="40"
+                                    Is24Hours="True"
+                                    Width="260"
+                                    FontSize="25"
+                                    SelectedTime="{Binding SelectedJob.Requested_Start}"/>
+                            </StackPanel>
+                            <StackPanel
+                                Orientation="Horizontal"
+                                Height="40"
+                                Margin="20,0,0,15">
+                                <DatePicker 
+                                   
+                                    SelectedDate="{Binding SelectedJob.Requested_End}"
+                                    DisplayDateStart="01/01/2019"
+                                    
+                                    Background="Red"
+                                    Height="40"
+                                    Width="260"
+                                    FontSize="25"
+                                    >
+
+                                </DatePicker>
+                                <materialDesign:TimePicker 
+                                    Margin="20,0,0,0"
+                                     Height="40"
+                                    Width="260"
+                                    Is24Hours="True"
+                                    FontSize="25"
+                                    SelectedTime="{Binding SelectedJob.Requested_End}"/>
+                            </StackPanel>
+                            <StackPanel
+                                Orientation="Horizontal"
+                                Height="40"
+                                Margin="20,0,0,15">
+                                <DatePicker 
+                                   
+                                    SelectedDate="{Binding SelectedJob.Requested_Report_Date}"
+                                    DisplayDateStart="01/01/2019"
+                                    
+                                    Background="Red"
+                                    Height="40"
+                                    Width="260"
+                                    FontSize="25"
+                                    >
+
+                                </DatePicker>
+                                <materialDesign:TimePicker 
+                                    Margin="20,0,0,0"
+                                     Height="40"
+                                    Width="260"
+                                    Is24Hours="True"
+                                    FontSize="25"
+                                    SelectedTime="{Binding SelectedJob.Requested_Report_Date}"/>
+                            
+                            </StackPanel>
+                            <dxe:ComboBoxEdit 
+                                Grid.Column="1"
+                                ItemsSource="{dxe:EnumItemsSource EnumType=local1:TaskPriority,AllowImages=True}"
+                                ApplyItemTemplateToSelectedItem="True"
+                                IsTextEditable="False"
+                                IsEnabled="True"
+                                Name="cbbPrioriry"
+                                AllowDefaultButton="False"
+                                HorizontalContentAlignment="Stretch"
+                                ItemTemplate="{StaticResource Template}"
+                                Margin="20,0,0,10"
+                                Height="40" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectedIndexChanged">
+                                        <i:InvokeCommandAction 
+                                            Command="{Binding selectpriority}"
+                                            CommandParameter="{Binding ElementName=cbbPrioriry, Path=SelectedItem}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </dxe:ComboBoxEdit>
+                            <!--<DatePicker 
                         SelectedDate="{Binding SelectedJob.Requested_Start}"
              
                         Background="Red"
@@ -167,14 +295,19 @@
                         Text="Demo"
                         
                         FontSize="25"
-                         Margin="20,0,0,10"/>
-                            <DatePicker 
-                        SelectedDate="{Binding SelectedJob.Requested_Report_Date}"
-                        Background="Red"
-                        Height="50"
-                        Text="Demo"
-                        FontSize="25"
-                         Margin="20,0,0,10"/>
+                         Margin="20,0,0,10"/>-->
+                            <!--<dxe:ComboBoxEdit 
+                                Grid.Column="1"
+                                ItemsSource="{dxe:EnumItemsSource EnumType=local1:TaskPriority,AllowImages=True}"
+                                ApplyItemTemplateToSelectedItem="True"
+                                IsTextEditable="False"
+                                IsEnabled="True"
+                                SelectedItem="{Binding SelectedJob.Priority}"
+                                AllowDefaultButton="False"
+                                HorizontalContentAlignment="Stretch"
+                                ItemTemplate="{StaticResource Template}"
+                                Margin="20,0,0,10"
+                                Height="40" />-->
 
 
                         </StackPanel>
@@ -242,36 +375,7 @@
                     </StackPanel>
 
                 </Button>
-                <Button
-                    Style="{StaticResource MaterialDesignFlatButton}"
-                    Height="70"
-                    DataContext="{StaticResource Planner}"
-                    materialDesign:ShadowAssist.ShadowDepth="Depth3"
-                    Width="70"
-                    BorderBrush="Blue"
-                    BorderThickness="2"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Bottom"
-                    Margin="0,0,20,390"
-                    Command="{Binding Add_Project}"
-                    Background="AliceBlue"
-                    materialDesign:ButtonAssist.CornerRadius="8">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-
-                        <materialDesign:PackIcon 
-                            HorizontalAlignment="Center"
-                            Kind="PlusCircle"
-                            Height="35"
-                            Width="35"
-                            Foreground="LawnGreen"/>
-                        <TextBlock 
-                            Text="Add"
-                            FontSize="15"
-                            HorizontalAlignment="Center"
-                            Foreground="Black"/>
-                    </StackPanel>
-
-                </Button>
+                
                 <Button
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Height="70"

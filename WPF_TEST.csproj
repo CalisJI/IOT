@@ -95,6 +95,7 @@
     <Reference Include="DevExpress.Xpf.Themes.Office2016ColorfulSE.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Themes.Office2016DarkGraySE.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Themes.Office2016White.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Themes.Office2019Colorful.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraBars.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraCharts.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraGauges.v19.2.Core, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -309,6 +310,24 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=4.1.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>packages\Extended.Wpf.Toolkit.4.1.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=4.1.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>packages\Extended.Wpf.Toolkit.4.1.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=4.1.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>packages\Extended.Wpf.Toolkit.4.1.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=4.1.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>packages\Extended.Wpf.Toolkit.4.1.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Samples.SampleData">
+      <HintPath>..\wpftoolkit-master\wpftoolkit-master\ExtendedWPFToolkitSolution\Libs\Xceed.Wpf.Samples.SampleData.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=4.1.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>packages\Extended.Wpf.Toolkit.4.1.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
     <Reference Include="Zstandard.Net, Version=1.1.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>packages\MySql.Data.8.0.26\lib\net48\Zstandard.Net.dll</HintPath>
     </Reference>
@@ -340,10 +359,14 @@
     <Compile Include="Data\DocumentObject.cs" />
     <Compile Include="Data\ImageObject.cs" />
     <Compile Include="Data\JobOrder.cs" />
+    <Compile Include="Data\JobOrderRuntime.cs" />
     <Compile Include="Data\UserAccount.cs" />
     <Compile Include="Data\VideoObject.cs" />
     <Compile Include="Data\Works.cs" />
     <Compile Include="FileProcess\ExcelProcess.cs" />
+    <Compile Include="Loading.xaml.cs">
+      <DependentUpon>Loading.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainScreenView.xaml.cs">
       <DependentUpon>MainScreenView.xaml</DependentUpon>
     </Compile>
@@ -362,6 +385,7 @@
     <Compile Include="SerialCommunicate\MessagesViewModel.cs" />
     <Compile Include="SerialCommunicate\PortSettingsViewModel.cs" />
     <Compile Include="SerialCommunicate\SerialPortViewModel.cs" />
+    <Compile Include="ViewModel\loading_ViewModel.cs" />
     <Compile Include="ViewModel\Login_ViewModel.cs" />
     <Compile Include="ViewModel\ModbusConfig\AddNewConnectionViewModel.cs" />
     <Compile Include="ViewModel\Media\AudioManager_ViewModel.cs" />
@@ -374,6 +398,7 @@
     <Compile Include="ViewModel\DataStreamCollectionModel.cs" />
     <Compile Include="ViewModel\Media\DocumentManager_ViewModel.cs" />
     <Compile Include="ViewModel\Scheduler\AddProjectSchedule_ViewModel.cs" />
+    <Compile Include="ViewModel\Scheduler\FrameWorkscope_ViewModel.cs" />
     <Compile Include="ViewModel\Scheduler\PartSchedulrt_ViewModel.cs" />
     <Compile Include="ViewModel\Scheduler\ScheduleListTime_ViewModel.cs" />
     <Compile Include="ViewModel\Scheduler\EditJobModel.cs" />
@@ -414,6 +439,9 @@
     </Compile>
     <Compile Include="View\FileConfig\JSONFileConfig_View.xaml.cs">
       <DependentUpon>JSONFileConfig_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\loading_view.xaml.cs">
+      <DependentUpon>loading_view.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ModbusConfig\AddNewConnectionView.xaml.cs">
       <DependentUpon>AddNewConnectionView.xaml</DependentUpon>
@@ -490,6 +518,9 @@
     <Compile Include="View\ModbusConfig\Modbus_TCP_IP_Frame_View.xaml.cs">
       <DependentUpon>Modbus_TCP_IP_Frame_View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Scheduler\FrameAddWork_View.xaml.cs">
+      <DependentUpon>FrameAddWork_View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Scheduler\PartScheduler_View.xaml.cs">
       <DependentUpon>PartScheduler_View.xaml</DependentUpon>
     </Compile>
@@ -511,10 +542,7 @@
     <Compile Include="View\Scheduler\SchedulerMain_View.xaml.cs">
       <DependentUpon>SchedulerMain_View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Workflow\WorkFlow_View.xaml.cs">
-      <DependentUpon>WorkFlow_View.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Workflow\WorkScope_View.xaml.cs">
+    <Compile Include="View\Scheduler\WorkScope_View.xaml.cs">
       <DependentUpon>WorkScope_View.xaml</DependentUpon>
     </Compile>
     <Compile Include="WorkflowCreator.xaml.cs">
@@ -533,6 +561,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DataStreamCollection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Loading.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -588,6 +620,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FileConfig\JSONFileConfig_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\loading_view.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -691,6 +727,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Scheduler\FrameAddWork_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Scheduler\PartScheduler_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -719,11 +759,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Workflow\WorkFlow_View.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Workflow\WorkScope_View.xaml">
+    <Page Include="View\Scheduler\WorkScope_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -763,7 +799,9 @@
   <ItemGroup>
     <Resource Include="ImageSource\Home.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="View\Workflow\" />
+  </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
@@ -807,6 +845,7 @@
     <Resource Include="ImageSource\Openfolder.png" />
     <Resource Include="ImageSource\User.png" />
     <Resource Include="ImageSource\schedule.png" />
+    <Resource Include="ImageSource\Barcode.png" />
     <Content Include="Images\OutlookInspired\Svg\CalendarGroup.svg" />
     <Content Include="Images\OutlookInspired\Svg\CalendarPermission.svg" />
     <Content Include="Images\OutlookInspired\Svg\Categorize.svg" />

@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
+using WPF_TEST.View;
 
 namespace WPF_TEST.ViewModel
 {
     public class MainScreenViewModel: BaseViewModel
     {
         private BaseViewModel _selectedViewModel;
+        private UserControl loading_view;
+
         public BaseViewModel SelectedViewModel
         {
             get { return _selectedViewModel; }
@@ -41,16 +46,16 @@ namespace WPF_TEST.ViewModel
         public ICommand Main_menu { get; set; }
         public ICommand Media { get; set; }
 
-        FileConnfig_Main_ViewModel FileConnfig_Main_ViewModel = new FileConnfig_Main_ViewModel();
+        static FileConnfig_Main_ViewModel FileConnfig_Main_ViewModel = new FileConnfig_Main_ViewModel();
         //DataStreamCollectionModel DataStreamCollectionModel = new DataStreamCollectionModel();
-        MainMenuModel MainMenuModel = new MainMenuModel();
+        static MainMenuModel MainMenuModel = new MainMenuModel();
         WorkflowCreatorModel WorkflowCreatorModel = new WorkflowCreatorModel();
-        SchedulerViewModel SchedulerViewModel = new SchedulerViewModel();
-        MainAll_ViewModel MainAll_ViewModel = new MainAll_ViewModel();
-        DataCollectConfigureModel DataCollectConfigureModel = new DataCollectConfigureModel();
-        Ethenet_SerialModel ethenet_SerialModel = new Ethenet_SerialModel();
-        ModbusViewModel ModbusViewModel = new ModbusViewModel();
-        Content_Manager_ViewModel Content_Manager_ViewModel = new Content_Manager_ViewModel();
+        static SchedulerViewModel SchedulerViewModel = new SchedulerViewModel();
+        static MainAll_ViewModel MainAll_ViewModel = new MainAll_ViewModel();
+        static DataCollectConfigureModel DataCollectConfigureModel = new DataCollectConfigureModel();
+        static Ethenet_SerialModel ethenet_SerialModel = new Ethenet_SerialModel();
+        static ModbusViewModel ModbusViewModel = new ModbusViewModel();
+        static Content_Manager_ViewModel Content_Manager_ViewModel = new Content_Manager_ViewModel();
         public MainScreenViewModel mainScreenViewModel;
         public bool loadMain = false;
         public MainScreenViewModel() 
@@ -89,7 +94,20 @@ namespace WPF_TEST.ViewModel
             {
                 //SchedulerMain schedulerMain = new SchedulerMain();
                 //schedulerMain.ShowDialog();
+
                 mainScreenViewModel.SelectedViewModel = SchedulerViewModel;
+
+                //Task.Factory.StartNew(() => {
+                //    loading_ViewModel loading_ViewModel = new loading_ViewModel();
+                //    mainScreenViewModel.SelectedViewModel = loading_ViewModel;
+                //    Dispatcher.CurrentDispatcher.Invoke(new Action(() => 
+                //    {
+                        
+
+                //    }));
+                    
+                //});
+                
             });
             Home = new RelayCommand<object>((p) => { return true; }, (p) =>
             {

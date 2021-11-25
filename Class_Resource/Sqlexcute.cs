@@ -223,6 +223,7 @@ namespace WPF_TEST.Class_Resource
             }
             catch (Exception ex)
             {
+                SQL_Connection.Close();
                 error_message = ex.Message;
                 return false;
             }
@@ -361,9 +362,13 @@ namespace WPF_TEST.Class_Resource
                         case "System.Double":
                             sqlsc += " DOUBLE ";
                             break;
-                        case "System.FLOAT":
+                        case "System.Single":
                             sqlsc += " FLOAT ";
                             break;
+
+                        //case "WPF_TEST.ViewModel.Status":
+                        //    sqlsc += " ENUM('Queued','Ready','Running','Paused','Delayed','Done','Plan') ";
+                        //    break;
                         case "System.String":
                         default:
                             sqlsc += string.Format(" VARCHAR({0}) ", dataTable.Columns[i].MaxLength == -1 ? "200" : dataTable.Columns[i].MaxLength.ToString());
@@ -375,7 +380,7 @@ namespace WPF_TEST.Class_Resource
                         sqlsc += " NOT NULL ";
                     sqlsc += ",";
                 }
-                cmd = sqlsc.Substring(0, sqlsc.Length - 1) + ")";
+                cmd = sqlsc.Substring(0, sqlsc.Length - 1) +", PRIMARY KEY ("+ dataTable.Columns[0].ColumnName + "))";
                 exist = false;
                 //*****************************************************
                 check = SQL_command(cmd, database);
@@ -474,7 +479,7 @@ namespace WPF_TEST.Class_Resource
         {
             try
             {
-                
+                mySqlDataAdapter = null;
                 SQL_command("DELETE FROM " + table_Name + "",Database);
                 using (SQL_Connection = new MySqlConnection(StrCon_Database(Server, pwd, Database)))
                 {
@@ -569,7 +574,7 @@ namespace WPF_TEST.Class_Resource
             //put a breakpoint here and check datatable
             return dataTable;
         }
-        public static ObservableCollection<T> Conver_From_Data_Table_To_List<T>(DataTable dt)
+        public  ObservableCollection<T> Conver_From_Data_Table_To_List<T>(DataTable dt)
         {
             ObservableCollection<T> data = new ObservableCollection<T>();
             foreach (DataRow row in dt.Rows)
@@ -579,7 +584,7 @@ namespace WPF_TEST.Class_Resource
             }
             return data;
         }
-        public static T ConvertFromDBVal<T>(object obj)
+        public  T ConvertFromDBVal<T>(object obj)
         {
             if (obj == null || obj == DBNull.Value)
             {
@@ -590,7 +595,7 @@ namespace WPF_TEST.Class_Resource
                 return (T)obj;
             }
         }
-        private static T GetItem<T>(DataRow dr)
+        private  T GetItem<T>(DataRow dr)
         {
             Type temp = typeof(T);
             T obj = Activator.CreateInstance<T>();
@@ -617,6 +622,26 @@ namespace WPF_TEST.Class_Resource
                         {
                             pro.SetValue(obj, (ModbusFunction)Enum.Parse(typeof(ModbusFunction), (string)dr[column.ColumnName]), null);
                         }
+                        else if (pro.PropertyType == typeof(Status))
+                        {
+                            Status myStatus;
+                            try
+                            {
+                                Enum.TryParse((string)dr[column.ColumnName], out myStatus);
+                            }
+                            catch (Exception)
+                            {
+
+                                myStatus = (Status)dr[column.ColumnName];
+                            }
+                           
+
+                            pro.SetValue(obj, myStatus, null);
+                        }
+                        else if (pro.PropertyType == typeof(TaskPriority))
+                        {
+                            pro.SetValue(obj, (TaskPriority)Enum.Parse(typeof(TaskPriority), (string)dr[column.ColumnName]), null);
+                        }
                         else if (column.DataType == typeof(System.DBNull)) 
                         {
                             pro.SetValue(obj, ConvertFromDBVal<string>((string)dr[column.ColumnName]), null);
@@ -627,7 +652,7 @@ namespace WPF_TEST.Class_Resource
                             {
                                 pro.SetValue(obj, dr[column.ColumnName], null);
                             }
-                            catch (Exception)
+                            catch (Exception ex)
                             {
 
                                 pro.SetValue(obj, "", null);
