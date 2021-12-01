@@ -39,15 +39,17 @@
                         HorizontalAlignment="Center">
                         <Button
                             Command="{Binding Audio_Manager}"
-                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            Style="{StaticResource MaterialDesignFlatButton}"
                             Height="200" Width="250"
-                            materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="#FFF08011">
-                            <Button.Background>
+                            
+                            BorderThickness="2"
+                            materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="Blue">
+                            <!--<Button.Background>
                                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                     <GradientStop Color="White" Offset="0"/>
                                     <GradientStop Color="#FF65C6CB" Offset="1"/>
                                 </LinearGradientBrush>
-                            </Button.Background>
+                            </Button.Background>-->
                             <StackPanel Orientation="Vertical" Height="190" Width="210" HorizontalAlignment="Center"
                                         VerticalAlignment="Center">
                                 <Image Height="120"
@@ -71,15 +73,12 @@
                         HorizontalAlignment="Center">
                         <Button
                             Command="{Binding Image_Manager}"
-                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            Style="{StaticResource MaterialDesignFlatButton}"
                             Height="200" Width="250"
+                            BorderBrush="Blue"
+                            BorderThickness="2"
                             materialDesign:ButtonAssist.CornerRadius="5">
-                            <Button.Background>
-                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                    <GradientStop Color="White" Offset="0"/>
-                                    <GradientStop Color="#FF65C6CB" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Button.Background>
+                            
                             <StackPanel Orientation="Vertical" Height="190" Width="210" HorizontalAlignment="Center"
                                         VerticalAlignment="Center">
                                 <Image Height="120"
@@ -103,15 +102,12 @@
                         HorizontalAlignment="Center">
                         <Button
                             Command="{Binding Video_Manager}"
-                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            Style="{StaticResource MaterialDesignFlatButton}"
                             Height="200" Width="250"
+                            BorderBrush="Blue"
+                            BorderThickness="2"
                             materialDesign:ButtonAssist.CornerRadius="5">
-                            <Button.Background>
-                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                    <GradientStop Color="White" Offset="0"/>
-                                    <GradientStop Color="#FF65C6CB" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Button.Background>
+                            
                             <StackPanel Orientation="Vertical" Height="190" Width="210" HorizontalAlignment="Center"
                                         VerticalAlignment="Center">
                                 <Image Height="120"
@@ -135,15 +131,12 @@
                         HorizontalAlignment="Center">
                         <Button
                             Command="{Binding Document_Manager}"
-                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            Style="{StaticResource MaterialDesignFlatButton}"
                             Height="200" Width="250"
+                            BorderBrush="Blue"
+                            BorderThickness="2"
                             materialDesign:ButtonAssist.CornerRadius="5">
-                            <Button.Background>
-                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                    <GradientStop Color="White" Offset="0"/>
-                                    <GradientStop Color="#FF65C6CB" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Button.Background>
+                          
                             <StackPanel Orientation="Vertical" Height="190" Width="210" HorizontalAlignment="Center"
                                         VerticalAlignment="Center">
                                 <Image Height="120"
@@ -168,7 +161,7 @@
             Height="100" Grid.Row="1"
             HorizontalAlignment="Center">
             <Button
-                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                Style="{StaticResource MaterialDesignFlatButton}"
                 Height="80" Width="250"
                 
                 materialDesign:ButtonAssist.CornerRadius="5"

@@ -371,7 +371,7 @@ namespace WPF_TEST.Class_Resource
                         //    break;
                         case "System.String":
                         default:
-                            sqlsc += string.Format(" VARCHAR({0}) ", dataTable.Columns[i].MaxLength == -1 ? "200" : dataTable.Columns[i].MaxLength.ToString());
+                            sqlsc += string.Format(" VARCHAR({0}) ", dataTable.Columns[i].MaxLength == -1 ? "400" : dataTable.Columns[i].MaxLength.ToString());
                             break;
                     }
                     if (dataTable.Columns[i].AutoIncrement)
@@ -471,7 +471,7 @@ namespace WPF_TEST.Class_Resource
                     sqlsc += "JSON";
                     sqlsc += ",";
                 }
-                cmd = sqlsc.Substring(0, sqlsc.Length - 1) + ")";
+                cmd = sqlsc.Substring(0, sqlsc.Length - 1) +")";
                 var check = SQL_command(cmd, database);
             }
         }

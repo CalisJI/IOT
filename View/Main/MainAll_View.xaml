@@ -5,10 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF_TEST.View"
              mc:Ignorable="d" 
+             Loaded="UserControl_Loaded"
              xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              DataContext="{StaticResource MenuMainAll}"
+             
              d:DesignHeight="1080" d:DesignWidth="1920">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Load}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -27,68 +34,134 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Margin="0,0,0,0">
-                <GroupBox 
+                <GroupBox
                     FontWeight="DemiBold"
-                    Header="Sales"
+                    Header="Customer"
                     FontSize="30"
                     TextBlock.TextAlignment="Center"
                     Margin="200,0,0,0"
-                    VerticalAlignment="Center" 
                     Height="500"
-                    Width="500" >
+                    Width="250"
+                    VerticalAlignment="Center" >
                     <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
+
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0" Grid.Column="0">
                             <Button
+                                DataContext="{StaticResource MenuMainAll}"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"
                                 Margin="10"
-                                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                IsEnabled="{Binding CurrentAccount.Permit.UACC.ModifyAccount}"
+                                Command="{Binding Usermanager}"
+                                BorderBrush="Blue"
+                                BorderThickness="2"
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Background="AliceBlue"
                                 materialDesign:ButtonAssist.CornerRadius="8" Height="Auto">
-                                <TextBlock
-                                Text="1" />
+                                <StackPanel 
+                                    Orientation="Vertical"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" Height="150" Width="150">
+                                    <Image
+                                        Visibility="Visible"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Top"
+                                        Margin="0,10,0,0"
+                                        Stretch="Fill"
+                                        Source="pack://application:,,,/ImageSource/customer.png"
+                                        Height="90"
+                                        Width="90"/>
+                                    <TextBlock
+                                        Text="Customer"
+                                        Foreground="Black"
+                                        HorizontalAlignment="Center"
+                                        FontSize="30"/>
+                                </StackPanel>
                             </Button>
                         </Grid>
-                        <Grid Grid.Row="0" Grid.Column="1">
+                       
+                    </Grid>
+                </GroupBox>
+                <GroupBox 
+                    FontWeight="DemiBold"
+                    Header="Personnel"
+                    FontSize="30"
+                    TextBlock.TextAlignment="Center"
+                    Margin="100,0,0,0"
+                    VerticalAlignment="Center" 
+                    Height="500"
+                    Width="250" >
+                    <Grid>
+                       
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Grid.Column="0">
                             <Button
+                                DataContext="{StaticResource MenuMainAll}"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"
                                 Margin="10"
-                                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                IsEnabled="{Binding CurrentAccount.Permit.UACC.ModifyAccount}"
+                                Command="{Binding Usermanager}"
+                                BorderBrush="Blue"
+                                BorderThickness="2"
+                                Background="AliceBlue"
+                                Style="{StaticResource MaterialDesignFlatButton}"
                                 materialDesign:ButtonAssist.CornerRadius="8" Height="Auto">
-                                <TextBlock
-                                Text="2" />
+                                <StackPanel 
+                                    Orientation="Vertical"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" Height="150" Width="150">
+                                    <Image
+                                        Visibility="Visible"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Top"
+                                        Margin="0,10,0,0"
+                                        Stretch="Fill"
+                                        Source="pack://application:,,,/ImageSource/User1.png"
+                                        Height="90"
+                                        Width="90"/>
+                                    <TextBlock x:Name="UserTB"
+                                        Text="Personnel"
+                                        Foreground="Black"
+                                        HorizontalAlignment="Center"
+                                        FontSize="30"/>
+                                </StackPanel>
                             </Button>
                         </Grid>
-                        <Grid Grid.Row="1" Grid.Column="0">
+                        <!--<Grid Grid.Row="1" Grid.Column="0">
                             <Button
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Margin="10"
-                                Style="{StaticResource MaterialDesignRaisedLightButton}"
-                                materialDesign:ButtonAssist.CornerRadius="8" Height="Auto">
-                                <TextBlock
-                                Text="3" />
+                            Command="{Binding Image_Manager}"
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            Height="200" Width="250"
+                            materialDesign:ButtonAssist.CornerRadius="5">
+                                <Button.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="White" Offset="0"/>
+                                        <GradientStop Color="#FF65C6CB" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                                <StackPanel Orientation="Vertical" Height="190" Width="210" HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                                    <Image Height="120"
+                                       Margin="0,15,0,0"
+                                       Width="130"
+                                       Source="pack://application:,,,/ImageSource/Picture.png"/>
+                                    <TextBlock
+                                    
+                                    Text="Images"
+                                    FontWeight="Bold"
+                                    Margin="0,10,0,0"
+                                    FontSize="24"/>
+                                </StackPanel>
                             </Button>
-                        </Grid>
-                        <Grid Grid.Row="1" Grid.Column="1">
-                            <Button
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Margin="10"
-                                Style="{StaticResource MaterialDesignRaisedLightButton}"
-                                materialDesign:ButtonAssist.CornerRadius="8" Height="Auto">
-                                <TextBlock
-                                Text="4" />
-                            </Button>
-                        </Grid>
+                        </Grid>-->
                     </Grid>
                 </GroupBox>
                 <GroupBox 
@@ -99,49 +172,20 @@
                     Margin="100,0,0,0"
                     VerticalAlignment="Center" 
                     Height="500"
-                    Width="1000" >
+                    Width="250" >
                     <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
+                       
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
+                        
                         <Grid Grid.Row="0" Grid.Column="0">
                             <Button
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"
                                 Margin="10"
-                                Background="White"
-                                Command="{Binding WorkFlow}"
-                                materialDesign:ButtonAssist.CornerRadius="8" Height="Auto">
-                                <StackPanel 
-                                    Orientation="Vertical"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center" Height="150" Width="150">
-                                    <materialDesign:PackIcon 
-                                        HorizontalAlignment="Center"
-                                        Foreground="Gray"
-                                        Kind="Sitemap"
-                                        Height="100"
-                                        Width="100"/>
-                                    <TextBlock
-                                        Text="Workflow"
-                                        Foreground="Black"
-                                        HorizontalAlignment="Center"
-                                        FontSize="30"/>
-                                </StackPanel>
-                            </Button>
-                        </Grid>
-                        <Grid Grid.Row="0" Grid.Column="1">
-                            <Button
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Margin="10"
+                                IsEnabled="{Binding CurrentAccount.Permit.UACC.Schedule}"
                                 Background="White"
                                 Command="{Binding Schedular}"
                                 materialDesign:ButtonAssist.CornerRadius="8" Height="Auto">
@@ -163,7 +207,65 @@
                                 </StackPanel>
                             </Button>
                         </Grid>
-                        <Grid Grid.Row="0" Grid.Column="2" DataContext="{StaticResource MenuMainAll}">
+                        
+                        <!--<Grid Grid.Row="0" Grid.Column="3">
+                            <Button
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Margin="10"
+                                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                materialDesign:ButtonAssist.CornerRadius="8" Height="Auto">
+                                <TextBlock
+                                Text="4" />
+                            </Button>
+                        </Grid>-->
+                        
+                       
+                    </Grid>
+                </GroupBox>
+                <GroupBox 
+                    FontWeight="DemiBold"
+                    Header="Operator"
+                    FontSize="30"
+                    TextBlock.TextAlignment="Center"
+                    Margin="100,0,0,0"
+                    VerticalAlignment="Center" 
+                    Height="500"
+                    Width="250" >
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="1" Grid.Column="2">
+                            <Button
+                                IsEnabled="{Binding CurrentAccount.Permit.UACC.DataInput}"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Margin="10"
+                                Background="White"
+                                Command="{Binding DataStreamCollectionModel_Command}"
+                                materialDesign:ButtonAssist.CornerRadius="8" Height="Auto">
+                                <StackPanel 
+                                    Orientation="Vertical"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" Height="150" Width="150">
+                                    <materialDesign:PackIcon 
+                                        HorizontalAlignment="Center"
+                                        Foreground="Gray"
+                                        Kind="Input"
+                                        Height="100"
+                                        Width="100"/>
+                                    <TextBlock
+                                        Text="Data Collection"
+                                        Foreground="Black"
+                                        HorizontalAlignment="Center"
+                                        FontSize="30"/>
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                        <Grid Grid.Row="0" Grid.Column="0" DataContext="{StaticResource MenuMainAll}">
                             <Button
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"
@@ -190,189 +292,8 @@
                                 </StackPanel>
                             </Button>
                         </Grid>
-                        <Grid Grid.Row="0" Grid.Column="3">
-                            <Button
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Margin="10"
-                                Style="{StaticResource MaterialDesignRaisedLightButton}"
-                                materialDesign:ButtonAssist.CornerRadius="8" Height="Auto">
-                                <TextBlock
-                                Text="4" />
-                            </Button>
-                        </Grid>
-                        <Grid Grid.Row="1" Grid.Column="0">
-                            <Button
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Margin="10"
-                                Background="White"
-                                Command="{Binding DataStreamCollectionModel_Command}"
-                                materialDesign:ButtonAssist.CornerRadius="8" Height="Auto">
-                                <StackPanel 
-                                    Orientation="Vertical"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center" Height="150" Width="150">
-                                    <materialDesign:PackIcon 
-                                        HorizontalAlignment="Center"
-                                        Foreground="Gray"
-                                        Kind="Input"
-                                        Height="100"
-                                        Width="100"/>
-                                    <TextBlock
-                                        Text="Data Collection"
-                                        Foreground="Black"
-                                        HorizontalAlignment="Center"
-                                        FontSize="30"/>
-                                </StackPanel>
-                            </Button>
-                        </Grid>
-                        <Grid Grid.Row="1" Grid.Column="1">
-                            <Button
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Margin="10"
-                                Style="{StaticResource MaterialDesignRaisedLightButton}"
-                                materialDesign:ButtonAssist.CornerRadius="8" Height="Auto">
-                                <TextBlock
-                                Text="4" />
-                            </Button>
-                        </Grid>
-                        <Grid Grid.Row="1" Grid.Column="2">
-                            <Button
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Margin="10"
-                                Style="{StaticResource MaterialDesignRaisedLightButton}"
-                                materialDesign:ButtonAssist.CornerRadius="8" Height="Auto">
-                                <TextBlock
-                                Text="4" />
-                            </Button>
-                        </Grid>
-                        <Grid Grid.Row="1" Grid.Column="3">
-                            <Button
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Margin="10"
-                                Style="{StaticResource MaterialDesignRaisedLightButton}"
-                                materialDesign:ButtonAssist.CornerRadius="8" Height="Auto">
-                                <TextBlock
-                                Text="4" />
-                            </Button>
-                        </Grid>
                     </Grid>
-                </GroupBox>
-                <GroupBox 
-                    FontWeight="DemiBold"
-                    Header="Operations"
-                    FontSize="30"
-                    TextBlock.TextAlignment="Center"
-                    Margin="100,0,0,0"
-                    VerticalAlignment="Center" 
-                    Height="500"
-                    Width="1000" >
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0" Grid.Column="0">
-                            <Button
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Margin="10"
-                                
-                                Style="{StaticResource MaterialDesignRaisedLightButton}"
-                                materialDesign:ButtonAssist.CornerRadius="8" Height="Auto">
-
-
-                            </Button>
-                        </Grid>
-                        <Grid Grid.Row="0" Grid.Column="1">
-                            <Button
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Margin="10"
-                                Style="{StaticResource MaterialDesignRaisedLightButton}"
-                                materialDesign:ButtonAssist.CornerRadius="8" Height="Auto">
-                                <TextBlock
-                                Text="4" />
-                            </Button>
-                        </Grid>
-                        <Grid Grid.Row="0" Grid.Column="2">
-                            <Button
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Margin="10"
-                                Style="{StaticResource MaterialDesignRaisedLightButton}"
-                                materialDesign:ButtonAssist.CornerRadius="8" Height="Auto">
-                                <TextBlock
-                                Text="4" />
-                            </Button>
-                        </Grid>
-                        <Grid Grid.Row="0" Grid.Column="3">
-                            <Button
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Margin="10"
-                                Style="{StaticResource MaterialDesignRaisedLightButton}"
-                                materialDesign:ButtonAssist.CornerRadius="8" Height="Auto">
-                                <TextBlock
-                                Text="4" />
-                            </Button>
-                        </Grid>
-                        <Grid Grid.Row="1" Grid.Column="0">
-                            <Button
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Margin="10"
-                                Style="{StaticResource MaterialDesignRaisedLightButton}"
-                                materialDesign:ButtonAssist.CornerRadius="8" Height="Auto">
-                                <TextBlock
-                                Text="4" />
-                            </Button>
-                        </Grid>
-                        <Grid Grid.Row="1" Grid.Column="1">
-                            <Button
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Margin="10"
-                                Style="{StaticResource MaterialDesignRaisedLightButton}"
-                                materialDesign:ButtonAssist.CornerRadius="8" Height="Auto">
-                                <TextBlock
-                                Text="4" />
-                            </Button>
-                        </Grid>
-                        <Grid Grid.Row="1" Grid.Column="2">
-                            <Button
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Margin="10"
-                                Style="{StaticResource MaterialDesignRaisedLightButton}"
-                                materialDesign:ButtonAssist.CornerRadius="8" Height="Auto">
-                                <TextBlock
-                                Text="4" />
-                            </Button>
-                        </Grid>
-                        <Grid Grid.Row="1" Grid.Column="3">
-                            <Button
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Margin="10"
-                                Style="{StaticResource MaterialDesignRaisedLightButton}"
-                                materialDesign:ButtonAssist.CornerRadius="8" Height="Auto">
-                                <TextBlock
-                                Text="4" />
-                            </Button>
-                        </Grid>
-                    </Grid>
-
+                    
                 </GroupBox>
             </StackPanel>
 

@@ -80,7 +80,7 @@
                                     Width="200"
                                     HorizontalAlignment="Left"
                                     Margin="20,0,0,0"
-                                    Command="{Binding OpenBarcode}"
+                                    Command="{Binding OpenBarCode}"
                                     materialDesign:ShadowAssist.ShadowDepth="Depth3"
                                     materialDesign:ButtonAssist.CornerRadius="8"
                                     Style="{StaticResource MaterialDesignFlatButton}"

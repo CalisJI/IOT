@@ -207,9 +207,9 @@ namespace WPF_TEST.ViewModel
         private void Add_Job() 
         {
             JobOrder jobOrder = new JobOrder();
-
+            Random random = new Random();
             jobOrder.Customerinformation = CustomerInfo[0];
-           
+            jobOrder.ID = random.Next(111111, 888888);
             jobOrder.Customer_PO = "PO1";
             jobOrder.Quotation = "Quotation1";
             jobOrder.Priority = TaskPriority.Normal;
@@ -226,7 +226,7 @@ namespace WPF_TEST.ViewModel
             JobOrder jobOrder1 = new JobOrder();
 
             jobOrder1.Customerinformation = CustomerInfo[1];
-            
+            jobOrder1.ID = random.Next(111111, 888888);
             jobOrder1.Customer_PO = "PO2";
             jobOrder1.Quotation = "Quotation2";
             jobOrder1.Priority = TaskPriority.Normal;
@@ -341,6 +341,7 @@ namespace WPF_TEST.ViewModel
                     {
                         mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref JobOrder_Table, "JobOrder", Sqlexcute.Database);
                         ToJson = Sqlexcute.Conver_From_Data_Table_To_List<ConvertoJson>(JobOrder_Table);
+                        string a = JobOrder_Table.Rows[0][0].ToString();
                         JobOrders = JsonSerializer.Deserialize<ObservableCollection<JobOrder>>(ToJson.ElementAt(0).Code);
                         PlannerModel._jobOrder = JobOrders;
                         PlannerModel._customerInfo = CustomerInfo;

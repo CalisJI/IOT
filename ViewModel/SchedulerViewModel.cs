@@ -20,6 +20,7 @@ using System.Windows.Input;
 using WPF_TEST.Class_Resource;
 using WPF_TEST.Data;
 using WPF_TEST.Notyfication;
+using WPF_TEST.View;
 
 namespace WPF_TEST.ViewModel
 {
@@ -236,7 +237,8 @@ namespace WPF_TEST.ViewModel
             });
             OpenBarCode = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
-                
+                Barcode_View barcode = new Barcode_View();
+                barcode.ShowDialog();
             });
             SelectedWork = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
@@ -324,6 +326,7 @@ namespace WPF_TEST.ViewModel
                     var d = (Customer)p;
                     SingleCustomer = d;
                     Customer_Infor = d.Customer_Details;
+                    SelectedJob.Customerinformation = d;
                 }
                 catch (Exception)
                 {

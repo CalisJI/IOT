@@ -12,17 +12,34 @@ using WPF_TEST.Data;
 using WPF_TEST.Notyfication;
 using System.Text.Json;
 using System.Security;
+using WPF_TEST.View;
 
 namespace WPF_TEST.ViewModel
 {
     public class Login_ViewModel:BaseViewModel
     {
         private MySqlDataAdapter mySqlDataAdapter;
-
+        
+        public static UserAccount LoginAcount = new UserAccount();
         public static bool LoginSuccess { get; set; }
 
         WPFMessageBoxService WPFMessageBoxService = new WPFMessageBoxService();
         public DataTable TableUser = new DataTable("User Account");
+
+
+        private UserAccount account;
+        public UserAccount SelectedUser
+        {
+            get
+            {
+                return account;
+            }
+            set
+            {
+                SetProperty(ref account, value, nameof(SelectedUser));
+            }
+        }
+
         public static Permit Permit { get; set; }
         private string _userId;
         private string pass;
@@ -70,6 +87,8 @@ namespace WPF_TEST.ViewModel
             }
         }
         public ICommand Login { get; set; }
+        public ICommand Selected { get; set; }
+        public ICommand Save_permit { get; set; }
         public static bool Loaded { get; set; }
 
         Sqlexcute Sqlexcute = new Sqlexcute();
@@ -110,8 +129,54 @@ namespace WPF_TEST.ViewModel
             userAccount.Permit.CompletedJob.CanAdd = true;
             userAccount.Permit.CompletedJob.CanDelete = true;
             userAccount.Permit.CompletedJob.CanEdit = true;
-            
+
+            userAccount.Permit.UACC.DataInput = true;
+            userAccount.Permit.UACC.Schedule = true;
+            userAccount.Permit.UACC.Operator = true;
+            userAccount.Permit.UACC.ModifyAccount = true;
+
+
+            UserAccount userAccount1 = new UserAccount();
+            userAccount1.UserID = 2;
+            userAccount1.User = "User1";
+            userAccount1.Pass = Sqlexcute.MD5Genrate("fwd@2021");
+
+            userAccount1.Permit.Weekly_Schedule.CacAccess = true;
+            userAccount1.Permit.Weekly_Schedule.CanAdd = true;
+            userAccount1.Permit.Weekly_Schedule.CanDelete = true;
+            userAccount1.Permit.Weekly_Schedule.CanEdit = true;
+
+            userAccount1.Permit.ViewJob.CacAccess = true;
+            userAccount1.Permit.ViewJob.CanAdd = true;
+            userAccount1.Permit.ViewJob.CanDelete = true;
+            userAccount1.Permit.ViewJob.CanEdit = true;
+
+            userAccount1.Permit.SalesDraft.CacAccess = true;
+            userAccount1.Permit.SalesDraft.CanAdd = true;
+            userAccount1.Permit.SalesDraft.CanDelete = true;
+            userAccount1.Permit.SalesDraft.CanEdit = true;
+
+            userAccount1.Permit.ModifySalesItem.CacAccess = true;
+            userAccount1.Permit.ModifySalesItem.CanAdd = true;
+            userAccount1.Permit.ModifySalesItem.CanDelete = true;
+            userAccount1.Permit.ModifySalesItem.CanEdit = true;
+
+            userAccount1.Permit.MCPReport.CacAccess = true;
+            userAccount1.Permit.MCPReport.CanAdd = true;
+            userAccount1.Permit.MCPReport.CanDelete = true;
+            userAccount1.Permit.MCPReport.CanEdit = true;
+
+            userAccount1.Permit.CompletedJob.CacAccess = true;
+            userAccount1.Permit.CompletedJob.CanAdd = true;
+            userAccount1.Permit.CompletedJob.CanDelete = true;
+            userAccount1.Permit.CompletedJob.CanEdit = true;
+
+            userAccount1.Permit.UACC.DataInput = false;
+            userAccount1.Permit.UACC.Schedule = false;
+            userAccount1.Permit.UACC.Operator = true;
+            userAccount1.Permit.UACC.ModifyAccount = false;
             ListUser.Add(userAccount);
+            ListUser.Add(userAccount1);
         }
         public Login_ViewModel() 
         {
@@ -127,13 +192,16 @@ namespace WPF_TEST.ViewModel
                 if (check == 0) 
                 {
                     Admin();
-
+                    bool check2 = false;
+                    bool exit = false;
                     var Json = JsonSerializer.Serialize(ListUser);
                     ToJSON.Add(new ConvertoJson { Code = Json });
                     //var aa = JsonSerializer.Deserialize<ObservableCollection<UserAccount>>(Json);
-
+                    
 
                     TableUser = Sqlexcute.FillToDataTable(ToJSON);
+
+                    Sqlexcute.Create_JSon_Table(TableUser, Sqlexcute.Database, "UserAccount");
                     Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, TableUser, Sqlexcute.Database, "UserAccount");
                 }
                 else if (check == 1) 
@@ -156,7 +224,9 @@ namespace WPF_TEST.ViewModel
                     {
                         LoginSuccess = true;
                         Permit = login.Permit;
-                        WPFMessageBoxService.ShowMessage("Đăng nhập thành công", "Login!", System.Messaging.MessageType.Report);
+                        LoginAcount = login;
+                       
+                        //WPFMessageBoxService.ShowMessage("Đăng nhập thành công", "Login!", System.Messaging.MessageType.Report);
                         
                     }
                     else if (check != null && login == null)
@@ -178,6 +248,41 @@ namespace WPF_TEST.ViewModel
                 }
                
             });
+            Selected = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                try
+                {
+                    var a = (UserAccount)p;
+                    SelectedUser = a;
+                }
+                catch (Exception)
+                {
+
+                    
+                }
+               
+            });
+            Save_permit = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                try
+                {
+                    var Json = JsonSerializer.Serialize(ListUser);
+                    ToJSON = new ObservableCollection<ConvertoJson>();
+                    ToJSON.Add(new ConvertoJson { Code = Json });
+                    //var aa = JsonSerializer.Deserialize<ObservableCollection<UserAccount>>(Json);
+
+                    TableUser = new DataTable("User Account");
+                    TableUser = Sqlexcute.FillToDataTable(ToJSON);
+                    Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, TableUser, Sqlexcute.Database, "UserAccount");
+                    WPFMessageBoxService.ShowMessage("Đã Lưu", "Lưu dữ liệu!", System.Messaging.MessageType.Report);
+                }
+                catch (Exception ex)
+                {
+
+                    WPFMessageBoxService.ShowMessage(ex.Message, "Lỗi Lưu Dữ Liệu!", System.Messaging.MessageType.Report);
+                }
+            });
+            
         }
 
        

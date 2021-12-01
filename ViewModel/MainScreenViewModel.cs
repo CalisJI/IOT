@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
+using WPF_TEST.Data;
 using WPF_TEST.View;
 
 namespace WPF_TEST.ViewModel
@@ -13,8 +14,15 @@ namespace WPF_TEST.ViewModel
     public class MainScreenViewModel: BaseViewModel
     {
         private BaseViewModel _selectedViewModel;
-        private UserControl loading_view;
-
+        private UserAccount user;
+        public UserAccount CurrentAccount
+        {
+            get { return user; }
+            set 
+            {
+                SetProperty(ref user, value, nameof(CurrentAccount));
+            }
+        }
         public BaseViewModel SelectedViewModel
         {
             get { return _selectedViewModel; }
@@ -45,6 +53,10 @@ namespace WPF_TEST.ViewModel
         public ICommand PLC_data { get; set; }
         public ICommand Main_menu { get; set; }
         public ICommand Media { get; set; }
+        public ICommand Usermanager { get; set; }
+
+        public ICommand Load { get; set; }
+        public ICommand Unload { get; set; }
 
         static FileConnfig_Main_ViewModel FileConnfig_Main_ViewModel = new FileConnfig_Main_ViewModel();
         //DataStreamCollectionModel DataStreamCollectionModel = new DataStreamCollectionModel();
@@ -57,15 +69,25 @@ namespace WPF_TEST.ViewModel
         static ModbusViewModel ModbusViewModel = new ModbusViewModel();
         static Content_Manager_ViewModel Content_Manager_ViewModel = new Content_Manager_ViewModel();
         public MainScreenViewModel mainScreenViewModel;
+        public Access_Managerment_ViewModel Access_Managerment_ViewModel = new Access_Managerment_ViewModel();
         public bool loadMain = false;
         public MainScreenViewModel() 
         {
+            CurrentAccount = Login_ViewModel.LoginAcount;
             if (!loadMain) 
             {
+                CurrentAccount = Login_ViewModel.LoginAcount;
                 mainScreenViewModel = this;
                 mainScreenViewModel.SelectedViewModel = MainAll_ViewModel;
                 loadMain = true;
             }
+            Load = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                CurrentAccount = Login_ViewModel.LoginAcount;
+                mainScreenViewModel = this;
+                mainScreenViewModel.SelectedViewModel = MainAll_ViewModel;
+                loadMain = true;
+            });
             Image_Manager = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 mainScreenViewModel.SelectedViewModel = Content_Manager_ViewModel.ImageManager_ViewModel;
@@ -108,6 +130,10 @@ namespace WPF_TEST.ViewModel
                     
                 //});
                 
+            });
+            Usermanager = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                mainScreenViewModel.SelectedViewModel = Access_Managerment_ViewModel;
             });
             Home = new RelayCommand<object>((p) => { return true; }, (p) =>
             {

@@ -202,7 +202,7 @@
 
                     <dxlc:LayoutItem Label="Project" LabelStyle="{StaticResource LB}" LabelPosition="Top"  HorizontalAlignment="Left" Width="auto" >
                         <dxg:GridControl x:Name="Grid_data" ItemsSource="{Binding Path=JobOrders}" Height="1000" Width="auto" dxlc:DockLayoutControl.Dock="Left">
-                            <dxg:GridControl.Columns>
+                            <dxg:GridControl.Columns >
                                 <dxg:GridColumn
                                 FieldName="SaleOrder" 
                                 Header="Name"

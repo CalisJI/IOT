@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_TEST"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Loading" Height="450" Width="800" WindowStyle="None">
+        Title="Loading" Height="150" Width="300" WindowStyle="None">
     <Grid Background="CadetBlue">
         <Border BorderBrush="Black" BorderThickness="1" Background="CadetBlue">
             <Grid Background="#303030">

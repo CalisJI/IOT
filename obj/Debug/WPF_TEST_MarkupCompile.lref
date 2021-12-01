@@ -1,4 +1,4 @@
-﻿F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\GeneratedInternalTypeHelper.g.cs
+﻿
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\App.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\Configuration.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\DataStreamCollection.xaml;;
@@ -10,6 +10,8 @@ FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\MainResource\Ribbon.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\MainScreenView.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\MainWindow.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\SchedulerMain.xaml;;
+FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\AccessManager_View.xaml;;
+FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\Barcode_View.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\FileConfig\ExcelFileConfig_View.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\FileConfig\XMLFileConfig_View.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\FileConfig\JSONFileConfig_View.xaml;;

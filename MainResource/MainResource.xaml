@@ -39,5 +39,6 @@
     <FileConfig:TXTData_ViewModel x:Key="txt"/>
     <viewmodel:Login_ViewModel x:Key="Login"/>
     <viewmodel:AddProjectSchedule_ViewModel x:Key="AddJobProject"/>
+    <viewmodel:Barcode_ViewModel x:Key="Barcode"/>
 
 </ResourceDictionary>

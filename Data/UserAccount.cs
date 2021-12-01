@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,15 @@ namespace WPF_TEST.Data
     public class UserAccount
     {
         Permit permit = new Permit();
+        //ObservableCollection<Permit> permits = new ObservableCollection<Permit>();
+        //public ObservableCollection<Permit> Permits 
+        //{
+        //    get { return permits; }
+        //    set 
+        //    {
+        //        permits = value;
+        //    }
+        //}
         public int UserID { get; set; }
         public string User { get; set; }
         public string Pass { get; set; }
@@ -23,6 +33,19 @@ namespace WPF_TEST.Data
         private CompletedJob completedJob = new CompletedJob();
         private SalesDraft salesDraft = new SalesDraft();
         private ModifySalesItem modifySales = new ModifySalesItem();
+        private UACC uacc = new UACC();
+
+        public UACC UACC
+        {
+            get 
+            {
+                return uacc;
+            }
+            set
+            {
+                uacc = value;
+            }
+        }
         public Weekly_Schedule Weekly_Schedule 
         {
             get 
@@ -147,5 +170,12 @@ namespace WPF_TEST.Data
     public class ConvertoJson 
     {
         public string Code { get; set; }
+    }
+    public class UACC
+    {
+        public bool Schedule { get; set; }
+        public bool DataInput { get; set; }
+        public bool Operator { get; set; }
+        public bool ModifyAccount { get; set; }
     }
 }

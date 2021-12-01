@@ -6,7 +6,7 @@
              xmlns:viewmodel_FileConfig ="clr-namespace:WPF_TEST.ViewModel.FileConfig"
              xmlns:views="clr-namespace:WPF_TEST.View"
              
-             StartupUri="MainScreenView.xaml">
+             StartupUri="Login_form.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -129,6 +129,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:loading_ViewModel}">
                 <views:loading_view/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:Access_Managerment_ViewModel}">
+                <views:AccessManager_View/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

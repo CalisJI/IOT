@@ -1,7 +1,9 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,28 +29,38 @@ namespace WPF_TEST
         {
             InitializeComponent();
            
-            timer.Interval = new TimeSpan(0, 0, 0,0,800);
+            timer.Interval = new TimeSpan(0, 0, 0,1);
             timer.Tick += Timer_Tick;
 
             timer.IsEnabled = true;
 
 
         }
-
+        private void ClosingEventHandler(object sender, DialogClosingEventArgs eventArgs) 
+        {
+        
+        }
+      
         private void Timer_Tick(object sender, EventArgs e)
         {
             if (Login_ViewModel.LoginSuccess)
             {
+              
+
+
                 MainScreenView mainScreenView = new MainScreenView();
                 mainScreenView.Closed += (object sender1, EventArgs e1) =>
                 {
                     this.Show();
+                   
                 };
                 this.Hide();
                 mainScreenView.Show();
+
+                timer.Stop();
+                timer.IsEnabled = false;
             }
-            timer.Stop();
-            timer.IsEnabled = false;
+            
         }
 
         private void pass_box_PasswordChanged(object sender, RoutedEventArgs e)
