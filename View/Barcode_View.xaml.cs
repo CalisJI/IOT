@@ -68,13 +68,16 @@ namespace WPF_TEST.View
             localCamera = new VideoCaptureDevice(LocalWebcamCollection[0].MonikerString);
             localCamera.NewFrame += LocalCamera_NewFrame;
             localCamera.Start();
-            barcode = new ObservableCollection<string>();
+            
         }
         
-        public static ObservableCollection<string> barcode
+        public static string barcode
         {
-            get; 
-            set;
+            get { return Barcode_ViewModel._barcode; }
+            set 
+            {
+                Barcode_ViewModel._barcode = value;
+            }
         }
         private void LocalCamera_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
@@ -98,12 +101,13 @@ namespace WPF_TEST.View
                     if (result != null)
                     {
                         string decoded = result.ToString().Trim();
-                        barcode.Add(decoded);
-                        Barcode_ViewModel._barcode = barcode;
 
-
+                        barcode = decoded;
+                        Macode.Text = barcode;
+                        //localCamera.SignalToStop();
+                        
                     }
-
+                   
 
 
                 }

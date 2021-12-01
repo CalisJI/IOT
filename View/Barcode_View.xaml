@@ -9,28 +9,18 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         DataContext="{StaticResource Barcode}"
         Title="Barcode_View" Height="600" Width="800">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding GetSource}"/>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Unloaded">
+            <i:InvokeCommandAction Command="{Binding GetSource}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
-        <Image x:Name="FrameSource" Width="400" Height="400"/>
-        <ListView Background="Yellow" Width="200" Height="400" 
-                  HorizontalAlignment="Left"
-                  ItemsSource="{Binding ResultBarCode}"
-                  Name="code" >
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="SouceUpdated">
-                    <i:InvokeCommandAction Command="{Binding GetSource}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <Image x:Name="FrameSource" Width="750" Height="520" VerticalAlignment="Top"/>
+        <TextBlock Text="{Binding ResultBarCode}" 
+                   Name="Macode" VerticalAlignment="Bottom" FontSize="30"
+                   HorizontalAlignment="Center"/>
     </Grid>
 </Window>

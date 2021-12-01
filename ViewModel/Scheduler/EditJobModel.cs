@@ -176,19 +176,35 @@ namespace WPF_TEST.ViewModel
         // Thêm công việc càn thực hiện tỏng đơn hàng thu công
         private void Add()
         {
+            Random random = new Random();
             Works works = new Works();
             works.WorkOrderName = "Test1";
             works.Product = "Product1";
             works.Remark = "Something";
             works.ImageProduct = @"F:\IMAGE\ELECTRONICS_machine_technology_circuit_electronic_computer_technics_detail_psychedelic_abstract_pattern_6160x4106.jpg";
-
+            works.Quantity = random.Next(1, 50);
             Works works1 = new Works();
             works1.WorkOrderName = "Test2";
             works1.Product = "Product2";
             works1.Remark = "Something2";
-            works1.ImageProduct = @"F:\IMAGE\ELECTRONICS_machine_technology_circuit_electronic_computer_technics_detail_psychedelic_abstract_pattern_6160x4106.jpg";
+            works1.ImageProduct = @"F:\IMAGE\W_Motors_Lykan_HyperSport_2014_4K_7128x4493.jpg";
+            works1.Quantity = random.Next(1, 50);
+            Works works2 = new Works();
+            works2.WorkOrderName = "Test3";
+            works2.Product = "Product3";
+            works2.Remark = "Mã thử nghiệm 1";
+            works2.ImageProduct = @"F:\IMAGE\ELECTRONICS_machine_technology_circuit_electronic_computer_technics_detail_psychedelic_abstract_pattern_6160x4106.jpg";
+            works2.Quantity = random.Next(1, 50);
+            Works works3 = new Works();
+            works3.WorkOrderName = "Test4";
+            works3.Product = "Product4";
+            works3.Remark = "Mã Thử nghiệm 2";
+            works3.ImageProduct = @"F:\IMAGE\W_Motors_Lykan_HyperSport_2014_4K_7128x4493.jpg";
+            works3.Quantity = random.Next(1, 50);
             WorksList.Add(works);
             WorksList.Add(works1);
+            WorksList.Add(works2);
+            WorksList.Add(works3);
         }
         private void Add_Customer() 
         {
@@ -243,6 +259,7 @@ namespace WPF_TEST.ViewModel
             works.WorkOrderName = "Mã 1";
             works.ImageProduct = @"F:\IMAGE\W_Motors_Lykan_HyperSport_2014_4K_7128x4493.jpg";
             works.Remark = "Noremark";
+            works.Quantity = random.Next(1, 20);
             WorksList.Add(works);
             jobOrder1.Works.Add(works);
             JobOrders.Add(jobOrder);

@@ -146,7 +146,30 @@ namespace WPF_TEST.ViewModel
             get { return _work; }
             set { SetProperty(ref _work, value, nameof(WorksList)); }
         }
-
+        private int _quantity;
+        public int Quantity 
+        {
+            get 
+            {
+                return _quantity;
+            }
+            set 
+            {
+                SetProperty(ref _quantity, value, nameof(Quantity));
+            }
+        }
+        private Works _selectedwork;
+        public Works Selected_Work 
+        {
+            get 
+            {
+                return _selectedwork;
+            }
+            set
+            {
+                SetProperty(ref _selectedwork, value, nameof(Selected_Work));
+            }
+        }
         public ICommand AddJob
         { get; set; }
         public ICommand AddrangeWork { get; set; }
@@ -156,6 +179,7 @@ namespace WPF_TEST.ViewModel
         public ICommand AddSelectjob { get; set; }
         public ICommand UndoSelect { get; set; }
         public ICommand selectpriority { get; set; }
+        public ICommand SelectedWork { get; set; }
 
 
         static bool Loaed = false;
@@ -171,6 +195,18 @@ namespace WPF_TEST.ViewModel
                 Loaed = true;
                 
             }
+            SelectedWork = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                try
+                {
+                    Selected_Work = (Works)p;
+                }
+                catch (Exception ex)
+                {
+
+                   
+                }
+            });
             AddSelectjob = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
                
@@ -283,6 +319,11 @@ namespace WPF_TEST.ViewModel
                 JobOrderRuntime_Table = Sqlexcute.FillToDataTable(JobOrdersRumtimes);
                 Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, JobOrderRuntime_Table, Sqlexcute.Database, JobOrderRuntime_Table.TableName);
                 Save_Table();
+                foreach (var item in Work_Library)
+                {
+                    item.Selected = false;
+                }
+                Work_Library.Clear();
 
               
             });

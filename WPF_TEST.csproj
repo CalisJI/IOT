@@ -383,6 +383,7 @@
     <Compile Include="Data\JobOrderRuntime.cs" />
     <Compile Include="Data\UserAccount.cs" />
     <Compile Include="Data\VideoObject.cs" />
+    <Compile Include="Data\WorkInventory.cs" />
     <Compile Include="Data\Works.cs" />
     <Compile Include="FileProcess\ExcelProcess.cs" />
     <Compile Include="Loading.xaml.cs">

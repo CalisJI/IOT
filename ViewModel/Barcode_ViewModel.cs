@@ -11,8 +11,8 @@ namespace WPF_TEST.ViewModel
 {
     public class Barcode_ViewModel:BaseViewModel
     {
-        public static ObservableCollection<string> _barcode;
-        public ObservableCollection<string> ResultBarCode 
+        public static string _barcode;
+        public string ResultBarCode 
         {
             get 
             {
@@ -25,12 +25,14 @@ namespace WPF_TEST.ViewModel
         }
         
         public ICommand GetSource { get; set; }
+        public ICommand caicungc { get; set; }
+
         public Barcode_ViewModel() 
         {
             
             GetSource = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
-                
+                string a = ResultBarCode;
             });
         }
     }

@@ -116,7 +116,7 @@
                                               
                                           Width="420"
                                           FontSize="20"
-                                          SelectedItem="{Binding CustomerName}"
+                                          SelectedItem="{Binding SingleCustomer}"
                                                      
                                           ItemsSource="{Binding CustomerInfor}">
                                                 <ComboBox.ItemTemplate>
@@ -313,6 +313,7 @@
                                 AllowDefaultButton="False"
                                 HorizontalContentAlignment="Stretch"
                                 ItemTemplate="{StaticResource Template}"
+                               
                                 Margin="20,0,0,10"
                                 Height="40" >
                                 <i:Interaction.Triggers>
