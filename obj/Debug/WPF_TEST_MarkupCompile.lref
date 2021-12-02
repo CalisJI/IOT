@@ -11,7 +11,8 @@ FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\MainScreenView.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\MainWindow.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\SchedulerMain.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\AccessManager_View.xaml;;
-FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\Barcode_View.xaml;;
+FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\Barcode\Barcode_View.xaml;;
+FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\DataInput\CustomerSetting_View.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\FileConfig\ExcelFileConfig_View.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\FileConfig\XMLFileConfig_View.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\FileConfig\JSONFileConfig_View.xaml;;
@@ -50,5 +51,6 @@ FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\Media\VideoManager_View.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\Scheduler\ScheduleListTime_View.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\Scheduler\SchedulerMain_View.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\Scheduler\WorkScope_View.xaml;;
+FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\Scheduler\Work_Library_View.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\WorkflowCreator.xaml;;
 

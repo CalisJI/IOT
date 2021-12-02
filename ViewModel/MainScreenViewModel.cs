@@ -57,10 +57,12 @@ namespace WPF_TEST.ViewModel
 
         public ICommand Load { get; set; }
         public ICommand Unload { get; set; }
+        public ICommand CustomerManager { get; set; }
 
         static FileConnfig_Main_ViewModel FileConnfig_Main_ViewModel = new FileConnfig_Main_ViewModel();
         //DataStreamCollectionModel DataStreamCollectionModel = new DataStreamCollectionModel();
         static MainMenuModel MainMenuModel = new MainMenuModel();
+        static CustomerSetting_ViewModel CustomerSetting_ViewModel = new CustomerSetting_ViewModel();
         WorkflowCreatorModel WorkflowCreatorModel = new WorkflowCreatorModel();
         static SchedulerViewModel SchedulerViewModel = new SchedulerViewModel();
         static MainAll_ViewModel MainAll_ViewModel = new MainAll_ViewModel();
@@ -87,6 +89,7 @@ namespace WPF_TEST.ViewModel
                 mainScreenViewModel = this;
                 mainScreenViewModel.SelectedViewModel = MainAll_ViewModel;
                 loadMain = true;
+                Loading_Indicator.Finished();
             });
             Image_Manager = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
@@ -116,7 +119,7 @@ namespace WPF_TEST.ViewModel
             {
                 //SchedulerMain schedulerMain = new SchedulerMain();
                 //schedulerMain.ShowDialog();
-
+                Loading_Indicator.BeingBusy();
                 mainScreenViewModel.SelectedViewModel = SchedulerViewModel;
 
                 //Task.Factory.StartNew(() => {
@@ -130,6 +133,10 @@ namespace WPF_TEST.ViewModel
                     
                 //});
                 
+            });
+            CustomerManager = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                mainScreenViewModel.SelectedViewModel = CustomerSetting_ViewModel;
             });
             Usermanager = new RelayCommand<object>((p) => { return true; }, (p) => 
             {

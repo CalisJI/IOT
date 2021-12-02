@@ -40,5 +40,7 @@
     <viewmodel:Login_ViewModel x:Key="Login"/>
     <viewmodel:AddProjectSchedule_ViewModel x:Key="AddJobProject"/>
     <viewmodel:Barcode_ViewModel x:Key="Barcode"/>
+    <viewmodel:CustomerSetting_ViewModel x:Key="CustomerSetting"/>
+    <viewmodel:Work_Edit_ViewModel x:Key="WorkEdit"/>
 
 </ResourceDictionary>

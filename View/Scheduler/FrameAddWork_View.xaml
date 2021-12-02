@@ -290,7 +290,7 @@
                         Width="150"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Bottom"
-                        Command="{Binding Add_Project}"
+                        Command="{Binding BackAddJob}"
                         BorderBrush="Blue"
                         BorderThickness="2"
                     

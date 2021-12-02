@@ -4,3 +4,4 @@ DevExpress.Xpf.Scheduling.SchedulerControl, DevExpress.Xpf.Scheduling.v19.2, Ver
 DevExpress.Xpf.Gantt.GanttControl, DevExpress.Xpf.Gantt.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a
 DevExpress.Xpf.RichEdit.RichEditControl, DevExpress.Xpf.RichEdit.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a
 DevExpress.Xpf.Editors.ComboBoxEdit, DevExpress.Xpf.Core.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a
+DevExpress.Xpf.Grid.GridControl, DevExpress.Xpf.Grid.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a

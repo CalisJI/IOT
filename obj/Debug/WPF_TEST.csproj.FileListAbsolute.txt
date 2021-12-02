@@ -1123,7 +1123,6 @@ F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\loading_view.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\loading_view.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\AccessManager_View.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\AccessManager_View.baml
-F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.csproj.AssemblyReference.cache
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\bin\Debug\AForge.dll
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\bin\Debug\AForge.Imaging.dll
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\bin\Debug\AForge.Math.dll
@@ -1138,5 +1137,10 @@ F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\bin\Debug\AForge.Video.xml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\bin\Debug\AForge.Video.DirectShow.xml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\bin\Debug\zxing.xml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\bin\Debug\zxing.presentation.xml
-F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Barcode_View.g.cs
-F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Barcode_View.baml
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Barcode\Barcode_View.g.cs
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\DataInput\CustomerSetting_View.g.cs
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Barcode\Barcode_View.baml
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\DataInput\CustomerSetting_View.baml
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.csproj.AssemblyReference.cache
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Scheduler\Work_Library_View.g.cs
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Scheduler\Work_Library_View.baml

@@ -89,20 +89,20 @@
                             </ListView>
                         </Grid>
                         <Grid  Grid.Row="1"
-                           HorizontalAlignment="Right">
+                            HorizontalAlignment="Right">
                             <Button
-                        Style="{StaticResource MaterialDesignFlatButton}"
-                        Height="60"
-                        DataContext="{StaticResource EditJob}"
-                        materialDesign:ShadowAssist.ShadowDepth="Depth3"
-                        Width="150"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Bottom"
-                   
-                        BorderBrush="Blue"
-                        BorderThickness="2"
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Height="60"
+                                DataContext="{StaticResource ScheduleViewModel}"
+                                materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                Width="150"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                Command="{Binding }"
+                                BorderBrush="Blue"
+                                BorderThickness="2"
                     
-                        materialDesign:ButtonAssist.CornerRadius="8">
+                                materialDesign:ButtonAssist.CornerRadius="8">
                                 <StackPanel Orientation="Horizontal" 
                                     Height="50"
                                     Width="130" 
@@ -110,21 +110,21 @@
                                     HorizontalAlignment="Center">
 
                                     <materialDesign:PackIcon 
-                            Kind="Delete"
-                            Height="30"
-                            Width="30"
-                                Margin="10,0,0,0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"
-                            Foreground="Red"/>
+                                        Kind="Delete"
+                                        Height="30"
+                                        Width="30"
+                                        Margin="10,0,0,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        Foreground="Red"/>
                                     <TextBlock 
-                                VerticalAlignment="Center"
-                                Margin="20,0,0,0"
-                            Text="Delete"
+                                        VerticalAlignment="Center"
+                                        Margin="20,0,0,0"
+                                        Text="Delete"
                                         
-                            FontSize="16"
-                            HorizontalAlignment="Center"
-                            Foreground="Black"/>
+                                        FontSize="16"
+                                        HorizontalAlignment="Center"
+                                        Foreground="Black"/>
                                 </StackPanel>
 
                             </Button>
@@ -159,7 +159,7 @@
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                                 <TextBlock Text="Quantity:" Width="150" Margin="20,5,0,0"/>
-                                <TextBox Text="Binding" Margin="40,0,0,0"/>
+                                <TextBox Text="{Binding GetWorks.Quantity}" Margin="40,0,0,0"/>
 
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
@@ -249,7 +249,7 @@
                     <Button
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Height="60"
-                    DataContext="{StaticResource EditJob}"
+                    DataContext="{StaticResource ScheduleViewModel}"
                     materialDesign:ShadowAssist.ShadowDepth="Depth3"
                     Width="150"
                     HorizontalAlignment="Center"

@@ -13,6 +13,7 @@ using WPF_TEST.Notyfication;
 using System.Text.Json;
 using System.Security;
 using WPF_TEST.View;
+using System.Threading;
 
 namespace WPF_TEST.ViewModel
 {
@@ -225,7 +226,7 @@ namespace WPF_TEST.ViewModel
                         LoginSuccess = true;
                         Permit = login.Permit;
                         LoginAcount = login;
-                       
+                        Loading_Indicator.BeingBusy();
                         //WPFMessageBoxService.ShowMessage("Đăng nhập thành công", "Login!", System.Messaging.MessageType.Report);
                         
                     }
@@ -286,5 +287,29 @@ namespace WPF_TEST.ViewModel
         }
 
        
+    }
+    public static class Loading_Indicator 
+    {
+        public static Loading Loading { get; set; }
+        public static void BeingBusy() 
+        {
+            Thread thread = new Thread(() => 
+            {
+                Loading = new Loading();
+                Loading.ShowDialog();
+
+            });
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+           
+           
+        }
+        public static void Finished() 
+        {
+            Loading.Dispatcher.BeginInvoke(new Action(() => 
+            {
+                Loading.Close();
+            }));
+        }
     }
 }

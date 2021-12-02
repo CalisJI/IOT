@@ -79,7 +79,7 @@
                                     Height="100"
                                     Width="200"
                                     HorizontalAlignment="Left"
-                                    Margin="20,0,0,0"
+                                    Margin="20,0,0,70"
                                     Command="{Binding OpenBarCode}"
                                     materialDesign:ShadowAssist.ShadowDepth="Depth3"
                                     materialDesign:ButtonAssist.CornerRadius="8"
@@ -99,6 +99,13 @@
                                     </StackPanel>
                                     
                                 </Button>
+                                <TextBox 
+                                    HorizontalAlignment="Left"
+                                    Text=""
+                                    Margin="10,110,0,0"
+                                    Width="220"
+                                    Height="40"
+                                    FontSize="20" FontWeight="DemiBold"/>
                                 <GroupBox 
                                     Header="Customer"
                                     Margin="250,0,20,0"
@@ -114,11 +121,11 @@
                                             <ComboBox Margin="52,5,10,0"
                                               Name="Customeradd_cbb"
                                               
-                                          Width="420"
-                                          FontSize="20"
-                                          SelectedItem="{Binding SingleCustomer}"
+                                              Width="420"
+                                              FontSize="20"
+                                              SelectedItem="{Binding SingleCustomer}"
                                                      
-                                          ItemsSource="{Binding CustomerInfor}">
+                                              ItemsSource="{Binding CustomerInfor}">
                                                 <ComboBox.ItemTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Text="{Binding Customer_Info}"/>

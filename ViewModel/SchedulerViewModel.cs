@@ -53,6 +53,9 @@ namespace WPF_TEST.ViewModel
         public ICommand selectpriority { get; set; }
 
         public ICommand BackAddJob { get; set; }
+        public ICommand DeleteWork { get; set; }
+        public ICommand ConfirmEditjob { get; set; }
+        public ICommand Loaded { get; set; }
 
         private string _customer_Infor;
         public string Customer_Infor
@@ -82,7 +85,7 @@ namespace WPF_TEST.ViewModel
         private string _detail;
         public string Details
         { get { return _detail; } set { SetProperty(ref _detail, value, nameof(Details)); } }
-        private JobOrder Edit_JobItem;
+        private Customer Edit_JobItem;
         private JobOrder _SelectedJob;
         private Customer _singleCustomer;
         public Customer SingleCustomer
@@ -140,6 +143,7 @@ namespace WPF_TEST.ViewModel
         ScheduleListTime_ViewModel ScheduleListTime_ViewModel = new ScheduleListTime_ViewModel();
         PlannerModel PlannerModel = new PlannerModel();
         WorkScope_ViewModel WorkScope_ViewModel = new WorkScope_ViewModel();
+        Work_Edit_ViewModel Work_Edit_ViewModel = new Work_Edit_ViewModel();
         AddProjectSchedule_ViewModel AddProjectSchedule_ViewModel;
         FrameWorkscope_ViewModel FrameWorkscope_ViewModel = new FrameWorkscope_ViewModel();
         public ICommand SaveCommand
@@ -193,6 +197,29 @@ namespace WPF_TEST.ViewModel
             //    aa = GetWorks;
 
             //});
+            Loaded = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                try
+                {
+                    Loading_Indicator.Finished();
+                }
+                catch (Exception ex)
+                {
+
+                  
+                }
+               
+            });
+            ConfirmEditjob = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                foreach (var item in Work_Edit_ViewModel._work)
+                {
+                    SelectedJob.Works.Add(item);
+                }
+
+                schedulerViewModel.SelectedViewModel = EditJobModel;
+
+            });
             selectpriority = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 try
@@ -221,6 +248,21 @@ namespace WPF_TEST.ViewModel
 
 
                 }
+            });
+            DeleteWork = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                try
+                {
+                    var d = (Works)p;
+                    var a = SelectedJob.Works.Where(x => x == d).SingleOrDefault();
+                    SelectedJob.Works.Remove(a);
+                }
+                catch (Exception ex)
+                {
+
+                    
+                }
+               
             });
             SaveNewJob = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
@@ -294,9 +336,10 @@ namespace WPF_TEST.ViewModel
                     {
                         throw new Exception();
                     }
-                    Edit_JobItem = (JobOrder)p;
-                    var dd = JobOrders.Where(x => x == Edit_JobItem).FirstOrDefault();
-                    SelectedJob = Edit_JobItem;
+                    SelectedJob = (JobOrder)p;
+                    //var dd = JobOrders.Where(x => x == Edit_JobItem).FirstOrDefault();
+                    //SelectedJob = Edit_JobItem;
+                    Edit_JobItem = CustomerInfo.Where(x => x == SelectedJob.Customerinformation).FirstOrDefault();
                     schedulerViewModel.SelectedViewModel = EditJobModel;
                 }
                 catch (Exception )

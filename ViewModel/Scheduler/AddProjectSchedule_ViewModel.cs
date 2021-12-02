@@ -170,6 +170,12 @@ namespace WPF_TEST.ViewModel
                 SetProperty(ref _selectedwork, value, nameof(Selected_Work));
             }
         }
+        private string _id;
+        public string ID_Barcode 
+        {
+            get { return _id; }
+            set { SetProperty(ref _id, value, nameof(ID_Barcode)); }
+        }
         public ICommand AddJob
         { get; set; }
         public ICommand AddrangeWork { get; set; }
@@ -276,7 +282,9 @@ namespace WPF_TEST.ViewModel
             });
             AddJob = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
+                Random random = new Random();
                 JobOrder jobOrder = new JobOrder();
+                jobOrder.ID = random.Next(111111, 999999);
                 jobOrder.ActualvsPlan = 0;
                 jobOrder.Complete = 0;
                 jobOrder.Stage = Status.Plan;
@@ -293,7 +301,12 @@ namespace WPF_TEST.ViewModel
                 jobOrder.Customerinformation = SingleCustomer;
                 
                 jobOrder.Customer_PO = Customer_PO;
-                jobOrder.Works = WorksList;
+                jobOrder.Works = new ObservableCollection<Works>();
+                foreach (var item in WorksList)
+                {
+                    
+                    jobOrder.Works.Add(item);
+                }
 
                 JobOrders.Add(jobOrder);
                 try
@@ -323,15 +336,24 @@ namespace WPF_TEST.ViewModel
                 {
                     item.Selected = false;
                 }
-                Work_Library.Clear();
+                WorksList.Clear();
 
               
             });
             ChooseCustomer = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
-                var a = (Customer)p;
-                SingleCustomer = a;
-                Customer_Infor = a.Customer_Details;
+                try
+                {
+                    var a = (Customer)p;
+                    SingleCustomer = a;
+                    Customer_Infor = a.Customer_Details;
+                }
+                catch (Exception ex)
+                {
+
+                   
+                }
+              
             });
         }
         public void Save_Table()

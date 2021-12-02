@@ -133,6 +133,12 @@
             <DataTemplate DataType="{x:Type viewmodels:Access_Managerment_ViewModel}">
                 <views:AccessManager_View/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:CustomerSetting_ViewModel}">
+                <views:CustomerSetting_View/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:Work_Edit_ViewModel}">
+                <views:Work_Library_View/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

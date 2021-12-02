@@ -409,6 +409,7 @@
     <Compile Include="SerialCommunicate\SerialPortViewModel.cs" />
     <Compile Include="ViewModel\Access_Managerment_ViewModel.cs" />
     <Compile Include="ViewModel\Barcode_ViewModel.cs" />
+    <Compile Include="ViewModel\CustomerSetting_ViewModel.cs" />
     <Compile Include="ViewModel\loading_ViewModel.cs" />
     <Compile Include="ViewModel\Login_ViewModel.cs" />
     <Compile Include="ViewModel\ModbusConfig\AddNewConnectionViewModel.cs" />
@@ -450,18 +451,22 @@
     <Compile Include="ViewModel\SchedulerViewModel.cs" />
     <Compile Include="ViewModel\ModbusConfig\TCP_IP_Frame_ViewModel.cs" />
     <Compile Include="ViewModel\FileConfig\TXTData_ViewModel.cs" />
+    <Compile Include="ViewModel\Scheduler\Work_Edit_ViewModel.cs" />
     <Compile Include="ViewModel\ValueDescription.cs" />
     <Compile Include="ViewModel\Media\VideoManager_ViewModel.cs" />
     <Compile Include="ViewModel\Workflow\WorkflowCreatorModel.cs" />
-    <Compile Include="ViewModel\Workflow\WorkScope_ViewModel.cs" />
+    <Compile Include="ViewModel\Scheduler\WorkScope_ViewModel.cs" />
     <Compile Include="ViewModel\FileConfig\XMLData_ViewModel.cs" />
     <Compile Include="View\AccessManager_View.xaml.cs">
       <DependentUpon>AccessManager_View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Barcode_View.xaml.cs">
+    <Compile Include="View\Barcode\Barcode_View.xaml.cs">
       <DependentUpon>Barcode_View.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Barcode_viewModel.cs" />
+    <Compile Include="View\DataInput\CustomerSetting_View.xaml.cs">
+      <DependentUpon>CustomerSetting_View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\FileConfig\ExcelFileConfig_View.xaml.cs">
       <DependentUpon>ExcelFileConfig_View.xaml</DependentUpon>
     </Compile>
@@ -576,6 +581,9 @@
     <Compile Include="View\Scheduler\WorkScope_View.xaml.cs">
       <DependentUpon>WorkScope_View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Scheduler\Work_Library_View.xaml.cs">
+      <DependentUpon>Work_Library_View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WorkflowCreator.xaml.cs">
       <DependentUpon>WorkflowCreator.xaml</DependentUpon>
     </Compile>
@@ -646,7 +654,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Barcode_View.xaml">
+    <Page Include="View\Barcode\Barcode_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DataInput\CustomerSetting_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -802,6 +814,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Scheduler\Work_Library_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WorkflowCreator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -840,7 +856,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="View\Access_Management\" />
-    <Folder Include="View\Barcode\" />
     <Folder Include="View\Workflow\" />
   </ItemGroup>
   <ItemGroup>
@@ -889,6 +904,8 @@
     <Resource Include="ImageSource\Barcode.png" />
     <Resource Include="ImageSource\User1.png" />
     <Resource Include="ImageSource\customer.png" />
+    <Resource Include="ImageSource\Media.png" />
+    <Resource Include="ImageSource\Loading.gif" />
     <Content Include="Images\OutlookInspired\Svg\CalendarGroup.svg" />
     <Content Include="Images\OutlookInspired\Svg\CalendarPermission.svg" />
     <Content Include="Images\OutlookInspired\Svg\Categorize.svg" />

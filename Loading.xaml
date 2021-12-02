@@ -7,23 +7,38 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Loading" Height="150" Width="300" WindowStyle="None">
-    <Grid Background="CadetBlue">
-        <Border BorderBrush="Black" BorderThickness="1" Background="CadetBlue">
-            <Grid Background="#303030">
-                <materialDesign:Card
-                Background="CadetBlue"
-            
-                UniformCornerRadius="50">
+        Title="Loading" Height="130" Width="200" WindowStyle="None">
+    <Grid>
+       
+            <Grid Background="AliceBlue">
+                <materialDesign:Card Background="AliceBlue" >
                     <ProgressBar
-                Style="{StaticResource MaterialDesignCircularProgressBar}"
-                Value="50"
-                Margin="0,0,0,15"
-                IsIndeterminate="True" Height="50"  Width="50" />
+                        Background="AliceBlue"
+                        Style="{StaticResource MaterialDesignCircularProgressBar}"
+                        Value="0"
+                        Width="50"
+                        Height="50"
+                       
+                        
+                    IsIndeterminate="True" >
+                        <ProgressBar.Foreground>
+                            <LinearGradientBrush>
+                                <GradientStop Color="Orange" Offset="0"/>
+                                <GradientStop Color="Lime" Offset="0.8"/>
+                                <GradientStop Color="Purple" Offset="0.4"/>
+                            </LinearGradientBrush>
+                        </ProgressBar.Foreground>
+                    </ProgressBar>
 
                 </materialDesign:Card>
-                <TextBlock Text="Loading. . ." FontSize="30" Foreground="WhiteSmoke" Margin="0,100,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock 
+                    Text="Loading. . ."
+                    FontWeight="DemiBold"
+                    FontSize="25"
+                    Foreground="Black" 
+                    Margin="0,90,0,0"
+                    VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Grid>
-        </Border>
+       
     </Grid>
 </Window>

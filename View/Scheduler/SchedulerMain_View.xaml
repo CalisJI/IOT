@@ -5,8 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF_TEST.View"
              mc:Ignorable="d" 
+             xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             
              DataContext="{StaticResource ScheduleViewModel}"
              d:DesignHeight="1080" d:DesignWidth="1920">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Loaded}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+
     <Grid>
         <ContentControl Content="{Binding SelectedViewModel}"/>
     </Grid>

@@ -16,9 +16,9 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <Grid
-                        Margin="0,50,0,0"
-                        VerticalAlignment="Top"
-                        HorizontalAlignment="Center">
+                Margin="0,50,0,0"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Center">
                 <Button
                             Style="{StaticResource MaterialDesignRaisedLightButton}"
                             Height="80" Width="80"

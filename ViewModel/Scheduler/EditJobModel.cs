@@ -41,7 +41,7 @@ namespace WPF_TEST.ViewModel
         public static ObservableCollection<Customer> _customerInfo;
         public ObservableCollection<Customer> CustomerInfo { get { return _customerInfo; } set { SetProperty(ref _customerInfo, value, nameof(CustomerInfo)); } }
 
-       
+
 
         private ObservableCollection<JobOrder> _jobOrder;
         public ObservableCollection<JobOrder> JobOrders
@@ -206,17 +206,25 @@ namespace WPF_TEST.ViewModel
             WorksList.Add(works2);
             WorksList.Add(works3);
         }
-        private void Add_Customer() 
-        {
-            Customer customer = new Customer();
-            customer.Customer_Info = "Customer1";
-            customer.Customer_Details = "Email: Person13gmail.com \n Fax:5530145 \n Address:Da Nang ...";
-            Customer customer1 = new Customer();
-            customer1.Customer_Info = "Customer2";
-            customer1.Customer_Details = "Email: Person32gmail.com \n Fax:54320145 \n Address:Da Nang ...";
-            CustomerInfo.Add(customer);
-            CustomerInfo.Add(customer1);
-        }
+        //private void Add_Customer() 
+        //{
+        //    Customer customer = new Customer();
+        //    customer.Customer_Info = "Company1";
+        //    customer.Customer_Details = "Email: Person13gmail.com \n Fax:5530145 \n Address:Da Nang ...";
+        //    customer.Address = "Đà Nẵng";
+        //    customer.Contact_Person = "Mr.Thi";
+        //    customer.PhoneNumber = "0123456789";
+        //    customer.Email = "Person13@gmail.com";
+        //    Customer customer1 = new Customer();
+        //    customer1.Customer_Info = "Company2";
+        //    customer1.Customer_Details = "Email: Person13gmail.com \n Fax:5530145 \n Address:Da Nang ...";
+        //    customer1.Address = "Sài Gòn";
+        //    customer1.Contact_Person = "Mr.Dao";
+        //    customer1.PhoneNumber = "0321789456";
+        //    customer1.Email = "Person13@gmail.com";
+        //    CustomerInfo.Add(customer);
+        //    CustomerInfo.Add(customer1);
+        //}
 
 
         //======================== Thêm đơn hàng thủ công===========================
@@ -280,7 +288,7 @@ namespace WPF_TEST.ViewModel
                 ToJson = new ObservableCollection<ConvertoJson>();
                 CustomerInfo = new ObservableCollection<Customer>();
                 WorksList = new ObservableCollection<Works>();
-                
+                CustomerInfo = CustomerSetting_ViewModel.customers;
                 PlannerModel._jobOrder = JobOrders;
                 PlannerModel._customerInfo = CustomerInfo;
                 PlannerModel._work = WorksList;
@@ -302,23 +310,23 @@ namespace WPF_TEST.ViewModel
                 Sqlexcute.Check_Table(Sqlexcute.Database, "JobOrder", ref check);
                 Sqlexcute.Check_Table(Sqlexcute.Database, Customer_Table.TableName, ref check1);
                 Sqlexcute.Check_Table(Sqlexcute.Database, Work_Table.TableName, ref check2);
-               
-                if (check1 == 0)
-                {
-                   
-                    Add_Customer();
-                    Customer_Table = Sqlexcute.FillToDataTable(CustomerInfo);
-                    Sqlexcute.AutoCreateTable(Customer_Table, Sqlexcute.Database, Customer_Table.TableName, ref check_, ref exist_);
-                    mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref Customer_Table, Customer_Table.TableName, Sqlexcute.Database);
-              
-                    Customer_Table = Sqlexcute.FillToDataTable(CustomerInfo);
-                    Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, Customer_Table, Sqlexcute.Database, Customer_Table.TableName);
-                }
-                else
-                {
-                    mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref Customer_Table, Customer_Table.TableName, Sqlexcute.Database);
-                   CustomerInfo = Sqlexcute.Conver_From_Data_Table_To_List<Customer>(Customer_Table);
-                }
+
+                //if (check1 == 0)
+                //{
+
+                //    Add_Customer();
+                //    Customer_Table = Sqlexcute.FillToDataTable(CustomerInfo);
+                //    Sqlexcute.AutoCreateTable(Customer_Table, Sqlexcute.Database, Customer_Table.TableName, ref check_, ref exist_);
+                //    mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref Customer_Table, Customer_Table.TableName, Sqlexcute.Database);
+
+                //    Customer_Table = Sqlexcute.FillToDataTable(CustomerInfo);
+                //    Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, Customer_Table, Sqlexcute.Database, Customer_Table.TableName);
+                //}
+                //else
+                //{
+                //    mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref Customer_Table, Customer_Table.TableName, Sqlexcute.Database);
+                //    CustomerInfo = Sqlexcute.Conver_From_Data_Table_To_List<Customer>(Customer_Table);
+                //}
                 if (check2 == 0)
                 {
                     
@@ -385,10 +393,19 @@ namespace WPF_TEST.ViewModel
             //});
             SelectToEditcbbox = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
-                var a = (Customer)p;
-                var b = CustomerInfo.Where(cc => cc.Customer_Info == a.Customer_Info).FirstOrDefault();
-                
-                CustomerSelected = b;
+                try
+                {
+                    var a = (Customer)p;
+                    var b = CustomerInfo.Where(cc => cc.Customer_Info == a.Customer_Info).FirstOrDefault();
+
+                    CustomerSelected = b;
+                }
+                catch (Exception ex)
+                {
+
+                    
+                }
+               
                 
             });
         }

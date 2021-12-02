@@ -56,7 +56,7 @@
                                 VerticalAlignment="Stretch"
                                 Margin="10"
                                 IsEnabled="{Binding CurrentAccount.Permit.UACC.ModifyAccount}"
-                                Command="{Binding Usermanager}"
+                                Command="{Binding CustomerManager}"
                                 BorderBrush="Blue"
                                 BorderThickness="2"
                                 Style="{StaticResource MaterialDesignFlatButton}"
@@ -193,14 +193,17 @@
                                     Orientation="Vertical"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center" Height="150" Width="150">
-                                    <materialDesign:PackIcon 
+                                    <Image
+                                        Visibility="Visible"
                                         HorizontalAlignment="Center"
-                                        Foreground="Gray"
-                                        Kind="CalendarMonth"
-                                        Height="100"
-                                        Width="100"/>
-                                    <TextBlock
-                                        Text="Scheduler"
+                                        VerticalAlignment="Top"
+                                        Margin="0,10,0,0"
+                                        Stretch="Fill"
+                                        Source="pack://application:,,,/ImageSource/schedule.png"
+                                        Height="90"
+                                        Width="90"/>
+                                    <TextBlock 
+                                        Text="Schedule"
                                         Foreground="Black"
                                         HorizontalAlignment="Center"
                                         FontSize="30"/>
@@ -278,13 +281,16 @@
                                     Orientation="Vertical"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center" Height="150" Width="150">
-                                    <materialDesign:PackIcon 
+                                    <Image
+                                        Visibility="Visible"
                                         HorizontalAlignment="Center"
-                                        Foreground="Gray"
-                                        Kind="FolderMultipleImage"
-                                        Height="100"
-                                        Width="100"/>
-                                    <TextBlock
+                                        VerticalAlignment="Top"
+                                        Margin="0,10,0,0"
+                                        Stretch="Fill"
+                                        Source="pack://application:,,,/ImageSource/Media.png"
+                                        Height="90"
+                                        Width="90"/>
+                                    <TextBlock 
                                         Text="Content"
                                         Foreground="Black"
                                         HorizontalAlignment="Center"
