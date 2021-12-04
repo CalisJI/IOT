@@ -7,38 +7,42 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Loading" Height="130" Width="200" WindowStyle="None">
+        Title="Loading" Height="100" Width="130" WindowStyle="None">
     <Grid>
        
-            <Grid Background="AliceBlue">
-                <materialDesign:Card Background="AliceBlue" >
-                    <ProgressBar
-                        Background="AliceBlue"
-                        Style="{StaticResource MaterialDesignCircularProgressBar}"
-                        Value="0"
-                        Width="50"
-                        Height="50"
-                       
-                        
-                    IsIndeterminate="True" >
-                        <ProgressBar.Foreground>
-                            <LinearGradientBrush>
-                                <GradientStop Color="Orange" Offset="0"/>
-                                <GradientStop Color="Lime" Offset="0.8"/>
-                                <GradientStop Color="Purple" Offset="0.4"/>
-                            </LinearGradientBrush>
-                        </ProgressBar.Foreground>
-                    </ProgressBar>
+            <StackPanel Background="Gray">
 
-                </materialDesign:Card>
+            <ProgressBar
+                    Style="{DynamicResource MaterialDesignCircularProgressBar}"
+                    HorizontalAlignment="Center"
+                    Margin="16"
+                    Height="30"
+                    Width="40"
+                    
+                    IsIndeterminate="True"
+                    Value="0" >
+                <ProgressBar.Foreground>
+                    <LinearGradientBrush>
+                        <GradientStop Color="Blue" Offset="0.1"/>
+                        <GradientStop Color="Cyan" Offset="0.3"/>
+                        <GradientStop Color="Lime" Offset="0.5"/>
+                        <GradientStop Color="Yellow" Offset="0.7"/>
+                        <GradientStop Color="Orange" Offset="0.9"/>
+                        <GradientStop Color="Red" Offset="1.1"/>
+                    </LinearGradientBrush>
+                </ProgressBar.Foreground>
+            </ProgressBar>
+
+                    
                 <TextBlock 
                     Text="Loading. . ."
                     FontWeight="DemiBold"
-                    FontSize="25"
-                    Foreground="Black" 
-                    Margin="0,90,0,0"
-                    VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            </Grid>
+                    FontSize="20"
+                    Foreground="AliceBlue" 
+                   
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"/>
+            </StackPanel>
        
     </Grid>
 </Window>

@@ -394,7 +394,103 @@ namespace WPF_TEST.Class_Resource
             }
             
         }
-      
+        public void AutoCreateTable(DataTable dataTable, string database, string TableName , ref DataTable dataTable1)
+        {
+            string cmd;
+            int count = 2;
+            //*****************************************************
+            // Code for processing
+            using (SQL_Connection = new MySqlConnection(StrCon(Server, pwd)))
+            {
+                MySqlCommand command = new MySqlCommand(Check_Table_Exits(database, TableName), SQL_Connection);
+
+                SQL_Connection.Open();
+
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+
+                {
+                    count = reader.GetInt32(0);
+                }
+                SQL_Connection.Close();
+            }
+            if (count == 0)
+
+            {
+
+                //MessageBox.Show("No such data table exists!");
+                string sqlsc = string.Empty;
+                sqlsc = "CREATE TABLE " + TableName + " (";
+                for (int i = 0; i < dataTable.Columns.Count; i++)
+                {
+                    sqlsc += "" + dataTable.Columns[i].ColumnName + " ";
+                    string columnType = dataTable.Columns[i].DataType.ToString();
+                    switch (columnType)
+                    {
+                        case "System.Int32":
+                            sqlsc += " INT ";
+                            break;
+                        case "System.Int64":
+                            sqlsc += " BIGINT(50) ";
+                            break;
+                        case "System.Int16":
+                            sqlsc += " SMALLINT(50)";
+                            break;
+                        case "System.Byte":
+                            sqlsc += " TINYINT(50)";
+                            break;
+                        case "System.Boolean":
+                            sqlsc += " TINYINT(1)";
+                            break;
+                        case "System.Decimal":
+                            sqlsc += " DECIMAL(45) ";
+                            break;
+                        case "System.DateTime":
+                            sqlsc += " DATETIME ";
+                            break;
+                        case "System.Double":
+                            sqlsc += " DOUBLE ";
+                            break;
+                        case "System.Single":
+                            sqlsc += " FLOAT ";
+                            break;
+
+                        //case "WPF_TEST.ViewModel.Status":
+                        //    sqlsc += " ENUM('Queued','Ready','Running','Paused','Delayed','Done','Plan') ";
+                        //    break;
+                        case "System.String":
+                        default:
+                            sqlsc += string.Format(" VARCHAR({0}) ", dataTable.Columns[i].MaxLength == -1 ? "400" : dataTable.Columns[i].MaxLength.ToString());
+                            break;
+                    }
+                    if (dataTable.Columns[i].AutoIncrement)
+                        sqlsc += " IDENTITY(" + dataTable.Columns[i].AutoIncrementSeed.ToString() + "," + dataTable.Columns[i].AutoIncrementStep.ToString() + ") ";
+                    if (!dataTable.Columns[i].AllowDBNull)
+                        sqlsc += " NOT NULL ";
+                    sqlsc += ",";
+                }
+                cmd = sqlsc.Substring(0, sqlsc.Length - 1) + ", PRIMARY KEY (" + dataTable.Columns[0].ColumnName + "))";
+               
+                //*****************************************************
+                SQL_command(cmd, database);
+                dataTable1 = new DataTable(TableName);
+            }
+            else if (count == 1)
+            {
+                try
+                {
+                    GetData_FroM_Database(ref dataTable1, TableName, database);
+                }
+                catch (Exception ex)
+                {
+
+                    error_message = ex.Message;
+                }
+
+            }
+
+        }
         //public void UpdateTable_to_MySQlHost( ref DataTable dataTable,string table_Name, string Database) 
         //{
         //    using(SQL_Connection = new MySqlConnection(StrCon(Server, pwd))) 

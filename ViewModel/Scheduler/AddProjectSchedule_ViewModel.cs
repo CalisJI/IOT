@@ -16,7 +16,25 @@ namespace WPF_TEST.ViewModel
 {
     public class AddProjectSchedule_ViewModel:BaseViewModel
     {
+        #region =================================SingleTon=======================
+        private static AddProjectSchedule_ViewModel addProjectSchedule_ViewModel;
+        public static AddProjectSchedule_ViewModel _AddProjectSchedule_ViewModel
+        {
+            get
+            {
+                if (addProjectSchedule_ViewModel == null)
+                {
+                    addProjectSchedule_ViewModel = new AddProjectSchedule_ViewModel();
+                }
+                return addProjectSchedule_ViewModel;
+            }
+            set
+            {
+                addProjectSchedule_ViewModel = value;
+            }
+        }
 
+        #endregion
         DataTable JobOrderRuntime_Table = new DataTable("JobOrderRuntime");
         public static ObservableCollection<JobOrderRuntime> _jobOrderRuntime;
         public ObservableCollection<JobOrderRuntime> JobOrdersRumtimes
@@ -64,7 +82,18 @@ namespace WPF_TEST.ViewModel
         private TaskPriority _taskPriority;
         public TaskPriority TaskPriority 
         {
-            get { return _taskPriority; }
+            get
+            {
+                if (_taskPriority != null) 
+                {
+                    return _taskPriority;
+                }
+                else 
+                {
+                    return TaskPriority.Normal;
+                }
+                
+            }
             set { SetProperty(ref _taskPriority, value, nameof(TaskPriority)); }
         }
      
@@ -186,6 +215,7 @@ namespace WPF_TEST.ViewModel
         public ICommand UndoSelect { get; set; }
         public ICommand selectpriority { get; set; }
         public ICommand SelectedWork { get; set; }
+        public ICommand Get_BarCode { get; set; }
 
 
         static bool Loaed = false;
@@ -201,6 +231,23 @@ namespace WPF_TEST.ViewModel
                 Loaed = true;
                 
             }
+            Get_BarCode = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                try
+                {
+                    if (p != null) 
+                    {
+                        ID_Barcode = p.ToString();
+                    }
+                    
+                }
+                catch (Exception ex)
+                {
+
+                  
+                }
+                
+            });
             SelectedWork = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
                 try
@@ -337,7 +384,9 @@ namespace WPF_TEST.ViewModel
                     item.Selected = false;
                 }
                 WorksList.Clear();
-
+                SchedulerViewModel schedulerViewModel = SchedulerViewModel._SchedulerViewModel;
+                schedulerViewModel.SaveAddjob.CanExecute(null);
+                schedulerViewModel.SaveAddjob.Execute(null);
               
             });
             ChooseCustomer = new RelayCommand<object>((p) => { return true; }, (p) => 
@@ -355,6 +404,11 @@ namespace WPF_TEST.ViewModel
                 }
               
             });
+        }
+        public void CompareBarCode(string barcode) 
+        {
+        
+            
         }
         public void Save_Table()
         {

@@ -100,11 +100,13 @@
                                     
                                 </Button>
                                 <TextBox 
+                                    DataContext="{StaticResource AddJobProject}"
                                     HorizontalAlignment="Left"
-                                    Text=""
+                                    Text="{Binding ID_Barcode, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                     Margin="10,110,0,0"
                                     Width="220"
                                     Height="40"
+                                    Name="Barcodetbx"
                                     FontSize="20" FontWeight="DemiBold"/>
                                 <GroupBox 
                                     Header="Customer"

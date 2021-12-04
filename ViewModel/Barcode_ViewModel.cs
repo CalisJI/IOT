@@ -25,14 +25,26 @@ namespace WPF_TEST.ViewModel
         }
         
         public ICommand GetSource { get; set; }
-        public ICommand caicungc { get; set; }
+        
 
         public Barcode_ViewModel() 
         {
             
             GetSource = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
-                string a = ResultBarCode;
+                try
+                {
+                    if (p != null) 
+                    {
+                        ResultBarCode = p.ToString();
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    
+                }
+                
             });
         }
     }

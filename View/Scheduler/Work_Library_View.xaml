@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             
+             DataContext="{StaticResource ScheduleViewModel}"
              d:DesignHeight="1080" d:DesignWidth="1920">
     <ScrollViewer
         HorizontalAlignment="Stretch"
@@ -286,7 +286,6 @@
                     <Button
                         Style="{StaticResource MaterialDesignFlatButton}"
                         Height="60"
-                        DataContext="{StaticResource ScheduleViewModel}"
                         materialDesign:ShadowAssist.ShadowDepth="Depth3"
                         Width="150"
                         HorizontalAlignment="Center"
@@ -294,19 +293,17 @@
                         Command="{Binding ConfirmEditjob}"
                         BorderBrush="Blue"
                         BorderThickness="2"
-                    
                         materialDesign:ButtonAssist.CornerRadius="8">
-
-                        <StackPanel Orientation="Horizontal" 
-                                    Height="50"
-                                    Width="130" 
-                                    VerticalAlignment="Center" 
-                                    HorizontalAlignment="Center">
-
+                        <StackPanel
+                            Orientation="Horizontal" 
+                            Height="50"
+                            Width="130" 
+                            VerticalAlignment="Center" 
+                            HorizontalAlignment="Center">
                             <materialDesign:PackIcon 
-                            Kind="ContentSaveOutline"
-                            Height="30"
-                            Width="30"
+                                Kind="ContentSaveOutline"
+                                Height="30"
+                                Width="30"
                                 Margin="10,0,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
@@ -327,13 +324,13 @@
                     <Button
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Height="60"
-                    DataContext="{StaticResource ScheduleViewModel}"
+                    
                     materialDesign:ShadowAssist.ShadowDepth="Depth3"
                     Width="150"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
                    
-                    Command="{Binding BackAddJob}"
+                    Command="{Binding Backschedule}"
                      BorderBrush="Blue"
                         BorderThickness="2"
                     materialDesign:ButtonAssist.CornerRadius="8">

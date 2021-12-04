@@ -27,10 +27,31 @@ namespace WPF_TEST.ViewModel
     [POCOViewModel]
     public class SchedulerViewModel : BaseViewModel
     {
+        private static SchedulerViewModel _Schedule;
+        public static SchedulerViewModel _SchedulerViewModel 
+        {
+            get 
+            {
+                if (_Schedule != null) 
+                {
+                    return _Schedule;
+                }
+                else 
+                {
+                    return new SchedulerViewModel();
+                }
+            }
+            set 
+            {
+                _Schedule = value;
+            }
+        }
+
+
         private BaseViewModel _selectedViewModel;
         WPFMessageBoxService messageBoxService = new WPFMessageBoxService();
         public ICommand WorKScope { get; set; }
-        public ICommand Save { get; set; }
+        public ICommand SaveAddjob { get; set; }
         public ICommand GotoEditJob { get; set; }
         public ICommand Goback { get; set; }
         public ICommand Schedule { get; set; }
@@ -144,8 +165,8 @@ namespace WPF_TEST.ViewModel
         PlannerModel PlannerModel = new PlannerModel();
         WorkScope_ViewModel WorkScope_ViewModel = new WorkScope_ViewModel();
         Work_Edit_ViewModel Work_Edit_ViewModel = new Work_Edit_ViewModel();
-        AddProjectSchedule_ViewModel AddProjectSchedule_ViewModel;
-        FrameWorkscope_ViewModel FrameWorkscope_ViewModel = new FrameWorkscope_ViewModel();
+        AddProjectSchedule_ViewModel AddProjectSchedule_ViewModel = AddProjectSchedule_ViewModel._AddProjectSchedule_ViewModel;
+        FrameWorkscope_ViewModel FrameWorkscope_ViewModel;
         public ICommand SaveCommand
         {
             get
@@ -212,12 +233,13 @@ namespace WPF_TEST.ViewModel
             });
             ConfirmEditjob = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
+                
+
                 foreach (var item in Work_Edit_ViewModel._work)
                 {
                     SelectedJob.Works.Add(item);
                 }
-
-                schedulerViewModel.SelectedViewModel = EditJobModel;
+                //schedulerViewModel.SelectedViewModel = EditJobModel;
 
             });
             selectpriority = new RelayCommand<object>((p) => { return true; }, (p) =>
@@ -270,7 +292,11 @@ namespace WPF_TEST.ViewModel
             });
             Add_Project = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
-                AddProjectSchedule_ViewModel = new AddProjectSchedule_ViewModel();
+                if (AddProjectSchedule_ViewModel != null) 
+                {
+                    AddProjectSchedule_ViewModel = null;
+                }
+                AddProjectSchedule_ViewModel = AddProjectSchedule_ViewModel._AddProjectSchedule_ViewModel;
                 schedulerViewModel.SelectedViewModel = AddProjectSchedule_ViewModel;
             });
             BackAddJob = new RelayCommand<object>((p) => { return true; }, (p) => 
@@ -324,9 +350,11 @@ namespace WPF_TEST.ViewModel
             {
                 schedulerViewModel.SelectedViewModel = PlannerModel;
             });
-            Save = new RelayCommand<object>((p) => { return true; }, (p) =>
+            SaveAddjob = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-
+                schedulerViewModel.SelectedViewModel = PlannerModel;
+                AddProjectSchedule_ViewModel = null;
+                
             });
             GotoEditJob = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
@@ -385,7 +413,7 @@ namespace WPF_TEST.ViewModel
              });
             AddworkScope = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
-                schedulerViewModel.SelectedViewModel = FrameWorkscope_ViewModel;
+                schedulerViewModel.SelectedViewModel = new FrameWorkscope_ViewModel();
             });
 
         }

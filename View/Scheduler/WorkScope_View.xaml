@@ -247,77 +247,78 @@
                 </Grid>
                 <Grid Margin="0,50,0,0">
                     <Button
-                    Style="{StaticResource MaterialDesignFlatButton}"
-                    Height="60"
-                    DataContext="{StaticResource ScheduleViewModel}"
-                    materialDesign:ShadowAssist.ShadowDepth="Depth3"
-                    Width="150"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Bottom"
-                    BorderBrush="Blue"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Height="60"
+                        DataContext="{StaticResource ScheduleViewModel}"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                        Width="150"
+                        Command="{Binding AddworkScope}"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        BorderBrush="Blue"
                         BorderThickness="2"
-                    materialDesign:ButtonAssist.CornerRadius="8">
+                        materialDesign:ButtonAssist.CornerRadius="8">
                         <StackPanel 
                             Orientation="Horizontal"
                             Height="50"
-                                    Width="130" 
-                                    VerticalAlignment="Center" 
-                                    HorizontalAlignment="Center">
+                            Width="130" 
+                            VerticalAlignment="Center" 
+                            HorizontalAlignment="Center">
 
                             <materialDesign:PackIcon 
-                            Kind="PlusCircle"
-                            Height="30"
-                            Width="30"
-                                  Margin="10,0,0,0"
+                                Kind="PlusCircle"
+                                Height="30"
+                                Width="30"
+                                Margin="10,0,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
-                            Foreground="Yellow"/>
+                                Foreground="Yellow"/>
                             <TextBlock
                                 VerticalAlignment="Center"
-                            Text="Add Work"
-                            FontSize="16"
-                            HorizontalAlignment="Center"
-                            Foreground="Black"/>
+                                Text="Add Work"
+                                FontSize="16"
+                                HorizontalAlignment="Center"
+                                Foreground="Black"/>
                         </StackPanel>
 
                     </Button>
                 </Grid>
                 <Grid Margin="0,50,0,0">
                     <Button
-                    Style="{StaticResource MaterialDesignFlatButton}"
-                    Height="60"
-                    DataContext="{StaticResource ScheduleViewModel}"
-                    materialDesign:ShadowAssist.ShadowDepth="Depth3"
-                    Width="150"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Bottom"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Height="60"
+                        DataContext="{StaticResource ScheduleViewModel}"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                        Width="150"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
                    
-                    Command="{Binding Backschedule}"
-                     BorderBrush="Blue"
+                        Command="{Binding Backschedule}"
+                        BorderBrush="Blue"
                         BorderThickness="2"
-                    materialDesign:ButtonAssist.CornerRadius="8">
+                        materialDesign:ButtonAssist.CornerRadius="8">
                         <StackPanel 
                             Orientation="Horizontal"
                             Height="50"
-                                    Width="130" 
-                                    VerticalAlignment="Center" 
-                                    HorizontalAlignment="Center">
+                            Width="130" 
+                            VerticalAlignment="Center" 
+                            HorizontalAlignment="Center">
 
                             <materialDesign:PackIcon 
-                            Kind="CloseCircle"
-                            Height="30"
-                            Width="30"
-                                 Margin="10,0,0,0"
+                                Kind="CloseCircle"
+                                Height="30"
+                                Width="30"
+                                Margin="10,0,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
-                            Foreground="Red"/>
+                                Foreground="Red"/>
                             <TextBlock 
-                            Text="Cancel"
-                            FontSize="16"
+                                Text="Cancel"
+                                FontSize="16"
                                 Margin="10,0,0,0"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center"
-                            Foreground="Black"/>
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Foreground="Black"/>
                         </StackPanel>
 
                     </Button>

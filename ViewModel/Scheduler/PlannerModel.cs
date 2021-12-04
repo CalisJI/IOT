@@ -149,7 +149,21 @@ namespace WPF_TEST.ViewModel
         public TaskPriority taskPriority;
         public Status status;
         public Status Status { get { return status; } set { SetProperty(ref status, value, "Status"); } }
-        public TaskPriority TaskPriority { get { return taskPriority; } set { SetProperty(ref taskPriority, value, "TaskPriority"); } }
+        public TaskPriority TaskPriority
+        {
+            get
+            {
+                if (taskPriority != null) 
+                {
+                    return taskPriority;
+                }
+                else 
+                {
+                    return TaskPriority.Urgent;
+                }
+                
+            } 
+            set { SetProperty(ref taskPriority, value, "TaskPriority"); } }
 
 
         public static BackgroundWorker Runtime = new BackgroundWorker();

@@ -64,7 +64,7 @@ namespace WPF_TEST.ViewModel
         static MainMenuModel MainMenuModel = new MainMenuModel();
         static CustomerSetting_ViewModel CustomerSetting_ViewModel = new CustomerSetting_ViewModel();
         WorkflowCreatorModel WorkflowCreatorModel = new WorkflowCreatorModel();
-        static SchedulerViewModel SchedulerViewModel = new SchedulerViewModel();
+        static SchedulerViewModel SchedulerViewModel = SchedulerViewModel._SchedulerViewModel;
         static MainAll_ViewModel MainAll_ViewModel = new MainAll_ViewModel();
         static DataCollectConfigureModel DataCollectConfigureModel = new DataCollectConfigureModel();
         static Ethenet_SerialModel ethenet_SerialModel = new Ethenet_SerialModel();
@@ -86,10 +86,15 @@ namespace WPF_TEST.ViewModel
             Load = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
                 CurrentAccount = Login_ViewModel.LoginAcount;
-                mainScreenViewModel = this;
+                //mainScreenViewModel = this;
                 mainScreenViewModel.SelectedViewModel = MainAll_ViewModel;
                 loadMain = true;
                 Loading_Indicator.Finished();
+            });
+            Unload = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+               
+                loadMain = false;
             });
             Image_Manager = new RelayCommand<object>((p) => { return true; }, (p) =>
             {

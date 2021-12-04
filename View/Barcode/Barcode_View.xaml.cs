@@ -29,6 +29,7 @@ namespace WPF_TEST.View
     /// </summary>
     public partial class Barcode_View : Window
     {
+        AddProjectSchedule_ViewModel AddProjectSchedule_ViewModel;
         Barcode_ViewModel Barcode_ViewModel = new Barcode_ViewModel();
         VideoCaptureDevice localCamera;
         public FilterInfoCollection LocalWebcamCollection;
@@ -101,11 +102,30 @@ namespace WPF_TEST.View
                     if (result != null)
                     {
                         string decoded = result.ToString().Trim();
-
-                        barcode = decoded;
-                        Macode.Text = barcode;
-                        //localCamera.SignalToStop();
                         
+                        barcode = decoded;
+                        this.Dispatcher.Invoke(() =>
+                        {
+                            Macode.Text = barcode;
+                        });
+
+                        //localCamera.SignalToStop();
+                        //AddProjectSchedule_ViewModel addProjectSchedule_ViewModel = AddProjectSchedule_ViewModel._AddProjectSchedule_ViewModel;
+                        //addProjectSchedule_ViewModel.Get_BarCode.CanExecute(barcode);
+                        //addProjectSchedule_ViewModel.Get_BarCode.Execute(barcode);
+                        Thread thread = new Thread(() => 
+                        {
+                            AddProjectSchedule_View _View = AddProjectSchedule_View.INS_AddProjectSchedule_View;
+                            _View.settext(barcode);
+                        });
+                        thread.SetApartmentState(ApartmentState.STA);
+                        thread.Start();
+
+                        
+                        this.Dispatcher.BeginInvoke(new Action(() => 
+                        {
+                            this.Close();
+                        }));
                     }
                    
 

@@ -78,6 +78,7 @@ namespace WPF_TEST
             {
                 timer.IsEnabled = true;
                 timer.Start();
+               
             }
            
         }

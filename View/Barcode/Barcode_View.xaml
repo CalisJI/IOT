@@ -19,8 +19,9 @@
     </i:Interaction.Triggers>
     <Grid>
         <Image x:Name="FrameSource" Width="750" Height="520" VerticalAlignment="Top"/>
-        <TextBlock Text="{Binding ResultBarCode}" 
-                   Name="Macode" VerticalAlignment="Bottom" FontSize="30"
-                   HorizontalAlignment="Center"/>
+        <TextBlock 
+            Width="200"
+            Name="Macode" VerticalAlignment="Bottom" FontSize="30"
+            HorizontalAlignment="Center"/>
     </Grid>
 </Window>

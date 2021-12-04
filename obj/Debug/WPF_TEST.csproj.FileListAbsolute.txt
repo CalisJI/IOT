@@ -1141,6 +1141,6 @@ F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Barcode\Barcode_View.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\DataInput\CustomerSetting_View.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Barcode\Barcode_View.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\DataInput\CustomerSetting_View.baml
-F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.csproj.AssemblyReference.cache
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Scheduler\Work_Library_View.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Scheduler\Work_Library_View.baml
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\WPF_TEST.csproj.AssemblyReference.cache

@@ -36,7 +36,7 @@ namespace WPF_TEST.ViewModel
             set { SetProperty(ref convertoJson, value, nameof(ToJson)); }
         }
 
-        private ObservableCollection<Works> _work;
+        public static ObservableCollection<Works> _work;
         public ObservableCollection<Works> WorksList { get { return _work; } set { SetProperty(ref _work, value, nameof(WorksList)); } }
         public static ObservableCollection<Customer> _customerInfo;
         public ObservableCollection<Customer> CustomerInfo { get { return _customerInfo; } set { SetProperty(ref _customerInfo, value, nameof(CustomerInfo)); } }

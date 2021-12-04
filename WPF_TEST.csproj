@@ -418,7 +418,7 @@
     <Compile Include="ViewModel\BusyIndicatorViewModel.cs" />
     <Compile Include="ViewModel\ConfigurationModel.cs" />
     <Compile Include="ViewModel\AMDashBoardModel.cs" />
-    <Compile Include="ViewModel\Content_Manager_ViewModel.cs" />
+    <Compile Include="ViewModel\Media\Content_Manager_ViewModel.cs" />
     <Compile Include="ViewModel\DataCollectConfigureModel.cs" />
     <Compile Include="ViewModel\DataStreamCollectionModel.cs" />
     <Compile Include="ViewModel\Media\DocumentManager_ViewModel.cs" />
@@ -432,7 +432,7 @@
     <Compile Include="ViewModel\ModbusConfig\EditModbus_Window_ViewModel.cs" />
     <Compile Include="ViewModel\Ethenet_SerialModel.cs" />
     <Compile Include="ViewModel\FileConfig\ExcelFileConfig_ViewModel.cs" />
-    <Compile Include="ViewModel\FileConnfig_Main_ViewModel.cs" />
+    <Compile Include="ViewModel\FileConfig\FileConnfig_Main_ViewModel.cs" />
     <Compile Include="ViewModel\Media\ImageManager_ViewModel.cs" />
     <Compile Include="ViewModel\FileConfig\JSONData_ViewModel.cs" />
     <Compile Include="ViewModel\MainAll_ViewModel.cs" />
@@ -906,6 +906,7 @@
     <Resource Include="ImageSource\customer.png" />
     <Resource Include="ImageSource\Media.png" />
     <Resource Include="ImageSource\Loading.gif" />
+    <Resource Include="ImageSource\Apply.png" />
     <Content Include="Images\OutlookInspired\Svg\CalendarGroup.svg" />
     <Content Include="Images\OutlookInspired\Svg\CalendarPermission.svg" />
     <Content Include="Images\OutlookInspired\Svg\Categorize.svg" />
