@@ -8,6 +8,12 @@
              mc:Ignorable="d" 
              xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
              d:DesignHeight="1080" d:DesignWidth="1920">
+    <UserControl.Resources>
+        <Style x:Key="card" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+        </Style>
+    </UserControl.Resources>
     <ScrollViewer
         HorizontalAlignment="Stretch"
         Margin="0,-14,0,0"
@@ -51,25 +57,37 @@
                                             Grid.Column="0"
                                             Orientation="Vertical"
                                             HorizontalAlignment="Stretch" Width="Auto" Margin="33,0,0,0">
-                                                    <Grid Margin="5">
-                                                        <TextBlock Text="Work Order Name:" FontSize="22"/>
+                                                    <Grid Margin="5,2,0,0">
                                                         <TextBlock 
-                                                        FontSize="22"
-                                                    Text="{Binding WorkOrderName}"
-                                                    Margin="220,0,0,0"/>
+                                                            Style="{StaticResource card}"
+                                                            FontWeight="DemiBold"
+                                                            Text="Tên đơn hàng:" 
+                                                            FontSize="20"/>
+                                                        <TextBlock 
+                                                            FontSize="20"
+                                                            FontWeight="DemiBold"
+                                                            Text="{Binding WorkOrderName}"
+                                                             Margin="220,0,0,0"/>
                                                     </Grid>
-                                                    <Grid Margin="5">
-                                                        <TextBlock Text="Product:" FontSize="22"/>
+                                                    <Grid Margin="5,2,0,0">
+                                                        <TextBlock Text="Sản Phẩm:" Style="{StaticResource card}"/>
                                                         <TextBlock 
-                                                        FontSize="22"
+                                                        Style="{StaticResource card}"
                                                     Text="{Binding Product}"
                                                     Margin="220,0,0,0"/>
                                                     </Grid>
-                                                    <Grid Margin="5">
-                                                        <TextBlock Text="Remark:" FontSize="22"/>
+                                                    <Grid Margin="5,2,0,0">
+                                                        <TextBlock Text="Ghi chú:" Style="{StaticResource card}"/>
                                                         <TextBlock 
-                                                        FontSize="22"
+                                                        Style="{StaticResource card}"
                                                     Text="{Binding Remark}"
+                                                    Margin="220,0,0,0"/>
+                                                    </Grid>
+                                                    <Grid Margin="5,2,0,0">
+                                                        <TextBlock Text="Số lượng:" Style="{StaticResource card}"/>
+                                                        <TextBlock 
+                                                        Style="{StaticResource card}"
+                                                    Text="{Binding Quantity}"
                                                     Margin="220,0,0,0"/>
                                                     </Grid>
                                                 </StackPanel>
@@ -98,7 +116,8 @@
                                 Width="150"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Bottom"
-                                Command="{Binding }"
+                                Command="{Binding Xoa_WorkinEdit}"
+                                CommandParameter="{Binding ElementName=List_Work, Path=SelectedItem}"
                                 BorderBrush="Blue"
                                 BorderThickness="2"
                     
@@ -146,7 +165,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="W/O Number:" Width="150" Margin="20,5,0,0"/>
                                 <TextBox  Margin="40,0,0,0" Text="{Binding GetWorks.WorkOrderName}">
-                                    
+
                                 </TextBox>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
@@ -179,7 +198,7 @@
                                         <GridViewColumn Header="Content Name" >
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    
+
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
@@ -206,7 +225,7 @@
             </Grid>
             <StackPanel Grid.Column="2" Orientation="Vertical">
                 <Grid Margin="0,700,0,0">
-                        <Button
+                    <Button
                         Style="{StaticResource MaterialDesignFlatButton}"
                         Height="60"
                         DataContext="{StaticResource Planner}"
@@ -219,7 +238,7 @@
                         BorderThickness="2"
                     
                         materialDesign:ButtonAssist.CornerRadius="8">
-                        
+
                         <StackPanel Orientation="Horizontal" 
                                     Height="50"
                                     Width="130" 
@@ -252,12 +271,12 @@
                         DataContext="{StaticResource ScheduleViewModel}"
                         materialDesign:ShadowAssist.ShadowDepth="Depth3"
                         Width="150"
-                        Command="{Binding AddworkScope}"
-                        HorizontalAlignment="Center"
+                        Command="{Binding Add_In_Editjob}"
+                        HorizontalAlignment="Right"
                         VerticalAlignment="Bottom"
                         BorderBrush="Blue"
                         BorderThickness="2"
-                        materialDesign:ButtonAssist.CornerRadius="8">
+                        materialDesign:ButtonAssist.CornerRadius="8" Margin="0,0,11,0">
                         <StackPanel 
                             Orientation="Horizontal"
                             Height="50"

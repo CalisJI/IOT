@@ -233,7 +233,7 @@ namespace WPF_TEST.ViewModel
             JobOrder jobOrder = new JobOrder();
             Random random = new Random();
             jobOrder.Customerinformation = CustomerInfo[0];
-            jobOrder.ID = random.Next(111111, 888888);
+            jobOrder.ID = random.Next(111111, 888888).ToString();
             jobOrder.Customer_PO = "PO1";
             jobOrder.Quotation = "Quotation1";
             jobOrder.Priority = TaskPriority.Normal;
@@ -250,7 +250,7 @@ namespace WPF_TEST.ViewModel
             JobOrder jobOrder1 = new JobOrder();
 
             jobOrder1.Customerinformation = CustomerInfo[1];
-            jobOrder1.ID = random.Next(111111, 888888);
+            jobOrder1.ID = random.Next(111111, 888888).ToString();
             jobOrder1.Customer_PO = "PO2";
             jobOrder1.Quotation = "Quotation2";
             jobOrder1.Priority = TaskPriority.Normal;

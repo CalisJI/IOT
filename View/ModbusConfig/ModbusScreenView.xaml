@@ -12,210 +12,380 @@
              d:DesignHeight="1080" d:DesignWidth="1920">
     <Grid>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+       
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="0.2*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Column="0" Grid.Row="0">
-            <GroupBox 
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.6*"/>
+                <ColumnDefinition Width="0.6*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Grid.Row="0">
+                <GroupBox 
                 Margin="30,40,30,10" 
                 Header="Controller Name"
                 TextBlock.TextAlignment="Center"
                 TextBlock.FontSize="26">
-                <ListBox 
+                    <ListBox 
                     Height="692"
                     x:Name="Modbus_list"
                     ScrollViewer.VerticalScrollBarVisibility="Visible"
                   
                     DataContext="{StaticResource Modbus}"
                     ItemsSource="{Binding ModbusDevices}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding DeviceName}"/>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding DeviceName}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction
                                 Command="{Binding Display_Type}"
                                 CommandParameter="{Binding ElementName=Modbus_list, Path=SelectedItem}"/>
 
 
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </ListBox>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListBox>
 
-            </GroupBox>
-        </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0" >
-            <GroupBox 
+                </GroupBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0" >
+                <GroupBox 
                 Margin="10,40,10,10" 
                 Header="Controller Details"
                 TextBlock.TextAlignment="Center"
                 TextBlock.FontSize="26">
-                <StackPanel Orientation="Vertical" Margin="0,10,0,0">
-                   
-                    <Grid 
+                    <StackPanel Orientation="Vertical" Margin="0,10,0,0">
+
+                        <Grid 
                         Height="380"
                         DataContext="{StaticResource Modbus}"
                         ScrollViewer.VerticalScrollBarVisibility="Visible">
-                        <ContentControl Content="{Binding DisplayType}"/>
-                        
-                    </Grid>
+                            <ContentControl Content="{Binding DisplayType}"/>
 
-                </StackPanel>
+                        </Grid>
 
-            </GroupBox>
-            <GroupBox
+                    </StackPanel>
+
+                </GroupBox>
+                <GroupBox
                 Margin="10,20,10,0" 
                 Header="Data Exportation"
                 TextBlock.TextAlignment="Center">
-                <StackPanel Orientation="Vertical">
-                    <Grid >
-                        <TextBlock 
+                    <StackPanel Orientation="Vertical">
+                        <Grid >
+                            <TextBlock 
                             Text="Export Rate (ms):"
                             FontSize="20" 
                             HorizontalAlignment="Left"
                             Margin="5"/>
-                        <TextBox 
+                            <TextBox 
                             Margin="190,0,0,0"
                             HorizontalAlignment="Left" 
                             FontSize="20"
                             Text="N/A"/>
-                    </Grid>
-                    <Grid Margin="0,10,0,0">
-                        <TextBlock 
+                        </Grid>
+                        <Grid Margin="0,10,0,0">
+                            <TextBlock 
                             Text="Data Delimiter:"
                             FontSize="20" 
                             HorizontalAlignment="Left"
                             Margin="5"/>
-                        <TextBox 
+                            <TextBox 
                             Margin="190,0,0,0"
                             HorizontalAlignment="Left" 
                             FontSize="20"
                             Text="N/A"/>
-                    </Grid>
-                    <Grid Margin="0,10,0,0">
-                        <TextBlock 
+                        </Grid>
+                        <Grid Margin="0,10,0,0">
+                            <TextBlock 
                             Text="Extraction Method:"
                             FontSize="20" 
                             HorizontalAlignment="Left"
                             Margin="5"/>
-                        <TextBox 
+                            <TextBox 
                             Margin="190,0,0,0"
                             HorizontalAlignment="Left" 
                             FontSize="20"
                             Text="N/A"/>
-                    </Grid>
-                    <Grid Margin="0,10,0,0">
-                        <TextBlock 
+                        </Grid>
+                        <Grid Margin="0,10,0,0">
+                            <TextBlock 
                             Text="Export Directory:"
                             FontSize="20" 
                             HorizontalAlignment="Left"
                             Margin="5"/>
-                        <TextBox 
+                            <TextBox 
                             Margin="190,0,0,0"
                             HorizontalAlignment="Left" 
                             FontSize="20"
                             Text="N/A"/>
-                    </Grid>
-                    <Grid Margin="0,10,0,0">
-                        <TextBlock 
+                        </Grid>
+                        <Grid Margin="0,10,0,0">
+                            <TextBlock 
                             Text="File Path:"
                             FontSize="20" 
                             HorizontalAlignment="Left"
                             Margin="5"/>
-                        <TextBox 
+                            <TextBox 
                             TextWrapping="Wrap"
                             ScrollViewer.VerticalScrollBarVisibility="Auto"
                             Margin="190,0,0,0"
                             HorizontalAlignment="Left" 
                             FontSize="20"
                             Text="N/A"/>
-                    </Grid>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+            <StackPanel
+            Orientation="Vertical" 
+            Grid.Row="0"
+            Grid.Column="2">
+                <GroupBox 
+                Margin="10,40,10,10" 
+                Header="Modbus Item"
+                TextBlock.TextAlignment="Left"
+                TextBlock.FontSize="26">
+                    <ListView 
+                        ItemsSource="{Binding Select_PLCVALUE}"
+                        DataContext="{StaticResource Modbus}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ElementName=Modbus_list,Path=SelectedItem.ID}"/>
+                                <GridViewColumn Header="Register" DisplayMemberBinding="{Binding ElementName=Modbus_list,Path=SelectedItem.Register_Address}"/>
+                                <GridViewColumn Header="Value">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ListView
+                                                Height="50"
+                                                Width="200"
+                                                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                                ItemsSource="{Binding Select_PLCVALUE.Data}"
+                                                DataContext="{StaticResource Modbus}">
+                                                <ListView.View>
+                                                    <GridView>
+                                                        <GridViewColumn>
+                                                            <GridViewColumn.CellTemplate>
+                                                                <DataTemplate>
+                                                                    <TextBlock Text="{Binding CurrentTime}"/>
+                                                                </DataTemplate>
+                                                            </GridViewColumn.CellTemplate>
+                                                        </GridViewColumn>
+                                                        <GridViewColumn>
+                                                            <GridViewColumn.CellTemplate>
+                                                                <DataTemplate>
+                                                                    <ListView ItemsSource="{Binding ArrayValue}">
+                                                                        <ListView.View>
+                                                                            <GridView>
+                                                                                <GridViewColumn>
+                                                                                    <GridViewColumn.CellTemplate>
+                                                                                        <DataTemplate>
+                                                                                            <TextBlock Text="{Binding}"/>
+                                                                                        </DataTemplate>
+                                                                                    </GridViewColumn.CellTemplate>
+                                                                                </GridViewColumn>
+                                                                            </GridView>
+                                                                        </ListView.View>
+                                                                    </ListView>
+                                                                </DataTemplate>
+                                                            </GridViewColumn.CellTemplate>
+                                                        </GridViewColumn>
+                                                    </GridView>
+                                                </ListView.View>
+                                            </ListView>
+                                            <!--<DataGrid 
+                                                Width="500"
+                                                ScrollViewer.CanContentScroll="True"
+                                                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                                Height="300"
+                                                ItemsSource="{Binding Select_PLCVALUE.Data}"
+                                                AutoGenerateColumns="True"
+                                                EnableColumnVirtualization="True"
+                                                EnableRowVirtualization="True"
+                                                DataContext="{StaticResource Modbus}">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Thởi gian" Binding="{Binding CurrentTime}"/>
+                                                    <DataGridTemplateColumn>
+                                                        <DataGridTemplateColumn.CellTemplate>
+                                                            <DataTemplate>
+                                                                <DataGrid 
+                                                                    DataContext="{StaticResource Modbus}"
+                                                                    ItemsSource="{Binding DataValue}"
+                                                                    AutoGenerateColumns="True"
+                                                                    Width="250"
+                                                                    Height="60">
+                                                                    
+                                                                </DataGrid>
+                                                            </DataTemplate>
+                                                        </DataGridTemplateColumn.CellTemplate>
+                                                    </DataGridTemplateColumn>
+                                                </DataGrid.Columns>
+                                                
+                                                
+                                            </DataGrid>-->
+                                            
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                        <ScrollBar Visibility="Collapsed" HorizontalAlignment="Right"/>
+                    </ListView>
+
+                </GroupBox>
+
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Horizontal" >
+                <StackPanel Margin="70,0,0,0" Orientation="Vertical" >
+                    <Button
+                        Margin="0,30,0,5"
+                        Height="80"
+                        Width="80"
+                        BorderBrush="Blue"
+                        BorderThickness="2"
+                
+                        materialDesign:ButtonAssist.CornerRadius="8"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        ToolTip="Start"
+                        Command="{Binding Start}"
+                        CommandParameter="{Binding ElementName=Modbus_list, Path=SelectedItem}"
+                        Background="{DynamicResource MaterialDesignTextFieldBoxBackground}">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+
+                            <materialDesign:PackIcon 
+                            Kind="Play"
+                            HorizontalAlignment="Center"
+                            Height="50"
+                            Width="60"
+                            Foreground="Yellow"/>
+
+                        </StackPanel>
+                    </Button>
+                    <TextBlock 
+                            Text="Start"
+                        FontWeight="DemiBold"
+                            FontSize="15"
+                            HorizontalAlignment="Center"
+                            Foreground="Black"/>
                 </StackPanel>
-            </GroupBox>
-        </StackPanel>
-        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,55">
-            <Button
+                
+                <StackPanel Margin="70,0,0,0">
+                    <Button
+                        Margin="0,30,0,5"
+                materialDesign:ButtonAssist.CornerRadius="8"
+                BorderBrush="Blue"
+                BorderThickness="2"
                 Height="80"
                 Width="80"
-                Margin="70,0,0,0"
-                Style="{StaticResource MaterialDesignIconButton}"
-                ToolTip="Start"
-                Command="{Binding Start}"
-                CommandParameter="{Binding ElementName=Modbus_list, Path=SelectedItem}"
-                Background="{DynamicResource MaterialDesignTextFieldBoxBackground}">
-                <materialDesign:PackIcon
-                    Height="80"
-                    Foreground="Yellow"
-                    Width="80"
-                    Kind="Play" />
-            </Button>
-            <Button
-                Height="80"
-                Width="80"
-                Margin="70,0,0,0"
-                Style="{StaticResource MaterialDesignIconButton}"
+                
+                Style="{StaticResource MaterialDesignFlatButton}"
                 ToolTip="Stop"
                 Command="{Binding Stop}"
                 Background="{DynamicResource MaterialDesignTextFieldBoxBackground}">
-                <materialDesign:PackIcon
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+
+                            <materialDesign:PackIcon 
+                            Kind="Stop"
+                            HorizontalAlignment="Center"
+                            Height="50"
+                            Width="60"
+                            Foreground="Red"/>
+                           
+                        </StackPanel>
+                    </Button>
+                    <TextBlock 
+                            Text="Stop"
+                        FontWeight="DemiBold"
+                            FontSize="15"
+                            HorizontalAlignment="Center"
+                            Foreground="Black"/>
+                </StackPanel>
+
+                <StackPanel  Margin="70,0,0,0">
+                    <Button
+                        Margin='0,30,0,5'
+                    materialDesign:ButtonAssist.CornerRadius="8"
+                    BorderBrush="Blue"
+                    BorderThickness="2"
+                    DataContext="{StaticResource Modbus}"
                     Height="80"
-                    Foreground="#f6236e"
                     Width="80"
-                    Kind="Stop" />
-            </Button>
-            <Button
-                DataContext="{StaticResource Modbus}"
-                Height="80"
-                Width="80"
-                Margin="70,0,0,0"
-                Style="{StaticResource MaterialDesignIconButton}"
-                ToolTip="Start Service"
-                Command="{Binding Start_Service}"
+               
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    ToolTip="Start Service"
+                    Command="{Binding Start_Service}"
                 
-                Background="{DynamicResource MaterialDesignTextFieldBoxBackground}">
-                <materialDesign:PackIcon
-                    Height="80"
-                    Foreground="Lime"
-                    Width="80"
-                    Kind="Play" />
-            </Button>
-            <Button
-                Height="80"
-                Width="80"
-                Margin="70,0,0,0"
-                Style="{StaticResource MaterialDesignIconButton}"
-                Command="{Binding Stop_Service}"
-                Background="{DynamicResource MaterialDesignTextFieldBoxBackground}">
-                <materialDesign:PackIcon
-                    Foreground="Red"
-                    Height="80"
-                    Width="80"
-                    Kind="Stop" />
+                    Background="{DynamicResource MaterialDesignTextFieldBoxBackground}">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
 
-            </Button>
-        </StackPanel>
-        <StackPanel Height="76"
-            Orientation="Horizontal" 
-            VerticalAlignment="Bottom" 
-            Grid.Row="1" Grid.Column="0">
-            <TextBlock Text="Start" FontSize="20" Margin="90,0,0,0"/>
-            <TextBlock Text="Stop" FontSize="20" Margin="108,0,0,0"/>
-            <TextBlock Text="Start Service" FontSize="20" Margin="80,0,0,0"/>
-            <TextBlock Text="Stop Service" FontSize="20" Margin="40,0,0,0"/>
+                            <materialDesign:PackIcon 
+                            Kind="Play"
+                            HorizontalAlignment="Center"
+                            Height="50"
+                            Width="60"
+                            Foreground="Lime"/>
 
+                        </StackPanel>
+                    </Button>
+                    <TextBlock 
+                            Text="Start Service"
+                        FontWeight="DemiBold"
+                            FontSize="15"
+                            HorizontalAlignment="Center"
+                            Foreground="Black"/>
+                </StackPanel>
 
-        </StackPanel>
+                <StackPanel Margin="70,0,0,0">
+                    <Button
+                        Margin="0,30,0,5"
+                        materialDesign:ButtonAssist.CornerRadius="8"
+                        BorderBrush="Blue"
+                        BorderThickness="2"
+                        Height="80"
+                        Width="80"
+                
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Command="{Binding Stop_Service}"
+                        Background="{DynamicResource MaterialDesignTextFieldBoxBackground}">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
 
-        <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,55">
-            <Button
+                            <materialDesign:PackIcon 
+                            Kind="Stop"
+                            HorizontalAlignment="Center"
+                            Height="50"
+                            Width="60"
+                            Foreground="Red"/>
+
+                        </StackPanel>
+                        
+
+                    </Button>
+                    <TextBlock 
+                        Text="Stop Service"
+                        FontWeight="DemiBold"
+                        FontSize="15"
+                        HorizontalAlignment="Center"
+                        Foreground="Black"/>
+                </StackPanel>
+               
+               
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,55">
+                <Button
                 Height="80"
                 Width="80"
                 Margin="70,0,0,0"
@@ -223,14 +393,14 @@
                 ToolTip="Start"
                 Command="{Binding NewConnect}"
                 Background="{DynamicResource MaterialDesignTextFieldBoxBackground}">
-                <materialDesign:PackIcon
+                    <materialDesign:PackIcon
                     Height="80"
                     Foreground="Yellow"
                     Width="80"
                     Kind="PlusCircle" />
 
-            </Button>
-            <Button
+                </Button>
+                <Button
                 Height="80"
                 Width="80"
                 Margin="70,0,0,0"
@@ -239,13 +409,13 @@
                 Command="{Binding EditConnect}"
                 CommandParameter="{Binding ElementName=Modbus_list,Path=SelectedItem}"
                 Background="{DynamicResource MaterialDesignTextFieldBoxBackground}">
-                <materialDesign:PackIcon
+                    <materialDesign:PackIcon
                     Height="80"
                     Foreground="#f6236e"
                     Width="80"
                     Kind="FileEdit" />
-            </Button>
-            <Button
+                </Button>
+                <Button
                 Height="80"
                 Width="80"
                 Margin="70,0,0,0"
@@ -254,13 +424,13 @@
                 Command="{Binding DeleteConnect}"
                 CommandParameter="{Binding ElementName=Modbus_list,Path=SelectedItem}"
                 Background="{DynamicResource MaterialDesignTextFieldBoxBackground}">
-                <materialDesign:PackIcon
+                    <materialDesign:PackIcon
                     Height="80"
                     Foreground="Red"
                     Width="80"
                     Kind="Delete" />
-            </Button>
-            <Button
+                </Button>
+                <Button
                 Height="80"
                 Width="80"
                 Margin="70,0,0,0"
@@ -268,49 +438,16 @@
                 ToolTip="Connect"
                 Command="{Binding ConnectionExcute}"
                 Background="{DynamicResource MaterialDesignTextFieldBoxBackground}">
-                <materialDesign:PackIcon
+                    <materialDesign:PackIcon
                     Foreground="Lime"
                     Height="80"
                     Width="80"
                     Kind="Connection" />
 
-            </Button>
-        </StackPanel>
-        <StackPanel Height="66"
-            Orientation="Horizontal" 
-            VerticalAlignment="Bottom" 
-            Grid.Row="1" Grid.Column="2">
-            <TextBlock Text="Add" FontSize="20" Margin="92,0,0,0"/>
-            <TextBlock Text="Edit" FontSize="20" Margin="112,0,0,0"/>
-            <TextBlock Text="Delete" FontSize="20" Margin="106,0,0,0"/>
-            <TextBlock Text="Connect" FontSize="20" Margin="85,0,0,0"/>
-        </StackPanel>
-        <StackPanel
-            Orientation="Vertical" 
-            Grid.Row="0"
-            Grid.Column="2">
-            <GroupBox 
-                Margin="10,40,10,10" 
-                Header="Modbus Item"
-                TextBlock.TextAlignment="Left"
-                TextBlock.FontSize="26">
-                <ListView 
-                    
-                    DataContext="{StaticResource Modbus}">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ElementName=Modbus_list,Path=SelectedItem.ID}"/>
-                            <GridViewColumn Header="Register" DisplayMemberBinding="{Binding ElementName=Modbus_list,Path=SelectedItem.Register_Address}"/>
-                            <GridViewColumn Header="Value"/>
-                        </GridView>
-                    </ListView.View>
-                    <ScrollBar Visibility="Collapsed" HorizontalAlignment="Right"/>
-                </ListView>
+                </Button>
+            </StackPanel>
 
-            </GroupBox>
-          
-        </StackPanel>
-        <Grid 
+            <Grid 
             Grid.Column="1"
             Grid.Row="1"
             VerticalAlignment="Center"
@@ -318,7 +455,7 @@
             Margin="50,20"
             Width="150"
             Height="80">
-            <Button
+                <Button
                 x:Name="Home_button"
                 DataContext="{StaticResource MenuMainAll}"
                 Style="{StaticResource MaterialDesignRaisedButton}"
@@ -327,11 +464,11 @@
                 ToolTip="Back"
                 Click="Home_button_Click"
                 Command="{Binding DataStream}">
-                <materialDesign:PackIcon Kind="StepBackward2" Height="60" Width="100"/>
-                
-            </Button>
-        </Grid>
-        <Grid 
+                    <materialDesign:PackIcon Kind="StepBackward2" Height="60" Width="100"/>
+
+                </Button>
+            </Grid>
+            <Grid 
             Grid.Column="1"
             Grid.Row="1"
             VerticalAlignment="Center"
@@ -339,7 +476,7 @@
             Margin="50,20"
             Width="150"
             Height="80">
-            <Button
+                <Button
                 Visibility="Hidden"
                 Name="update_btn"
                 DataContext="{StaticResource Modbus}"
@@ -349,9 +486,36 @@
                 ToolTip="Back"
                 
                 Command="{Binding Update_Data}">
-                <materialDesign:PackIcon Kind="StepBackward2" Height="60" Width="100"/>
+                    <materialDesign:PackIcon Kind="StepBackward2" Height="60" Width="100"/>
 
-            </Button>
+                </Button>
+            </Grid>
         </Grid>
+       <!--Nút Bấm-->
+        
+        <!--<StackPanel Height="76"
+            Orientation="Horizontal" 
+            VerticalAlignment="Bottom" 
+            Grid.Row="1" Grid.Column="0">
+            <TextBlock Text="Start" FontSize="20" Margin="90,0,0,0"/>
+            <TextBlock Text="Stop" FontSize="20" Margin="108,0,0,0"/>
+            <TextBlock Text="Start Service" FontSize="20" Margin="80,0,0,0"/>
+            <TextBlock Text="Stop Service" FontSize="20" Margin="40,0,0,0"/>
+
+
+        </StackPanel>-->
+
+        
+        <!--<StackPanel Height="66"
+            Orientation="Horizontal" 
+            VerticalAlignment="Bottom" 
+            Grid.Row="1" Grid.Column="2">
+            <TextBlock Text="Add" FontSize="20" Margin="92,0,0,0"/>
+            <TextBlock Text="Edit" FontSize="20" Margin="112,0,0,0"/>
+            <TextBlock Text="Delete" FontSize="20" Margin="106,0,0,0"/>
+            <TextBlock Text="Connect" FontSize="20" Margin="85,0,0,0"/>
+        </StackPanel>-->
+        
+       
     </Grid>
 </UserControl>

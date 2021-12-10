@@ -103,7 +103,8 @@ namespace WPF_TEST.ViewModel
                 fileConnfig_Main_ViewModel = this;
                 fileConnfig_Main_ViewModel.SelectedViewModel = MenuFileConfig_ViewModel;
                 PageSheet = new ObservableCollection<string>();
-                
+                JobOrders = DataProvider.JobOrderInput;
+
                 loaded = true;
             }
             EXcelLoaded = new RelayCommand<object>((p) => { return true; }, (p) => 
@@ -197,7 +198,7 @@ namespace WPF_TEST.ViewModel
                 {
                     JobOrder jobOrder = new JobOrder();
                     string bb = DatatableExcel.Rows[0][0].ToString();
-                    jobOrder.ID = int.Parse(bb);
+                    jobOrder.ID = bb;
                     jobOrder.SaleOrder = DatatableExcel.Rows[0][1].ToString();
                     jobOrder.Quotation = DatatableExcel.Rows[0][2].ToString();
                     jobOrder.Customer_PO = DatatableExcel.Rows[0][3].ToString();
@@ -206,6 +207,7 @@ namespace WPF_TEST.ViewModel
                     jobOrder.Requested_End = DateTime.Parse(DatatableExcel.Rows[0][6].ToString());
                     jobOrder.ActualvsPlan = 0;
                     jobOrder.Complete = 0;
+                    jobOrder.Priority = TaskPriority.Normal;
                     jobOrder.Stage = Status.Plan;
                     jobOrder.Current_Stage = PlannerModel.getColor(jobOrder.Stage);
                     jobOrder.Customerinformation = CustomerSetting_ViewModel.customers.Where(x =>
@@ -215,9 +217,11 @@ namespace WPF_TEST.ViewModel
                     jobOrder.Works = GetWorks(a.Item1, a.Item2, a.Item3);
                     jobOrder.Priority = TaskPriority.Normal;
 
-                    JobOrders.Add(jobOrder);
+                    DataProvider.JobOrderInput.Add(jobOrder);
 
-                    Save_Table();
+                    DataProvider.UpLoad_data(0);
+
+                    messageBoxService.ShowMessage("Đã Lưu", "Nhập Dữ Liệu", System.Messaging.MessageType.Report);
                 }
                 catch (Exception ex)
                 {

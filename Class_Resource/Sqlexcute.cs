@@ -394,7 +394,7 @@ namespace WPF_TEST.Class_Resource
             }
             
         }
-        public void AutoCreateTable(DataTable dataTable, string database, string TableName , ref DataTable dataTable1)
+        public void AutoCreateTable(DataTable dataTable, string database, string TableName, ref DataTable dataTable1, bool Json = false)
         {
             string cmd;
             int count = 2;
@@ -415,7 +415,7 @@ namespace WPF_TEST.Class_Resource
                 }
                 SQL_Connection.Close();
             }
-            if (count == 0)
+            if (count == 0 && !Json)
 
             {
 
@@ -471,10 +471,26 @@ namespace WPF_TEST.Class_Resource
                     sqlsc += ",";
                 }
                 cmd = sqlsc.Substring(0, sqlsc.Length - 1) + ", PRIMARY KEY (" + dataTable.Columns[0].ColumnName + "))";
-               
+
                 //*****************************************************
                 SQL_command(cmd, database);
                 dataTable1 = new DataTable(TableName);
+                SQL_command("DELETE FROM " + TableName + "", Database);
+            }
+            else if (count == 0 && Json) 
+            {
+                string sqlsc = string.Empty;
+                sqlsc = "CREATE TABLE " + TableName + " (";
+                for (int i = 0; i < dataTable.Columns.Count; i++)
+                {
+                    sqlsc += "" + dataTable.Columns[i].ColumnName + " ";
+                    sqlsc += "JSON";
+                    sqlsc += ",";
+                }
+                cmd = sqlsc.Substring(0, sqlsc.Length - 1) + ")";
+                var check = SQL_command(cmd, database);
+                //dataTable1 = new DataTable(TableName);
+                //SQL_command("DELETE FROM " + TableName + "", Database);
             }
             else if (count == 1)
             {

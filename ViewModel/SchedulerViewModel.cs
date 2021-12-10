@@ -65,7 +65,7 @@ namespace WPF_TEST.ViewModel
         public ICommand WorkScope_Back { get; set; }
         public ICommand SelectedWork { get; set; }
         public ICommand Save_work { get; set; }
-        public ICommand OpenBarCode { get; set; }
+        
         public ICommand Add_Project { get; set; }
         public ICommand AddworkScope { get; set; }
 
@@ -77,6 +77,8 @@ namespace WPF_TEST.ViewModel
         public ICommand DeleteWork { get; set; }
         public ICommand ConfirmEditjob { get; set; }
         public ICommand Loaded { get; set; }
+        public ICommand Add_In_Editjob { get; set; }
+        public ICommand Xoa_WorkinEdit { get; set; }
 
         private string _customer_Infor;
         public string Customer_Infor
@@ -218,6 +220,25 @@ namespace WPF_TEST.ViewModel
             //    aa = GetWorks;
 
             //});
+            Xoa_WorkinEdit = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                try
+                {
+                    var a = SelectedJob.Works.Where(x => x == (Works)p).FirstOrDefault();
+                    SelectedJob.Works.Remove(a);
+                }
+                catch (Exception ex)
+                {
+
+                    
+                }
+                
+            });
+            Add_In_Editjob = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+
+                schedulerViewModel.SelectedViewModel = new Work_Edit_ViewModel();
+            });
             Loaded = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
                 try
@@ -233,13 +254,29 @@ namespace WPF_TEST.ViewModel
             });
             ConfirmEditjob = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
-                
-
-                foreach (var item in Work_Edit_ViewModel._work)
+                try
                 {
-                    SelectedJob.Works.Add(item);
+                    if(Work_Edit_ViewModel._work != null) 
+                    {
+                        foreach (var item in Work_Edit_ViewModel._work)
+                        {
+                            SelectedJob.Works.Add(item);
+                        }
+                        schedulerViewModel.SelectedViewModel = EditJobModel;
+                    }
+                    else 
+                    {
+                        messageBoxService.ShowMessage("Công việc chưa được thêm vào danh sách", "Thêm Công Việc", System.Messaging.MessageType.Acknowledgment);
+                    }
+                   
                 }
-                //schedulerViewModel.SelectedViewModel = EditJobModel;
+                catch (Exception ex)
+                {
+
+                    
+                }
+
+               
 
             });
             selectpriority = new RelayCommand<object>((p) => { return true; }, (p) =>
@@ -303,11 +340,7 @@ namespace WPF_TEST.ViewModel
             {
                 schedulerViewModel.SelectedViewModel = AddProjectSchedule_ViewModel;
             });
-            OpenBarCode = new RelayCommand<object>((p) => { return true; }, (p) => 
-            {
-                Barcode_View barcode = new Barcode_View();
-                barcode.ShowDialog();
-            });
+           
             SelectedWork = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
                 var aa = SelectedJob.Works.Where(s => s == (Works)p).FirstOrDefault();
@@ -325,7 +358,6 @@ namespace WPF_TEST.ViewModel
             });
             Backschedule = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-
                 schedulerViewModel.SelectedViewModel = EditJobModel;
             });
             WorKScope = new RelayCommand<object>((p) => { return true; }, (p) =>

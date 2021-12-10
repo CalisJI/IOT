@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
+using WPF_TEST.ViewModel;
 
 namespace WPF_TEST.View
 {
@@ -20,7 +22,9 @@ namespace WPF_TEST.View
     /// </summary>
     public partial class AddProjectSchedule_View : UserControl
     {
+        AddProjectSchedule_ViewModel AddProjectSchedule_ViewModel = AddProjectSchedule_ViewModel._AddProjectSchedule_ViewModel;
         private static AddProjectSchedule_View _View;
+        DispatcherTimer DispatcherTimer = new DispatcherTimer();
         public static AddProjectSchedule_View INS_AddProjectSchedule_View 
         {
             get 
@@ -41,11 +45,32 @@ namespace WPF_TEST.View
         }
         public void settext(string code) 
         {
+            
             Barcodetbx.Text = code;
+
+            AddProjectSchedule_ViewModel.BarcodeApply.CanExecute(code);
+            AddProjectSchedule_ViewModel.BarcodeApply.Execute(code);
+            this.Barcodetbx.Focus();
         }
         public AddProjectSchedule_View()
         {
             InitializeComponent();
+          
+        }
+
+       
+        private void Barcodetbx_TargetUpdated(object sender, DataTransferEventArgs e)
+        {
+           
+
+        }
+
+        private void Barcodetbx_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter) 
+            {
+                
+            }
         }
     }
 }

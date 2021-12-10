@@ -20,7 +20,7 @@
                 <ColumnDefinition Width="0.2*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0" Margin="45" DataContext="{StaticResource AddJobProject}">
-                <GroupBox Header="Information" FontSize="22">
+                <GroupBox Header="Thông tin" FontSize="22" TextBlock.FontWeight="DemiBold">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="2*"/>
@@ -59,25 +59,42 @@
                                             Grid.Column="0"
                                             Orientation="Vertical"
                                             HorizontalAlignment="Stretch" Width="Auto" Margin="33,0,0,0">
-                                                    <Grid Margin="5">
-                                                        <TextBlock Text="Work Order Name:" FontSize="22"/>
+                                                    <Grid Margin="5,2,0,0">
                                                         <TextBlock 
-                                                        FontSize="22"
-                                                    Text="{Binding WorkOrderName}"
-                                                    Margin="220,0,0,0"/>
+                                                            FontWeight="DemiBold"
+                                                            Text="Tên đơn hàng:" 
+                                                            FontSize="20"/>
+                                                        <TextBlock 
+                                                            FontSize="20"
+                                                            FontWeight="DemiBold"
+                                                            Text="{Binding WorkOrderName}"
+                                                             Margin="220,0,0,0"/>
                                                     </Grid>
-                                                    <Grid Margin="5">
-                                                        <TextBlock Text="Product:" FontSize="22"/>
+                                                    <Grid Margin="5,2,0,0">
+                                                        <TextBlock Text="Sản Phẩm:" FontSize="20"
+                                                                   FontWeight="DemiBold"/>
                                                         <TextBlock 
-                                                        FontSize="22"
+                                                        FontWeight="DemiBold"
+                                                        FontSize="20"
                                                     Text="{Binding Product}"
                                                     Margin="220,0,0,0"/>
                                                     </Grid>
-                                                    <Grid Margin="5">
-                                                        <TextBlock Text="Remark:" FontSize="22"/>
+                                                    <Grid Margin="5,2,0,0">
+                                                        <TextBlock Text="Ghi chú:" FontSize="20"
+                                                                   FontWeight="DemiBold"/>
                                                         <TextBlock 
-                                                        FontSize="22"
+                                                        FontSize="20"
+                                                            FontWeight="DemiBold"
                                                     Text="{Binding Remark}"
+                                                    Margin="220,0,0,0"/>
+                                                    </Grid>
+                                                    <Grid Margin="5,2,0,0">
+                                                        <TextBlock Text="Số lượng:" FontSize="20"
+                                                                   FontWeight="DemiBold"/>
+                                                        <TextBlock 
+                                                        FontSize="20"
+                                                            FontWeight="DemiBold"
+                                                    Text="{Binding Quantity}"
                                                     Margin="220,0,0,0"/>
                                                     </Grid>
                                                 </StackPanel>

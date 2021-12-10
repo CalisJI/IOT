@@ -9,6 +9,12 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              DataContext="{StaticResource ScheduleViewModel}"
              d:DesignHeight="1080" d:DesignWidth="1920">
+    <UserControl.Resources>
+        <Style x:Key="card" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+        </Style>
+    </UserControl.Resources>
     <ScrollViewer
         HorizontalAlignment="Stretch"
         Margin="0,-14,0,0"
@@ -60,27 +66,34 @@
                                             Grid.Column="0"
                                             Orientation="Vertical"
                                             HorizontalAlignment="Stretch" Width="Auto" Margin="33,0,0,0">
-                                                    <Grid Margin="5">
-                                                        <TextBlock Text="Work Order Name:" FontSize="22"/>
+                                                    <Grid Margin="5,2,0,0">
+                                                        <TextBlock Text="Tên Đơn Hàng:" Style="{StaticResource card}"/>
                                                         <TextBlock 
-                                                        FontSize="22"
+                                                        Style="{StaticResource card}"
                                                     Text="{Binding WorkOrderName}"
                                                     Margin="220,0,0,0"/>
                                                     </Grid>
-                                                    <Grid Margin="5">
-                                                        <TextBlock Text="Product:" FontSize="22"/>
+                                                    <Grid Margin="5,2,0,0">
+                                                        <TextBlock Text="Sản Phẩm:" Style="{StaticResource card}"/>
                                                         <TextBlock 
-                                                        FontSize="22"
+                                                        Style="{StaticResource card}"
                                                     Text="{Binding Product}"
                                                     Margin="220,0,0,0"/>
                                                     </Grid>
-                                                    <Grid Margin="5">
-                                                        <TextBlock Text="Remark:" FontSize="22"/>
+                                                    <Grid Margin="5,2,0,0">
+                                                        <TextBlock Text="Ghi chú:" Style="{StaticResource card}"/>
                                                         <TextBlock 
-                                                        FontSize="22"
+                                                       Style="{StaticResource card}"
                                                     Text="{Binding Remark}"
                                                     Margin="220,0,0,0"/>
                                                     </Grid>
+                                                    <Grid Margin="5,2,0,0">
+                                                            <TextBlock Text="Số Lượng:" Style="{StaticResource card}"/>
+                                                            <TextBlock 
+                                                       Style="{StaticResource card}"
+                                                    Text="{Binding Quantity}"
+                                                    Margin="220,0,0,0"/>
+                                                        </Grid>
                                                 </StackPanel>
                                                 <Grid Grid.Column="1">
                                                     <Image 

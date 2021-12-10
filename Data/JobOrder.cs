@@ -15,7 +15,7 @@ namespace WPF_TEST.Data
         private TimeSpan end = new TimeSpan();
         
         private ObservableCollection<Works> works = new ObservableCollection<Works>();
-        public int ID { get; set; }
+        public string ID { get; set; }
         public string SaleOrder { get; set; }
         //public string Customer { get; set; }
         //public string Customer_Details { get; set; }

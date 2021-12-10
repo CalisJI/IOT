@@ -64,7 +64,7 @@ namespace WPF_TEST.ViewModel
         static MainMenuModel MainMenuModel = new MainMenuModel();
         static CustomerSetting_ViewModel CustomerSetting_ViewModel = new CustomerSetting_ViewModel();
         WorkflowCreatorModel WorkflowCreatorModel = new WorkflowCreatorModel();
-        static SchedulerViewModel SchedulerViewModel = SchedulerViewModel._SchedulerViewModel;
+        SchedulerViewModel SchedulerViewModel = SchedulerViewModel._SchedulerViewModel;
         static MainAll_ViewModel MainAll_ViewModel = new MainAll_ViewModel();
         static DataCollectConfigureModel DataCollectConfigureModel = new DataCollectConfigureModel();
         static Ethenet_SerialModel ethenet_SerialModel = new Ethenet_SerialModel();
@@ -93,7 +93,7 @@ namespace WPF_TEST.ViewModel
             });
             Unload = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
-               
+                //mainScreenViewModel.SelectedViewModel = MainAll_ViewModel;
                 loadMain = false;
             });
             Image_Manager = new RelayCommand<object>((p) => { return true; }, (p) =>
@@ -125,19 +125,20 @@ namespace WPF_TEST.ViewModel
                 //SchedulerMain schedulerMain = new SchedulerMain();
                 //schedulerMain.ShowDialog();
                 Loading_Indicator.BeingBusy();
+                
                 mainScreenViewModel.SelectedViewModel = SchedulerViewModel;
-
+                SchedulerViewModel.Goback.Execute(null);
                 //Task.Factory.StartNew(() => {
                 //    loading_ViewModel loading_ViewModel = new loading_ViewModel();
                 //    mainScreenViewModel.SelectedViewModel = loading_ViewModel;
                 //    Dispatcher.CurrentDispatcher.Invoke(new Action(() => 
                 //    {
-                        
+
 
                 //    }));
-                    
+
                 //});
-                
+
             });
             CustomerManager = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
