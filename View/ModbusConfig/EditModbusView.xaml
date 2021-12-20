@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF_TEST.View"
              mc:Ignorable="d"
+             xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:local1="clr-namespace:WPF_TEST.ViewModel"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"           
@@ -200,6 +201,7 @@
 
 
                             <ComboBox
+                                Name="CB_Function"
                                 HorizontalAlignment="Right"
                                 DataContext="{StaticResource Modbus}"
                                  ItemsSource="{Binding Source={StaticResource FuntionCode}}"
@@ -210,6 +212,13 @@
                                         <TextBlock Text="{Binding Converter={StaticResource ConnectionConvert}}"/>
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectedChanged">
+                                        <i:InvokeCommandAction 
+                                            Command="{Binding}"
+                                            CommandParameter="{Binding ElementName=CB_Function, Path=SelectedItem}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
                             </ComboBox>
                         </Grid>
                         <Grid >

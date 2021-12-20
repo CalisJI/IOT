@@ -4,13 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF_TEST.View"
-             xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
+             
              mc:Ignorable="d" 
              xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
              xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
              xmlns:local1="clr-namespace:WPF_TEST.ViewModel"
              xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" 
+             xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              DataContext="{StaticResource Planner}"
              Loaded="UserControl_Loaded"
@@ -286,19 +287,20 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="3">
                     <Button
-                    Style="{StaticResource MaterialDesignFlatButton}"
-                    Height="80"
-                    DataContext="{StaticResource ScheduleViewModel}"
-                    materialDesign:ShadowAssist.ShadowDepth="Depth3"
-                    Width="120"
-                    BorderBrush="Blue"
-                    BorderThickness="2"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    
-                    Command="{Binding Add_Project}"
-                    Background="AliceBlue"
-                    materialDesign:ButtonAssist.CornerRadius="8">
+                     
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            Height="80"
+                            DataContext="{StaticResource ScheduleViewModel}"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                            Width="120"
+                            BorderBrush="Blue"
+                            BorderThickness="2"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            
+                            Command="{Binding Add_Project}"
+                            Background="AliceBlue"
+                            materialDesign:ButtonAssist.CornerRadius="8">
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
 
                             <materialDesign:PackIcon 
@@ -323,14 +325,14 @@
                   VerticalAlignment="Center">
                     <Button
                     DataContext="{StaticResource ScheduleViewModel}"
-                    Style="{StaticResource MaterialDesignFlatButton}"
+                    
                     Height="80"
                     materialDesign:ShadowAssist.ShadowDepth="Depth3"
                     Width="120"
                     HorizontalAlignment="Center"
                     BorderBrush="Blue"
-                        BorderThickness="2"
-                    
+                    BorderThickness="2"
+                    Style="{StaticResource MaterialDesignFlatButton}"
                     Command="{Binding GotoEditJob}"
                     CommandParameter="{Binding ElementName=Grid_data, Path=SelectedItem}"
                     Background="AliceBlue"
@@ -366,7 +368,7 @@
                     BorderBrush="Blue"
                         BorderThickness="2"
                     
-                    Command="{Binding Schedule}"
+                    Command="{Binding ViewSchedule}"
                     Background="AliceBlue"
                     materialDesign:ButtonAssist.CornerRadius="8">
                         <StackPanel Orientation="Vertical">

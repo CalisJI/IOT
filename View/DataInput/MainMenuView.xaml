@@ -24,17 +24,19 @@
                     <Grid
                     Width="250" Height="200"  Margin="46,0,0,0">
                         <Button
-                        Style="{StaticResource MaterialDesignRaisedLightButton}"
+                        Style="{StaticResource MaterialDesignFlatButton}"
                         Height="180" Width="250"
-                        materialDesign:ButtonAssist.CornerRadius="5"
-                        ToolTip="MaterialDesignRaisedLightButton with Round Corners"
-                        Background="#ab47bc">
+                        BorderBrush="Blue"
+                        BorderThickness="2"
+                            Command="{Binding OpenDataBaseSetting}"
+                        materialDesign:ButtonAssist.CornerRadius="10">
                             <StackPanel 
                             Orientation="Vertical"
                             Width="250" Height="180" 
                             HorizontalAlignment="Center" 
                             VerticalAlignment="Center">
                                 <materialDesign:PackIcon Kind="Cog"
+                                                         Foreground="Gray"
                                                      Width="100" Height="100" 
                                                      HorizontalAlignment="Center" 
                                                      Margin="10"/>
@@ -47,21 +49,24 @@
                     <Grid
                     Width="250" Height="200" Margin="27,0,0,0">
                         <Button
-                        Style="{StaticResource MaterialDesignRaisedLightButton}"
+                        Style="{StaticResource MaterialDesignFlatButton}"
                         Height="180" Width="250"
-                        materialDesign:ButtonAssist.CornerRadius="5"
-                        ToolTip="MaterialDesignRaisedLightButton with Round Corners"
-                        Background="#ab47bc"
-                            Command="{Binding DataStream}">
+                            BorderBrush="Blue"
+                            BorderThickness="2"
+                        materialDesign:ButtonAssist.CornerRadius="10"
+                        
+                        Command="{Binding DataStream}">
                             <StackPanel 
                             Orientation="Vertical"
                             Width="250" Height="180" 
                             HorizontalAlignment="Center" 
                             VerticalAlignment="Center">
-                                <materialDesign:PackIcon Kind="TrayArrowDown"
-                                                     Width="100" Height="100" 
-                                                     HorizontalAlignment="Center" 
-                                                     Margin="10"/>
+                                <materialDesign:PackIcon 
+                                    Foreground="Blue"
+                                    Kind="TrayArrowDown"
+                                    Width="100" Height="100" 
+                                    HorizontalAlignment="Center" 
+                                    Margin="10"/>
                                 <TextBlock Text="Data Stream Collection"
                                        HorizontalAlignment="Center" FontSize="20"/>
                             </StackPanel>
@@ -70,11 +75,12 @@
                     <Grid
                     Width="250" Height="200" Margin="27,0,20,0">
                         <Button
-                        Style="{StaticResource MaterialDesignRaisedLightButton}"
+                        Style="{StaticResource MaterialDesignFlatButton}"
                         Height="180" Width="250"
-                        materialDesign:ButtonAssist.CornerRadius="5"
-                        ToolTip="MaterialDesignRaisedLightButton with Round Corners"
-                        Background="#ab47bc">
+                            BorderBrush="Blue"
+                            BorderThickness="2"
+                        materialDesign:ButtonAssist.CornerRadius="10"
+                        ToolTip="MaterialDesignRaisedLightButton with Round Corners">
                             <StackPanel 
                             Orientation="Vertical"
                             Width="250" Height="180" 

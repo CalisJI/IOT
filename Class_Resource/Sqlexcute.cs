@@ -16,14 +16,35 @@ namespace WPF_TEST.Class_Resource
 {
     public class Sqlexcute
     {
-        private static MySqlConnection SQL_Connection;
-        public static string pwd { get; set; }
+        
+        public static string pwd { get { return "Fwd@2021"; } }
         //public static string pwd = "12345678";
         public string error_message;
         //public static string Server = "127.0.0.1";
-        public static string Server { get; set; }
-        public static string UId { get; set; }
+        public static string Server { get { return "112.78.2.9"; } }
+        public static string UId { get { return "fwd63823_fwdvina"; } }
         public static string Database { get { return "fwd63823_database"; } }
+
+
+        private static MySqlConnection _sQL_Connection = new MySqlConnection("Server = " + Server + ";Database =" + Database + "; UId = " + UId + "; Pwd = " + pwd + "; Pooling = false; Character Set=utf8; SslMode=none");
+        private static MySqlConnection SQL_Connection 
+        {
+            get 
+            {
+                if (_sQL_Connection != null)
+                {
+                    return _sQL_Connection;
+                }
+                else 
+                {
+                    return new MySqlConnection("Server = " + Server + ";Database =" + Database + "; UId = " + UId + "; Pwd = " + pwd + "; Pooling = false; Character Set=utf8; SslMode=none");
+                }
+            }
+            set 
+            {
+                _sQL_Connection = value;
+            }
+        }
         private string Check_Table_Exits(string Db, string TB) 
         {
             string check = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = '"+Db+"' AND table_name = '"+TB+"'";
@@ -90,8 +111,11 @@ namespace WPF_TEST.Class_Resource
             DataTable dt = new DataTable();
             try
             {
-                SQL_Connection = new MySqlConnection(StrCon(Server, pwd));
-                SQL_Connection.Open();
+
+                if (SQL_Connection.State == ConnectionState.Closed)
+                {
+                    SQL_Connection.Open();
+                }
                 dt = SQL_Connection.GetSchema("Databases");
                 error_message = string.Empty;
                 SQL_Connection.Close();
@@ -110,11 +134,13 @@ namespace WPF_TEST.Class_Resource
             List<string> listName = new List<string>();
             try
             {
-                using (SQL_Connection = new MySqlConnection(StrCon(Server, pwd)))
+
+                if (SQL_Connection.State == ConnectionState.Closed)
                 {
                     SQL_Connection.Open();
-                    //using (MySqlCommand com = new MySqlCommand(" SELECT * FROM sys.tables where table_schema = 'agv_data'", con))
-                    using (MySqlCommand com = new MySqlCommand("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'AND TABLE_SCHEMA='" + datebase + "' ", SQL_Connection))
+                }
+                //using (MySqlCommand com = new MySqlCommand(" SELECT * FROM sys.tables where table_schema = 'agv_data'", con))
+                using (MySqlCommand com = new MySqlCommand("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'AND TABLE_SCHEMA='" + datebase + "' ", SQL_Connection))
                     {
 
                         using (MySqlDataReader reader = com.ExecuteReader())
@@ -128,7 +154,7 @@ namespace WPF_TEST.Class_Resource
                     }
                     error_message = string.Empty;
                     return listName;
-                }
+               
             }
             catch (Exception ex)
             {
@@ -144,17 +170,20 @@ namespace WPF_TEST.Class_Resource
             DataTable dt = new DataTable();
             try
             {
-
-                using (SQL_Connection = new MySqlConnection("Server = " + Server + ";Database =" + database + "; UId = " + UId + "; Pwd = " + pwd + "; Pooling = false; Character Set=utf8; SslMode=none"))
+                if (SQL_Connection.State == ConnectionState.Closed)
                 {
-                    string str = "SELECT * FROM " + table + "";
-                    MySqlDataAdapter adp = new MySqlDataAdapter(str, SQL_Connection);
-                    MySqlCommandBuilder cmd = new MySqlCommandBuilder(adp);
-
-                    adp.Fill(dt);
-                    error_message = string.Empty;
-                    return dt;
+                    SQL_Connection.Open();
                 }
+
+                string str = "SELECT * FROM " + table + "";
+                MySqlDataAdapter adp = new MySqlDataAdapter(str, SQL_Connection);
+                MySqlCommandBuilder cmd = new MySqlCommandBuilder(adp);
+
+                adp.Fill(dt);
+                SQL_Connection.Close();
+                error_message = string.Empty;
+                return dt;
+               
 
             }
             catch (Exception ex)
@@ -169,36 +198,34 @@ namespace WPF_TEST.Class_Resource
             DataTable dataTable = new DataTable();
             try
             {
-
-                using (SQL_Connection = new MySqlConnection("Server = " + Server + ";Database =" + database + "; UId = " + UId + "; Pwd = " + pwd + "; Pooling = false; Character Set=utf8; SslMode=none"))
+                if(SQL_Connection.State == ConnectionState.Closed) 
                 {
                     SQL_Connection.Open();
-                    int i = 0;
-                    string str = "SELECT * FROM " + table + "";
+                }
+                int i = 0;
+                string str = "SELECT * FROM " + table + "";
 
-                    MySqlCommand cmd = new MySqlCommand(str, SQL_Connection);
-                    var SQL_Reader = cmd.ExecuteReader();
-                    if (SQL_Reader.HasRows)
+                MySqlCommand cmd = new MySqlCommand(str, SQL_Connection);
+                var SQL_Reader = cmd.ExecuteReader();
+                if (SQL_Reader.HasRows)
+                {
+                    while (SQL_Reader.Read())
                     {
-                        while (SQL_Reader.Read())
+                        dataTable.Rows.Add();
+                        for (int j = 0; j < SQL_Reader.FieldCount; j++)
                         {
-                            dataTable.Rows.Add();
-                            for (int j = 0; j < SQL_Reader.FieldCount; j++)
-                            {
-                                if (SQL_Reader.IsDBNull(j)) break;
-                                dataTable.Columns.Add();
-                                dataTable.Rows[i][j] = SQL_Reader.GetString(j);
-
-                            }
-                            i++;
+                            if (SQL_Reader.IsDBNull(j)) break;
+                            dataTable.Columns.Add();
+                            dataTable.Rows[i][j] = SQL_Reader.GetString(j);
 
                         }
-                    }
-                    SQL_Connection.Close();
-                    error_message = string.Empty;
-                    return dataTable;
-                }
+                        i++;
 
+                    }
+                }
+                SQL_Connection.Close();
+                error_message = string.Empty;
+                return dataTable;
             }
             catch (Exception ex)
             {
@@ -210,19 +237,24 @@ namespace WPF_TEST.Class_Resource
         {
             try
             {
-                SQL_Connection = new MySqlConnection("Server = " + Server + ";Database =" + database + "; UId = " + UId + "; Pwd = " + pwd + "; Pooling = false; Character Set=utf8; SslMode=none");
-                SQL_Connection.Open();
-                MySqlCommand cmd = new MySqlCommand(command, SQL_Connection);
+                //SQL_Connection = new MySqlConnection("Server = " + Server + ";Database =" + database + "; UId = " + UId + "; Pwd = " + pwd + "; Pooling = false; Character Set=utf8; SslMode=none");
+                if (SQL_Connection.State == ConnectionState.Closed && SQL_Connection.State!= ConnectionState.Connecting && SQL_Connection.State != ConnectionState.Executing)
+                {
+                    SQL_Connection.Open();
+                    MySqlCommand cmd = new MySqlCommand(command, SQL_Connection);
 
-                cmd.ExecuteNonQuery();
-                SQL_Connection.Close();
-                error_message = string.Empty;
+                    cmd.ExecuteNonQuery();
+                    SQL_Connection.Close();
+                    error_message = string.Empty;
+                   
+                }
+
                 return true;
-
 
             }
             catch (Exception ex)
             {
+                
                 SQL_Connection.Close();
                 error_message = ex.Message;
                 return false;
@@ -270,8 +302,7 @@ namespace WPF_TEST.Class_Resource
         public void SaveData2DB(DataTable dt, string tempCsvFileSpec, string database, string table)
         {
 
-            using (SQL_Connection = new MySqlConnection("Server = " + Server + ";Database =" + database + "; UId = " + UId + "; Pwd = " + pwd + "; Pooling = false; Character Set=utf8; SslMode=none"))
-            {
+            
                 ToCSV(dt, tempCsvFileSpec);
                 tempCsvFileSpec = tempCsvFileSpec.Replace('\\', '/');
                 var msbl = new MySqlBulkLoader(new MySqlConnection("Server = " + Server + ";Database =" + database + "; UId = " + UId + "; Pwd = " + pwd + "; Pooling = false; Character Set=utf8; SslMode=none"));
@@ -282,27 +313,39 @@ namespace WPF_TEST.Class_Resource
                 msbl.FieldQuotationCharacter = '"';
                 var dem = msbl.Load();
                 File.Delete(tempCsvFileSpec);
-            }
+           
         }
         public void Check_Table(string database, string TableName,ref int check) 
         {
-            int count = 2;
-            using (SQL_Connection = new MySqlConnection(StrCon(Server, pwd)))
+            try
             {
-                MySqlCommand command = new MySqlCommand(Check_Table_Exits(database, TableName), SQL_Connection);
+                int count = 2;
+                
+                    MySqlCommand command = new MySqlCommand(Check_Table_Exits(database, TableName), SQL_Connection);
 
-                SQL_Connection.Open();
+                if (SQL_Connection.State == ConnectionState.Closed)
+                {
+                    SQL_Connection.Open();
+                }
 
                 MySqlDataReader reader = command.ExecuteReader();
 
-                while (reader.Read())
+                    while (reader.Read())
 
-                {
-                    count = reader.GetInt32(0);
-                }
-                SQL_Connection.Close();
+                    {
+                        count = reader.GetInt32(0);
+                    }
+                    SQL_Connection.Close();
+                
+                check = count;
             }
-            check = count;
+            catch (Exception ex)
+            {
+
+                error_message = ex.Message;
+            }
+            
+            
         }
         public void AutoCreateTable(DataTable dataTable, string database, string TableName, ref bool check,ref bool exist) 
         {
@@ -310,13 +353,15 @@ namespace WPF_TEST.Class_Resource
             int count = 2;
             //*****************************************************
             // Code for processing
-            using (SQL_Connection = new MySqlConnection(StrCon(Server, pwd))) 
-            {
+           
                 MySqlCommand command = new MySqlCommand(Check_Table_Exits(database, TableName),SQL_Connection);
 
+            if (SQL_Connection.State == ConnectionState.Closed)
+            {
                 SQL_Connection.Open();
+            }
 
-                MySqlDataReader reader = command.ExecuteReader();
+            MySqlDataReader reader = command.ExecuteReader();
 
                 while (reader.Read())
 
@@ -324,7 +369,7 @@ namespace WPF_TEST.Class_Resource
                      count = reader.GetInt32(0);
                 }
                 SQL_Connection.Close();
-            }
+           
             if (count == 0)
 
             {
@@ -400,13 +445,15 @@ namespace WPF_TEST.Class_Resource
             int count = 2;
             //*****************************************************
             // Code for processing
-            using (SQL_Connection = new MySqlConnection(StrCon(Server, pwd)))
-            {
+           
                 MySqlCommand command = new MySqlCommand(Check_Table_Exits(database, TableName), SQL_Connection);
 
+            if (SQL_Connection.State == ConnectionState.Closed)
+            {
                 SQL_Connection.Open();
+            }
 
-                MySqlDataReader reader = command.ExecuteReader();
+            MySqlDataReader reader = command.ExecuteReader();
 
                 while (reader.Read())
 
@@ -414,7 +461,7 @@ namespace WPF_TEST.Class_Resource
                     count = reader.GetInt32(0);
                 }
                 SQL_Connection.Close();
-            }
+           
             if (count == 0 && !Json)
 
             {
@@ -530,15 +577,17 @@ namespace WPF_TEST.Class_Resource
             MySqlDataAdapter mySqlData;
             try
             {
-               
-                using (SQL_Connection = new MySqlConnection(StrCon_Database(Server, pwd, Database)))
+
+                if (SQL_Connection.State == ConnectionState.Closed)
                 {
-                    string Query = "SELECT * FROM " + table_Name + "";
+                    SQL_Connection.Open();
+                }
+                string Query = "SELECT * FROM " + table_Name + "";
                     mySqlData = new MySqlDataAdapter(Query, SQL_Connection);
                     MySqlCommandBuilder mySqlCommand = new MySqlCommandBuilder(mySqlData);
                     mySqlData.Fill(dataTable);
 
-                }
+                SQL_Connection.Close();
                 error_message = string.Empty;
                 return mySqlData;
             }
@@ -558,13 +607,15 @@ namespace WPF_TEST.Class_Resource
             int count = 2;
             //*****************************************************
             // Code for processing
-            using (SQL_Connection = new MySqlConnection(StrCon(Server, pwd)))
-            {
+           
                 MySqlCommand command = new MySqlCommand(Check_Table_Exits(database, TableName), SQL_Connection);
 
+            if (SQL_Connection.State == ConnectionState.Closed)
+            {
                 SQL_Connection.Open();
+            }
 
-                MySqlDataReader reader = command.ExecuteReader();
+            MySqlDataReader reader = command.ExecuteReader();
 
                 while (reader.Read())
 
@@ -572,7 +623,7 @@ namespace WPF_TEST.Class_Resource
                     count = reader.GetInt32(0);
                 }
                 SQL_Connection.Close();
-            }
+           
             if (count == 0)
             {
                 string sqlsc = string.Empty;
@@ -587,29 +638,29 @@ namespace WPF_TEST.Class_Resource
                 var check = SQL_command(cmd, database);
             }
         }
-        public void Update_Table_to_Host(ref MySqlDataAdapter mySqlDataAdapter, DataTable dataTable, string Database,string table_Name) 
+        public void Update_Table_to_Host(DataTable dataTable, string Database  ,string table_Name) 
         {
+            MySqlDataAdapter mySqlDataAdapter = null;
             try
             {
-                mySqlDataAdapter = null;
+                
                 SQL_command("DELETE FROM " + table_Name + "",Database);
-                using (SQL_Connection = new MySqlConnection(StrCon_Database(Server, pwd, Database)))
+                if (SQL_Connection.State == ConnectionState.Closed)
                 {
-                    if (mySqlDataAdapter == null) 
-                    {
-                        string Query = "SELECT * FROM " + table_Name + "";
-                        mySqlDataAdapter = new MySqlDataAdapter(Query, SQL_Connection);
-                        MySqlCommandBuilder mySqlCommand = new MySqlCommandBuilder(mySqlDataAdapter);
-                    }
-                    
-                    mySqlDataAdapter.Update(dataTable);
-                    error_message = string.Empty;
+                    SQL_Connection.Open();
                 }
+             
+                string Query = "SELECT * FROM " + table_Name + "";
+                mySqlDataAdapter = new MySqlDataAdapter(Query, SQL_Connection);
+                MySqlCommandBuilder mySqlCommand = new MySqlCommandBuilder(mySqlDataAdapter);
+                mySqlDataAdapter.Update(dataTable);
+                error_message = string.Empty;
+                SQL_Connection.Close();
             }
             catch (Exception ex)
             {
                 error_message = ex.Message;
-              
+                SQL_Connection.Close();             
             }
            
         }

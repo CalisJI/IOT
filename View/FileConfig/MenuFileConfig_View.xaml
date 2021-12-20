@@ -30,10 +30,12 @@
                 <Grid
                     Width="200" Height="200"  Margin="15" Grid.Column="0" Grid.Row="0">
                     <Button
-                        Style="{StaticResource MaterialDesignRaisedLightButton}"
+                        BorderBrush="Blue"
+                    BorderThickness="2"
+                    Style="{StaticResource MaterialDesignFlatButton}"
                         Height="180" Width="200"
                         materialDesign:ButtonAssist.CornerRadius="20"
-                        Background="#673cb2"
+                        
                         Command="{Binding Excel}"
                     CommandParameter="Modbus">
                         <StackPanel 
@@ -57,10 +59,12 @@
                 <Grid
                     Width="200" Height="200"  Margin="15" Grid.Column="1" Grid.Row="1">
                     <Button
-                        Style="{StaticResource MaterialDesignRaisedLightButton}"
+                        BorderBrush="Blue"
+                    BorderThickness="2"
+                    Style="{StaticResource MaterialDesignFlatButton}"
                         Height="180" Width="200"
                         materialDesign:ButtonAssist.CornerRadius="20"
-                        Background="#673cb2"
+                        
                         Command="{Binding XML}"
                     CommandParameter="Modbus">
                         <StackPanel 
@@ -84,10 +88,12 @@
                 <Grid
                     Width="200" Height="200"  Margin="15" Grid.Column="2" Grid.Row="0">
                     <Button
-                        Style="{StaticResource MaterialDesignRaisedLightButton}"
+                        BorderBrush="Blue"
+                    BorderThickness="2"
+                    Style="{StaticResource MaterialDesignFlatButton}"
                         Height="180" Width="200"
                         materialDesign:ButtonAssist.CornerRadius="20"
-                        Background="#673cb2"
+                       
                         Command="{Binding Txt}"
                     CommandParameter="Modbus">
                         <StackPanel 
@@ -111,10 +117,12 @@
                 <Grid
                     Width="200" Height="200"  Margin="15" Grid.Column="0" Grid.Row="1">
                     <Button
-                        Style="{StaticResource MaterialDesignRaisedLightButton}"
+                        BorderBrush="Blue"
+                    BorderThickness="2"
+                    Style="{StaticResource MaterialDesignFlatButton}"
                         Height="180" Width="200"
                         materialDesign:ButtonAssist.CornerRadius="20"
-                        Background="#673cb2"
+                        
                         Command="{Binding Json}"
                     CommandParameter="Modbus">
                         <StackPanel 
@@ -138,10 +146,12 @@
                 <Grid
                     Width="200" Height="200"  Margin="15" Grid.Column="1" Grid.Row="0">
                     <Button
-                        Style="{StaticResource MaterialDesignRaisedLightButton}"
+                        BorderBrush="Blue"
+                    BorderThickness="2"
+                    Style="{StaticResource MaterialDesignFlatButton}"
                         Height="180" Width="200"
                         materialDesign:ButtonAssist.CornerRadius="20"
-                        Background="#673cb2"
+                        
                         Command="{Binding CSV}"
                     CommandParameter="Modbus">
                         <StackPanel 
@@ -172,12 +182,14 @@
             Height="100"
             HorizontalAlignment="Center">
             <Button
-                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                BorderBrush="Blue"
+                    BorderThickness="2"
+                    Style="{StaticResource MaterialDesignFlatButton}"
                 Height="80" Width="250"
                 
                 materialDesign:ButtonAssist.CornerRadius="5"
                 ToolTip="MaterialDesignRaisedLightButton with Round Corners"
-                Background="#007acc"
+                
                 Command="{Binding Home}">
                 <StackPanel 
                             Orientation="Horizontal"

@@ -11,6 +11,6 @@
         Title="MainScreenView" Height="1080" Width="1920">
     <Grid>
        
-        <ContentControl Content="{Binding SelectedViewModel}" Grid.ColumnSpan="2"/>
+        <ContentControl Content="{Binding SelectedViewModel}"/>
     </Grid>
 </Window>

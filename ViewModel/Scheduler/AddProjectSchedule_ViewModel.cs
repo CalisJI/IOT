@@ -272,7 +272,7 @@ namespace WPF_TEST.ViewModel
             });
             Focus = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
-                if (ScanBarCode && dem==1) 
+                if (ScanBarCode && dem==2) 
                 {
                     dem = 0;
                     ID_Barcode = Barcode_ID;
@@ -392,7 +392,7 @@ namespace WPF_TEST.ViewModel
                 //var a = DataProvider.JobOrderInput.Where(x => x.ID == "68189122").FirstOrDefault();
                 if (a != null) 
                 {
-                    dem = 1;
+                    dem = 2;
                     Barcode_SaleOder = a.SaleOrder;
                     Barcode_ID = a.ID;
                     Barcode_Customer = a.Customerinformation;
@@ -531,7 +531,7 @@ namespace WPF_TEST.ViewModel
                         }
 
                         JobOrderRuntime_Table = Sqlexcute.FillToDataTable(JobOrdersRumtimes);
-                        Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, JobOrderRuntime_Table, Sqlexcute.Database, JobOrderRuntime_Table.TableName);
+                        Sqlexcute.Update_Table_to_Host(JobOrderRuntime_Table, Sqlexcute.Database, JobOrderRuntime_Table.TableName);
                         Save_Table();
                         foreach (var item in Work_Library)
                         {
@@ -593,7 +593,7 @@ namespace WPF_TEST.ViewModel
                         }
 
                         JobOrderRuntime_Table = Sqlexcute.FillToDataTable(JobOrdersRumtimes);
-                        Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, JobOrderRuntime_Table, Sqlexcute.Database, JobOrderRuntime_Table.TableName);
+                        Sqlexcute.Update_Table_to_Host( JobOrderRuntime_Table, Sqlexcute.Database, JobOrderRuntime_Table.TableName);
                         Save_Table();
                         foreach (var item in Work_Library)
                         {
@@ -659,7 +659,7 @@ namespace WPF_TEST.ViewModel
 
             if (ToJson.ElementAt(0).Code != "") 
             {
-                Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, PlannerModel.DatatableScheduler, Sqlexcute.Database, "JobOrder");
+                Sqlexcute.Update_Table_to_Host(PlannerModel.DatatableScheduler, Sqlexcute.Database, "JobOrder");
                 if (Sqlexcute.error_message != string.Empty)
                 {
                     messageBoxService.ShowMessage("Lỗi khi lưu dữ liệu lên đám mây:\n " + Sqlexcute.error_message + "", "Thông tin lỗi", System.Messaging.MessageType.Report);

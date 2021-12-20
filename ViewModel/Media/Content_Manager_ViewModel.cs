@@ -27,107 +27,29 @@ namespace WPF_TEST.ViewModel
         public static DataTable DocumentObjectTable = new DataTable();
         Sqlexcute Sqlexcute = new Sqlexcute();
 
-        #region Model of Media
-
-        private string _linkVideo;
-        public string Linkvideo 
+        private static Content_Manager_ViewModel _content_Manager_ViewModel;
+        public static Content_Manager_ViewModel INS_Content_Manager_ViewModel 
         {
             get 
             {
-                return _linkVideo;
+                if (_content_Manager_ViewModel != null) 
+                {
+                    return _content_Manager_ViewModel;
+                }
+                else 
+                {
+                    return new Content_Manager_ViewModel();
+                }
             }
             set 
             {
-                SetProperty(ref _linkVideo, value, nameof(Linkvideo));
+                _content_Manager_ViewModel = value;
             }
         }
 
-        private string _type;
-        public string VideoType
-        {
-            get
-            {
-                return _type;
-            }
-            set
-            {
-                SetProperty(ref _type, value, nameof(VideoType));
-            }
-        }
-
-        private string _version;
-        public string Version
-        {
-            get
-            {
-                return _version;
-            }
-            set
-            {
-                SetProperty(ref _version, value, nameof(Version));
-            }
-        }
-
-        private string _videoGroup;
-        public string VideoGroup
-        {
-            get
-            {
-                return _videoGroup;
-            }
-            set
-            {
-                SetProperty(ref _videoGroup, value, nameof(VideoGroup));
-            }
-        }
-
-        private string _videoCategory;
-        public string VideoCategory
-        {
-            get
-            {
-                return _videoCategory;
-            }
-            set
-            {
-                SetProperty(ref _videoCategory, value, nameof(VideoCategory));
-            }
-        }
-        private ImageObject _image;
-        public ImageObject Image_
-        {
-            get 
-            {
-                return _image;
-            }
-            set 
-            {
-                SetProperty(ref _image, value, nameof(Image_));
-            } 
-        }
-        private VideoObject _video;
-        public VideoObject video 
-        {
-            get { return _video; }
-            set 
-            {
-                SetProperty(ref _video, value, nameof(video));
-            }
-        }
-
-        private Uri _uri;
-        public Uri Uri 
-        {
-            get 
-            {
-                return _uri;
-            }
-            set 
-            {
-                SetProperty(ref _uri, value, nameof(Uri));
-            } 
-        }
-        private ObservableCollection<AudioObject> _audioObjects;
+       
+       
+        private static ObservableCollection<AudioObject> _audioObjects;
         public ObservableCollection<AudioObject> AudioObjects 
         {
             get
@@ -139,13 +61,13 @@ namespace WPF_TEST.ViewModel
                 SetProperty(ref _audioObjects, value, nameof(AudioObjects));
             }
         }
-        private ObservableCollection<DocumentObject> _documentObjects;
+        private static ObservableCollection<DocumentObject> _documentObjects;
         public ObservableCollection<DocumentObject> DocumentObjects 
         {
             get { return _documentObjects; }
             set { SetProperty(ref _documentObjects, value, nameof(DocumentObjects)); }
         }
-        private ObservableCollection<ImageObject> _imageObject;
+        private static ObservableCollection<ImageObject> _imageObject;
         public ObservableCollection<ImageObject> ImageObjects 
         {
             get 
@@ -157,13 +79,13 @@ namespace WPF_TEST.ViewModel
                 SetProperty(ref _imageObject, value, nameof(ImageObjects));
             }
         }
-        private ObservableCollection<VideoObject> _videoObject;
-        public ObservableCollection<VideoObject> VideoObjects 
+        private static ObservableCollection<VideoObject> _videoObject;
+        public  ObservableCollection<VideoObject> VideoObjects 
         {
             get { return _videoObject; }
             set { SetProperty(ref _videoObject, value, nameof(VideoObjects)); }
         }
-        #endregion
+       
         private static bool load = false;
         private MySqlDataAdapter mySqlDataAdapter;
 
@@ -289,8 +211,8 @@ namespace WPF_TEST.ViewModel
             ImageObjects.Add(imageObject4);
 
         }
-        public ICommand SelectVideoItem { get; set; }
-        public ICommand SelectImageItem { get; set; }
+      
+        
         public ICommand SelectAudioItem { get; set; }
         public ICommand SelectDocumentItem { get; set; }
         public Content_Manager_ViewModel() 
@@ -309,9 +231,9 @@ namespace WPF_TEST.ViewModel
                 AudioObjects = new ObservableCollection<AudioObject>();
                 //AddVideo();
                 //AddImage();
-                Sqlexcute.Server = "112.78.2.9";
-                Sqlexcute.pwd = "Fwd@2021";
-                Sqlexcute.UId = "fwd63823_fwdvina";
+                //Sqlexcute.Server = "112.78.2.9";
+                //Sqlexcute.pwd = "Fwd@2021";
+                //Sqlexcute.UId = "fwd63823_fwdvina";
                 Sqlexcute.Check_Table("fwd63823_database", VideoObjectTable.TableName, ref check);
                 Sqlexcute.Check_Table("fwd63823_database", ImageObjectTable.TableName, ref check1);
                 Sqlexcute.Check_Table("fwd63823_database", AudioObjectTable.TableName, ref check2);
@@ -326,7 +248,7 @@ namespace WPF_TEST.ViewModel
                     mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref VideoObjectTable, VideoObjectTable.TableName, "fwd63823_database");
                     AddVideo();
                     VideoObjectTable = Sqlexcute.FillToDataTable<VideoObject>(VideoObjects);
-                    Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, VideoObjectTable, "fwd63823_database", VideoObjectTable.TableName);
+                    Sqlexcute.Update_Table_to_Host(VideoObjectTable, "fwd63823_database", VideoObjectTable.TableName);
                 }
                 else
                 {
@@ -342,7 +264,7 @@ namespace WPF_TEST.ViewModel
                     mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref ImageObjectTable, ImageObjectTable.TableName, "fwd63823_database");
                     AddImage();
                     ImageObjectTable = Sqlexcute.FillToDataTable<ImageObject>(ImageObjects);
-                    Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, ImageObjectTable, "fwd63823_database", ImageObjectTable.TableName);
+                    Sqlexcute.Update_Table_to_Host(ImageObjectTable, "fwd63823_database", ImageObjectTable.TableName);
                 }
                 else
                 {
@@ -357,7 +279,7 @@ namespace WPF_TEST.ViewModel
                     mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref DocumentObjectTable, DocumentObjectTable.TableName, "fwd63823_database");
                     AddDocumnet();
                     DocumentObjectTable = Sqlexcute.FillToDataTable<DocumentObject>(DocumentObjects);
-                    Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, DocumentObjectTable, "fwd63823_database", DocumentObjectTable.TableName);
+                    Sqlexcute.Update_Table_to_Host( DocumentObjectTable, "fwd63823_database", DocumentObjectTable.TableName);
                 }
                 else
                 {
@@ -372,7 +294,7 @@ namespace WPF_TEST.ViewModel
                     mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref AudioObjectTable, AudioObjectTable.TableName, "fwd63823_database");
                     AddAudio();
                     AudioObjectTable = Sqlexcute.FillToDataTable<AudioObject>(AudioObjects);
-                    Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, AudioObjectTable, "fwd63823_database", AudioObjectTable.TableName);
+                    Sqlexcute.Update_Table_to_Host(AudioObjectTable, "fwd63823_database", AudioObjectTable.TableName);
                 }
                 else
                 {
@@ -380,12 +302,7 @@ namespace WPF_TEST.ViewModel
                     AudioObjects = Sqlexcute.Conver_From_Data_Table_To_List<AudioObject>(AudioObjectTable);
                 }
             }
-            SelectVideoItem = new RelayCommand<object>((p) => { return true; }, (p) => 
-            {
-                var c = (VideoObject)p;
-                Uri = new Uri(c.LinkVideo);
-                video = c;
-            });
+            
             SelectAudioItem = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
                 
@@ -394,11 +311,7 @@ namespace WPF_TEST.ViewModel
             {
                 
             });
-            SelectImageItem = new RelayCommand<object>((p) => { return true; }, (p) => 
-            {
-                var c = (ImageObject)p;
-                Image_ = c;
-            });
+            
         }
      }
     public class PageInfoConverter : IMultiValueConverter

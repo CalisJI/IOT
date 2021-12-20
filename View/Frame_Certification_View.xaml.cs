@@ -1,5 +1,4 @@
-﻿using DevExpress.Xpf.Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WPF_TEST
+namespace WPF_TEST.View
 {
     /// <summary>
-    /// Interaction logic for CustomAppointmentWindow1.xaml
+    /// Interaction logic for Frame_Certification_View.xaml
     /// </summary>
-    public partial class CustomAppointmentWindow1 : ThemedWindow
+    public partial class Frame_Certification_View : UserControl
     {
-        public CustomAppointmentWindow1()
+        public Frame_Certification_View()
         {
             InitializeComponent();
         }

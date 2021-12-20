@@ -33,7 +33,30 @@ namespace WPF_TEST.Class_Resource
         //public savedataEntities DB { get; set; }
         //public ServerData ServerData { get; set; }
         private Sqlexcute Sqlexcute { get; set; }
-
+        private string _cloud;
+        public string Cloud_Media 
+        {
+            get 
+            {
+                return _cloud;
+            }
+            set 
+            {
+                _cloud = value;
+            }
+        }
+        private ObservableCollection<DatabaseConfig> _cloudConfig;
+        public ObservableCollection<DatabaseConfig> CloudConfig 
+        {
+            get 
+            {
+                return _cloudConfig;
+            }
+            set 
+            {
+                _cloudConfig = value;
+            }
+        }
         private ObservableCollection<JobOrder> _jobconfig;
         public ObservableCollection<JobOrder> JobOrderInput 
         {
@@ -79,6 +102,20 @@ namespace WPF_TEST.Class_Resource
                 _Modbus = value;
             }
         }
+
+        private static DataTable _insCloud;
+        public static DataTable INS_Cloud 
+        {
+            get 
+            {
+                return _insCloud;
+            }
+            set 
+            {
+                _insCloud = value;
+            }
+        }
+
         private static DataTable _insJob;
         
         public static DataTable INS_JobOrder
@@ -164,12 +201,14 @@ namespace WPF_TEST.Class_Resource
             INS_Customer = new DataTable("CustomerConfig");
             INS_Work = new DataTable("Works");
             INS_PLC_Data = new DataTable("PLCDataConfig");
+            INS_Cloud = new DataTable("Cloud");
+            CloudConfig = new ObservableCollection<DatabaseConfig>();
             WorkInput = new ObservableCollection<Works>();
             PLC_DataInput = new ObservableCollection<PLC_Modbus>();
             JobOrderInput = new ObservableCollection<JobOrder>();
             CustomerInput = new ObservableCollection<Customer>();
             initializerData();
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 5; i++)
             {
                 LoadData(i);
 
@@ -179,6 +218,7 @@ namespace WPF_TEST.Class_Resource
             PLC_DataInput = d.Item2;
             CustomerInput = d.Item3;
             WorkInput = d.Item4;
+            CloudConfig = d.Item5;
         }
 
         /// <summary>
@@ -186,6 +226,7 @@ namespace WPF_TEST.Class_Resource
         /// type 1 PLC, 
         /// type 2 customer, 
         /// type 3 work
+        /// type 4 Cloud
         /// </summary>
         /// <param name="type"></param>
         public void UpLoad_data(int type) 
@@ -201,17 +242,17 @@ namespace WPF_TEST.Class_Resource
                         Json_Job.Add(new ConvertoJson { Code = s });
                         INS_JobOrder = Sqlexcute.FillToDataTable(Json_Job);
                         INS_JobOrder.TableName = "JobOrderConfig";
-                        Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, INS_JobOrder, Sqlexcute.Database, INS_JobOrder.TableName);
+                        Sqlexcute.Update_Table_to_Host( INS_JobOrder, Sqlexcute.Database, INS_JobOrder.TableName);
                         break;
                     case 2:
                         INS_Customer = Sqlexcute.FillToDataTable(CustomerInput);
                         INS_Customer.TableName = "CustomerConfig";
-                        Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, INS_Customer, Sqlexcute.Database, INS_Customer.TableName);
+                        Sqlexcute.Update_Table_to_Host(INS_Customer, Sqlexcute.Database, INS_Customer.TableName);
                         break;
                     case 3:
                         INS_Work = Sqlexcute.FillToDataTable(WorkInput);
                         INS_Work.TableName = "Works";
-                        Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, INS_Work, Sqlexcute.Database, INS_Work.TableName);
+                        Sqlexcute.Update_Table_to_Host(INS_Work, Sqlexcute.Database, INS_Work.TableName);
                         break;
                     case 1:
                         var s1 = JsonSerializer.Serialize(PLC_DataInput);
@@ -219,7 +260,12 @@ namespace WPF_TEST.Class_Resource
                         JsonPLC.Add(new ConvertoJson { Code = s1 });
                         INS_PLC_Data = Sqlexcute.FillToDataTable(JsonPLC);
                         INS_PLC_Data.TableName = "PLCDataConfig";
-                        Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, INS_PLC_Data, Sqlexcute.Database, INS_PLC_Data.TableName);
+                        Sqlexcute.Update_Table_to_Host(INS_PLC_Data, Sqlexcute.Database, INS_PLC_Data.TableName);
+                        break;
+                    case 4:
+                        INS_Cloud = Sqlexcute.FillToDataTable(CloudConfig);
+                        INS_Cloud.TableName = "Cloud";
+                        Sqlexcute.Update_Table_to_Host( INS_Cloud, Sqlexcute.Database, INS_Cloud.TableName);
                         break;
                     default:
                         break;
@@ -240,10 +286,21 @@ namespace WPF_TEST.Class_Resource
             int check_work = 2;
             int check_PLC = 2;
             int check_customer = 2;
+            int check_cloud = 2;
             Sqlexcute.Check_Table(Sqlexcute.Database, INS_JobOrder.TableName, ref check_Job);
             Sqlexcute.Check_Table(Sqlexcute.Database, INS_Customer.TableName, ref check_customer);
             Sqlexcute.Check_Table(Sqlexcute.Database, INS_PLC_Data.TableName, ref check_PLC);
             Sqlexcute.Check_Table(Sqlexcute.Database, INS_Work.TableName, ref check_work);
+            Sqlexcute.Check_Table(Sqlexcute.Database, INS_Cloud.TableName, ref check_cloud);
+            if(check_cloud == 0) 
+            {
+                DatabaseConfig databaseConfig = new DatabaseConfig();
+                
+                CloudConfig.Add(databaseConfig);
+
+                INS_Cloud = Sqlexcute.FillToDataTable(CloudConfig);
+                INS_Cloud.TableName = "Cloud";
+            }
             if (check_customer == 0) 
             {
                 Customer customer = new Customer();
@@ -340,6 +397,9 @@ namespace WPF_TEST.Class_Resource
                     case 3:
                         Sqlexcute.AutoCreateTable(_insWork, Sqlexcute.Database, INS_Work.TableName, ref _insWork);
                         break;
+                    case 4:
+                        Sqlexcute.AutoCreateTable(_insCloud, Sqlexcute.Database, INS_Cloud.TableName, ref _insCloud);
+                        break;
                     default:
                         break;
                 }
@@ -357,7 +417,7 @@ namespace WPF_TEST.Class_Resource
         /// 
         /// </summary>
         /// <returns></returns>
-        public (ObservableCollection<JobOrder> ,ObservableCollection<PLC_Modbus>,ObservableCollection<Customer>,ObservableCollection<Works>) Data_Source()
+        public (ObservableCollection<JobOrder> ,ObservableCollection<PLC_Modbus>,ObservableCollection<Customer>,ObservableCollection<Works>, ObservableCollection<DatabaseConfig>) Data_Source()
         {
             ObservableCollection<JobOrder> jobOrders = new ObservableCollection<JobOrder>();
             ObservableCollection<Works> works = new ObservableCollection<Works>();
@@ -365,16 +425,27 @@ namespace WPF_TEST.Class_Resource
             ObservableCollection<PLC_Modbus> pLC_Modbus = new ObservableCollection<PLC_Modbus>();
             ObservableCollection<ConvertoJson> JS_Job = new ObservableCollection<ConvertoJson>();
             ObservableCollection<ConvertoJson> js_PLC = new ObservableCollection<ConvertoJson>();
+            ObservableCollection<DatabaseConfig> cloud = new ObservableCollection<DatabaseConfig>();
+            try
+            {
 
-            JS_Job = Sqlexcute.Conver_From_Data_Table_To_List<ConvertoJson>(INS_JobOrder);
-            works = Sqlexcute.Conver_From_Data_Table_To_List<Works>(INS_Work);
-            customers = Sqlexcute.Conver_From_Data_Table_To_List<Customer>(INS_Customer);
-            js_PLC = Sqlexcute.Conver_From_Data_Table_To_List<ConvertoJson>(INS_PLC_Data);
+                cloud = Sqlexcute.Conver_From_Data_Table_To_List<DatabaseConfig>(INS_Cloud);
+                JS_Job = Sqlexcute.Conver_From_Data_Table_To_List<ConvertoJson>(INS_JobOrder);
+                works = Sqlexcute.Conver_From_Data_Table_To_List<Works>(INS_Work);
+                customers = Sqlexcute.Conver_From_Data_Table_To_List<Customer>(INS_Customer);
+                js_PLC = Sqlexcute.Conver_From_Data_Table_To_List<ConvertoJson>(INS_PLC_Data);
 
-            jobOrders = JsonSerializer.Deserialize<ObservableCollection<JobOrder>>(JS_Job.ElementAt(0).Code);
-            pLC_Modbus = JsonSerializer.Deserialize<ObservableCollection<PLC_Modbus>>(js_PLC.ElementAt(0).Code);
+                jobOrders = JsonSerializer.Deserialize<ObservableCollection<JobOrder>>(JS_Job.ElementAt(0).Code);
+                pLC_Modbus = JsonSerializer.Deserialize<ObservableCollection<PLC_Modbus>>(js_PLC.ElementAt(0).Code);
 
-            return (jobOrders, pLC_Modbus, customers, works);
+               
+            }
+            catch (Exception ex)
+            {
+               
+
+            }
+            return (jobOrders, pLC_Modbus, customers, works,cloud);
         }
     }
 }

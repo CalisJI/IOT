@@ -12,7 +12,7 @@
         ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen" 
         WindowStyle="None" 
-       
+        Keyboard.KeyDown="Window_KeyDown"
         FontFamily="Segoe UI Emoji">
     <Grid>
         <Rectangle Height="280" VerticalAlignment="Top" >

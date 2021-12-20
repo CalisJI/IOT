@@ -304,9 +304,9 @@ namespace WPF_TEST.ViewModel
                 bool exist_ = true;
                
                 load_edit = true;
-                Sqlexcute.Server = "112.78.2.9";
-                Sqlexcute.pwd = "Fwd@2021";
-                Sqlexcute.UId = "fwd63823_fwdvina";
+                //Sqlexcute.Server = "112.78.2.9";
+                //Sqlexcute.pwd = "Fwd@2021";
+                //Sqlexcute.UId = "fwd63823_fwdvina";
                 Sqlexcute.Check_Table(Sqlexcute.Database, "JobOrder", ref check);
                 Sqlexcute.Check_Table(Sqlexcute.Database, Customer_Table.TableName, ref check1);
                 Sqlexcute.Check_Table(Sqlexcute.Database, Work_Table.TableName, ref check2);
@@ -336,7 +336,7 @@ namespace WPF_TEST.ViewModel
                     mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref Work_Table, Work_Table.TableName, Sqlexcute.Database);
              
                     Work_Table = Sqlexcute.FillToDataTable(WorksList);
-                    Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, Work_Table, Sqlexcute.Database, Work_Table.TableName);
+                    Sqlexcute.Update_Table_to_Host(Work_Table, Sqlexcute.Database, Work_Table.TableName);
 
                 }
                 else
@@ -358,7 +358,7 @@ namespace WPF_TEST.ViewModel
                     //mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref JobOrder_Table, "JobOrder", Sqlexcute.Database);
                     mySqlDataAdapter = null;
 
-                    Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, JobOrder_Table, Sqlexcute.Database, "JobOrder");
+                    Sqlexcute.Update_Table_to_Host(JobOrder_Table, Sqlexcute.Database, "JobOrder");
                 }
                 else if (check == 1)
                 {
@@ -424,7 +424,7 @@ namespace WPF_TEST.ViewModel
             //    messageBoxService.ShowMessage(Sqlexcute.error_message, "Thông tin lỗi", System.Messaging.MessageType.Report);
             //}
            
-            Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, JobOrder_Table, "fwd63823_database", JobOrder_Table.TableName);
+            Sqlexcute.Update_Table_to_Host(JobOrder_Table, "fwd63823_database", JobOrder_Table.TableName);
             if (Sqlexcute.error_message != string.Empty)
             {
                 messageBoxService.ShowMessage("Lỗi khi lưu dữ liệu lên đám mây:\n " + Sqlexcute.error_message + "", "Thông tin lỗi", System.Messaging.MessageType.Report);

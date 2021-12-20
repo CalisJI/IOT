@@ -369,20 +369,22 @@
     <Compile Include="CustomAppointmentWindow.xaml.cs">
       <DependentUpon>CustomAppointmentWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomAppointmentWindow1.xaml.cs">
-      <DependentUpon>CustomAppointmentWindow1.xaml</DependentUpon>
+    <Compile Include="DatabaseConfig_View.xaml.cs">
+      <DependentUpon>DatabaseConfig_View.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataStreamCollection.xaml.cs">
       <DependentUpon>DataStreamCollection.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\AudioObject.cs" />
     <Compile Include="Data\Customer.cs" />
+    <Compile Include="Data\DatabaseConfig.cs" />
     <Compile Include="Data\DocumentObject.cs" />
     <Compile Include="Data\ImageObject.cs" />
     <Compile Include="Data\JobOrder.cs" />
     <Compile Include="Data\JobOrderRuntime.cs" />
     <Compile Include="Data\PLC_Modbus.cs" />
     <Compile Include="Data\UserAccount.cs" />
+    <Compile Include="Data\UserSchedule.cs" />
     <Compile Include="Data\VideoObject.cs" />
     <Compile Include="Data\WorkInventory.cs" />
     <Compile Include="Data\Works.cs" />
@@ -395,12 +397,6 @@
     </Compile>
     <Compile Include="Model\ModbusModel.cs" />
     <Compile Include="Notyfication\WPFMessageBoxService.cs" />
-    <Compile Include="OutlookExchangeOptionsWindow.xaml.cs">
-      <DependentUpon>OutlookExchangeOptionsWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SchedulerMain.xaml.cs">
-      <DependentUpon>SchedulerMain.xaml</DependentUpon>
-    </Compile>
     <Compile Include="SerialCommunicate\BoolToIsConnectedConverter.cs" />
     <Compile Include="SerialCommunicate\iModbus.cs" />
     <Compile Include="SerialCommunicate\MessageReceiver.cs" />
@@ -411,6 +407,9 @@
     <Compile Include="ViewModel\Access_Managerment_ViewModel.cs" />
     <Compile Include="ViewModel\Barcode_ViewModel.cs" />
     <Compile Include="ViewModel\CustomerSetting_ViewModel.cs" />
+    <Compile Include="ViewModel\Access_Manager\Frame_Schedule_ViewModel.cs" />
+    <Compile Include="ViewModel\Access_Manager\Frame_Certification_ViewModel.cs" />
+    <Compile Include="ViewModel\DataBaseConfig\DataConfig_ViewModel.cs" />
     <Compile Include="ViewModel\loading_ViewModel.cs" />
     <Compile Include="ViewModel\Login_ViewModel.cs" />
     <Compile Include="ViewModel\ModbusConfig\AddNewConnectionViewModel.cs" />
@@ -439,7 +438,6 @@
     <Compile Include="ViewModel\MainAll_ViewModel.cs" />
     <Compile Include="ViewModel\MainMenuModel.cs" />
     <Compile Include="ViewModel\MainScreenViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\FileConfig\MenuFileConfig_ViewModel.cs" />
     <Compile Include="ViewModel\ModbusConfig\ModbusScreenViewModel.cs" />
     <Compile Include="ViewModel\ModbusConfig\ModbusViewModel.cs" />
@@ -453,12 +451,13 @@
     <Compile Include="ViewModel\ModbusConfig\TCP_IP_Frame_ViewModel.cs" />
     <Compile Include="ViewModel\FileConfig\TXTData_ViewModel.cs" />
     <Compile Include="ViewModel\Scheduler\Work_Edit_ViewModel.cs" />
+    <Compile Include="ViewModel\Access_Manager\UserManager_ViewModel.cs" />
     <Compile Include="ViewModel\ValueDescription.cs" />
     <Compile Include="ViewModel\Media\VideoManager_ViewModel.cs" />
     <Compile Include="ViewModel\Workflow\WorkflowCreatorModel.cs" />
     <Compile Include="ViewModel\Scheduler\WorkScope_ViewModel.cs" />
     <Compile Include="ViewModel\FileConfig\XMLData_ViewModel.cs" />
-    <Compile Include="View\AccessManager_View.xaml.cs">
+    <Compile Include="View\Access_Management\AccessManager_View.xaml.cs">
       <DependentUpon>AccessManager_View.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Barcode\Barcode_View.xaml.cs">
@@ -476,6 +475,12 @@
     </Compile>
     <Compile Include="View\FileConfig\JSONFileConfig_View.xaml.cs">
       <DependentUpon>JSONFileConfig_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Frame_Certification_View.xaml.cs">
+      <DependentUpon>Frame_Certification_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Frame_Schedule_View.xaml.cs">
+      <DependentUpon>Frame_Schedule_View.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\loading_view.xaml.cs">
       <DependentUpon>loading_view.xaml</DependentUpon>
@@ -585,6 +590,9 @@
     <Compile Include="View\Scheduler\Work_Library_View.xaml.cs">
       <DependentUpon>Work_Library_View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Access_Management\UserManager_View.xaml.cs">
+      <DependentUpon>UserManager_View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WorkflowCreator.xaml.cs">
       <DependentUpon>WorkflowCreator.xaml</DependentUpon>
     </Compile>
@@ -596,7 +604,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CustomAppointmentWindow1.xaml">
+    <Page Include="DatabaseConfig_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -643,15 +651,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="OutlookExchangeOptionsWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="SchedulerMain.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\AccessManager_View.xaml">
+    <Page Include="View\Access_Management\AccessManager_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -672,6 +672,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FileConfig\JSONFileConfig_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Frame_Certification_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Frame_Schedule_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -819,6 +827,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Access_Management\UserManager_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WorkflowCreator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -856,7 +868,6 @@
     <Resource Include="ImageSource\Home.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="View\Access_Management\" />
     <Folder Include="View\Workflow\" />
   </ItemGroup>
   <ItemGroup>
@@ -908,6 +919,11 @@
     <Resource Include="ImageSource\Media.png" />
     <Resource Include="ImageSource\Loading.gif" />
     <Resource Include="ImageSource\Apply.png" />
+    <Resource Include="ImageSource\Access.png" />
+    <Resource Include="ImageSource\Certification.png" />
+    <Resource Include="ImageSource\Job.png" />
+    <Resource Include="ImageSource\JOB1.png" />
+    <Resource Include="ImageSource\Done.png" />
     <Content Include="Images\OutlookInspired\Svg\CalendarGroup.svg" />
     <Content Include="Images\OutlookInspired\Svg\CalendarPermission.svg" />
     <Content Include="Images\OutlookInspired\Svg\Categorize.svg" />

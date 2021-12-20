@@ -21,7 +21,8 @@ namespace WPF_TEST.Data
             {
                 if(_data.Count >= 10) 
                 {
-                    _data.Clear();
+                    _data.RemoveAt(0);
+                   
                 }
                 _data = value;
             } 

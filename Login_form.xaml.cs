@@ -24,9 +24,11 @@ namespace WPF_TEST
     public partial class Login_form : Window
     {
         public string Pass { get; set; }
+        Login_ViewModel login_ViewModel = Login_ViewModel.INS;
         DispatcherTimer timer = new DispatcherTimer();
         public Login_form()
         {
+            
             InitializeComponent();
            
             timer.Interval = new TimeSpan(0, 0, 0,1);
@@ -86,6 +88,16 @@ namespace WPF_TEST
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter) 
+            {
+                
+                login_ViewModel.Login.CanExecute(null);
+                login_ViewModel.Login.Execute(null);
+            }
         }
     }
 }

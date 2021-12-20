@@ -32,14 +32,14 @@ namespace WPF_TEST.ViewModel
             //WorkData.CalendarTrainingRoom.IsVisible = true;
         }
 
-        public void OutlookImport(SchedulerControl scheduler)
-        {
-            OutlookExchange(scheduler, OutlookExchangeType.Import);
-        }
-        public void OutlookExport(SchedulerControl scheduler)
-        {
-            OutlookExchange(scheduler, OutlookExchangeType.Export);
-        }
+        //public void OutlookImport(SchedulerControl scheduler)
+        //{
+        //    OutlookExchange(scheduler, OutlookExchangeType.Import);
+        //}
+        //public void OutlookExport(SchedulerControl scheduler)
+        //{
+        //    OutlookExchange(scheduler, OutlookExchangeType.Export);
+        //}
         public void iCalendarImport(SchedulerControl scheduler)
         {
             ICalendarImporter importer = new ICalendarImporter(scheduler);
@@ -61,26 +61,26 @@ namespace WPF_TEST.ViewModel
                 }
             }
         }
-        void OutlookExchange(SchedulerControl scheduler, OutlookExchangeType exchangeType)
-        {
-            try
-            {
-                string[] outlookCalendarPaths = DevExpress.XtraScheduler.Outlook.OutlookExchangeHelper.GetOutlookCalendarPaths();
-                if (outlookCalendarPaths == null || outlookCalendarPaths.Length == 0)
-                    return;
+        //void OutlookExchange(SchedulerControl scheduler, OutlookExchangeType exchangeType)
+        //{
+        //    try
+        //    {
+        //        string[] outlookCalendarPaths = DevExpress.XtraScheduler.Outlook.OutlookExchangeHelper.GetOutlookCalendarPaths();
+        //        if (outlookCalendarPaths == null || outlookCalendarPaths.Length == 0)
+        //            return;
 
-                OutlookExchangeOptionsWindow optionsWindow = new OutlookExchangeOptionsWindow();
-                optionsWindow.DataContext = OutlookExchangeOptionsWindowViewModel.Create(scheduler, exchangeType, outlookCalendarPaths);
-                optionsWindow.Owner = Window.GetWindow(scheduler);
-                optionsWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-                optionsWindow.ShowDialog();
-            }
-            catch
-            {
-                DXMessageBox.Show(String.Format("Unable to {0}.\nCheck whether MS Outlook is installed.", "get the list of available calendars from Microsoft Outlook"),
-                    "Import from MS Outlook", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-        }
+        //        OutlookExchangeOptionsWindow optionsWindow = new OutlookExchangeOptionsWindow();
+        //        optionsWindow.DataContext = OutlookExchangeOptionsWindowViewModel.Create(scheduler, exchangeType, outlookCalendarPaths);
+        //        optionsWindow.Owner = Window.GetWindow(scheduler);
+        //        optionsWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+        //        optionsWindow.ShowDialog();
+        //    }
+        //    catch
+        //    {
+        //        DXMessageBox.Show(String.Format("Unable to {0}.\nCheck whether MS Outlook is installed.", "get the list of available calendars from Microsoft Outlook"),
+        //            "Import from MS Outlook", MessageBoxButton.OK, MessageBoxImage.Warning);
+        //    }
+        //}
         Stream OpenRead(string fileName, string filter)
         {
             OpenFileDialog dialog = new OpenFileDialog() { FileName = fileName, Filter = filter, FilterIndex = 1 };

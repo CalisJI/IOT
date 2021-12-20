@@ -164,7 +164,7 @@ namespace WPF_TEST.ViewModel
         
         PartSchedulrt_ViewModel PartSchedulrt_ViewModel = new PartSchedulrt_ViewModel();
         ScheduleListTime_ViewModel ScheduleListTime_ViewModel = new ScheduleListTime_ViewModel();
-        PlannerModel PlannerModel = new PlannerModel();
+        PlannerModel PlannerModel = PlannerModel.INS_PlanViewModel;
         WorkScope_ViewModel WorkScope_ViewModel = new WorkScope_ViewModel();
         Work_Edit_ViewModel Work_Edit_ViewModel = new Work_Edit_ViewModel();
         AddProjectSchedule_ViewModel AddProjectSchedule_ViewModel = AddProjectSchedule_ViewModel._AddProjectSchedule_ViewModel;
@@ -244,6 +244,8 @@ namespace WPF_TEST.ViewModel
                 try
                 {
                     Loading_Indicator.Finished();
+
+                    PlannerModel.Manager_Plan.Execute(null);
                 }
                 catch (Exception ex)
                 {
@@ -334,6 +336,16 @@ namespace WPF_TEST.ViewModel
                     AddProjectSchedule_ViewModel = null;
                 }
                 AddProjectSchedule_ViewModel = AddProjectSchedule_ViewModel._AddProjectSchedule_ViewModel;
+                AddProjectSchedule_ViewModel.SaleOrder = string.Empty;
+                AddProjectSchedule_ViewModel.Request_End = DateTime.Now;
+                AddProjectSchedule_ViewModel.Request_Start = DateTime.Now;
+                AddProjectSchedule_ViewModel.SingleCustomer = null;
+                AddProjectSchedule_ViewModel.WorksList = null;
+                AddProjectSchedule_ViewModel.ID_Barcode = string.Empty;
+                AddProjectSchedule_ViewModel.Quantity = 0;
+                AddProjectSchedule_ViewModel.Quotation = string.Empty;
+                AddProjectSchedule_ViewModel.Customer_PO = string.Empty;
+                AddProjectSchedule_ViewModel.Customer_Infor = string.Empty;
                 schedulerViewModel.SelectedViewModel = AddProjectSchedule_ViewModel;
             });
             BackAddJob = new RelayCommand<object>((p) => { return true; }, (p) => 
@@ -399,7 +411,9 @@ namespace WPF_TEST.ViewModel
                     SelectedJob = (JobOrder)p;
                     //var dd = JobOrders.Where(x => x == Edit_JobItem).FirstOrDefault();
                     //SelectedJob = Edit_JobItem;
+
                     Edit_JobItem = CustomerInfo.Where(x => x == SelectedJob.Customerinformation).FirstOrDefault();
+                    SingleCustomer = Edit_JobItem;
                     schedulerViewModel.SelectedViewModel = EditJobModel;
                 }
                 catch (Exception )

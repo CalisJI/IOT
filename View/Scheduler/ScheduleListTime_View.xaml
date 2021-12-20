@@ -86,11 +86,11 @@
                     <Button
                         DataContext="{StaticResource ScheduleViewModel}"
                         HorizontalAlignment="Right"
-                        Command="{Binding BacKPartSchedule}"
+                        Command="{Binding Goback}"
                         BorderBrush="Blue"
                         BorderThickness="2"
-                
                         Style="{StaticResource MaterialDesignFlatButton}"
+                        
                         Width="150"
                         Height="50">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">

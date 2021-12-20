@@ -10,6 +10,7 @@ namespace WPF_TEST.Data
     public class UserAccount
     {
         Permit permit = new Permit();
+        Information information = new Information();
         //ObservableCollection<Permit> permits = new ObservableCollection<Permit>();
         //public ObservableCollection<Permit> Permits 
         //{
@@ -23,7 +24,29 @@ namespace WPF_TEST.Data
         public string User { get; set; }
         public string Pass { get; set; }
         public Permit Permit { get { return permit; } set { permit = value; } }
+        public Information Information 
+        {
+            get 
+            {
+                return information;
+            }
+            set 
+            {
+                information = value;
+            }
+        }
 
+
+    }
+    public class Information 
+    {
+        public string Name { get; set; }
+        public string Avatar { get; set; }
+        public string Position { get; set; }
+        public DateTime Birth { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
+        public string Group { get; set; }
     }
     public class Permit
     {

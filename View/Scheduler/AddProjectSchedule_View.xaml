@@ -43,6 +43,11 @@
             </ObjectDataProvider.MethodParameters>
             
         </ObjectDataProvider>
+        <Style x:Key="tb" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            
+        </Style>
     </UserControl.Resources>
     
     
@@ -70,11 +75,12 @@
                            FontWeight="Bold"
                            Margin="50,10,0,0"
                            Foreground="Gray"/>
-                        <TextBox Text="{Binding SaleOrder ,IsAsync=True, Mode=TwoWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBox Text="{Binding SaleOrder , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          FontSize="30"
                          Margin="20,0,10,0"
                          Foreground="Gray"
                          Width="723"
+                                 CaretIndex="{x:Static System:Int32.MaxValue}"
                          Background="White" 
                          />
                     </StackPanel>
@@ -107,11 +113,12 @@
                                     
                                 </Button>
                                 <TextBox 
+                                    
                                     KeyDown="Barcodetbx_KeyDown"
                                     TargetUpdated="Barcodetbx_TargetUpdated"
                                     DataContext="{StaticResource AddJobProject}"
                                     HorizontalAlignment="Left"
-                                    Text="{Binding ID_Barcode ,IsAsync=True , UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, NotifyOnSourceUpdated=True}"
+                                    Text="{Binding ID_Barcode , UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                     Margin="10,110,0,0"
                                     Width="220"
                                     Height="40"
@@ -134,12 +141,12 @@
                                               
                                               Width="420"
                                               FontSize="20"
-                                              SelectedItem="{Binding SingleCustomer ,IsAsync=True , NotifyOnSourceUpdated=True, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                              SelectedItem="{Binding SingleCustomer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                      
                                               ItemsSource="{Binding CustomerInfor}">
                                                 <ComboBox.ItemTemplate>
                                                     <DataTemplate>
-                                                        <TextBlock Text="{Binding Customer_Info ,IsAsync=True , UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"/>
+                                                        <TextBlock Text="{Binding Customer_Info , UpdateSourceTrigger=PropertyChanged}"/>
                                                     </DataTemplate>
                                                 </ComboBox.ItemTemplate>
                                                 <i:Interaction.Triggers>
@@ -156,13 +163,16 @@
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock 
+                                                
                                         Text="Customer Details"
                                         Margin="20,10,0,0"/>
                                             <TextBox 
-                                            Text="{Binding Customer_Infor ,IsAsync=True, UpdateSourceTrigger=PropertyChanged,NotifyOnSourceUpdated=True}"      
+                                            CaretIndex="{x:Static System:Int32.MaxValue}"
+                                            Text="{Binding Customer_Infor, UpdateSourceTrigger=PropertyChanged,NotifyOnSourceUpdated=True}"      
                                             Margin="20,0,0,0"
                                             TextWrapping="Wrap"
                                             AcceptsReturn="True"
+                                                IsReadOnly="True"
                                             VerticalScrollBarVisibility="Auto"
                                             Width="420"
                                             Height="120"/>
@@ -184,21 +194,22 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel Orientation="Vertical" Grid.Column="0">
                             <TextBlock 
-                        Text="Quotation #" 
-                        FontSize="20"
-                        Margin="50,0,0,30"
-                        Width="auto"/>
+                                Text="Quotation #" 
+                                Style="{StaticResource tb}"
+                                Margin="50,0,0,30"
+                                Width="auto"/>
                             <TextBlock 
-                        Text="Customer PO #" 
-                        FontSize="20"
-                        Margin="50,0,0,30"
-                        Width="auto"/>
+                                Text="Customer PO #" 
+                                Style="{StaticResource tb}"
+                                Margin="50,0,0,30"
+                                Width="auto"/>
                             <TextBlock 
                         
-                        FontSize="20"
-                        Margin="50,0,0,30"
-                        Width="auto"
-                        FontWeight="Bold">
+                                FontSize="20"
+                                
+                                Margin="50,0,0,30"
+                                Width="auto"
+                                FontWeight="Bold">
                                 <Run Text="Requested Start*"/>
                                 <Run Text="(mm/dd/yyy)" FontSize="15" FontWeight="Normal"/>
                             </TextBlock>
@@ -219,7 +230,7 @@
                         Width="auto"/>-->
                             <TextBlock 
                         Text="Priority:" 
-                        FontSize="20"
+                        Style="{StaticResource tb}"
                         Margin="50,0,0,30"
                         Width="auto"/>
                             <TextBlock 
@@ -231,12 +242,14 @@
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Grid.Column="1">
                             <TextBox 
-                        Text="{Binding Quotation, UpdateSourceTrigger=PropertyChanged ,IsAsync=True}"
+                                CaretIndex="{x:Static System:Int32.MaxValue}"
+                        Text="{Binding Quotation, UpdateSourceTrigger=PropertyChanged}"
                         Height="40"
                         FontSize="20"
                          Margin="20,0,0,15"/>
                             <TextBox 
-                        Text="{Binding Customer_PO, UpdateSourceTrigger=PropertyChanged ,IsAsync=True}"
+                                CaretIndex="{x:Static System:Int32.MaxValue}"
+                        Text="{Binding Customer_PO, UpdateSourceTrigger=PropertyChanged}"
                         Height="40"
                         FontSize="25"
                          Margin="20,0,0,15"/>

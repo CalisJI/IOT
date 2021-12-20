@@ -1,0 +1,175 @@
+﻿<UserControl x:Class="WPF_TEST.View.Frame_Schedule_View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPF_TEST.View"
+             mc:Ignorable="d" 
+             DataContext="{StaticResource UserManager}"
+              xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:dxsch="http://schemas.devexpress.com/winfx/2008/xaml/scheduling"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding FrameSchedule_Loaded}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="Blue" BorderThickness="2" Grid.Row="1">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="897" >
+                <dxsch:SchedulerControl
+                        x:Name="schedule" 
+                         AutomationProperties.AutomationId="True"
+                        GroupType="Resource"
+                        FirstDayOfWeek="Monday"
+                        VerticalAlignment="Top" Height="885" Margin="1,0,0,0">
+                    <dxsch:SchedulerControl.DataSource>
+                        <dxsch:DataSource AppointmentsSource="{Binding}">
+
+                        </dxsch:DataSource>
+                    </dxsch:SchedulerControl.DataSource>
+
+                </dxsch:SchedulerControl>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="0"
+                    BorderBrush="Blue" 
+                    BorderThickness="2"
+                   
+                    >
+
+            <!--<Grid>
+                    <GroupBox Header="Legend">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                                <TextBlock
+                                     Width="92"
+                                    Margin="5,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Text="Shift Daily" 
+                                    FontWeight="DemiBold"/>
+                                <Button
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Margin="5,0,0,0"
+                                    BorderBrush="Blue"
+                                    BorderThickness="1"
+                                    Background="Pink"
+                                    materialDesign:ButtonAssist.CornerRadius="5">
+                                    
+                                </Button>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                                <TextBlock
+                                     Width="92"
+                                    Margin="5,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Text="Shift Weekly" 
+                                    FontWeight="DemiBold"/>
+                                <Button
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Margin="5,0,0,0"
+                                    BorderBrush="Blue"
+                                    BorderThickness="1"
+                                    Background="DeepPink"
+                                    materialDesign:ButtonAssist.CornerRadius="5">
+
+                                </Button>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal">
+                                <TextBlock
+                                     Width="92"
+                                    Margin="5,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Text="Shift Monthly" 
+                                    FontWeight="DemiBold"/>
+                                <Button
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Margin="5,0,0,0"
+                                    BorderBrush="Blue"
+                                    BorderThickness="1"
+                                    Background="Green"
+                                    materialDesign:ButtonAssist.CornerRadius="5">
+
+                                </Button>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                                <TextBlock
+                                    Width="92"
+                                    Margin="5,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Text="Off Hour Daily" 
+                                    FontWeight="DemiBold"/>
+                                <Button
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Margin="5,0,0,0"
+                                    BorderBrush="Blue"
+                                    BorderThickness="1"
+                                    Background="Purple"
+                                    materialDesign:ButtonAssist.CornerRadius="5">
+
+                                </Button>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                                <TextBlock
+                                    Width="92"
+                                    Margin="5,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Text="Off Hour Weekly" 
+                                    FontWeight="DemiBold"/>
+                                <Button
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Margin="5,0,0,0"
+                                    BorderBrush="Blue"
+                                    BorderThickness="1"
+                                    Background="Orange"
+                                    materialDesign:ButtonAssist.CornerRadius="5">
+
+                                </Button>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal">
+                                <TextBlock
+                                    Width="92"
+                                    Margin="5,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Text="Off Hour Monthly" 
+                                    FontWeight="DemiBold"/>
+                                <Button
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Margin="5,0,0,0"
+                                    BorderBrush="Blue"
+                                    BorderThickness="1"
+                                    Background="DarkRed"
+                                    materialDesign:ButtonAssist.CornerRadius="5">
+
+                                </Button>
+                            </StackPanel>
+ 
+                        </Grid>
+                    </GroupBox>
+                </Grid>-->
+
+            <ContentControl
+           
+            ContentTemplate="{StaticResource Ribbon1}"
+            dxsch:SchedulerControl.Scheduler="{Binding ElementName=schedule}"
+            DockPanel.Dock="Top"/>
+
+        </Border>
+    </Grid>
+</UserControl>

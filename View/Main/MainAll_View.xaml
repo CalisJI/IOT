@@ -54,7 +54,7 @@
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0" Grid.Column="0">
                             <Button
-                                DataContext="{StaticResource MenuMainAll}"
+                               
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"
                                 Margin="10"
@@ -82,7 +82,7 @@
                                         Text="Customer"
                                         Foreground="Black"
                                         HorizontalAlignment="Center"
-                                        FontSize="30"/>
+                                        FontSize="20"/>
                                 </StackPanel>
                             </Button>
                         </Grid>
@@ -106,12 +106,12 @@
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0" Grid.Column="0">
                             <Button
-                                DataContext="{StaticResource MenuMainAll}"
+                                
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"
                                 Margin="10"
                                 IsEnabled="{Binding CurrentAccount.Permit.UACC.ModifyAccount}"
-                                Command="{Binding Usermanager}"
+                                Command="{Binding User_Manager}"
                                 BorderBrush="Blue"
                                 BorderThickness="2"
                                 Background="AliceBlue"
@@ -134,37 +134,44 @@
                                         Text="Personnel"
                                         Foreground="Black"
                                         HorizontalAlignment="Center"
-                                        FontSize="30"/>
+                                        FontSize="20"/>
                                 </StackPanel>
                             </Button>
                         </Grid>
-                        <!--<Grid Grid.Row="1" Grid.Column="0">
+                        <Grid Grid.Row="1" Grid.Column="0">
                             <Button
-                            Command="{Binding Image_Manager}"
-                            Style="{StaticResource MaterialDesignRaisedLightButton}"
-                            Height="200" Width="250"
-                            materialDesign:ButtonAssist.CornerRadius="5">
-                                <Button.Background>
-                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <GradientStop Color="White" Offset="0"/>
-                                        <GradientStop Color="#FF65C6CB" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Button.Background>
-                                <StackPanel Orientation="Vertical" Height="190" Width="210" HorizontalAlignment="Center"
-                                        VerticalAlignment="Center">
-                                    <Image Height="120"
-                                       Margin="0,15,0,0"
-                                       Width="130"
-                                       Source="pack://application:,,,/ImageSource/Picture.png"/>
-                                    <TextBlock
-                                    
-                                    Text="Images"
-                                    FontWeight="Bold"
-                                    Margin="0,10,0,0"
-                                    FontSize="24"/>
+                                
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Margin="10"
+                                IsEnabled="{Binding CurrentAccount.Permit.UACC.ModifyAccount}"
+                                Command="{Binding Usermanager}"
+                                BorderBrush="Blue"
+                                BorderThickness="2"
+                                Background="AliceBlue"
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                materialDesign:ButtonAssist.CornerRadius="8" Height="Auto">
+                                <StackPanel 
+                                    Orientation="Vertical"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" Height="150" Width="150">
+                                    <Image
+                                        Visibility="Visible"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Top"
+                                        Margin="0,10,0,0"
+                                        Stretch="Fill"
+                                        Source="pack://application:,,,/ImageSource/Access.png"
+                                        Height="90"
+                                        Width="90"/>
+                                    <TextBlock 
+                                        Text="Access Manager"
+                                        Foreground="Black"
+                                        HorizontalAlignment="Center"
+                                        FontSize="20"/>
                                 </StackPanel>
                             </Button>
-                        </Grid>-->
+                        </Grid>
                     </Grid>
                 </GroupBox>
                 <GroupBox 
@@ -206,10 +213,10 @@
                                         Height="90"
                                         Width="90"/>
                                     <TextBlock 
-                                        Text="Schedule"
+                                        Text="Smart Schedule"
                                         Foreground="Black"
                                         HorizontalAlignment="Center"
-                                        FontSize="30"/>
+                                        FontSize="20"/>
                                 </StackPanel>
                             </Button>
                         </Grid>
@@ -267,7 +274,7 @@
                                         Text="Data Collection"
                                         Foreground="Black"
                                         HorizontalAlignment="Center"
-                                        FontSize="30"/>
+                                        FontSize="20"/>
                                 </StackPanel>
                             </Button>
                         </Grid>
@@ -283,7 +290,7 @@
                                 <StackPanel 
                                     Orientation="Vertical"
                                     HorizontalAlignment="Center"
-                                    VerticalAlignment="Center" Height="150" Width="150">
+                                    VerticalAlignment="Center" Height="150" Width="160">
                                     <Image
                                         Visibility="Visible"
                                         HorizontalAlignment="Center"
@@ -294,10 +301,10 @@
                                         Height="90"
                                         Width="90"/>
                                     <TextBlock 
-                                        Text="Content"
+                                        Text="Content Manager"
                                         Foreground="Black"
                                         HorizontalAlignment="Center"
-                                        FontSize="30"/>
+                                        FontSize="20"/>
                                 </StackPanel>
                             </Button>
                         </Grid>

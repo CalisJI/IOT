@@ -5,10 +5,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF_TEST.View"
              mc:Ignorable="d" 
-             DataContext="{StaticResource MenuMainAll}"
+             DataContext="{StaticResource VideoManager}"
              xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="1080" d:DesignWidth="1920">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding FrameVideoLoad}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="ChangVisible"/>
+
+
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
@@ -21,15 +31,13 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
                 <Button
-                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            BorderBrush="Blue"
+                    Command="{Binding OpentoAdd}"
+                            BorderThickness="2"
                             Height="100" Width="100"
-                            materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="#FFF08011">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="White" Offset="0"/>
-                            <GradientStop Color="#FF65C6CB" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
+                            materialDesign:ButtonAssist.CornerRadius="5">
+
                     <StackPanel Orientation="Vertical" Height="90" Width="90" HorizontalAlignment="Center"
                                         VerticalAlignment="Center">
                         <Image Height="50"
@@ -47,19 +55,19 @@
                 </Button>
             </Grid>
             <Grid
+                DataContext="{StaticResource VideoManager}"
                         Margin="0,15,0,0"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
                 <Button
-                            Style="{StaticResource MaterialDesignRaisedLightButton}"
-                            Height="100" Width="100"
-                            materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="#FFF08011">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="White" Offset="0"/>
-                            <GradientStop Color="#FF65C6CB" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    BorderBrush="Blue"
+                  
+                    BorderThickness="2"
+                    Height="100" Width="100"
+                    Command="{Binding EditExcute}"
+                    materialDesign:ButtonAssist.CornerRadius="5">
+
                     <StackPanel Orientation="Vertical" Height="90" Width="90" HorizontalAlignment="Center"
                                         VerticalAlignment="Center">
                         <Image Height="50"
@@ -77,19 +85,19 @@
                 </Button>
             </Grid>
             <Grid
+                        DataContext="{StaticResource VideoManager}"
                         Margin="0,15,0,0"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
                 <Button
-                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            BorderBrush="Blue"
+                            BorderThickness="2"
+                            Command="{Binding Delete_Video}"
+                            CommandParameter="{Binding ElementName=videoList, Path=SelectedItem}"
                             Height="100" Width="100"
-                            materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="#FFF08011">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="White" Offset="0"/>
-                            <GradientStop Color="#FF65C6CB" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
+                            materialDesign:ButtonAssist.CornerRadius="5" >
+
                     <StackPanel Orientation="Vertical" Height="90" Width="90" HorizontalAlignment="Center"
                                         VerticalAlignment="Center">
                         <Image Height="50"
@@ -111,15 +119,12 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
                 <Button
-                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            BorderBrush="Blue"
+                            BorderThickness="2"
                             Height="100" Width="100"
-                            materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="#FFF08011">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="White" Offset="0"/>
-                            <GradientStop Color="#FF65C6CB" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
+                            materialDesign:ButtonAssist.CornerRadius="5">
+
                     <StackPanel Orientation="Vertical" Height="90" Width="90" HorizontalAlignment="Center"
                                         VerticalAlignment="Center">
                         <Image Height="50"
@@ -138,19 +143,17 @@
             </Grid>
             <Grid
                         Margin="0,15,0,0"
+                DataContext="{StaticResource MenuMainAll}"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
                 <Button
-                    Command="{Binding Media}"
-                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            Command="{Binding Media}"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            BorderBrush="Blue"
+                            BorderThickness="2"
                             Height="100" Width="100"
-                            materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="#FFF08011">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="White" Offset="0"/>
-                            <GradientStop Color="#FF65C6CB" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
+                            materialDesign:ButtonAssist.CornerRadius="5" >
+
                     <StackPanel Orientation="Vertical" Height="90" Width="90" HorizontalAlignment="Center"
                                         VerticalAlignment="Center">
                         <Image Height="50"
@@ -167,6 +170,42 @@
                     </StackPanel>
                 </Button>
             </Grid>
+
+            <Grid
+                DataContext="{StaticResource VideoManager}"
+                        Margin="0,200,0,0"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0*"/>
+                    <RowDefinition Height="0*"/>
+                </Grid.RowDefinitions>
+                <Button
+                            Command="{Binding DoneEdit}"
+                            
+                            Visibility="{Binding Path=E_Done ,Converter={StaticResource ChangVisible}}"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            BorderBrush="Blue"
+                            BorderThickness="2"
+                            Height="100" Width="100"
+                            materialDesign:ButtonAssist.CornerRadius="5" Grid.RowSpan="2" >
+
+                    <StackPanel Orientation="Vertical" Height="90" Width="90" HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                        <Image Height="50"
+                               HorizontalAlignment="Center"
+                                       Margin="0,5,0,0"
+                                       Width="50"
+                                       Source="pack://application:,,,/ImageSource/Done.png"/>
+                        <TextBlock
+                                    HorizontalAlignment="Center"
+                                    Text="Done"
+                                    FontWeight="Bold"
+                                    Margin="0,10,0,0"
+                                    FontSize="16"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
         </StackPanel>
         <Grid Grid.Column="1">
             <StackPanel Orientation="Vertical">
@@ -176,13 +215,13 @@
                     Width="200"
                     HorizontalAlignment="Left"
                     materialDesign:HintAssist.Hint="Search">
-                    
+
                 </ComboBox>
                 <ListView Margin="0,10,0,0" 
                           SelectionChanged="videoList_SelectionChanged"
                           x:Name="videoList"
                           
-                          DataContext="{StaticResource ContenMedia}"
+                          DataContext="{StaticResource VideoManager}"
                           ItemsSource="{Binding VideoObjects}"
                           
                           ScrollViewer.VerticalScrollBarVisibility="Visible"
@@ -197,7 +236,7 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <ListView.View>
-                        
+
                         <GridView>
                             <GridView.ColumnHeaderContainerStyle>
                                 <Style TargetType="{x:Type GridViewColumnHeader}">
@@ -211,10 +250,10 @@
                                 Width="200" 
                                 Header="Preview"
                                 TextBlock.TextAlignment="Right">
-                                
+
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        
+
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -260,7 +299,7 @@
         <Grid Grid.Column="2">
             <GroupBox Header="Video Details" FontSize="22" FontWeight="Bold" Margin="15">
                 <Grid>
-                    <GroupBox Margin="10,10,10,0" Height="280" VerticalAlignment="Top" DataContext="{StaticResource ContenMedia}">
+                    <GroupBox Margin="10,10,10,0" Height="280" VerticalAlignment="Top" DataContext="{StaticResource VideoManager}">
                         <StackPanel Orientation="Vertical">
                             <Grid >
                                 <TextBlock
@@ -269,6 +308,7 @@
                                     FontSize="22" Margin="10"
                                     FontWeight="Normal"/>
                                 <TextBox
+                                    IsEnabled="{Binding E_Done}"
                                     Margin="200,0,0,0"
                                     VerticalAlignment="Center"
                                     Text="{Binding video.LinkVideo}" 
@@ -284,6 +324,7 @@
                                     FontSize="22" Margin="10"
                                     FontWeight="Normal"/>
                                 <TextBox
+                                    IsEnabled="{Binding E_Done}"
                                     Margin="200,0,0,0"
                                     VerticalAlignment="Center"
                                    
@@ -299,6 +340,7 @@
                                     FontSize="22" Margin="10"
                                     FontWeight="Normal"/>
                                 <TextBox
+                                    IsEnabled="{Binding E_Done}"
                                     Margin="200,0,0,0"
                                     VerticalAlignment="Center"
                                     Text="{Binding video.Type}" 
@@ -314,6 +356,7 @@
                                     FontSize="22" Margin="10"
                                     FontWeight="Normal"/>
                                 <TextBox
+                                    IsEnabled="{Binding E_Done}"
                                     Margin="200,0,0,0"
                                     VerticalAlignment="Center"
                                     Text="{Binding video.VideoGroup}" 
@@ -329,6 +372,7 @@
                                     FontSize="22" Margin="10"
                                     FontWeight="Normal"/>
                                 <TextBox
+                                    IsEnabled="{Binding E_Done}"
                                     Margin="200,0,0,0"
                                     VerticalAlignment="Center"
                                     Text="{Binding video.Category}" 
@@ -340,7 +384,7 @@
                         </StackPanel>
                     </GroupBox>
                     <GroupBox Margin="10,300,10,0" Header="Video Preview">
-                        <Grid DataContext="{StaticResource ContenMedia}">
+                        <Grid DataContext="{StaticResource VideoManager}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="4*"/>
                                 <RowDefinition Height="0.8*"/>
@@ -486,7 +530,7 @@
                                 Margin="20,0,0,0"
                                 Width="400" SmallChange="1" Maximum="7"/>
                         </Grid>
-                        
+
                     </GroupBox>
                 </Grid>
             </GroupBox>

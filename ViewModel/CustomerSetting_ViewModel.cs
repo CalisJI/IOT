@@ -157,7 +157,7 @@ namespace WPF_TEST.ViewModel
                     Customer_Storage.Add(customer);
 
                     Customer_Table = Sqlexcute.FillToDataTable(Customer_Storage);
-                    Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, Customer_Table, Sqlexcute.Database, Customer_Table.TableName);
+                    Sqlexcute.Update_Table_to_Host(Customer_Table, Sqlexcute.Database, Customer_Table.TableName);
                     Enable_Add = false;
                     messageBoxService.ShowMessage("Đã Lưu", "Cập nhật danh sach khách hàng", System.Messaging.MessageType.Report);
                 }
@@ -184,7 +184,7 @@ namespace WPF_TEST.ViewModel
                 mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref Customer_Table, Customer_Table.TableName, Sqlexcute.Database);
 
                 Customer_Table = Sqlexcute.FillToDataTable(Customer_Storage);
-                Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, Customer_Table, Sqlexcute.Database, Customer_Table.TableName);
+                Sqlexcute.Update_Table_to_Host(Customer_Table, Sqlexcute.Database, Customer_Table.TableName);
             }
             else
             {

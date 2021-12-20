@@ -46,13 +46,40 @@ namespace WPF_TEST.ViewModel
         //public static DataTable JobOrder_Table = new DataTable("Job Information");
         //public static DataTable Customer_Table = new DataTable("Customer_Details");
         //public static DataTable Work_Table = new DataTable("Work Information");
+
+        private static PlannerModel _insPlanModel;
+        public static PlannerModel INS_PlanViewModel 
+        {
+            get 
+            {
+                if (_insPlanModel != null) 
+                {
+                    return _insPlanModel;
+                }
+                else 
+                {
+                    return new PlannerModel();
+                }
+            }
+            set 
+            {
+                _insPlanModel = value;
+            }
+        }
+
         #region =================================Data Table ================================
         DataTable JobOrderRuntime_Table = new DataTable("JobOrderRuntime");
         #endregion
 
+        #region                                 Command                         
         public ICommand Save_EditJob { get; set; }
-       // public ICommand Save_work { get; set; }
+        public ICommand Manager_Plan { get; set; }
+        #endregion
 
+        #region ==============================Timer======================
+        public DispatcherTimer PlanTimer = new DispatcherTimer();
+        // public ICommand Save_work { get; set; }
+        #endregion
         private ObservableCollection<ConvertoJson> convertoJson;
         public ObservableCollection<ConvertoJson> ToJson 
         {
@@ -138,13 +165,23 @@ namespace WPF_TEST.ViewModel
                 OnPropertyChanged("PlannerTask");
             }
         }
-        public int Runnings { get { return this.running; } set { this.running = value; OnPropertyChanged("Runnings"); } }
-        public int Delayeds { get { return this.delayed; } set { this.delayed = value; OnPropertyChanged("Delayeds"); } }
-        public int Plans { get { return this.plan; } set { this.plan = value; OnPropertyChanged("Plans"); } }
-        public int Queueds { get { return this.queued; } set { this.queued = value; OnPropertyChanged("Queueds"); } }
-        public int Dones { get { return this.done; } set { this.done = value; OnPropertyChanged("Dones"); } }
-        public int Readys { get { return this.ready; } set { this.ready = value; OnPropertyChanged("Readys"); } }
-        public int Pauseds { get { return this.paused; } set { this.paused = value; OnPropertyChanged("Pauseds"); } }
+        public int Runnings 
+        {
+            get 
+            { 
+                return this.running; 
+            }
+            set 
+            {
+                SetProperty(ref running, value, nameof(Runnings));
+            } 
+        }
+        public int Delayeds { get { return this.delayed; } set { SetProperty(ref delayed, value, nameof(Delayeds)); } }
+        public int Plans { get { return this.plan; } set { SetProperty(ref plan, value, nameof(Plans)); } }
+        public int Queueds { get { return this.queued; } set { SetProperty(ref queued, value, nameof(Queueds)); } }
+        public int Dones { get { return this.done; } set { SetProperty(ref done, value, nameof(Dones)); } }
+        public int Readys { get { return this.ready; } set { SetProperty(ref ready, value, nameof(Readys)); } }
+        public int Pauseds { get { return this.paused; } set { SetProperty(ref paused, value, nameof(Pauseds)); } }
 
         public TaskPriority taskPriority;
         public Status status;
@@ -230,7 +267,7 @@ namespace WPF_TEST.ViewModel
                 
                 JobOrderRuntime_Table = new DataTable("JobOrderRuntime");
                 JobOrderRuntime_Table = Sqlexcute.FillToDataTable(JobOrdersRumtimes);
-                Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, JobOrderRuntime_Table, Sqlexcute.Database, JobOrderRuntime_Table.TableName);
+                Sqlexcute.Update_Table_to_Host( JobOrderRuntime_Table, Sqlexcute.Database, JobOrderRuntime_Table.TableName);
                 DatatableScheduler = new DataTable("JobOrder");
                 var Json = JsonSerializer.Serialize(JobOrders);
                 ToJson = new ObservableCollection<ConvertoJson>();
@@ -238,7 +275,7 @@ namespace WPF_TEST.ViewModel
                 DatatableScheduler = Sqlexcute.FillToDataTable(ToJson);
                 if (ToJson.ElementAt(0).Code != "") 
                 {
-                    Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, DatatableScheduler, "fwd63823_database", "JobOrder");
+                    Sqlexcute.Update_Table_to_Host(DatatableScheduler, "fwd63823_database", "JobOrder");
                 }
                 
             }
@@ -253,6 +290,7 @@ namespace WPF_TEST.ViewModel
         public PlannerModel() 
         {
             AddProjectSchedule_ViewModel._jobOrderRuntime = JobOrdersRumtimes;
+           
             if (!load) 
             {
                 Runtime.DoWork += Runtime_DoWork;
@@ -270,9 +308,9 @@ namespace WPF_TEST.ViewModel
                 bool exist_ = true;
                 ToJson = new ObservableCollection<ConvertoJson>();
                 load = true;
-                Sqlexcute.Server = "112.78.2.9";
-                Sqlexcute.pwd = "Fwd@2021";
-                Sqlexcute.UId = "fwd63823_fwdvina";
+                //Sqlexcute.Server = "112.78.2.9";
+                //Sqlexcute.pwd = "Fwd@2021";
+                //Sqlexcute.UId = "fwd63823_fwdvina";
                 AddProjectSchedule_ViewModel.jobOrders = JobOrders;
                 Sqlexcute.Check_Table(Sqlexcute.Database, JobOrderRuntime_Table.TableName, ref check);
                 //Sqlexcute.Check_Table("fwd63823_database", DatatableScheduler.TableName, ref check);
@@ -303,7 +341,7 @@ namespace WPF_TEST.ViewModel
                         mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref JobOrderRuntime_Table, JobOrderRuntime_Table.TableName, Sqlexcute.Database);
 
                         JobOrderRuntime_Table = Sqlexcute.FillToDataTable(JobOrdersRumtimes);
-                        Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, JobOrderRuntime_Table, Sqlexcute.Database, JobOrderRuntime_Table.TableName);
+                        Sqlexcute.Update_Table_to_Host(JobOrderRuntime_Table, Sqlexcute.Database, JobOrderRuntime_Table.TableName);
                     }
                     catch (Exception)
                     {
@@ -344,8 +382,15 @@ namespace WPF_TEST.ViewModel
                    
                    
                 }
-                var a = JobOrders;
-                GetStage(ref ready, ref done, ref running, ref delayed, ref paused, ref plan, ref queued);
+                //var c = JobOrders;
+                var a = GetStage();
+                Readys = a.Item1;
+                Dones = a.Item2;
+                Runnings = a.Item3;
+                Delayeds = a.Item4;
+                Pauseds = a.Item5;
+                Plans = a.Item6;
+                Queueds = a.Item7;
             }
             Save_EditJob = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
@@ -355,9 +400,17 @@ namespace WPF_TEST.ViewModel
                 });thread.Start();
                 
             });
-            
+            Manager_Plan = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                PlanTimer.Tick += PlanTimer_Tick;
+                PlanTimer.Interval = new TimeSpan(0, 0, 1);
+                if (!PlanTimer.IsEnabled) 
+                {
+                    PlanTimer.Start();
+                }
+            });
 
-            DispatcherTimer.Interval = new TimeSpan(0, 0, 5);
+            DispatcherTimer.Interval = new TimeSpan(0, 0, 3);
             DispatcherTimer.Tick += DispatcherTimer_Tick;
             if (!DispatcherTimer.IsEnabled) 
             {
@@ -369,6 +422,107 @@ namespace WPF_TEST.ViewModel
 
         }
 
+       
+
+        
+        DateTime Ground_timer = DateTime.Now;
+
+
+        #region                 Timer TIck              
+        private void PlanTimer_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                DateTime dateTime = DateTime.Now;
+                TimeSpan timeSpan = (dateTime - Ground_timer);
+                int dd = (int)timeSpan.TotalSeconds;
+                if (dd >= 5)
+                {
+                    Ground_timer = dateTime;
+                    string aa = dateTime.ToString("HH:mm:ss");
+                    Sqlexcute.SQL_command("UPDATE Message SET `MSG` = '" + aa + "' WHERE (`ID` = '1')", Sqlexcute.Database);
+
+                    DataTable dataTable = Sqlexcute.Read_data(Sqlexcute.Database, "Message");
+                    if (dataTable != null)
+                    {
+                        string msg = dataTable.Rows[0][1].ToString();
+                        if (msg == string.Empty)
+                        {
+                            Sqlexcute.SQL_command("UPDATE Message SET `MSG` = 'www' WHERE (`ID` = '1')", Sqlexcute.Database);
+                        }
+                        else 
+                        {
+                            try
+                            {
+                                string[] bb = msg.Split('-');
+                                if (bb[1] == "Pause")
+                                {
+
+                                    var pause = JobOrders.Where(x => x.ID == bb[0]).FirstOrDefault();
+                                    pause.Stage = Status.Paused;
+                                    pause.Current_Stage = getColor(pause.Stage);
+
+
+                                }
+                                else if (bb[1] == "Stated")
+                                {
+                                    var pause = JobOrders.Where(x => x.ID == bb[0]).FirstOrDefault();
+                                    pause.Stage = Status.Running;
+                                    pause.Current_Stage = getColor(pause.Stage);
+                                }
+                                else if (bb[1] == "Queued")
+                                {
+                                    var pause = JobOrders.Where(x => x.ID == bb[0]).FirstOrDefault();
+                                    pause.Stage = Status.Queued;
+                                    pause.Current_Stage = getColor(pause.Stage);
+                                }
+                                else if (bb[1] == "Done")
+                                {
+                                    var pause = JobOrders.Where(x => x.ID == bb[0]).FirstOrDefault();
+                                    pause.Stage = Status.Done;
+                                    pause.Current_Stage = getColor(pause.Stage);
+                                }
+                                else
+                                {
+
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    foreach (var item in JobOrders)
+                    {
+                        if (item.Requested_Start.Date == dateTime.Date)
+                        {
+                            //read respone from operator
+                            //DataTable dataTable = Sqlexcute.Read_data(Sqlexcute.Database, "Message");
+                            if (dataTable != null)
+                            {
+                                string msg = dataTable.Rows[0][1].ToString();
+                                if (msg == string.Empty)
+                                {
+                                    Sqlexcute.SQL_command("UPDATE Message SET `MSG` = 'www' WHERE (`ID` = '1')", Sqlexcute.Database);
+                                }
+                            }
+                            //Send message to operator
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+               
+            }
+            
+        }
+        #endregion
         private void Runtime_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
           
@@ -381,10 +535,16 @@ namespace WPF_TEST.ViewModel
 
         private void updatedata() 
         {
-            GetStage(ref ready, ref done, ref running, ref delayed, ref paused, ref plan, ref queued);
-            updateruntime();
-            
-            
+            //GetStage(ref Readys, ref done, ref running, ref delayed, ref paused, ref plan, ref queued);
+            var a = GetStage();
+            Readys = a.Item1;
+            Dones = a.Item2;
+            Runnings = a.Item3;
+            Delayeds = a.Item4;
+            Pauseds = a.Item5;
+            Plans = a.Item6;
+            Queueds = a.Item7;
+            updateruntime();    
         }
         public void Save_Table()
         {
@@ -407,7 +567,7 @@ namespace WPF_TEST.ViewModel
             
             DatatableScheduler = Sqlexcute.FillToDataTable(ToJson);
         
-            Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, DatatableScheduler, "fwd63823_database", "JobOrder");
+            Sqlexcute.Update_Table_to_Host(DatatableScheduler, Sqlexcute.Database, "JobOrder");
             if (Sqlexcute.error_message != string.Empty)
             {
                 messageBoxService.ShowMessage("Lỗi khi lưu dữ liệu lên đám mây:\n " + Sqlexcute.error_message + "", "Thông tin lỗi", System.Messaging.MessageType.Report);
@@ -566,8 +726,15 @@ namespace WPF_TEST.ViewModel
             }
             return count;
         }
-        private void GetStage(ref int _Ready, ref int _Done, ref int _Running, ref int _Delayed, ref int _Paused, ref int _Plan, ref int _Queued) 
+         (int,int,int,int,int,int,int) GetStage() 
         {
+            int _Ready;
+            int _Done;
+            int _Running;
+            int _Delayed;
+            int _Paused;
+            int _Plan;
+            int _Queued;
             _Ready = JobOrders.Where(i => i.Stage == Status.Ready).Count();
             _Done = JobOrders.Where(i => i.Stage == Status.Done).Count();
             _Running = JobOrders.Where(i => i.Stage == Status.Running).Count();
@@ -575,6 +742,8 @@ namespace WPF_TEST.ViewModel
             _Paused = JobOrders.Where(i => i.Stage == Status.Paused).Count();
             _Plan = JobOrders.Where(i => i.Stage == Status.Plan).Count();
             _Queued = JobOrders.Where(i => i.Stage == Status.Queued).Count();
+
+            return (_Ready, _Done, _Running, _Delayed, _Paused, _Plan, _Queued);
         }
         //void Initialize() 
         //{

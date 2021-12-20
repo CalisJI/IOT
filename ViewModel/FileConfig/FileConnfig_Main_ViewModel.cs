@@ -47,7 +47,18 @@ namespace WPF_TEST.ViewModel
             }
         }
         //public DataTable DataTable = new DataTable();
-
+        private int PageCOunt;
+        public int Page_Count 
+        {
+            get 
+            {
+                return PageCOunt;
+            }
+            set 
+            {
+                SetProperty(ref PageCOunt, value, nameof(Page_Count));
+            }
+        }
         ObservableCollection<string> _pageSheet;
         public ObservableCollection<string> PageSheet 
         {
@@ -161,6 +172,7 @@ namespace WPF_TEST.ViewModel
                                 ObservableCollection<string> vs = new ObservableCollection<string>();
                                 ExcelProcess.Get_excel(openFileDialog.FileName, ref vs);
                                 PageSheet = vs;
+                                Page_Count = PageSheet.Count + 1;
                             }
 
                         }
@@ -295,7 +307,7 @@ namespace WPF_TEST.ViewModel
 
             DatatableScheduler = Sqlexcute.FillToDataTable(ToJson);
 
-            Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, DatatableScheduler, "fwd63823_database", "JobOrder");
+            Sqlexcute.Update_Table_to_Host( DatatableScheduler, "fwd63823_database", "JobOrder");
             if (Sqlexcute.error_message != string.Empty)
             {
                 messageBoxService.ShowMessage("Lỗi khi lưu dữ liệu lên đám mây:\n " + Sqlexcute.error_message + "", "Thông tin lỗi", System.Messaging.MessageType.Report);

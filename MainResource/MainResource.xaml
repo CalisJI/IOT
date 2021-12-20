@@ -3,18 +3,25 @@
                     xmlns:viewmodel="clr-namespace:WPF_TEST.ViewModel"
                     xmlns:FileConfig ="clr-namespace:WPF_TEST.ViewModel.FileConfig"
                      xmlns:local="clr-namespace:WPF_TEST">
+    <viewmodel:MainScreenViewModel x:Key="MenuMainAll"/>
     <viewmodel:MainMenuModel x:Key="MainVM"/>
     <viewmodel:ConfigurationModel x:Key="CFGMain"/>
     <viewmodel:DataStreamCollectionModel x:Key="DataStr"/>
+    <viewmodel:PlannerModel x:Key="Planner"/>
+    <viewmodel:ModbusViewModel x:Key="Modbus"/>
+    <viewmodel:FileConnfig_Main_ViewModel x:Key="FileProcess"/>
+    
+    <viewmodel:AddProjectSchedule_ViewModel x:Key="AddJobProject"/>
+    <viewmodel:SchedulerViewModel x:Key="ScheduleViewModel"/>
     <viewmodel:Ethenet_SerialModel x:Key="Ethernet_Serial"/>
     <viewmodel:MainMenuModel x:Key="Mainmenu"/>
-    <viewmodel:PlannerModel x:Key="Planner"/>
+    
     <viewmodel:WorkflowCreatorModel x:Key="WorkFlow"/>
     <viewmodel:EditJobModel x:Key="EditJob"/>
-    <viewmodel:SchedulerViewModel x:Key="ScheduleViewModel"/>
+    
     <viewmodel:OutlookInspiredDemoViewModel x:Key="Outlook"/>
     <viewmodel:BusyIndicatorViewModel x:Key="Busy"/>
-    <viewmodel:ModbusViewModel x:Key="Modbus"/>
+   
     <viewmodel:AddNewConnectionViewModel x:Key="AddModbusDevice"/>
     <viewmodel:ModbusScreenViewModel x:Key="ModbusScreen"/>
     <viewmodel:EditModbusConnectionViewModel x:Key="EditModbus"/>
@@ -25,22 +32,23 @@
     <viewmodel:EditModbus_Window_ViewModel x:Key="Edit_RTU"/>
     <viewmodel:EditModbus_TCP_Window_ViewModel x:Key="Edit_TCP"/>
     <viewmodel:WorkScope_ViewModel x:Key="WorkScope"/>
-    <viewmodel:MainScreenViewModel x:Key="MenuMainAll"/>
+    
     <viewmodel:Content_Manager_ViewModel x:Key="ContenMedia"/>
     <viewmodel:ImageManager_ViewModel x:Key="ImageManager"/>
     <viewmodel:AudioManager_ViewModel x:Key="AudioManager"/>
     <viewmodel:VideoManager_ViewModel x:Key="VideoManager"/>
     <viewmodel:DocumentManager_ViewModel x:Key="DocumentManger"/>
-    <viewmodel:FileConnfig_Main_ViewModel x:Key="FileProcess"/>
+    
     <viewmodel:MenuFileConfig_ViewModel x:Key="menufileconfig"/>
     <FileConfig:ExcelFileConfig_ViewModel x:Key="excel"/>
     <FileConfig:JSONData_ViewModel x:Key="Json"/>
     <FileConfig:XMLData_ViewModel x:Key="xml"/>
     <FileConfig:TXTData_ViewModel x:Key="txt"/>
     <viewmodel:Login_ViewModel x:Key="Login"/>
-    <viewmodel:AddProjectSchedule_ViewModel x:Key="AddJobProject"/>
+   
     <viewmodel:Barcode_ViewModel x:Key="Barcode"/>
     <viewmodel:CustomerSetting_ViewModel x:Key="CustomerSetting"/>
     <viewmodel:Work_Edit_ViewModel x:Key="WorkEdit"/>
-
+    <viewmodel:UserManager_ViewModel x:Key="UserManager"/>
+    <viewmodel:DataConfig_ViewModel x:Key="Dataconfig"/>
 </ResourceDictionary>

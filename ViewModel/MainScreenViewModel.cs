@@ -18,7 +18,7 @@ namespace WPF_TEST.ViewModel
         public UserAccount CurrentAccount
         {
             get { return user; }
-            set 
+            set
             {
                 SetProperty(ref user, value, nameof(CurrentAccount));
             }
@@ -32,6 +32,8 @@ namespace WPF_TEST.ViewModel
                 OnPropertyChanged(nameof(SelectedViewModel));
             }
         }
+        #region Command
+
         public ICommand Image_Manager { get; set; }
         public ICommand Audio_Manager { get; set; }
         public ICommand Video_Manager { get; set; }
@@ -58,20 +60,24 @@ namespace WPF_TEST.ViewModel
         public ICommand Load { get; set; }
         public ICommand Unload { get; set; }
         public ICommand CustomerManager { get; set; }
+        public ICommand User_Manager { get; set; }
 
-        static FileConnfig_Main_ViewModel FileConnfig_Main_ViewModel = new FileConnfig_Main_ViewModel();
+        public ICommand OpenDataBaseSetting { get; set; }
+        #endregion
+        FileConnfig_Main_ViewModel FileConnfig_Main_ViewModel = new FileConnfig_Main_ViewModel();
         //DataStreamCollectionModel DataStreamCollectionModel = new DataStreamCollectionModel();
-        static MainMenuModel MainMenuModel = new MainMenuModel();
-        static CustomerSetting_ViewModel CustomerSetting_ViewModel = new CustomerSetting_ViewModel();
+        MainMenuModel MainMenuModel = new MainMenuModel();
+        CustomerSetting_ViewModel CustomerSetting_ViewModel = new CustomerSetting_ViewModel();
         WorkflowCreatorModel WorkflowCreatorModel = new WorkflowCreatorModel();
         SchedulerViewModel SchedulerViewModel = SchedulerViewModel._SchedulerViewModel;
-        static MainAll_ViewModel MainAll_ViewModel = new MainAll_ViewModel();
-        static DataCollectConfigureModel DataCollectConfigureModel = new DataCollectConfigureModel();
-        static Ethenet_SerialModel ethenet_SerialModel = new Ethenet_SerialModel();
-        static ModbusViewModel ModbusViewModel = new ModbusViewModel();
-        static Content_Manager_ViewModel Content_Manager_ViewModel = new Content_Manager_ViewModel();
+        MainAll_ViewModel MainAll_ViewModel = new MainAll_ViewModel();
+        DataCollectConfigureModel DataCollectConfigureModel = new DataCollectConfigureModel();
+        Ethenet_SerialModel ethenet_SerialModel = new Ethenet_SerialModel();
+        ModbusViewModel ModbusViewModel = new ModbusViewModel();
+        Content_Manager_ViewModel Content_Manager_ViewModel = new Content_Manager_ViewModel();
         public MainScreenViewModel mainScreenViewModel;
         public Access_Managerment_ViewModel Access_Managerment_ViewModel = new Access_Managerment_ViewModel();
+        UserManager_ViewModel UserManager_ViewModel = UserManager_ViewModel.INSUserManager_ViewModel;
         public bool loadMain = false;
         public MainScreenViewModel() 
         {
@@ -83,6 +89,16 @@ namespace WPF_TEST.ViewModel
                 mainScreenViewModel.SelectedViewModel = MainAll_ViewModel;
                 loadMain = true;
             }
+
+            User_Manager = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                 Task.Factory.StartNew(new Action(() => 
+                {
+                    Loading_Indicator.BeingBusy();
+                }));
+
+                mainScreenViewModel.SelectedViewModel = UserManager_ViewModel;
+            });
             Load = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
                 CurrentAccount = Login_ViewModel.LoginAcount;
@@ -200,8 +216,13 @@ namespace WPF_TEST.ViewModel
                 mainScreenViewModel.SelectedViewModel = Content_Manager_ViewModel;
             });
 
-
+            OpenDataBaseSetting = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                DatabaseConfig_View databaseConfig_View = new DatabaseConfig_View();
+                databaseConfig_View.ShowDialog();
+            });
         }
        
     }
+    
 }

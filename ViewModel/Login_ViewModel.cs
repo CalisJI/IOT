@@ -19,6 +19,28 @@ namespace WPF_TEST.ViewModel
 {
     public class Login_ViewModel:BaseViewModel
     {
+        private static Login_ViewModel login_ViewModel = new Login_ViewModel();
+        public static Login_ViewModel INS 
+        {
+            get 
+            {
+                if (login_ViewModel != null) 
+                {
+                    return login_ViewModel;
+                }
+                else 
+                {
+                   
+                    return new Login_ViewModel(); ;
+                }
+            }
+            set 
+            {
+
+                login_ViewModel = value;
+            }
+        }
+
         private MySqlDataAdapter mySqlDataAdapter;
         
         public static UserAccount LoginAcount = new UserAccount();
@@ -183,9 +205,9 @@ namespace WPF_TEST.ViewModel
         {
             if (!Loaded)
             {
-                Sqlexcute.Server = "112.78.2.9";
-                Sqlexcute.pwd = "Fwd@2021";
-                Sqlexcute.UId = "fwd63823_fwdvina";
+                //Sqlexcute.Server = "112.78.2.9";
+                //Sqlexcute.pwd = "Fwd@2021";
+                //Sqlexcute.UId = "fwd63823_fwdvina";
                 int check = 2;
                 ListUser = new ObservableCollection<UserAccount>();
                 ToJSON = new ObservableCollection<ConvertoJson>();
@@ -203,7 +225,7 @@ namespace WPF_TEST.ViewModel
                     TableUser = Sqlexcute.FillToDataTable(ToJSON);
 
                     Sqlexcute.Create_JSon_Table(TableUser, Sqlexcute.Database, "UserAccount");
-                    Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, TableUser, Sqlexcute.Database, "UserAccount");
+                    Sqlexcute.Update_Table_to_Host(TableUser, Sqlexcute.Database, "UserAccount");
                 }
                 else if (check == 1) 
                 {
@@ -274,7 +296,7 @@ namespace WPF_TEST.ViewModel
 
                     TableUser = new DataTable("User Account");
                     TableUser = Sqlexcute.FillToDataTable(ToJSON);
-                    Sqlexcute.Update_Table_to_Host(ref mySqlDataAdapter, TableUser, Sqlexcute.Database, "UserAccount");
+                    Sqlexcute.Update_Table_to_Host(TableUser, Sqlexcute.Database, "UserAccount");
                     WPFMessageBoxService.ShowMessage("Đã Lưu", "Lưu dữ liệu!", System.Messaging.MessageType.Report);
                 }
                 catch (Exception ex)
@@ -290,7 +312,18 @@ namespace WPF_TEST.ViewModel
     }
     public static class Loading_Indicator 
     {
-        public static Loading Loading { get; set; }
+        private static Loading loading;
+        public static Loading Loading 
+        {
+            get 
+            {
+                return loading;
+            }
+            set 
+            {
+                loading = value;
+            }
+        }
         public static void BeingBusy() 
         {
             Thread thread = new Thread(() => 
@@ -306,10 +339,22 @@ namespace WPF_TEST.ViewModel
         }
         public static void Finished() 
         {
-            Loading.Dispatcher.BeginInvoke(new Action(() => 
+            try
             {
-                Loading.Close();
-            }));
+                
+                    Loading.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        Loading.Close();
+                    }));
+                
+               
+            }
+            catch (Exception ex)
+            {
+
+               
+            }
+            
         }
     }
 }

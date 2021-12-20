@@ -22,22 +22,15 @@ namespace WPF_TEST.View
     public partial class MainAll_View : UserControl
     {
         public static bool LoadDone = false;
-        DispatcherTimer move = new DispatcherTimer();
+       
         public MainAll_View()
         {
             InitializeComponent();
 
-            move.Tick += Move_Tick;
-            move.Interval = new TimeSpan(0, 0, 0, 0,800);
-            move.IsEnabled = true;
-            move.Start();
+           
         }
 
-        private void Move_Tick(object sender, EventArgs e)
-        {
-
-            //UserTB.Text = ""
-        }
+       
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {

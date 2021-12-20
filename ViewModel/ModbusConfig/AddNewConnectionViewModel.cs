@@ -12,7 +12,7 @@ namespace WPF_TEST.ViewModel
 {
     public class AddNewConnectionViewModel:BaseViewModel
     {
-        public ObservableCollection<ModbusDevice> ModbusDevices { get; set; }
+        public static ObservableCollection<ModbusDevice> ModbusDevices { get; set; }
         public AddNewConnectionViewModel() 
         {
         

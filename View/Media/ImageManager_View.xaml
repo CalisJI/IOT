@@ -5,10 +5,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF_TEST.View"
              mc:Ignorable="d" 
-             DataContext="{StaticResource MenuMainAll}"
+             DataContext="{StaticResource ImageManager}"
              xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="1080" d:DesignWidth="1920">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding FrameImageLoaded}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="ChangVisible"/>
+
+
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
@@ -21,15 +31,13 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
                 <Button
-                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            BorderBrush="Blue"
+                    Command="{Binding OpentoAdd}"
+                            BorderThickness="2"
                             Height="100" Width="100"
-                            materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="#FFF08011">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="White" Offset="0"/>
-                            <GradientStop Color="#FF65C6CB" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
+                            materialDesign:ButtonAssist.CornerRadius="5">
+                   
                     <StackPanel Orientation="Vertical" Height="90" Width="90" HorizontalAlignment="Center"
                                         VerticalAlignment="Center">
                         <Image Height="50"
@@ -51,15 +59,14 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
                 <Button
-                            Style="{StaticResource MaterialDesignRaisedLightButton}"
-                            Height="100" Width="100"
-                            materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="#FFF08011">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="White" Offset="0"/>
-                            <GradientStop Color="#FF65C6CB" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    BorderBrush="Blue"
+                  
+                    BorderThickness="2"
+                    Height="100" Width="100"
+                    Command="{Binding EditExcute}"
+                    materialDesign:ButtonAssist.CornerRadius="5">
+                    
                     <StackPanel Orientation="Vertical" Height="90" Width="90" HorizontalAlignment="Center"
                                         VerticalAlignment="Center">
                         <Image Height="50"
@@ -81,15 +88,14 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
                 <Button
-                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            BorderBrush="Blue"
+                            BorderThickness="2"
+                            Command="{Binding Delete_Image}"
+                            CommandParameter="{Binding ElementName=imageList, Path=SelectedItem}"
                             Height="100" Width="100"
-                            materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="#FFF08011">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="White" Offset="0"/>
-                            <GradientStop Color="#FF65C6CB" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
+                            materialDesign:ButtonAssist.CornerRadius="5">
+                    
                     <StackPanel Orientation="Vertical" Height="90" Width="90" HorizontalAlignment="Center"
                                         VerticalAlignment="Center">
                         <Image Height="50"
@@ -111,15 +117,12 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
                 <Button
-                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                           Style="{StaticResource MaterialDesignFlatButton}"
+                            BorderBrush="Blue"
+                            BorderThickness="2"
                             Height="100" Width="100"
-                            materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="#FFF08011">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="White" Offset="0"/>
-                            <GradientStop Color="#FF65C6CB" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
+                            materialDesign:ButtonAssist.CornerRadius="5">
+                    
                     <StackPanel Orientation="Vertical" Height="90" Width="90" HorizontalAlignment="Center"
                                         VerticalAlignment="Center">
                         <Image Height="50"
@@ -142,16 +145,14 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
                 <Button
+                    DataContext="{StaticResource MenuMainAll}"
                     Command="{Binding Media}"
-                            Style="{StaticResource MaterialDesignRaisedLightButton}"
-                            Height="100" Width="100"
-                            materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="#FFF08011">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="White" Offset="0"/>
-                            <GradientStop Color="#FF65C6CB" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    BorderBrush="Blue"
+                    BorderThickness="2"
+                    Height="100" Width="100"
+                    materialDesign:ButtonAssist.CornerRadius="5" >
+
                     <StackPanel Orientation="Vertical" Height="90" Width="90" HorizontalAlignment="Center"
                                         VerticalAlignment="Center">
                         <Image Height="50"
@@ -162,6 +163,42 @@
                         <TextBlock
                                     HorizontalAlignment="Center"
                                     Text="Back"
+                                    FontWeight="Bold"
+                                    Margin="0,10,0,0"
+                                    FontSize="16"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
+
+            <Grid
+                DataContext="{StaticResource ImageManager}"
+                        Margin="0,200,0,0"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0*"/>
+                    <RowDefinition Height="0*"/>
+                </Grid.RowDefinitions>
+                <Button
+                            Command="{Binding DoneEdit}"
+                            
+                            Visibility="{Binding Path=E_Done ,Converter={StaticResource ChangVisible}}"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            BorderBrush="Blue"
+                            BorderThickness="2"
+                            Height="100" Width="100"
+                            materialDesign:ButtonAssist.CornerRadius="5" Grid.RowSpan="2" >
+
+                    <StackPanel Orientation="Vertical" Height="90" Width="90" HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                        <Image Height="50"
+                               HorizontalAlignment="Center"
+                                       Margin="0,5,0,0"
+                                       Width="50"
+                                       Source="pack://application:,,,/ImageSource/Done.png"/>
+                        <TextBlock
+                                    HorizontalAlignment="Center"
+                                    Text="Done"
                                     FontWeight="Bold"
                                     Margin="0,10,0,0"
                                     FontSize="16"/>
@@ -182,7 +219,7 @@
                 <ListView Margin="0,10,0,0" 
                           Height="1000"
                           x:Name="imageList"
-                          DataContext="{StaticResource ContenMedia}"
+                          
                           ItemsSource="{Binding ImageObjects}"
                           
                           ScrollViewer.VerticalScrollBarVisibility="Visible"
@@ -290,14 +327,15 @@
         <Grid Grid.Column="2">
             <GroupBox Header="Image Details" FontSize="22" FontWeight="Bold" Margin="15">
                 <Grid>
-                    <GroupBox Margin="10,10,10,0" Height="200" VerticalAlignment="Top" DataContext="{StaticResource ContenMedia}">
+                    <GroupBox Margin="10,10,10,0" Height="240" VerticalAlignment="Top">
                         <StackPanel Orientation="Vertical">
                             <Grid >
                                 <TextBlock
+                                    IsEnabled="{Binding E_Done}"
                                     VerticalAlignment="Center"
                                     Text="Original File Name"
                                     FontSize="16" Margin="10"
-                                    FontWeight="Normal"/>
+                                    FontWeight="DemiBold"/>
                                 <TextBox
                                     Margin="200,0,0,0"
                                     VerticalAlignment="Center"
@@ -312,8 +350,9 @@
                                     VerticalAlignment="Center"
                                     Text="Image Name"
                                     FontSize="16" Margin="10"
-                                    FontWeight="Normal"/>
+                                    FontWeight="DemiBold"/>
                                 <TextBox
+                                    IsEnabled="{Binding E_Done}"
                                     Margin="200,0,0,0"
                                     VerticalAlignment="Center"
                                     Text="{Binding Image_.ImageName}"
@@ -324,11 +363,13 @@
                             </Grid>
                             <Grid >
                                 <TextBlock
+                                    
                                     VerticalAlignment="Center"
                                     Text="Image Type"
                                     FontSize="16" Margin="10"
-                                    FontWeight="Normal"/>
+                                    FontWeight="DemiBold"/>
                                 <TextBox
+                                    IsEnabled="{Binding E_Done}"
                                     Margin="200,0,0,0"
                                     VerticalAlignment="Center"
                                     Text="{Binding Image_.ImageType}" 
@@ -342,8 +383,9 @@
                                     VerticalAlignment="Center"
                                     Text="Image Group"
                                     FontSize="16" Margin="10"
-                                    FontWeight="Normal"/>
+                                    FontWeight="DemiBold"/>
                                 <TextBox
+                                    IsEnabled="{Binding E_Done}"
                                     Margin="200,0,0,0"
                                     VerticalAlignment="Center"
                                     Text="{Binding Image_.ImageGroup}" 
@@ -357,8 +399,9 @@
                                     VerticalAlignment="Center"
                                     Text="Image Category"
                                     FontSize="16" Margin="10"
-                                    FontWeight="Normal"/>
+                                    FontWeight="DemiBold"/>
                                 <TextBox
+                                    IsEnabled="{Binding E_Done}"
                                     Margin="200,0,0,0"
                                     VerticalAlignment="Center"
                                     Text="{Binding Image_.ImgaeCategory}" 
@@ -369,10 +412,14 @@
                             </Grid>
                         </StackPanel>
                     </GroupBox>
-                    <GroupBox DataContext="{StaticResource ContenMedia}" Margin="10,220,10,0" Header="Image Preview">
-                        <Image
+                    <GroupBox  Margin="10,260,10,0" Header="Image Preview">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <Image
+                             
                             Source="{Binding Image_.LinkImage}"
                             Stretch="Fill"/>
+                        </ScrollViewer>
+                        
 
                     </GroupBox>
                 </Grid>
