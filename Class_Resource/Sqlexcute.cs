@@ -45,6 +45,12 @@ namespace WPF_TEST.Class_Resource
                 _sQL_Connection = value;
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Db"></param>
+        /// <param name="TB"></param>
+        /// <returns></returns>
         private string Check_Table_Exits(string Db, string TB) 
         {
             string check = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = '"+Db+"' AND table_name = '"+TB+"'";
@@ -233,6 +239,12 @@ namespace WPF_TEST.Class_Resource
                 return dataTable;
             }
         }
+        /// <summary>
+        /// Hàm thực hiện câu truy vấn đơn
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="database"></param>
+        /// <returns></returns>
         public bool SQL_command(string command, string database)
         {
             try
@@ -315,6 +327,12 @@ namespace WPF_TEST.Class_Resource
                 File.Delete(tempCsvFileSpec);
            
         }
+        /// <summary>
+        /// Kiểm tra và trả về sự tồn tại của bảng
+        /// </summary>
+        /// <param name="database"></param>
+        /// <param name="TableName"></param>
+        /// <param name="check"></param>
         public void Check_Table(string database, string TableName,ref int check) 
         {
             try
@@ -347,6 +365,14 @@ namespace WPF_TEST.Class_Resource
             
             
         }
+        /// <summary>
+        /// Tạo bảng bình thường dựa trên Properties của Datatable
+        /// </summary>
+        /// <param name="dataTable"></param>
+        /// <param name="database"></param>
+        /// <param name="TableName"></param>
+        /// <param name="check"></param>
+        /// <param name="exist"></param>
         public void AutoCreateTable(DataTable dataTable, string database, string TableName, ref bool check,ref bool exist) 
         {
             string cmd;
@@ -439,6 +465,16 @@ namespace WPF_TEST.Class_Resource
             }
             
         }
+        /// <summary>
+        /// Kiêm tra xem bảng đã tồn tại hay chưa.
+        /// Nếu chưa thì tạo bảng.
+        /// Parameter "Json"= true tạo bảng kiểu Json
+        /// </summary>
+        /// <param name="dataTable"></param>
+        /// <param name="database"></param>
+        /// <param name="TableName"></param>
+        /// <param name="dataTable1"></param>
+        /// <param name="Json"></param>
         public void AutoCreateTable(DataTable dataTable, string database, string TableName, ref DataTable dataTable1, bool Json = false)
         {
             string cmd;
@@ -566,7 +602,7 @@ namespace WPF_TEST.Class_Resource
         //    }
         //}
         /// <summary>
-        /// 
+        /// Lấy dữ liệu ban đầu từ Server
         /// </summary>
         /// <param name="dataTable"></param>
         /// <param name="table_Name"></param>
@@ -601,6 +637,12 @@ namespace WPF_TEST.Class_Resource
            
            
         }
+        /// <summary>
+        /// Tạo bảng kiểu JSon
+        /// </summary>
+        /// <param name="dataTable"></param>
+        /// <param name="database"></param>
+        /// <param name="TableName"></param>
         public void Create_JSon_Table(DataTable dataTable, string database, string TableName) 
         {
             string cmd;
@@ -638,6 +680,40 @@ namespace WPF_TEST.Class_Resource
                 var check = SQL_command(cmd, database);
             }
         }
+
+        public void Update_Runtime_to_Host(DataTable dataTable, string table_Name)
+        {
+            MySqlDataAdapter mySqlDataAdapter = null;
+            try
+            {
+
+                //SQL_command("DELETE FROM " + table_Name + "", Database);
+                if (SQL_Connection.State == ConnectionState.Closed)
+                {
+                    SQL_Connection.Open();
+                }
+
+                string Query = "SELECT * FROM " + table_Name + "";
+                mySqlDataAdapter = new MySqlDataAdapter(Query, SQL_Connection);
+                MySqlCommandBuilder mySqlCommand = new MySqlCommandBuilder(mySqlDataAdapter);
+                mySqlDataAdapter.Update(dataTable);
+                error_message = string.Empty;
+                SQL_Connection.Close();
+            }
+            catch (Exception ex)
+            {
+                error_message = ex.Message;
+                SQL_Connection.Close();
+            }
+
+        }
+
+        /// <summary>
+        /// Cập nhật bảng hiện tại lên Server
+        /// </summary>
+        /// <param name="dataTable"></param>
+        /// <param name="Database"></param>
+        /// <param name="table_Name"></param>
         public void Update_Table_to_Host(DataTable dataTable, string Database  ,string table_Name) 
         {
             MySqlDataAdapter mySqlDataAdapter = null;
@@ -664,6 +740,12 @@ namespace WPF_TEST.Class_Resource
             }
            
         }
+        /// <summary>
+        /// Tạo bảng từ file CSV
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="table"></param>
+        /// <param name="database"></param>
         public void AutoCreat_table(string path, string table, string database)
         {
             using (StreamReader sr = new StreamReader(path))
@@ -711,6 +793,12 @@ namespace WPF_TEST.Class_Resource
                 bool auto_create = SQL_command(cmd, database);
             }
         }
+        /// <summary>
+        /// Chuyển đổi dữ liệu từ một ObservariableCollection<typeparamref name="T"/> thành dữ liệu Datatable
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
         public static DataTable FillToDataTable<T>(ObservableCollection<T> items)
         {
             DataTable dataTable = new DataTable(typeof(T).Name);
@@ -736,7 +824,12 @@ namespace WPF_TEST.Class_Resource
             }
             //put a breakpoint here and check datatable
             return dataTable;
-        }
+        }/// <summary>
+        /// Chuyển đổi từ dữ liệu từ kiểu Datatable sang một ObsserCollection<typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="dt"></param>
+        /// <returns></returns>
         public  ObservableCollection<T> Conver_From_Data_Table_To_List<T>(DataTable dt)
         {
             ObservableCollection<T> data = new ObservableCollection<T>();
@@ -784,6 +877,10 @@ namespace WPF_TEST.Class_Resource
                         else if (pro.PropertyType == typeof(ModbusFunction))
                         {
                             pro.SetValue(obj, (ModbusFunction)Enum.Parse(typeof(ModbusFunction), (string)dr[column.ColumnName]), null);
+                        }
+                        else if(pro.PropertyType == typeof(DeviceStage)) 
+                        {
+                            pro.SetValue(obj, (DeviceStage)Enum.Parse(typeof(DeviceStage), (string)dr[column.ColumnName]), null);
                         }
                         else if (pro.PropertyType == typeof(Status))
                         {

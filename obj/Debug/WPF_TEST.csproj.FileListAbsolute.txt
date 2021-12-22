@@ -1146,3 +1146,5 @@ F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Frame_Certification_View.ba
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\Frame_Schedule_View.baml
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\DatabaseConfig_View.g.cs
 F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\DatabaseConfig_View.baml
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ModbusConfig\DeviceDataValue_View.g.cs
+F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\View\ModbusConfig\DeviceDataValue_View.baml

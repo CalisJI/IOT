@@ -361,6 +361,8 @@
     <Compile Include="Class_Resource\DataProvider.cs" />
     <Compile Include="Class_Resource\ServerData.cs" />
     <Compile Include="Class_Resource\Sqlexcute.cs" />
+    <Compile Include="Class_Resource\TimerSetting.cs" />
+    <Compile Include="Class_Resource\XMLConfig.cs" />
     <Compile Include="Common\Behaviors.cs" />
     <Compile Include="Common\Converters.cs" />
     <Compile Include="Configuration.xaml.cs">
@@ -422,6 +424,7 @@
     <Compile Include="ViewModel\DataCollectConfigureModel.cs" />
     <Compile Include="ViewModel\DataStreamCollectionModel.cs" />
     <Compile Include="ViewModel\Media\DocumentManager_ViewModel.cs" />
+    <Compile Include="ViewModel\ModbusConfig\DeviceDataValue_ViewModel.cs" />
     <Compile Include="ViewModel\Scheduler\AddProjectSchedule_ViewModel.cs" />
     <Compile Include="ViewModel\Scheduler\FrameWorkscope_ViewModel.cs" />
     <Compile Include="ViewModel\Scheduler\PartSchedulrt_ViewModel.cs" />
@@ -514,6 +517,9 @@
     </Compile>
     <Compile Include="View\FileConfig\TXTFileConfig_View.xaml.cs">
       <DependentUpon>TXTFileConfig_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ModbusConfig\DeviceDataValue_View.xaml.cs">
+      <DependentUpon>DeviceDataValue_View.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Scheduler\AddProjectSchedule_View.xaml.cs">
       <DependentUpon>AddProjectSchedule_View.xaml</DependentUpon>
@@ -727,6 +733,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ModbusConfig\DeviceDataValue_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Scheduler\AddProjectSchedule_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -924,6 +934,10 @@
     <Resource Include="ImageSource\Job.png" />
     <Resource Include="ImageSource\JOB1.png" />
     <Resource Include="ImageSource\Done.png" />
+    <Resource Include="ImageSource\Disconnect.png" />
+    <Resource Include="ImageSource\Connection.png" />
+    <Resource Include="ImageSource\Editting.png" />
+    <Resource Include="ImageSource\Deteting.png" />
     <Content Include="Images\OutlookInspired\Svg\CalendarGroup.svg" />
     <Content Include="Images\OutlookInspired\Svg\CalendarPermission.svg" />
     <Content Include="Images\OutlookInspired\Svg\Categorize.svg" />

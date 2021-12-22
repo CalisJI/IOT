@@ -148,7 +148,9 @@
             <DataTemplate DataType="{x:Type viewmodels:Frame_Certification_ViewModel}">
                 <views:Frame_Certification_View/>
             </DataTemplate>
-           
+            <DataTemplate DataType="{x:Type viewmodels:DeviceDataValue_ViewModel}">
+                <views:DeviceDataValue_View/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

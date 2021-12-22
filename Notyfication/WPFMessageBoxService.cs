@@ -19,5 +19,23 @@ namespace WPF_TEST.Notyfication
             // TODO: Choose MessageBoxButton and MessageBoxImage based on MessageType received
             MessageBox.Show(text, caption, MessageBoxButton.OK, MessageBoxImage.Information);
         }
+        public void ShowMessage(string text, string caption, MessageBoxImage messageBoxImage)
+        {
+            // TODO: Choose MessageBoxButton and MessageBoxImage based on MessageType received
+            MessageBox.Show(text, caption, MessageBoxButton.OK, messageBoxImage);
+        }
+    }
+
+    public static class ErrorServer 
+    {
+        public static void ShowServerError() 
+        {
+            
+        }
+
+        public static void ServerNormal() 
+        {
+        
+        }
     }
 }

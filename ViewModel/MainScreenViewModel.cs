@@ -73,7 +73,7 @@ namespace WPF_TEST.ViewModel
         MainAll_ViewModel MainAll_ViewModel = new MainAll_ViewModel();
         DataCollectConfigureModel DataCollectConfigureModel = new DataCollectConfigureModel();
         Ethenet_SerialModel ethenet_SerialModel = new Ethenet_SerialModel();
-        ModbusViewModel ModbusViewModel = new ModbusViewModel();
+        ModbusViewModel ModbusViewModel = ModbusViewModel.INS;
         Content_Manager_ViewModel Content_Manager_ViewModel = new Content_Manager_ViewModel();
         public MainScreenViewModel mainScreenViewModel;
         public Access_Managerment_ViewModel Access_Managerment_ViewModel = new Access_Managerment_ViewModel();
@@ -92,10 +92,9 @@ namespace WPF_TEST.ViewModel
 
             User_Manager = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
-                 Task.Factory.StartNew(new Action(() => 
-                {
+                
                     Loading_Indicator.BeingBusy();
-                }));
+                
 
                 mainScreenViewModel.SelectedViewModel = UserManager_ViewModel;
             });
@@ -190,6 +189,8 @@ namespace WPF_TEST.ViewModel
             });
             Modbus_Connection = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
+                Loading_Indicator.BeingBusy();
+                
                 this.mainScreenViewModel.SelectedViewModel = ModbusViewModel;
             });
             Web_API = new RelayCommand<object>((p) => { return true; }, (p) =>

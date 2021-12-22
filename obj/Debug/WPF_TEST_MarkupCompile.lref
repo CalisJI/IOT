@@ -1,4 +1,4 @@
-﻿F:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\obj\Debug\GeneratedInternalTypeHelper.g.cs
+﻿
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\App.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\Configuration.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\DatabaseConfig_View.xaml;;
@@ -29,6 +29,7 @@ FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\DataInput\DataCollectConfigureView.x
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\Media\DocumentManager_View.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\Media\Document_Docx_View.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\FileConfig\TXTFileConfig_View.xaml;;
+FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\ModbusConfig\DeviceDataValue_View.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\Scheduler\AddProjectSchedule_View.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\Scheduler\EditJobModelView.xaml;;
 FF:\VISUAL PROJECT\CSharp\WPF\WPF_TEST\View\ModbusConfig\EditModbusView.xaml;;

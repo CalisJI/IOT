@@ -41,6 +41,7 @@
                         <Style TargetType="dxg:LightweightCellEditor">
                             <Setter Property="Background" Value="{Binding Status,Converter={StaticResource ColorConvert}}"/>
                         </Style>
+                        
                     </dxg:GridColumn.CellStyle>
                 </dxg:GridColumn>
             </dxg:GridControl>
@@ -203,6 +204,17 @@
 
                     <dxlc:LayoutItem Label="Project" LabelStyle="{StaticResource LB}" LabelPosition="Top"  HorizontalAlignment="Left" Width="auto" >
                         <dxg:GridControl x:Name="Grid_data" ItemsSource="{Binding Path=JobOrders}" Height="1000" Width="auto" dxlc:DockLayoutControl.Dock="Left">
+                            <dxg:GridControl.View>
+                                <dxg:TableView 
+                                    AllowEditing="False"
+                                    ShowTotalSummary="True" 
+                                    ShowGroupPanel="False" 
+                                    ShowSearchPanelMode="Always" 
+                                    ShowSearchPanelNavigationButtons="True" 
+                                    ShowSearchPanelFindButton="True"
+                                    ShowSearchPanelMRUButton="True"
+                                    ShowSearchPanelCloseButton="True"/>
+                            </dxg:GridControl.View>
                             <dxg:GridControl.Columns >
                                 <dxg:GridColumn
                                 FieldName="SaleOrder" 

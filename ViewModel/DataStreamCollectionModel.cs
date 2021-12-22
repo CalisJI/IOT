@@ -34,7 +34,7 @@ namespace WPF_TEST.ViewModel
         MainMenuModel MainMenu = new MainMenuModel();
         DataCollectConfigureModel DataCollectConfigureModel = new DataCollectConfigureModel();
         Ethenet_SerialModel ethenet_SerialModel = new Ethenet_SerialModel();
-        ModbusViewModel ModbusViewModel = new ModbusViewModel();
+        //ModbusViewModel ModbusViewModel = new ModbusViewModel();
         public bool loaded = false;
         public DataStreamCollectionModel dataStreamCollectionModel;
         public DataStreamCollectionModel()
@@ -66,7 +66,7 @@ namespace WPF_TEST.ViewModel
             });
             Modbus_Connection = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                this.dataStreamCollectionModel.SelectedViewModel = ModbusViewModel;
+               // this.dataStreamCollectionModel.SelectedViewModel = ModbusViewModel;
             });
             Web_API = new RelayCommand<object>((p) => { return true; }, (p) =>
             {

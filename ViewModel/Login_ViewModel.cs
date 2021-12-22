@@ -109,7 +109,7 @@ namespace WPF_TEST.ViewModel
                 SetProperty(ref _userAccounts, value, nameof(ListUser));
             }
         }
-        public ICommand Login { get; set; }
+        public static ICommand Login { get; set; }
         public ICommand Selected { get; set; }
         public ICommand Save_permit { get; set; }
         public static bool Loaded { get; set; }

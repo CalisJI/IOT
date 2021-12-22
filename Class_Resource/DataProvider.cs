@@ -33,6 +33,20 @@ namespace WPF_TEST.Class_Resource
         //public savedataEntities DB { get; set; }
         //public ServerData ServerData { get; set; }
         private Sqlexcute Sqlexcute { get; set; }
+
+        private ObservableCollection<ModbusDevice> _modbusDevices;
+        public ObservableCollection<ModbusDevice> ModbusDevices 
+        {
+            get 
+            {
+                return _modbusDevices;
+            }
+            set 
+            {
+                _modbusDevices = value;
+            }
+        }
+
         private string _cloud;
         public string Cloud_Media 
         {
@@ -90,7 +104,7 @@ namespace WPF_TEST.Class_Resource
             }
         }
 
-        private ObservableCollection<PLC_Modbus> _Modbus;
+        private static ObservableCollection<PLC_Modbus> _Modbus;
         public ObservableCollection<PLC_Modbus> PLC_DataInput 
         {
             get 
@@ -177,7 +191,9 @@ namespace WPF_TEST.Class_Resource
             }
         }
 
-        private ObservableCollection<ConvertoJson> jsons2;
+        private  static ObservableCollection<ConvertoJson> jsons2;
+        private MySqlDataAdapter mySqlDataAdapter;
+
         public ObservableCollection<ConvertoJson> JsonPLC
         {
             get
@@ -200,7 +216,7 @@ namespace WPF_TEST.Class_Resource
             INS_JobOrder = new DataTable("JobOrderConfig");
             INS_Customer = new DataTable("CustomerConfig");
             INS_Work = new DataTable("Works");
-            INS_PLC_Data = new DataTable("PLCDataConfig");
+            INS_PLC_Data = new DataTable("ModbusDevice");
             INS_Cloud = new DataTable("Cloud");
             CloudConfig = new ObservableCollection<DatabaseConfig>();
             WorkInput = new ObservableCollection<Works>();
@@ -215,15 +231,16 @@ namespace WPF_TEST.Class_Resource
             }
             var d = Data_Source();
             JobOrderInput = d.Item1;
-            PLC_DataInput = d.Item2;
-            CustomerInput = d.Item3;
-            WorkInput = d.Item4;
-            CloudConfig = d.Item5;
+            //PLC_DataInput = d.Item2;
+            CustomerInput = d.Item2;
+            WorkInput = d.Item3;
+            CloudConfig = d.Item4;
+            PLC_DataInput = SearchDevice();
         }
 
         /// <summary>
         /// type 0 JobOrder, 
-        /// type 1 PLC, 
+        /// 
         /// type 2 customer, 
         /// type 3 work
         /// type 4 Cloud
@@ -254,14 +271,14 @@ namespace WPF_TEST.Class_Resource
                         INS_Work.TableName = "Works";
                         Sqlexcute.Update_Table_to_Host(INS_Work, Sqlexcute.Database, INS_Work.TableName);
                         break;
-                    case 1:
-                        var s1 = JsonSerializer.Serialize(PLC_DataInput);
-                        JsonPLC = new ObservableCollection<ConvertoJson>();
-                        JsonPLC.Add(new ConvertoJson { Code = s1 });
-                        INS_PLC_Data = Sqlexcute.FillToDataTable(JsonPLC);
-                        INS_PLC_Data.TableName = "PLCDataConfig";
-                        Sqlexcute.Update_Table_to_Host(INS_PLC_Data, Sqlexcute.Database, INS_PLC_Data.TableName);
-                        break;
+                    //case 1:
+                    //    var s1 = JsonSerializer.Serialize(PLC_DataInput);
+                    //    JsonPLC = new ObservableCollection<ConvertoJson>();
+                    //    JsonPLC.Add(new ConvertoJson { Code = s1 });
+                    //    INS_PLC_Data = Sqlexcute.FillToDataTable(JsonPLC);
+                    //    INS_PLC_Data.TableName = "ModbusDevice";
+                    //    Sqlexcute.Update_Table_to_Host(INS_PLC_Data, Sqlexcute.Database, INS_PLC_Data.TableName);
+                    //    break;
                     case 4:
                         INS_Cloud = Sqlexcute.FillToDataTable(CloudConfig);
                         INS_Cloud.TableName = "Cloud";
@@ -284,12 +301,12 @@ namespace WPF_TEST.Class_Resource
         {
             int check_Job = 2;
             int check_work = 2;
-            int check_PLC = 2;
+            //int check_PLC = 2;
             int check_customer = 2;
             int check_cloud = 2;
             Sqlexcute.Check_Table(Sqlexcute.Database, INS_JobOrder.TableName, ref check_Job);
             Sqlexcute.Check_Table(Sqlexcute.Database, INS_Customer.TableName, ref check_customer);
-            Sqlexcute.Check_Table(Sqlexcute.Database, INS_PLC_Data.TableName, ref check_PLC);
+            //Sqlexcute.Check_Table(Sqlexcute.Database, INS_PLC_Data.TableName, ref check_PLC);
             Sqlexcute.Check_Table(Sqlexcute.Database, INS_Work.TableName, ref check_work);
             Sqlexcute.Check_Table(Sqlexcute.Database, INS_Cloud.TableName, ref check_cloud);
             if(check_cloud == 0) 
@@ -360,23 +377,24 @@ namespace WPF_TEST.Class_Resource
                 INS_JobOrder.TableName = "JobOrderConfig";
             }
 
-            if (check_PLC == 0) 
-            {
-                PLC_Modbus _Modbus = new PLC_Modbus();
-                PLC_DataInput.Add(_Modbus);
-                var s1 = JsonSerializer.Serialize(PLC_DataInput);
-                JsonPLC = new ObservableCollection<ConvertoJson>();
-                JsonPLC.Add(new ConvertoJson { Code = s1 });
-                INS_PLC_Data = Sqlexcute.FillToDataTable(JsonPLC);
-                INS_PLC_Data.TableName = "PLCDataConfig";
-            }
+            //if (check_PLC == 0) 
+            //{
+            //    PLC_Modbus _Modbus = new PLC_Modbus();
+            //    PLC_DataInput.Add(_Modbus);
+            //    var s1 = JsonSerializer.Serialize(PLC_DataInput);
+            //    JsonPLC = new ObservableCollection<ConvertoJson>();
+            //    JsonPLC.Add(new ConvertoJson { Code = s1 });
+            //    INS_PLC_Data = Sqlexcute.FillToDataTable(JsonPLC);
+            //    INS_PLC_Data.TableName = "ModbusDevice";
+            //}
         }
 
         /// <summary>
         /// ================type 0 JobOrder
-        /// ================type 1 PLC
+        /// 
         /// ================type 2 customer
         /// ================type 3 work
+        /// ================type 4 Cloud
         /// </summary>
         /// <param name="type"></param>
         public void LoadData(int type) 
@@ -388,9 +406,9 @@ namespace WPF_TEST.Class_Resource
                     case 0:
                         Sqlexcute.AutoCreateTable(_insJob, Sqlexcute.Database, INS_JobOrder.TableName, ref _insJob , true);
                         break;
-                    case 1:
-                        Sqlexcute.AutoCreateTable(_insPLC, Sqlexcute.Database, INS_PLC_Data.TableName, ref _insPLC , true);
-                        break;
+                    //case 1:
+                    //    Sqlexcute.AutoCreateTable(_insPLC, Sqlexcute.Database, INS_PLC_Data.TableName, ref _insPLC , true);
+                    //    break;
                     case 2:
                         Sqlexcute.AutoCreateTable(_inscustomer, Sqlexcute.Database, INS_Customer.TableName, ref _inscustomer);
                         break;
@@ -412,19 +430,140 @@ namespace WPF_TEST.Class_Resource
             }
            
         }
+        public void UpdateRuntime(PLC_Modbus pLC_Modbus)
+        {
+            try
+            {
+                DataTable dataTable = new DataTable(pLC_Modbus.Device_Name);
+                dataTable.Columns.Add("CurrentTime");
+                dataTable.Columns.Add("ArrayValue");
+                dataTable.Columns.Add("Stage");
+                foreach (var item in pLC_Modbus.Data)
+                {
+                    string ValueRange = string.Empty;
+                    foreach (var value in item.ArrayValue)
+                    {
+                        ValueRange += value.ToString() + "-";
+                    }
+                    ValueRange = ValueRange.Substring(0, ValueRange.Length - 1);
+                    dataTable.Rows.Add(item.CurrentTime, ValueRange, item.Stage.ToString());
+                }
+                Sqlexcute.Update_Runtime_to_Host(dataTable, pLC_Modbus.Device_Name);
+                if (Sqlexcute.error_message != string.Empty)
+                {
+                    throw new Exception(Sqlexcute.error_message + "PLC_Error");
+                }
+                Error_mesage = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                Error_mesage = ex.Message;
+               
+            }
+           
+        }
+
+        /// <summary>
+        /// Cập nhật dữ liêu đơn PLC lên Server
+        /// </summary>
+        /// <param name="DeviceName"></param>
+        /// <param name="Value"></param>
+        /// <param name="Currenttime"></param>
+        public void UpdateRuntime(string DeviceName,int[] Value,string Currenttime) 
+        {
+            string cmm = string.Empty;
+            foreach (var item in Value)
+            {
+                cmm += item.ToString() + "-";
+            }
+            cmm = cmm.Substring(0, cmm.Length - 1);
+
+            Sqlexcute.SQL_command("INSERT INTO " + DeviceName + " ( `CurrentTime`,`ArrayValue`) VALUES ('"+Currenttime+"','"+cmm+"')",Sqlexcute.Database);
+            Error_mesage = string.Empty;
+            if (Sqlexcute.error_message != string.Empty) 
+            {
+                Error_mesage = Sqlexcute.error_message;
+            }
+            
+        }
+
+        public void DropTableDataDevice(string modbusDevice) 
+        {
+            try
+            {
+                int check = 2;
+                Sqlexcute.Check_Table(Sqlexcute.Database, modbusDevice, ref check);
+                if (check == 1)
+                {
+                    Sqlexcute.SQL_command("DROP TABLE `" + modbusDevice + "`", Sqlexcute.Database);
+                }
+                if (Sqlexcute.error_message != string.Empty) 
+                {
+                    throw new Exception(Sqlexcute.error_message);
+                }
+                Error_mesage = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                Error_mesage = ex.Message;
+                
+            }
+            
+        }
+
+        /// <summary>
+        /// Tìm và trả vể dữ liệu của các thiết bị từ Server 
+        /// </summary>
+        public ObservableCollection<PLC_Modbus> SearchDevice() 
+        {
+            ObservableCollection<PLC_Modbus> pLC_Modbus = new ObservableCollection<PLC_Modbus>();
+           
+            try
+            {
+                _insPLC = new DataTable("ModbusDevice");
+                mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref _insPLC, "ModbusDevice", Sqlexcute.Database);
+                ModbusDevices = Sqlexcute.Conver_From_Data_Table_To_List<ModbusDevice>(_insPLC);
+                if (pLC_Modbus.Count > 0) 
+                {
+                    pLC_Modbus.Clear();
+                }
+                foreach (var item in ModbusDevices)
+                {
+                    pLC_Modbus.Add(new PLC_Modbus() { Device_Name = item.DeviceName, Data = new ObservableCollection<RuntimeValue>()});
+                    int check = 2;
+                    Sqlexcute.Check_Table(Sqlexcute.Database, item.DeviceName, ref check);
+                    if (check == 0)
+                    {
+                        string sqlsc = string.Empty;
+                        sqlsc = "CREATE TABLE " + item.DeviceName + " (";
+                        sqlsc += "CurrentTime VARCHAR(200),ArrayValue VARCHAR(200),DeviceStage VARCHAR(200),";
+                        sqlsc += "PRIMARY KEY (CurrentTime))";
+
+                        Sqlexcute.SQL_command(sqlsc, Sqlexcute.Database);
+                    }
+                }
+                Error_mesage = string.Empty;
+            }
+            catch (Exception ex)
+            {
+
+                Error_mesage = ex.Message;
+            }
+            return pLC_Modbus;
+        }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public (ObservableCollection<JobOrder> ,ObservableCollection<PLC_Modbus>,ObservableCollection<Customer>,ObservableCollection<Works>, ObservableCollection<DatabaseConfig>) Data_Source()
+        public (ObservableCollection<JobOrder>,ObservableCollection<Customer>,ObservableCollection<Works>, ObservableCollection<DatabaseConfig>) Data_Source()
         {
             ObservableCollection<JobOrder> jobOrders = new ObservableCollection<JobOrder>();
             ObservableCollection<Works> works = new ObservableCollection<Works>();
             ObservableCollection<Customer> customers = new ObservableCollection<Customer>();
-            ObservableCollection<PLC_Modbus> pLC_Modbus = new ObservableCollection<PLC_Modbus>();
+           
             ObservableCollection<ConvertoJson> JS_Job = new ObservableCollection<ConvertoJson>();
-            ObservableCollection<ConvertoJson> js_PLC = new ObservableCollection<ConvertoJson>();
+            //ObservableCollection<ConvertoJson> js_PLC = new ObservableCollection<ConvertoJson>();
             ObservableCollection<DatabaseConfig> cloud = new ObservableCollection<DatabaseConfig>();
             try
             {
@@ -433,10 +572,10 @@ namespace WPF_TEST.Class_Resource
                 JS_Job = Sqlexcute.Conver_From_Data_Table_To_List<ConvertoJson>(INS_JobOrder);
                 works = Sqlexcute.Conver_From_Data_Table_To_List<Works>(INS_Work);
                 customers = Sqlexcute.Conver_From_Data_Table_To_List<Customer>(INS_Customer);
-                js_PLC = Sqlexcute.Conver_From_Data_Table_To_List<ConvertoJson>(INS_PLC_Data);
+                //js_PLC = Sqlexcute.Conver_From_Data_Table_To_List<ConvertoJson>(INS_PLC_Data);
 
                 jobOrders = JsonSerializer.Deserialize<ObservableCollection<JobOrder>>(JS_Job.ElementAt(0).Code);
-                pLC_Modbus = JsonSerializer.Deserialize<ObservableCollection<PLC_Modbus>>(js_PLC.ElementAt(0).Code);
+                //pLC_Modbus = JsonSerializer.Deserialize<ObservableCollection<PLC_Modbus>>(js_PLC.ElementAt(0).Code);
 
                
             }
@@ -445,7 +584,7 @@ namespace WPF_TEST.Class_Resource
                
 
             }
-            return (jobOrders, pLC_Modbus, customers, works,cloud);
+            return (jobOrders, customers, works,cloud);
         }
     }
 }
