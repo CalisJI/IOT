@@ -43,15 +43,15 @@ namespace WPF_TEST.View
                 
             }
         }
-        public void settext(string code) 
-        {
+        //public void settext(string code) 
+        //{
             
-            Barcodetbx.Text = code;
+        //    Barcodetbx.Text = code;
 
-            AddProjectSchedule_ViewModel.BarcodeApply.CanExecute(code);
-            AddProjectSchedule_ViewModel.BarcodeApply.Execute(code);
-            this.Barcodetbx.Focus();
-        }
+        //    AddProjectSchedule_ViewModel.BarcodeApply.CanExecute(code);
+        //    AddProjectSchedule_ViewModel.BarcodeApply.Execute(code);
+        //    this.Barcodetbx.Focus();
+        //}
         public AddProjectSchedule_View()
         {
             InitializeComponent();

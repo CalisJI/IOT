@@ -882,6 +882,27 @@ namespace WPF_TEST.Class_Resource
                         {
                             pro.SetValue(obj, (DeviceStage)Enum.Parse(typeof(DeviceStage), (string)dr[column.ColumnName]), null);
                         }
+                        else if(pro.PropertyType == typeof(byte[])) 
+                        {
+                            try
+                            {
+                                if ((string)dr[column.ColumnName] == string.Empty || (string)dr[column.ColumnName] == null)
+                                {
+                                    pro.SetValue(obj, new byte[] { }, null);
+                                }
+                                else
+                                {
+                                    pro.SetValue(obj, Encoding.UTF8.GetBytes(((string)dr[column.ColumnName])), null);
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+
+                                pro.SetValue(obj, new byte[] { }, null);
+                            }
+                            
+                           
+                        }
                         else if (pro.PropertyType == typeof(Status))
                         {
                             Status myStatus;

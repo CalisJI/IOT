@@ -3,7 +3,7 @@
   <Device_Name>PLC5</Device_Name>
   <Data>
     <RuntimeValue>
-      <CurrentTime>21:14:01</CurrentTime>
+      <CurrentTime>09:57:39</CurrentTime>
       <ArrayValue>
         <int>11</int>
         <int>0</int>
@@ -19,7 +19,7 @@
       <Stage>Running</Stage>
     </RuntimeValue>
     <RuntimeValue>
-      <CurrentTime>21:14:03</CurrentTime>
+      <CurrentTime>09:58:55</CurrentTime>
       <ArrayValue>
         <int>11</int>
         <int>0</int>
@@ -35,7 +35,7 @@
       <Stage>Running</Stage>
     </RuntimeValue>
     <RuntimeValue>
-      <CurrentTime>21:14:05</CurrentTime>
+      <CurrentTime>09:58:57</CurrentTime>
       <ArrayValue>
         <int>11</int>
         <int>0</int>
@@ -51,7 +51,7 @@
       <Stage>Running</Stage>
     </RuntimeValue>
     <RuntimeValue>
-      <CurrentTime>21:14:07</CurrentTime>
+      <CurrentTime>09:58:59</CurrentTime>
       <ArrayValue>
         <int>11</int>
         <int>0</int>
@@ -67,87 +67,7 @@
       <Stage>Running</Stage>
     </RuntimeValue>
     <RuntimeValue>
-      <CurrentTime>21:14:09</CurrentTime>
-      <ArrayValue>
-        <int>11</int>
-        <int>0</int>
-        <int>0</int>
-        <int>5</int>
-        <int>0</int>
-        <int>24</int>
-        <int>0</int>
-        <int>25</int>
-        <int>0</int>
-        <int>0</int>
-      </ArrayValue>
-      <Stage>Running</Stage>
-    </RuntimeValue>
-    <RuntimeValue>
-      <CurrentTime>21:14:13</CurrentTime>
-      <ArrayValue>
-        <int>11</int>
-        <int>0</int>
-        <int>0</int>
-        <int>5</int>
-        <int>0</int>
-        <int>24</int>
-        <int>0</int>
-        <int>25</int>
-        <int>0</int>
-        <int>0</int>
-      </ArrayValue>
-      <Stage>Running</Stage>
-    </RuntimeValue>
-    <RuntimeValue>
-      <CurrentTime>21:14:15</CurrentTime>
-      <ArrayValue>
-        <int>11</int>
-        <int>0</int>
-        <int>0</int>
-        <int>5</int>
-        <int>0</int>
-        <int>24</int>
-        <int>0</int>
-        <int>25</int>
-        <int>0</int>
-        <int>0</int>
-      </ArrayValue>
-      <Stage>Running</Stage>
-    </RuntimeValue>
-    <RuntimeValue>
-      <CurrentTime>21:14:17</CurrentTime>
-      <ArrayValue>
-        <int>11</int>
-        <int>0</int>
-        <int>0</int>
-        <int>5</int>
-        <int>0</int>
-        <int>24</int>
-        <int>0</int>
-        <int>25</int>
-        <int>0</int>
-        <int>0</int>
-      </ArrayValue>
-      <Stage>Running</Stage>
-    </RuntimeValue>
-    <RuntimeValue>
-      <CurrentTime>21:14:19</CurrentTime>
-      <ArrayValue>
-        <int>11</int>
-        <int>0</int>
-        <int>0</int>
-        <int>5</int>
-        <int>0</int>
-        <int>24</int>
-        <int>0</int>
-        <int>25</int>
-        <int>0</int>
-        <int>0</int>
-      </ArrayValue>
-      <Stage>Running</Stage>
-    </RuntimeValue>
-    <RuntimeValue>
-      <CurrentTime>21:14:21</CurrentTime>
+      <CurrentTime>09:59:01</CurrentTime>
       <ArrayValue>
         <int>11</int>
         <int>0</int>

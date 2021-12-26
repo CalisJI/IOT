@@ -6,10 +6,13 @@
              xmlns:local="clr-namespace:WPF_TEST.View"
              mc:Ignorable="d" 
               xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
              
+             xmlns:dxprg="http://schemas.devexpress.com/winfx/2008/xaml/propertygrid"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
              xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
-             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              DataContext="{StaticResource Login}"
              d:DesignHeight="1080" d:DesignWidth="1920">
@@ -19,7 +22,8 @@
             <RowDefinition Height="3*"/>
           
         </Grid.RowDefinitions>
-        <Grid
+        <DockPanel
+            
             Grid.Row="0">
             <TextBlock 
                 Text="Quản Lý Truy Cập"
@@ -28,10 +32,41 @@
                 FontSize="45"
                 Margin="30,0,0,0"
                 FontWeight="DemiBold"/>
-        </Grid>
+            <Button
+                Style="{StaticResource MaterialDesignFlatButton}"
+                Height="80"
+                DataContext="{StaticResource MenuMainAll}"
+                materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                Width="150"
+                BorderBrush="Blue"
+                BorderThickness="2"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Margin="0,0,150,0"
+                Command="{Binding Home}"
+                Background="AliceBlue"
+                materialDesign:ButtonAssist.CornerRadius="8">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+                    <materialDesign:PackIcon 
+                        HorizontalAlignment="Center"
+                        Kind="Home"
+                        Height="50"
+                        Width="50"
+                        />
+                    <TextBlock 
+                        Text="Home"
+                        FontSize="16"
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        />
+                </StackPanel>
+
+            </Button>
+        </DockPanel>
         <Grid
             Grid.Row="1">
-            <Grid.ColumnDefinitions>
+            <!--<Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="2.5*"/>
                 <ColumnDefinition Width="0.25*"/>
@@ -97,8 +132,415 @@
                     </StackPanel>
 
                 </Button>
+            </Grid>-->
+            <Grid >
+                <TabControl>
+                    <TabItem Header="Thông Tin Nhân Viên">
+                        <Grid Margin="12" KeyboardNavigation.ControlTabNavigation="Cycle">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="12" />
+                                <ColumnDefinition Width="420" />
+                                <ColumnDefinition Width="100" />
+                            </Grid.ColumnDefinitions>
+
+                            <dxg:GridControl Name="grid" ItemsSource="{Binding HoSoNhanVien }" SelectionMode="Row">
+                                <dxg:GridControl.Columns>
+                                    <dxg:GridColumn FieldName="Name" MinWidth="100" />
+                                    
+                                    <dxg:GridColumn FieldName="Birth" MinWidth="100" Header="Ngày Sinh">
+                                        <dxg:GridColumn.EditSettings>
+                                            <dxe:DateEditSettings DisplayFormat="d" />
+                                        </dxg:GridColumn.EditSettings>
+                                    </dxg:GridColumn>
+                                    <dxg:GridColumn FieldName="PhoneNumber" MinWidth="100" />
+                                    <dxg:GridColumn FieldName="Position" MinWidth="100" Header="Position" />
+                                    <dxg:GridColumn FieldName="Email" MinWidth="100" />
+                                    <dxg:GridColumn FieldName="Notes" MinWidth="100">
+                                        <dxg:GridColumn.EditSettings>
+                                            <dxe:MemoEditSettings ShowIcon="True" PopupWidth="250" MemoTextWrapping="Wrap" MemoVerticalScrollBarVisibility="Auto" />
+                                        </dxg:GridColumn.EditSettings>
+                                    </dxg:GridColumn>
+                                </dxg:GridControl.Columns>
+                                <dxg:GridControl.View>
+                                    <dxg:TableView
+                                        ShowGroupPanel="False"
+                                        ShowSearchPanelMode="Always"
+                                        ShowSearchPanelFindButton="True"
+                                        ShowSearchPanelMRUButton="True"
+                                        ShowSearchPanelNavigationButtons="True"
+                                        ShowGroupedColumns="True"
+                                        Name="view" 
+                                        AutoWidth="True">
+                                        <dxmvvm:Interaction.Behaviors>
+                                            <local:CommitEditingOnCellValueChanged />
+                                        </dxmvvm:Interaction.Behaviors>
+                                    </dxg:TableView>
+                                </dxg:GridControl.View>
+                            </dxg:GridControl>
+                            <dxprg:PropertyGridControl x:Name="pGrid"
+                                   Grid.Column="2"
+                                   SelectedObjects="{Binding Path=SelectedItems, ElementName=grid}"
+                                   ShowProperties="WithPropertyDefinitions"
+                                   ShowCategories="False"
+                                   SortMode="Definitions"
+                                   ExpandCategoriesWhenSelectedObjectChanged="True">
+                                <dxprg:PropertyGridControl.PropertyDefinitions>
+                                    <dxprg:PropertyDefinition Path="Photo" AllowExpanding="Never">
+                                        <dxprg:PropertyDefinition.EditSettings>
+                                            <dxe:ImageEditSettings ShowMenuMode="Always" />
+                                        </dxprg:PropertyDefinition.EditSettings>
+                                    </dxprg:PropertyDefinition>
+                                    <dxprg:PropertyDefinition Path="Name" Header="Họ Tên" />
+                                    <!--<dxprg:PropertyDefinition Path="LastName" Header="Last name" />-->
+                                    <dxprg:PropertyDefinition Path="Birth" Header="Ngày Sinh" />
+                                    <dxprg:PropertyDefinition Path="Country" Header="Quê Quán"/>
+                                    <dxprg:PropertyDefinition Path="City" />
+                                    <dxprg:PropertyDefinition Path="Position" Header="Chức Vụ"/>
+                                    <dxprg:PropertyDefinition Path="PhoneNumber" Header="Số Điện Thoại" />
+                                    <dxprg:PropertyDefinition Path="Address" Header="Địa Chỉ" />
+                                    <dxprg:PropertyDefinition Path="Email" />
+                                    <dxprg:PropertyDefinition Path="Notes" >
+                                        <dxprg:PropertyDefinition.EditSettings>
+                                            <dxe:TextEditSettings AcceptsReturn="True" TextWrapping="Wrap" />
+                                        </dxprg:PropertyDefinition.EditSettings>
+                                    </dxprg:PropertyDefinition>
+                                    
+                                </dxprg:PropertyGridControl.PropertyDefinitions>
+                            </dxprg:PropertyGridControl>
+                            <Grid Grid.Column="3">
+
+                                <Button
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Height="80"
+                                    DataContext="{StaticResource Login}"
+                                    materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                    Width="80"
+                                    BorderBrush="Blue"
+                                    BorderThickness="2"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Bottom"
+                                    Margin="0,0,0,150"
+                                    Command="{Binding OpenAddForm}"
+                                    Background="AliceBlue"
+                                    materialDesign:ButtonAssist.CornerRadius="8">
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+
+                                        <Image Source="/ImageSource/Add.png" />
+
+                                        <TextBlock 
+                                            Text="Thêm"
+                                            FontSize="16"
+                                            HorizontalAlignment="Center"
+                                            />
+                                    </StackPanel>
+
+                                </Button>
+
+                                <Button
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Height="80"
+                                    DataContext="{StaticResource Login}"
+                                    materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                    Width="80"
+                                    BorderBrush="Blue"
+                                    BorderThickness="2"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Bottom"
+                                    Margin="0,0,0,50"
+                                    Command="{Binding SavePersonnel}"
+                                    Background="AliceBlue"
+                                    materialDesign:ButtonAssist.CornerRadius="8">
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+
+                                       <Image Source="/ImageSource/Save.png" />
+
+                                        <TextBlock 
+                                            Text="Lưu"
+                                            FontSize="16"
+                                            HorizontalAlignment="Center"
+                                            />
+                                    </StackPanel>
+
+                                </Button>
+                                
+                            </Grid>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Quản Ly Truy Cập">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="0.25*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="2">
+                                <Button
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Height="80"
+                                    DataContext="{StaticResource Login}"
+                                    materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                    Width="80"
+                                    BorderBrush="Blue"
+                                    BorderThickness="2"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Bottom"
+                                    Margin="0,0,0,50"
+                                    Command="{Binding Save_permit}"
+                                    Background="AliceBlue"
+                                    materialDesign:ButtonAssist.CornerRadius="8">
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+
+                                        <materialDesign:PackIcon 
+                                            HorizontalAlignment="Center"
+                                            Kind="ContentSave"
+                                            Height="50"
+                                            Width="50"
+                                            Foreground="DarkBlue"/>
+                                                        <TextBlock 
+                                            Text="Save"
+                                            FontSize="16"
+                                            HorizontalAlignment="Center"
+                                            Foreground="Black"/>
+                                    </StackPanel>
+
+                                </Button>
+                               
+                            </Grid> 
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="0"> 
+                                <Grid>
+                                    <ListView ItemsSource="{Binding ListUser}" Name="userlist" HorizontalAlignment="Stretch">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="SelectionChanged">
+                                                <i:InvokeCommandAction 
+                                                    Command="{Binding Selected}"
+                                                    CommandParameter="{Binding ElementName=userlist, Path=SelectedItem}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <materialDesign:Card>
+                                                    <Grid HorizontalAlignment="Center">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="2*"/>
+                                                            <ColumnDefinition Width="0.6*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock 
+                                                            Margin="20,0,0,0"
+                                                            Text="{Binding User}"
+                                                            FontSize="30"
+                                                            VerticalAlignment="Center"
+                                                            Grid.Column="0"/>
+                                                        <Image Grid.Column="1" 
+                                                               Height="60"
+                                                               Width="60"
+                                                               Margin="25,0,0,0"/>
+                                                    </Grid>
+                                                </materialDesign:Card>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </Grid>
+                            </ScrollViewer>
+                            <Grid Grid.Column="1">
+                                <TabControl Margin="10">
+                                    <TabItem Header="Quản Lý Đơn Hàng">
+                                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                            <StackPanel>
+                                                <GroupBox Header="Weekly Schedule" FontSize="20">
+                                                    <StackPanel Orientation="Vertical">
+                                                        <CheckBox Content="Can Access" FontSize="12"
+                                                                  IsChecked="{Binding SelectedUser.Permit.Weekly_Schedule.CacAccess}">
+                                                            <CheckBox.LayoutTransform>
+                                                                <ScaleTransform ScaleX="2" ScaleY="2" CenterX="0" CenterY="0" />
+                                                            </CheckBox.LayoutTransform>
+                                                        </CheckBox>
+                                                        <CheckBox Content="Can Edit" FontSize="12"
+                                                                  IsChecked="{Binding SelectedUser.Permit.Weekly_Schedule.CanEdit}">
+                                                            <CheckBox.LayoutTransform>
+                                                                <ScaleTransform ScaleX="2" ScaleY="2" CenterX="0" CenterY="0" />
+                                                            </CheckBox.LayoutTransform>
+                                                        </CheckBox>
+                                                        <CheckBox Content="Can Add" FontSize="12"
+                                                                  IsChecked="{Binding SelectedUser.Permit.Weekly_Schedule.CanAdd}">
+                                                            <CheckBox.LayoutTransform>
+                                                                <ScaleTransform ScaleX="2" ScaleY="2" CenterX="0" CenterY="0" />
+                                                            </CheckBox.LayoutTransform>
+                                                        </CheckBox>
+                                                        <CheckBox Content="Can Delete" FontSize="12"
+                                                                  IsChecked="{Binding SelectedUser.Permit.Weekly_Schedule.CanDelete}">
+                                                            <CheckBox.LayoutTransform>
+                                                                <ScaleTransform ScaleX="2" ScaleY="2" CenterX="0" CenterY="0" />
+                                                            </CheckBox.LayoutTransform>
+                                                        </CheckBox>
+
+                                                    </StackPanel>
+                                                </GroupBox>
+                                                <GroupBox Header="MPC Report" FontSize="20">
+                                                    <StackPanel Orientation="Vertical">
+                                                        <CheckBox Content="Can Access" FontSize="12"
+                                                                  IsChecked="{Binding SelectedUser.Permit.MCPReport.CacAccess}">
+                                                            <CheckBox.LayoutTransform>
+                                                                <ScaleTransform ScaleX="2" ScaleY="2" CenterX="0" CenterY="0" />
+                                                            </CheckBox.LayoutTransform>
+                                                        </CheckBox>
+                                                        <CheckBox Content="Can Edit" FontSize="12"
+                                                                  IsChecked="{Binding SelectedUser.Permit.MCPReport.CanEdit}">
+                                                            <CheckBox.LayoutTransform>
+                                                                <ScaleTransform ScaleX="2" ScaleY="2" CenterX="0" CenterY="0" />
+                                                            </CheckBox.LayoutTransform>
+                                                        </CheckBox>
+                                                        <CheckBox Content="Can Add" FontSize="12"
+                                                                  IsChecked="{Binding SelectedUser.Permit.MCPReport.CanAdd}">
+                                                            <CheckBox.LayoutTransform>
+                                                                <ScaleTransform ScaleX="2" ScaleY="2" CenterX="0" CenterY="0" />
+                                                            </CheckBox.LayoutTransform>
+                                                        </CheckBox>
+                                                        <CheckBox Content="Can Delete" FontSize="12"
+                                                                  IsChecked="{Binding SelectedUser.Permit.MCPReport.CanDelete}">
+                                                            <CheckBox.LayoutTransform>
+                                                                <ScaleTransform ScaleX="2" ScaleY="2" CenterX="0" CenterY="0" />
+                                                            </CheckBox.LayoutTransform>
+                                                        </CheckBox>
+
+                                                    </StackPanel>
+                                                </GroupBox>
+                                                <GroupBox Header="View Job" FontSize="20">
+                                                    <StackPanel Orientation="Vertical">
+                                                        <CheckBox Content="Can Access" FontSize="12"
+                                                                  IsChecked="{Binding SelectedUser.Permit.ViewJob.CacAccess}">
+                                                            <CheckBox.LayoutTransform>
+                                                                <ScaleTransform ScaleX="2" ScaleY="2" CenterX="0" CenterY="0" />
+                                                            </CheckBox.LayoutTransform>
+                                                        </CheckBox>
+                                                        <CheckBox Content="Can Edit" FontSize="12"
+                                                                  IsChecked="{Binding SelectedUser.Permit.ViewJob.CanEdit}">
+                                                            <CheckBox.LayoutTransform>
+                                                                <ScaleTransform ScaleX="2" ScaleY="2" CenterX="0" CenterY="0" />
+                                                            </CheckBox.LayoutTransform>
+                                                        </CheckBox>
+                                                        <CheckBox Content="Can Add" FontSize="12"
+                                                                  IsChecked="{Binding SelectedUser.Permit.ViewJob.CanAdd}">
+                                                            <CheckBox.LayoutTransform>
+                                                                <ScaleTransform ScaleX="2" ScaleY="2" CenterX="0" CenterY="0" />
+                                                            </CheckBox.LayoutTransform>
+                                                        </CheckBox>
+                                                        <CheckBox Content="Can Delete" FontSize="12"
+                                                                  IsChecked="{Binding SelectedUser.Permit.ViewJob.CanDelete}">
+                                                            <CheckBox.LayoutTransform>
+                                                                <ScaleTransform ScaleX="2" ScaleY="2" CenterX="0" CenterY="0" />
+                                                            </CheckBox.LayoutTransform>
+                                                        </CheckBox>
+
+                                                    </StackPanel>
+                                                </GroupBox>
+                                                <GroupBox Header="Compelete Job" FontSize="20">
+                                                    <StackPanel Orientation="Vertical">
+                                                        <CheckBox Content="Can Access" FontSize="12"
+                                                                  IsChecked="{Binding SelectedUser.Permit.CompletedJob.CacAccess}">
+                                                            <CheckBox.LayoutTransform>
+                                                                <ScaleTransform ScaleX="2" ScaleY="2" CenterX="0" CenterY="0" />
+                                                            </CheckBox.LayoutTransform>
+                                                        </CheckBox>
+                                                        <CheckBox Content="Can Edit" FontSize="12"
+                                                                  IsChecked="{Binding SelectedUser.Permit.CompletedJob.CanEdit}">
+                                                            <CheckBox.LayoutTransform>
+                                                                <ScaleTransform ScaleX="2" ScaleY="2" CenterX="0" CenterY="0" />
+                                                            </CheckBox.LayoutTransform>
+                                                        </CheckBox>
+                                                        <CheckBox Content="Can Add" FontSize="12"
+                                                                  IsChecked="{Binding SelectedUser.Permit.CompletedJob.CanAdd}">
+                                                            <CheckBox.LayoutTransform>
+                                                                <ScaleTransform ScaleX="2" ScaleY="2" CenterX="0" CenterY="0" />
+                                                            </CheckBox.LayoutTransform>
+                                                        </CheckBox>
+                                                        <CheckBox Content="Can Delete" FontSize="12"
+                                                                  IsChecked="{Binding SelectedUser.Permit.CompletedJob.CanDelete}">
+                                                            <CheckBox.LayoutTransform>
+                                                                <ScaleTransform ScaleX="2" ScaleY="2" CenterX="0" CenterY="0" />
+                                                            </CheckBox.LayoutTransform>
+                                                        </CheckBox>
+
+                                                    </StackPanel>
+                                                </GroupBox>
+                                                <GroupBox Header="Sale Draft" FontSize="20">
+                                                    <StackPanel Orientation="Vertical">
+                                                        <CheckBox Content="Can Access" FontSize="12"
+                                                                  IsChecked="{Binding SelectedUser.Permit.SalesDraft.CacAccess}">
+                                                            <CheckBox.LayoutTransform>
+                                                                <ScaleTransform ScaleX="2" ScaleY="2" CenterX="0" CenterY="0" />
+                                                            </CheckBox.LayoutTransform>
+                                                        </CheckBox>
+                                                        <CheckBox Content="Can Edit" FontSize="12"
+                                                                  IsChecked="{Binding SelectedUser.Permit.SalesDraft.CanEdit}">
+                                                            <CheckBox.LayoutTransform>
+                                                                <ScaleTransform ScaleX="2" ScaleY="2" CenterX="0" CenterY="0" />
+                                                            </CheckBox.LayoutTransform>
+                                                        </CheckBox>
+                                                        <CheckBox Content="Can Add" FontSize="12"
+                                                                  IsChecked="{Binding SelectedUser.Permit.SalesDraft.CanAdd}">
+                                                            <CheckBox.LayoutTransform>
+                                                                <ScaleTransform ScaleX="2" ScaleY="2" CenterX="0" CenterY="0" />
+                                                            </CheckBox.LayoutTransform>
+                                                        </CheckBox>
+                                                        <CheckBox Content="Can Delete" FontSize="12"
+                                                                  IsChecked="{Binding SelectedUser.Permit.SalesDraft.CanDelete}">
+                                                            <CheckBox.LayoutTransform>
+                                                                <ScaleTransform ScaleX="2" ScaleY="2" CenterX="0" CenterY="0" />
+                                                            </CheckBox.LayoutTransform>
+                                                        </CheckBox>
+                                                    </StackPanel>
+                                                </GroupBox>
+                                                <GroupBox Header="Modify Sales Item" FontSize="20">
+                                                    <StackPanel Orientation="Vertical">
+                                                        <CheckBox Content="Can Access" FontSize="12"
+                                                                  IsChecked="{Binding SelectedUser.Permit.ModifySalesItem.CacAccess}">
+                                                            <CheckBox.LayoutTransform>
+                                                                <ScaleTransform ScaleX="2" ScaleY="2" CenterX="0" CenterY="0" />
+                                                            </CheckBox.LayoutTransform>
+                                                        </CheckBox>
+                                                        <CheckBox Content="Can Edit" FontSize="12"
+                                                                  IsChecked="{Binding SelectedUser.Permit.ModifySalesItem.CanEdit}">
+                                                            <CheckBox.LayoutTransform>
+                                                                <ScaleTransform ScaleX="2" ScaleY="2" CenterX="0" CenterY="0" />
+                                                            </CheckBox.LayoutTransform>
+                                                        </CheckBox>
+                                                        <CheckBox Content="Can Add" FontSize="12"
+                                                                  IsChecked="{Binding SelectedUser.Permit.ModifySalesItem.CanAdd}">
+                                                            <CheckBox.LayoutTransform>
+                                                                <ScaleTransform ScaleX="2" ScaleY="2" CenterX="0" CenterY="0" />
+                                                            </CheckBox.LayoutTransform>
+                                                        </CheckBox>
+                                                        <CheckBox Content="Can Delete" FontSize="12"
+                                                                  IsChecked="{Binding SelectedUser.Permit.ModifySalesItem.CanDelete}">
+                                                            <CheckBox.LayoutTransform>
+                                                                <ScaleTransform ScaleX="2" ScaleY="2" CenterX="0" CenterY="0" />
+                                                            </CheckBox.LayoutTransform>
+                                                        </CheckBox>
+
+                                                    </StackPanel>
+                                                </GroupBox>
+                                            </StackPanel>
+                                        </ScrollViewer>
+                                    </TabItem>
+                                    <TabItem Header="Operator">
+                        
+                                    </TabItem>
+                                    <TabItem Header="Report">
+                        
+                                    </TabItem>
+                                    <TabItem Header="Managerment">
+                        
+                                    </TabItem>
+                                </TabControl>
+                            </Grid>
+                            
+                        </Grid>
+                        
+                    </TabItem>
+                </TabControl>
             </Grid>
-            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="0"> 
+            <!--<ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="0"> 
                 <Grid>
                     <ListView ItemsSource="{Binding ListUser}" Name="userlist" HorizontalAlignment="Stretch">
                         <i:Interaction.Triggers>
@@ -324,7 +766,7 @@
                         
                     </TabItem>
                 </TabControl>
-            </Grid>
+            </Grid>-->
         </Grid>
        
     </Grid>

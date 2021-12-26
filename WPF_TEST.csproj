@@ -371,7 +371,7 @@
     <Compile Include="CustomAppointmentWindow.xaml.cs">
       <DependentUpon>CustomAppointmentWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DatabaseConfig_View.xaml.cs">
+    <Compile Include="DialogFunction\DatabaseConfig_View.xaml.cs">
       <DependentUpon>DatabaseConfig_View.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataStreamCollection.xaml.cs">
@@ -391,7 +391,7 @@
     <Compile Include="Data\WorkInventory.cs" />
     <Compile Include="Data\Works.cs" />
     <Compile Include="FileProcess\ExcelProcess.cs" />
-    <Compile Include="Loading.xaml.cs">
+    <Compile Include="DialogFunction\Loading.xaml.cs">
       <DependentUpon>Loading.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainScreenView.xaml.cs">
@@ -463,6 +463,9 @@
     <Compile Include="View\Access_Management\AccessManager_View.xaml.cs">
       <DependentUpon>AccessManager_View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Access_Management\AddNewPersonnel_View.xaml.cs">
+      <DependentUpon>AddNewPersonnel_View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Barcode\Barcode_View.xaml.cs">
       <DependentUpon>Barcode_View.xaml</DependentUpon>
     </Compile>
@@ -479,10 +482,10 @@
     <Compile Include="View\FileConfig\JSONFileConfig_View.xaml.cs">
       <DependentUpon>JSONFileConfig_View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Frame_Certification_View.xaml.cs">
+    <Compile Include="View\Access_Management\Frame_Certification_View.xaml.cs">
       <DependentUpon>Frame_Certification_View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Frame_Schedule_View.xaml.cs">
+    <Compile Include="View\Access_Management\Frame_Schedule_View.xaml.cs">
       <DependentUpon>Frame_Schedule_View.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\loading_view.xaml.cs">
@@ -610,7 +613,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DatabaseConfig_View.xaml">
+    <Page Include="DialogFunction\DatabaseConfig_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -618,7 +621,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Loading.xaml">
+    <Page Include="DialogFunction\Loading.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -661,6 +664,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Access_Management\AddNewPersonnel_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Barcode\Barcode_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -681,11 +688,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Frame_Certification_View.xaml">
+    <Page Include="View\Access_Management\Frame_Certification_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Frame_Schedule_View.xaml">
+    <Page Include="View\Access_Management\Frame_Schedule_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -938,6 +945,11 @@
     <Resource Include="ImageSource\Connection.png" />
     <Resource Include="ImageSource\Editting.png" />
     <Resource Include="ImageSource\Deteting.png" />
+    <Resource Include="ImageSource\Save.png" />
+    <Resource Include="ImageSource\cancel.png" />
+    <Resource Include="ImageSource\Plan.png" />
+    <Resource Include="ImageSource\TableConfig.png" />
+    <Resource Include="ImageSource\Collection.png" />
     <Content Include="Images\OutlookInspired\Svg\CalendarGroup.svg" />
     <Content Include="Images\OutlookInspired\Svg\CalendarPermission.svg" />
     <Content Include="Images\OutlookInspired\Svg\Categorize.svg" />

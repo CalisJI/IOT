@@ -105,7 +105,7 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0" Grid.Column="0">
-                            <Button
+                            <!--<Button
                                 
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"
@@ -136,9 +136,9 @@
                                         HorizontalAlignment="Center"
                                         FontSize="20"/>
                                 </StackPanel>
-                            </Button>
+                            </Button>-->
                         </Grid>
-                        <Grid Grid.Row="1" Grid.Column="0">
+                        <Grid Grid.Row="0" Grid.Column="0">
                             <Button
                                 
                                 HorizontalAlignment="Stretch"
@@ -176,7 +176,7 @@
                 </GroupBox>
                 <GroupBox 
                     FontWeight="DemiBold"
-                    Header="Invertory Management"
+                    Header="Kế Hoạch Sản Xuất"
                     FontSize="30"
                     TextBlock.TextAlignment="Center"
                     Margin="100,0,0,0"
@@ -264,12 +264,11 @@
                                     Orientation="Vertical"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center" Height="150" Width="150">
-                                    <materialDesign:PackIcon 
-                                        HorizontalAlignment="Center"
-                                        Foreground="Gray"
-                                        Kind="Input"
-                                        Height="100"
-                                        Width="100"/>
+                                    <Image 
+                                        Width="100"
+                                        Height="110"
+                                        Source="/ImageSource/Collection.png" />
+
                                     <TextBlock
                                         Text="Data Collection"
                                         Foreground="Black"

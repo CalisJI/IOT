@@ -272,25 +272,34 @@ namespace WPF_TEST.ViewModel
             });
             Focus = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
-                if (ScanBarCode && dem==2) 
+                try
                 {
-                    dem = 0;
-                    ID_Barcode = Barcode_ID;
-                    SaleOrder = Barcode_SaleOder;
-                    SingleCustomer = Barcode_Customer;
-                    Customer_Infor = SingleCustomer.Customer_Details;
-                    Quotation = Barcode_Quotation;
-                    Customer_PO = Barcode_customerPO;
-                    Request_Start = Barcode_Requested_Start;
-                    Request_End = Barcode_Requested_End;
-                    Report_Date = DateTime.Now;
-                    WorksList = new ObservableCollection<Works>();
-                    foreach (var item in Barcode_Work)
+                    if (ScanBarCode && dem == 2)
                     {
-                        WorksList.Add(item);
+                        dem = 0;
+                        ID_Barcode = Barcode_ID;
+                        SaleOrder = Barcode_SaleOder;
+                        SingleCustomer = Barcode_Customer;
+                        Customer_Infor = SingleCustomer.Customer_Details;
+                        Quotation = Barcode_Quotation;
+                        Customer_PO = Barcode_customerPO;
+                        Request_Start = Barcode_Requested_Start;
+                        Request_End = Barcode_Requested_End;
+                        Report_Date = DateTime.Now;
+                        WorksList = new ObservableCollection<Works>();
+                        foreach (var item in Barcode_Work)
+                        {
+                            WorksList.Add(item);
+                        }
+
                     }
+                }
+                catch (Exception ex)
+                {
+
                     
                 }
+               
             });
             Test = new RelayCommand<object>((p) => { return true; }, (p) => 
             {

@@ -1,0 +1,258 @@
+﻿<Window x:Class="WPF_TEST.View.Access_Management.AddNewPersonnel_View"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_TEST.View"
+        mc:Ignorable="d"
+        xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+        DataContext="{StaticResource Login}"
+        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+        xmlns:dxprg="http://schemas.devexpress.com/winfx/2008/xaml/propertygrid"
+        xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        ResizeMode="NoResize"
+        Title="AddNewPersonnel_View" Height="450" Width="900">
+    <Window.Resources>
+        <Style x:Key="tb" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="140"/>
+
+        </Style>
+        <Style x:Key="tbox" TargetType="TextBox">
+            <Setter Property="Margin" Value="10,0,0,0"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="250"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.16*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock 
+            Width="300"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Left"
+            Margin="30,0,0,0"
+            Text="Thêm Nhân Sự"
+            FontSize="30"
+            FontWeight="DemiBold"/>
+            <Button
+                Style="{StaticResource MaterialDesignFlatButton}"
+                Height="40"
+                
+                materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                Width="100"
+                BorderBrush="Blue"
+                BorderThickness="2"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Margin="230,0,0,0"
+                Command="{Binding ThemNguoi}"
+                Click="Button_Click"
+                Background="AliceBlue"
+                materialDesign:ButtonAssist.CornerRadius="8">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+                    <Image 
+                        Width="35"
+                        Source="/ImageSource/Save.png" />
+
+                    <TextBlock 
+                        Text="Lưu"
+                        FontSize="15"
+                        Margin="5,0,0,0"
+                        VerticalAlignment="Center"
+                        />
+                </StackPanel>
+
+            </Button>
+            <Button
+                Style="{StaticResource MaterialDesignFlatButton}"
+                Height="40"
+               
+                materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                Width="100"
+                BorderBrush="Blue"
+                BorderThickness="2"
+                Margin="10,0,0,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+               
+                Command="{Binding HuyBo}"
+                Click="Button_Click_1"
+                Background="AliceBlue"
+                materialDesign:ButtonAssist.CornerRadius="8">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+                    <Image 
+                        Width="35"
+                        Source="/ImageSource/cancel.png" />
+
+                    <TextBlock 
+                        Text="Hủy"
+                        FontSize="15"
+                        Margin="5,0,0,0"
+                        VerticalAlignment="Center"
+                        />
+                </StackPanel>
+
+            </Button>
+        </StackPanel>
+        
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid
+                Grid.Column="0"
+                >
+                <StackPanel Orientation="Vertical" Margin="10">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Họ &amp; Tên :" Style="{StaticResource tb}"/>
+                        <TextBox Text="{Binding NewPerSon[0].Name}" Style="{StaticResource tbox}"/>
+                    </StackPanel>
+                    <StackPanel  Margin="0,15,0,0" Orientation="Horizontal">
+                        <TextBlock Text="Năm Sinh :" Style="{StaticResource tb}"/>
+                        <TextBox 
+                            
+                            Text="{Binding NewPerSon[0].Birth }"
+                            Style="{StaticResource tbox}"/>
+                    </StackPanel>
+                    <StackPanel  Margin="0,15,0,0" Orientation="Horizontal">
+                        <TextBlock Text="Email :" Style="{StaticResource tb}"/>
+                        <TextBox 
+                            
+                            Text="{Binding NewPerSon[0].Email }"
+                            Style="{StaticResource tbox}"/>
+                    </StackPanel>
+                    <StackPanel  Margin="0,15,0,0" Orientation="Horizontal">
+                        <TextBlock Text="Địa chỉ :" Style="{StaticResource tb}"/>
+                        <TextBox 
+                            
+                            Text="{Binding NewPerSon[0].Address }"
+                            Style="{StaticResource tbox}"/>
+                    </StackPanel>
+                    <StackPanel  Margin="0,15,0,0" Orientation="Horizontal">
+                        <TextBlock Text="Chức Vụ:" Style="{StaticResource tb}"/>
+                        <TextBox 
+                            
+                            Text="{Binding NewPerSon[0].Position }"
+                            Style="{StaticResource tbox}"/>
+                    </StackPanel>
+                    <StackPanel  Margin="0,15,0,0" Orientation="Horizontal">
+                        <TextBlock Text="Số Điện Thoại :" Style="{StaticResource tb}"/>
+                        <TextBox 
+                            
+                            Text="{Binding NewPerSon[0].PhoneNumber }"
+                            Style="{StaticResource tbox}"/>
+                    </StackPanel>
+                    <StackPanel  Margin="0,15,0,0" Orientation="Horizontal">
+                        <TextBlock Text="Nơi Cư Trú :" Style="{StaticResource tb}"/>
+                        <TextBox 
+                            
+                            Text="{Binding NewPerSon[0].City }"
+                            Style="{StaticResource tbox}"/>
+                    </StackPanel>
+                    <StackPanel  Margin="0,15,0,0" Orientation="Horizontal">
+                        <TextBlock Text="Quê Quán :" Style="{StaticResource tb}"/>
+                        <TextBox 
+                            
+                            Text="{Binding NewPerSon[0].Country }"
+                            Style="{StaticResource tbox}"/>
+                    </StackPanel>
+                    <StackPanel  Margin="0,15,0,0" Orientation="Horizontal">
+                        <TextBlock Text="Ghi Chú :" Style="{StaticResource tb}"/>
+                        <TextBox 
+                            TextWrapping="Wrap"
+                            Height="50"
+                            Text="{Binding NewPerSon[0].Notes }"
+                            Style="{StaticResource tbox}"/>
+                    </StackPanel>
+                </StackPanel>
+
+            </Grid>
+            <Grid Grid.Column="1">
+                <!--<Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <dxg:GridControl Name="grid" ItemsSource="{Binding NewPerSon}" SelectionMode="Row">
+                    <dxg:GridControl.Columns>
+                        <dxg:GridColumn FieldName="Name" MinWidth="100" />
+
+                        <dxg:GridColumn FieldName="Birth" MinWidth="100" Header="Ngày Sinh">
+                            <dxg:GridColumn.EditSettings>
+                                <dxe:DateEditSettings DisplayFormat="d" />
+                            </dxg:GridColumn.EditSettings>
+                        </dxg:GridColumn>
+                        <dxg:GridColumn FieldName="PhoneNumber" MinWidth="100" />
+                        <dxg:GridColumn FieldName="Position" MinWidth="100" Header="Position" />
+                        <dxg:GridColumn FieldName="Email" MinWidth="100" />
+                        <dxg:GridColumn FieldName="Notes" MinWidth="100">
+                            <dxg:GridColumn.EditSettings>
+                                <dxe:MemoEditSettings ShowIcon="True" PopupWidth="250" MemoTextWrapping="Wrap" MemoVerticalScrollBarVisibility="Auto" />
+                            </dxg:GridColumn.EditSettings>
+                        </dxg:GridColumn>
+                    </dxg:GridControl.Columns>
+                    <dxg:GridControl.View>
+                        <dxg:TableView
+                                        ShowGroupPanel="False"
+                                        ShowSearchPanelMode="Always"
+                                        ShowSearchPanelFindButton="True"
+                                        ShowSearchPanelMRUButton="True"
+                                        ShowSearchPanelNavigationButtons="True"
+                                        ShowGroupedColumns="True"
+                                        Name="view" 
+                                        AutoWidth="True">
+                            <dxmvvm:Interaction.Behaviors>
+                                <local:CommitEditingOnCellValueChanged />
+                            </dxmvvm:Interaction.Behaviors>
+                        </dxg:TableView>
+                    </dxg:GridControl.View>
+                </dxg:GridControl>-->
+
+
+
+                <dxprg:PropertyGridControl x:Name="pGrid"
+                                   Grid.Column="1"
+                                   SelectedObjects="{Binding NewPerSon}"
+                                   ShowProperties="WithPropertyDefinitions"
+                                   ShowCategories="False"
+                                   SortMode="Definitions"
+                                   ExpandCategoriesWhenSelectedObjectChanged="True">
+                    <dxprg:PropertyGridControl.PropertyDefinitions>
+                        <dxprg:PropertyDefinition Path="Photo" AllowExpanding="Never">
+                            <dxprg:PropertyDefinition.EditSettings>
+                                <dxe:ImageEditSettings ShowMenuMode="Always" />
+                            </dxprg:PropertyDefinition.EditSettings>
+                        </dxprg:PropertyDefinition>
+                        <dxprg:PropertyDefinition Path="Name" Header="Họ Tên" />
+                        <!--<dxprg:PropertyDefinition Path="LastName" Header="Last name" />-->
+                        <dxprg:PropertyDefinition Path="Birth" Header="Ngày Sinh" />
+                        <dxprg:PropertyDefinition Path="Country" Header="Quê Quán"/>
+                        <dxprg:PropertyDefinition Path="City" />
+                        <dxprg:PropertyDefinition Path="Position" Header="Chức Vụ"/>
+                        <dxprg:PropertyDefinition Path="PhoneNumber" Header="Số Điện Thoại" />
+                        <dxprg:PropertyDefinition Path="Address" Header="Địa Chỉ" />
+                        <dxprg:PropertyDefinition Path="Email" />
+                        <dxprg:PropertyDefinition Path="Notes" >
+                            <dxprg:PropertyDefinition.EditSettings>
+                                <dxe:TextEditSettings AcceptsReturn="True" TextWrapping="Wrap" />
+                            </dxprg:PropertyDefinition.EditSettings>
+                        </dxprg:PropertyDefinition>
+
+                    </dxprg:PropertyGridControl.PropertyDefinitions>
+                </dxprg:PropertyGridControl>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

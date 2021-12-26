@@ -322,7 +322,7 @@
                             Width="50"
                             Foreground="LawnGreen"/>
                             <TextBlock 
-                            Text="Add"
+                            Text="Nhập Kế Hoạch"
                             FontSize="16"
                             HorizontalAlignment="Center"
                             Foreground="Black"/>
@@ -357,7 +357,7 @@
                             Width="50"
                             Foreground="Purple"/>
                             <TextBlock 
-                            Text="Edit"
+                            Text="Chỉnh Sửa"
                             FontSize="20"
                             HorizontalAlignment="Center"
                             Foreground="Black"/>
@@ -387,12 +387,12 @@
 
                             <materialDesign:PackIcon 
                             Kind="CalendarClockOutline"
-                            Height="45"
+                            Height="40"
                             Width="50"
                             HorizontalAlignment="Center"
                             Foreground="Green"/>
                             <TextBlock 
-                            Text="Schedule"
+                            Text="Kế Hoạch"
                             FontSize="20"
                             HorizontalAlignment="Center"
                             Foreground="Black"/>
@@ -426,7 +426,7 @@
                             HorizontalAlignment="Center"
                             Foreground="DarkCyan"/>
                             <TextBlock 
-                            Text="Home"
+                            Text="Trang Chủ"
                             FontSize="20"
                             HorizontalAlignment="Center"
                             Foreground="Black"/>

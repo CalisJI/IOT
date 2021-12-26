@@ -10,19 +10,28 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WPF_TEST.View
+namespace WPF_TEST.View.Access_Management
 {
     /// <summary>
-    /// Interaction logic for Frame_Certification_View.xaml
+    /// Interaction logic for AddNewPersonnel_View.xaml
     /// </summary>
-    public partial class Frame_Certification_View : UserControl
+    public partial class AddNewPersonnel_View : Window
     {
-        public Frame_Certification_View()
+        public AddNewPersonnel_View()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

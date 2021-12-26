@@ -72,8 +72,8 @@ namespace WPF_TEST.ViewModel
         #endregion
 
         #region                                 Command                         
-        public ICommand Save_EditJob { get; set; }
-        public ICommand Manager_Plan { get; set; }
+        public static ICommand Save_EditJob { get; set; }
+        public static ICommand Manager_Plan { get; set; }
         #endregion
 
         #region ==============================Timer======================
@@ -141,17 +141,17 @@ namespace WPF_TEST.ViewModel
             }
             set
             {
-                SetProperty(ref _jobOrder, value, nameof(JobOrders));
+               SetProperty(ref _jobOrder, value, nameof(JobOrders));
                 //OnPropertyChanged(nameof(JobOrders));
             }
         }
-        private int running;
-        private int queued;
-        private int done;
-        private int delayed;
-        private int plan;
-        private int paused;
-        private int ready;
+        private static int running;
+        private static int queued;
+        private static int done;
+        private static int delayed;
+        private static int plan;
+        private static int paused;
+        private static int ready;
         private PlannerTask _plannerTask;
         public PlannerTask PlannerTask 
         {
@@ -169,19 +169,19 @@ namespace WPF_TEST.ViewModel
         {
             get 
             { 
-                return this.running; 
+                return running; 
             }
             set 
             {
                 SetProperty(ref running, value, nameof(Runnings));
             } 
         }
-        public int Delayeds { get { return this.delayed; } set { SetProperty(ref delayed, value, nameof(Delayeds)); } }
-        public int Plans { get { return this.plan; } set { SetProperty(ref plan, value, nameof(Plans)); } }
-        public int Queueds { get { return this.queued; } set { SetProperty(ref queued, value, nameof(Queueds)); } }
-        public int Dones { get { return this.done; } set { SetProperty(ref done, value, nameof(Dones)); } }
-        public int Readys { get { return this.ready; } set { SetProperty(ref ready, value, nameof(Readys)); } }
-        public int Pauseds { get { return this.paused; } set { SetProperty(ref paused, value, nameof(Pauseds)); } }
+        public int Delayeds { get { return delayed; } set { SetProperty(ref delayed, value, nameof(Delayeds)); } }
+        public int Plans { get { return plan; } set { SetProperty(ref plan, value, nameof(Plans)); } }
+        public int Queueds { get { return queued; } set { SetProperty(ref queued, value, nameof(Queueds)); } }
+        public int Dones { get { return done; } set { SetProperty(ref done, value, nameof(Dones)); } }
+        public int Readys { get { return ready; } set { SetProperty(ref ready, value, nameof(Readys)); } }
+        public int Pauseds { get { return paused; } set { SetProperty(ref paused, value, nameof(Pauseds)); } }
 
         public TaskPriority taskPriority;
         public Status status;
@@ -219,6 +219,7 @@ namespace WPF_TEST.ViewModel
         // thêm runrime thủ công
         public void adruntime()
         {
+            JobOrdersRumtimes = new ObservableCollection<JobOrderRuntime>();
             foreach (var item in JobOrders)
             {
                 JobOrderRuntime jobOrderRuntime = new JobOrderRuntime();
@@ -227,14 +228,14 @@ namespace WPF_TEST.ViewModel
                 jobOrderRuntime.CurrentStage = item.Stage;
                 jobOrderRuntime.PercentComplete = item.Complete;
 
-                if (JobOrdersRumtimes == null) JobOrdersRumtimes = new ObservableCollection<JobOrderRuntime>();
+                //if (JobOrdersRumtimes == null) JobOrdersRumtimes = new ObservableCollection<JobOrderRuntime>();
                 JobOrdersRumtimes.Add(jobOrderRuntime);
             }
 
         }
 
         //Cập nhật giá trị runtime
-        private void updateruntime()
+        public void updateruntime()
         {
             try
             {

@@ -20,7 +20,8 @@ namespace WPF_TEST.Class_Resource
     {
         private static string RuntimeDataxml = System.IO.Directory.GetCurrentDirectory() + @"\" + "RuntimeData.xml";
         private static string Joborderxml = System.IO.Directory.GetCurrentDirectory() + @"\" + "JobData.xml";
-        private static string TimerSettingxml = System.IO.Directory.GetCurrentDirectory() + @"\" + "TimerSetting.xml";
+        private static string TimerSettingxml = System.IO.Directory.GetCurrentDirectory() + @"\" + "TimerUpdateRate.xml";
+        private static string JobTableConfigxml = System.IO.Directory.GetCurrentDirectory() + @"\" + "JobTableConfig.xml";
         #region Runtime Region
         public static void CheckFile(string fileName) 
         {
@@ -181,6 +182,52 @@ namespace WPF_TEST.Class_Resource
             using (TextWriter textWriter = new StreamWriter(TimerSettingxml))
             {
                 xmlSerializer.Serialize(textWriter, timerSetting);
+                textWriter.Close();
+            }
+        }
+        #endregion
+
+        #region Cấu Hình Bảng Công Dữ Liệu Công Việc
+        public static JobTableConfig Get_JobtableConfig()
+        {
+            if (File.Exists(JobTableConfigxml))
+            {
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(JobTableConfig));
+                Stream stream = new FileStream(JobTableConfigxml, FileMode.Open);
+                JobTableConfig JobTableConfig = (JobTableConfig)xmlSerializer.Deserialize(stream);
+                stream.Close();
+                return JobTableConfig;
+            }
+            else
+            {
+                JobTableConfig JobTableConfig = new JobTableConfig();
+                JobTableConfig.SoHieuCongViec_Col = 0;
+                JobTableConfig.MaSanPham_Col = 2;
+                JobTableConfig.TenSanPham_Col = 3;
+                JobTableConfig.SoLuong_Col = 4;
+                JobTableConfig.SoLuowngHoanThanh_Col = 5;
+                JobTableConfig.NgayBatDau_Col = 6;
+                JobTableConfig.NgayKetThuc_Col = 7;
+                JobTableConfig.TinhTrang_Col = 10;
+                JobTableConfig.ThamKhao_Col = 11;
+
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(JobTableConfig));
+                Stream stream = new FileStream(JobTableConfigxml, FileMode.Create);
+                XmlWriter xmlwriter = new XmlTextWriter(stream, Encoding.UTF8);
+                xmlSerializer.Serialize(xmlwriter, JobTableConfig);
+                xmlwriter.Close();
+                stream.Close();
+                return JobTableConfig;
+            }
+        }
+
+        public static void Update_JobtableConfig(JobTableConfig JobTableConfig)
+        {
+            CheckFile(JobTableConfigxml);
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(JobTableConfig));
+            using (TextWriter textWriter = new StreamWriter(JobTableConfigxml))
+            {
+                xmlSerializer.Serialize(textWriter, JobTableConfig);
                 textWriter.Close();
             }
         }

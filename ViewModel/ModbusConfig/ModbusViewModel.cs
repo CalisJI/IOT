@@ -855,6 +855,7 @@ namespace WPF_TEST.ViewModel
                     {
                         timerUpdateData.Start();
                         timerUpdateData.IsEnabled = true;
+                        XMLConfig.Update_TimerSetting(TimerSetting);
                     }
                 }
                 catch (Exception ex)
@@ -903,7 +904,7 @@ namespace WPF_TEST.ViewModel
             ProcesPercent = e.ProgressPercentage;
             
         }
-
+        static bool complete = false;
         private void UpdateThreadBGR_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if(ProcesPercent<100)
@@ -912,6 +913,7 @@ namespace WPF_TEST.ViewModel
             }
             else 
             {
+                complete = true;
                 Cansee = false;
                 ErrorUpdate = false;
                 NameofUpdateErrorDevice.Clear();
@@ -919,7 +921,8 @@ namespace WPF_TEST.ViewModel
                 {
                     item.Data.Clear();
                 }
-                
+
+                complete = false;
             }
             
         }
@@ -938,13 +941,16 @@ namespace WPF_TEST.ViewModel
                     int tong = DataProvider.PLC_DataInput.Count;
                     for (int i = 0; i < DataProvider.PLC_DataInput.Count; i++)
                     {
-                        DataProvider.UpdateRuntime(DataProvider.PLC_DataInput[i]);
+                        var dd = DataProvider.PLC_DataInput.ElementAt(i);
+                        DataProvider.UpdateRuntime(dd);
                         if (DataProvider.Error_mesage != string.Empty && DataProvider.Error_mesage.Contains("PLC_Error"))
                         {
                             XMLConfig.Update_PLCData(DataProvider.PLC_DataInput[i], DataProvider.PLC_DataInput[i].Device_Name);
                             NameofUpdateErrorDevice.Add(DataProvider.PLC_DataInput[i].Device_Name);
                         }
-                        UpdateThreadBGR.ReportProgress(((i+1) / tong)*100);
+                        var a = i + 1;
+                        var c = (double)a / tong;
+                        UpdateThreadBGR.ReportProgress((int)(c*100));
                     }
                 }
                 else 
@@ -957,8 +963,8 @@ namespace WPF_TEST.ViewModel
                         var a = DataProvider.PLC_DataInput.Where(x => x.Device_Name == item).FirstOrDefault();
                         DataProvider.UpdateRuntime(a);
                         var b = ProcesPercent + i;
-                        var c = b / tong;
-                        UpdateThreadBGR.ReportProgress(c * 100);
+                        var c = (double)b / tong;
+                        UpdateThreadBGR.ReportProgress((int)(c * 100));
                     }
                 }
                
@@ -972,7 +978,7 @@ namespace WPF_TEST.ViewModel
         {
             Timecount++;
             
-            if(Timecount == TimerInterval) 
+            if(Timecount >= TimerInterval) 
             {
                 Timecount = 0;
                 Cansee = true;
@@ -1227,9 +1233,11 @@ namespace WPF_TEST.ViewModel
             }
             else
             {
+                TimeSpan timeSpan = DateTime.Now - Start_ModbusTCP_Service;
+                
                 foreach (var item in ModbusDevices)
                 {
-                    TimeSpan timeSpan = DateTime.Now - Start_ModbusTCP_Service;
+                    //while (complete) { }
                     int queue = (int)timeSpan.TotalMilliseconds % item.Update_Rate;
                     if (item.ConntionType == ConntionTypes.Modbus_TCP_IP && item.ModbusFunctions == ModbusFunction.Read_Coil && item.Start_by_Service && queue < 5 && queue >= 0) 
                     {
@@ -1271,6 +1279,10 @@ namespace WPF_TEST.ViewModel
                             }));
                             if (modbusClient.Connected) modbusClient.Disconnect();
                             //DataProvider.UpdateRuntime(item.DeviceName, runtimeValue.ArrayValue, runtimeValue.CurrentTime); // cập nhật dữ liệu vào database
+                            if (Select_PLCVALUE.Data.Count > 0)
+                            {
+                                LastItemRuntimeValue = Select_PLCVALUE.Data.Last();
+                            }
                         }
                         catch (Exception)
                         {
@@ -1320,6 +1332,10 @@ namespace WPF_TEST.ViewModel
                             }));
                             if (modbusClient.Connected) modbusClient.Disconnect();
                             //DataProvider.UpdateRuntime(item.DeviceName, runtimeValue.ArrayValue, runtimeValue.CurrentTime); // cập nhật dữ liệu vào database
+                            if (Select_PLCVALUE.Data.Count > 0)
+                            {
+                                LastItemRuntimeValue = Select_PLCVALUE.Data.Last();
+                            }
 
                         }
                         catch (Exception ex)
@@ -1390,6 +1406,10 @@ namespace WPF_TEST.ViewModel
                             //}));
 
                             //DataProvider.UpdateRuntime(item.DeviceName, readcoil, runtimeValue.CurrentTime); // cập nhật dữ liệu vào database
+                            if (Select_PLCVALUE.Data.Count > 0)
+                            {
+                                LastItemRuntimeValue = Select_PLCVALUE.Data.Last();
+                            }
                         }
                         catch (Exception ex)
                         {
@@ -1450,6 +1470,10 @@ namespace WPF_TEST.ViewModel
                             }
                             //}));
                             //DataProvider.UpdateRuntime(item.DeviceName, readcoil, runtimeValue.CurrentTime); // cập nhật dữ liệu vào database
+                            if (Select_PLCVALUE.Data.Count > 0)
+                            {
+                                LastItemRuntimeValue = Select_PLCVALUE.Data.Last();
+                            }
                         }
                         catch (Exception ex)
                         {

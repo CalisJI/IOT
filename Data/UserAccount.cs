@@ -4,13 +4,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WPF_TEST.ViewModel;
 
 namespace WPF_TEST.Data
 {
     public class UserAccount
     {
         Permit permit = new Permit();
-        Information information = new Information();
+        //Information information = new Information();
         //ObservableCollection<Permit> permits = new ObservableCollection<Permit>();
         //public ObservableCollection<Permit> Permits 
         //{
@@ -24,29 +25,87 @@ namespace WPF_TEST.Data
         public string User { get; set; }
         public string Pass { get; set; }
         public Permit Permit { get { return permit; } set { permit = value; } }
-        public Information Information 
-        {
-            get 
-            {
-                return information;
-            }
-            set 
-            {
-                information = value;
-            }
-        }
+        //public Information Information 
+        //{
+        //    get 
+        //    {
+        //        return information;
+        //    }
+        //    set 
+        //    {
+        //        information = value;
+        //    }
+        //}
 
 
     }
-    public class Information 
+    public class Information : BaseViewModel
     {
-        public string Name { get; set; }
-        public string Avatar { get; set; }
-        public string Position { get; set; }
-        public DateTime Birth { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Email { get; set; }
-        public string Group { get; set; }
+
+        private string _name;
+        private byte[] _photo;
+        private string _address;
+        private string _city;
+        private string _position;
+        private DateTime _birth;
+        private string _phone;
+        private string _email;
+        private string _notes;
+        private string _country;
+
+       
+
+        public string Name { get { return _name; } set { SetProperty(ref _name, value, nameof(Name)); } }
+        public byte[] Photo
+        {
+            get
+            {
+                _photo = Convert.FromBase64String(Image);
+                return _photo;
+            }
+            set 
+            {
+               
+                SetProperty(ref _photo, value, nameof(Photo));
+                Image = Convert.ToBase64String(_photo);
+            }
+        }
+        public string Address { get { return _address; } set { SetProperty(ref _address, value, nameof(Address)); } }
+        public string City { get { return _city; } set { SetProperty(ref _city, value, nameof(City)); } }
+        public string Position { get { return _position; } set { SetProperty(ref _position, value, nameof(Position)); } }
+        public DateTime Birth 
+        {
+            get 
+            {
+                if (_birth == DateTime.Parse("1/1/0001"))
+                {
+                    return DateTime.Today;
+                }
+                else 
+                {
+                    return _birth;
+                }
+                
+            }
+            set { SetProperty(ref _birth, value, nameof(Birth)); } }
+        public string PhoneNumber { get { return _phone; } set { SetProperty(ref _phone, value, nameof(PhoneNumber)); } }
+        public string Email { get { return _email; } set { SetProperty(ref _email, value, nameof(Email)); } }
+        //public string Group { get; set; }
+        public string Notes { get { return _notes; } set { SetProperty(ref _notes, value, nameof(Notes)); } }
+        public string Country { get { return _country; } set { SetProperty(ref _country, value, nameof(Country)); } }
+        private string image;
+        public string Image
+        {
+            get
+            {
+                return image;
+            }
+            set
+            {
+                SetProperty(ref image, value, nameof(Image));
+            }
+        }
+
     }
     public class Permit
     {

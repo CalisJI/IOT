@@ -437,7 +437,7 @@ namespace WPF_TEST.Class_Resource
                 DataTable dataTable = new DataTable(pLC_Modbus.Device_Name);
                 dataTable.Columns.Add("CurrentTime");
                 dataTable.Columns.Add("ArrayValue");
-                dataTable.Columns.Add("Stage");
+                dataTable.Columns.Add("DeviceStage");
                 foreach (var item in pLC_Modbus.Data)
                 {
                     string ValueRange = string.Empty;

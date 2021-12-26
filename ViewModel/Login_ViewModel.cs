@@ -14,6 +14,7 @@ using System.Text.Json;
 using System.Security;
 using WPF_TEST.View;
 using System.Threading;
+using WPF_TEST.View.Access_Management;
 
 namespace WPF_TEST.ViewModel
 {
@@ -48,6 +49,164 @@ namespace WPF_TEST.ViewModel
 
         WPFMessageBoxService WPFMessageBoxService = new WPFMessageBoxService();
         public DataTable TableUser = new DataTable("User Account");
+
+        public static DataTable Personnel = new DataTable("Personnel");
+
+        #region Nhân Viên Mới Properties
+
+        private ObservableCollection<Information> _info;
+        public ObservableCollection<Information> NewPerSon 
+        {
+            get 
+            {
+                if (_info != null) 
+                {
+                    return _info;
+                }
+                else 
+                {
+                    _info = new ObservableCollection<Information>();
+                    Information information = new Information();
+                    information.Name = "";
+                    information.Notes = "";
+                    information.PhoneNumber = "0000000000";
+                    information.Position = "";
+                    information.Photo = Convert.FromBase64String("None");
+                    information.Email = "Example@email.com";
+                    information.Country = "Việt Nam";
+                    information.City = "Đà Nẵng";
+                    information.Birth = DateTime.Parse("01/01/1990");
+                    information.Address = "--------";
+                    _info.Add(information);
+                    return _info;
+                }
+                
+            }
+            set 
+            {
+                SetProperty(ref _info, value, nameof(NewPerSon));
+            }
+        }   
+
+        private string _name;
+        public string FullName 
+        {
+            get 
+            {
+                return _name;
+            }
+            set 
+            {
+                SetProperty(ref _name, value, nameof(FullName));
+            }
+        }
+
+        private string _address;
+        public string NewAddress
+        {
+            get
+            {
+                return _address;
+            }
+            set
+            {
+                SetProperty(ref _address, value, nameof(NewAddress));
+            }
+        }
+
+        private string _city;
+        public string NewCity
+        {
+            get
+            {
+                return _city;
+            }
+            set
+            {
+                SetProperty(ref _city, value, nameof(NewCity));
+            }
+        }
+
+        private string _position;
+        public string NewPosition
+        {
+            get
+            {
+                return _position;
+            }
+            set
+            {
+                SetProperty(ref _position, value, nameof(NewPosition));
+            }
+        }
+
+        private DateTime _birth;
+        public DateTime NewBirth
+        {
+            get
+            {
+                if (_birth == DateTime.Parse("01/01/0001")) 
+                {
+                    _birth = DateTime.Today;
+                }
+                return _birth;
+            }
+            set
+            {
+                SetProperty(ref _birth, value, nameof(NewBirth));
+            }
+        }
+
+        private string _phone;
+        public string NewPhone
+        {
+            get
+            {
+                return _phone;
+            }
+            set
+            {
+                SetProperty(ref _phone, value, nameof(NewPhone));
+            }
+        }
+        private string _email;
+        public string NewEmail
+        {
+            get
+            {
+                return _email;
+            }
+            set
+            {
+                SetProperty(ref _email, value, nameof(NewEmail));
+            }
+        }
+        private string _note;
+        public string NewNote
+        {
+            get
+            {
+                return _note;
+            }
+            set
+            {
+                SetProperty(ref _note, value, nameof(NewNote));
+            }
+        }
+
+        private string _country;
+        public string NewCountry
+        {
+            get
+            {
+                return _country;
+            }
+            set
+            {
+                SetProperty(ref _country, value, nameof(NewCountry));
+            }
+        }
+        #endregion
 
 
         private UserAccount account;
@@ -109,9 +268,25 @@ namespace WPF_TEST.ViewModel
                 SetProperty(ref _userAccounts, value, nameof(ListUser));
             }
         }
+        private static ObservableCollection<Information> _nhanvien;
+        public ObservableCollection<Information> HoSoNhanVien
+        {
+            get
+            {
+                return _nhanvien;
+            }
+            set
+            {
+                SetProperty(ref _nhanvien, value, nameof(HoSoNhanVien));
+            }
+        }
         public static ICommand Login { get; set; }
         public ICommand Selected { get; set; }
         public ICommand Save_permit { get; set; }
+        public ICommand SavePersonnel { get; set; }
+        public static ICommand ThemNguoi { get; set; }
+        public ICommand OpenAddForm { get; set; }
+        public ICommand HuyBo { get; set; }
         public static bool Loaded { get; set; }
 
         Sqlexcute Sqlexcute = new Sqlexcute();
@@ -201,6 +376,23 @@ namespace WPF_TEST.ViewModel
             ListUser.Add(userAccount);
             ListUser.Add(userAccount1);
         }
+
+        public void Employee() 
+        {
+            Information information = new Information();
+            information.Name = "";
+            information.Notes = "";
+            information.PhoneNumber = "0123456789";
+            information.Position = "";
+            information.Photo = Convert.FromBase64String("None");
+            information.Email = "Example@email.com";
+            information.Country = "Việt Nam";
+            information.City = "Đà Nẵng";
+            information.Birth = DateTime.Parse("01/01/1990");
+            information.Address = "125 Võ An Ninh";
+
+            HoSoNhanVien.Add(information);
+        }
         public Login_ViewModel() 
         {
             if (!Loaded)
@@ -209,14 +401,18 @@ namespace WPF_TEST.ViewModel
                 //Sqlexcute.pwd = "Fwd@2021";
                 //Sqlexcute.UId = "fwd63823_fwdvina";
                 int check = 2;
+                int check1 = 2;
+                bool checkex = false;
+                bool exist = false;
                 ListUser = new ObservableCollection<UserAccount>();
+                HoSoNhanVien = new ObservableCollection<Information>();
                 ToJSON = new ObservableCollection<ConvertoJson>();
                 Sqlexcute.Check_Table(Sqlexcute.Database, "UserAccount", ref check);
+                Sqlexcute.Check_Table(Sqlexcute.Database, "Personnel", ref check1);
                 if (check == 0) 
                 {
                     Admin();
-                    bool check2 = false;
-                    bool exit = false;
+                    
                     var Json = JsonSerializer.Serialize(ListUser);
                     ToJSON.Add(new ConvertoJson { Code = Json });
                     //var aa = JsonSerializer.Deserialize<ObservableCollection<UserAccount>>(Json);
@@ -234,7 +430,22 @@ namespace WPF_TEST.ViewModel
 
                     ListUser = JsonSerializer.Deserialize<ObservableCollection<UserAccount>>(ToJSON.ElementAt(0).Code);
                 }
-               
+
+                if (check1 == 0) 
+                {
+                    Employee();
+                    //Personnel.TableName = "Personnel";
+                    Personnel = Sqlexcute.FillToDataTable(HoSoNhanVien);
+                    Sqlexcute.AutoCreateTable(Personnel, Sqlexcute.Database, "Personnel", ref checkex, ref exist);
+                    Sqlexcute.Update_Table_to_Host(Personnel, Sqlexcute.Database, "Personnel");
+                }
+                else if (check1==1)
+                {
+                    Personnel = new DataTable("Personnel");
+                    Sqlexcute.GetData_FroM_Database(ref Personnel, "Personnel", Sqlexcute.Database);
+                    HoSoNhanVien = Sqlexcute.Conver_From_Data_Table_To_List<Information>(Personnel);
+                }
+
                 Loaded = true;
             }
             Login = new RelayCommand<object>((p) => { return true; }, (p) => 
@@ -304,6 +515,51 @@ namespace WPF_TEST.ViewModel
 
                     WPFMessageBoxService.ShowMessage(ex.Message, "Lỗi Lưu Dữ Liệu!", System.Messaging.MessageType.Report);
                 }
+            });
+            SavePersonnel = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                try
+                {
+                    Personnel = new DataTable("Personnel");
+                    Personnel = Sqlexcute.FillToDataTable(HoSoNhanVien);
+                    Sqlexcute.Update_Table_to_Host(Personnel, Sqlexcute.Database, "Personnel");
+                    WPFMessageBoxService.ShowMessage("Đã Lưu", "Lưu Dữ Liệu:", System.Windows.MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+
+                    WPFMessageBoxService.ShowMessage(ex.Message, "Lỗi", System.Windows.MessageBoxImage.Error);
+                }
+               
+            });
+            ThemNguoi = new RelayCommand<object>((p) => { return true; },(P)=> 
+            {
+                try
+                {
+                    var a = NewPerSon.ElementAt(0);
+                    HoSoNhanVien.Add(a);
+                    Personnel = new DataTable("Personnel");
+                    Personnel = Sqlexcute.FillToDataTable(HoSoNhanVien);
+                    Sqlexcute.Update_Table_to_Host(Personnel, Sqlexcute.Database, "Personnel");
+                    WPFMessageBoxService.ShowMessage("Thêm Thành Công", "Thêm Nhân Sự:", System.Windows.MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+
+                    WPFMessageBoxService.ShowMessage(ex.Message, "Lỗi", System.Windows.MessageBoxImage.Error);
+                }
+                
+
+            });
+
+            OpenAddForm = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                AddNewPersonnel_View addNewPersonnel_View = new AddNewPersonnel_View();
+                addNewPersonnel_View.ShowDialog();
+            });
+            HuyBo = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                NewPerSon = new ObservableCollection<Information>();
             });
             
         }

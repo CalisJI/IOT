@@ -16,6 +16,7 @@ using System.Text.Json;
 using WPF_TEST.Class_Resource;
 using MySql.Data.MySqlClient;
 using WPF_TEST.Notyfication;
+using System.ComponentModel;
 
 namespace WPF_TEST.ViewModel
 {
@@ -24,6 +25,9 @@ namespace WPF_TEST.ViewModel
         DataProvider DataProvider = DataProvider.INS;
         Sqlexcute Sqlexcute = new Sqlexcute();
         WPFMessageBoxService messageBoxService = new WPFMessageBoxService();
+        
+        
+        
         private MySqlDataAdapter mySqlDataAdapter;
 
         private BaseViewModel _selectedViewModel;
@@ -59,6 +63,19 @@ namespace WPF_TEST.ViewModel
                 SetProperty(ref PageCOunt, value, nameof(Page_Count));
             }
         }
+        private static JobTableConfig jobTables;
+        public JobTableConfig JobTableConfigs 
+        {
+            get 
+            {
+                return jobTables;
+            }
+            set 
+            {
+                SetProperty(ref jobTables, value, nameof(jobTables));
+            }
+        }
+
         ObservableCollection<string> _pageSheet;
         public ObservableCollection<string> PageSheet 
         {
@@ -82,6 +99,32 @@ namespace WPF_TEST.ViewModel
             get { return convertoJson; }
             set { SetProperty(ref convertoJson, value, nameof(ToJson)); }
         }
+
+        private int _percent;
+        public int Percentage 
+        {
+            get 
+            {
+                return _percent;
+            }
+            set 
+            {
+                SetProperty(ref _percent, value, nameof(Percentage));
+            }
+        }
+        private static bool _visible;
+        public bool CanSee 
+        {
+            get 
+            {
+                return _visible;
+            }
+            set 
+            {
+                SetProperty(ref _visible, value, nameof(CanSee));
+            }
+        }
+
         public ICommand XML
         { get; set; }
         public ICommand Excel{ get; set; }
@@ -94,6 +137,10 @@ namespace WPF_TEST.ViewModel
 
         public ICommand EXcelLoaded { get; set; }
         public ICommand ApplyExcel { get; set; }
+
+        public ICommand CatDatBang { get; set; }
+        public ICommand LuuConfigJob { get; set; }
+
         public  bool loaded = false;
         ExcelFileConfig_ViewModel ExcelFileConfig_ViewModel = new ExcelFileConfig_ViewModel();
         
@@ -104,10 +151,20 @@ namespace WPF_TEST.ViewModel
         ExcelProcess ExcelProcess = new ExcelProcess();
         MenuFileConfig_ViewModel MenuFileConfig_ViewModel = new MenuFileConfig_ViewModel();
         public FileConnfig_Main_ViewModel fileConnfig_Main_ViewModel;
-       
+
+
+        #region Threading Funtion
+        static BackgroundWorker NhapDuLieu = new BackgroundWorker();
+        #endregion
+
 
         public FileConnfig_Main_ViewModel() 
         {
+            NhapDuLieu.DoWork += NhapDuLieu_DoWork;
+            NhapDuLieu.RunWorkerCompleted += NhapDuLieu_RunWorkerCompleted;
+            NhapDuLieu.ProgressChanged += NhapDuLieu_ProgressChanged;
+            NhapDuLieu.WorkerReportsProgress = true;
+            NhapDuLieu.WorkerSupportsCancellation = true;
             
             if (!loaded) 
             {
@@ -121,6 +178,7 @@ namespace WPF_TEST.ViewModel
             EXcelLoaded = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
                 JobOrders = PlannerModel._jobOrder;
+                JobtableConfig_Load();
             });
             Excel = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
@@ -144,7 +202,21 @@ namespace WPF_TEST.ViewModel
             });
             ApplyExcel = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
-                ConfigData();
+                CanSee = true;
+                NhapDuLieu.RunWorkerAsync();
+                
+                //ConfigData();
+            });
+
+            CatDatBang = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                
+            });
+
+            LuuConfigJob = new RelayCommand<object>((p) => { return true; },(p)=>
+            {
+
+                UpdateJobConfig(JobTableConfigs);
             });
             #region =====================================================Open Excel===================================================================
             Openfolder = new RelayCommand<object>((p) => { return true; }, (p) => 
@@ -201,6 +273,141 @@ namespace WPF_TEST.ViewModel
             });
             #endregion
         }
+        
+        private void NhapDuLieu_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            Percentage = e.ProgressPercentage;
+        }
+
+        private void NhapDuLieu_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            CanSee = false;
+            if (DataProvider.Error_mesage != string.Empty)
+            {
+                messageBoxService.ShowMessage(DataProvider.Error_mesage , "Lỗi Nhập Dữ Liệu", System.Windows.MessageBoxImage.Error);
+            }
+            else 
+            {
+                messageBoxService.ShowMessage("Đã Lưu", "Nhập Dữ Liệu", System.Windows.MessageBoxImage.Information);
+            }
+           
+        }
+
+        private void NhapDuLieu_DoWork(object sender, DoWorkEventArgs e)
+        {
+            if (NhapDuLieu.CancellationPending) 
+            {
+                e.Cancel = true;
+            }
+            else 
+            {
+                if (DatatableExcel != null)
+                {
+                    try
+                    {
+                        for (int i = 1; i < DatatableExcel.Rows.Count; i++)
+                        {
+                            JobOrder jobOrder = new JobOrder();
+                            string bb = DatatableExcel.Rows[i][JobTableConfigs.SoHieuCongViec_Col].ToString();
+                            jobOrder.ID = bb;
+                            //jobOrder.SaleOrder = DatatableExcel.Rows[i][1].ToString();
+                            jobOrder.Quotation = DatatableExcel.Rows[i][JobTableConfigs.ThamKhao_Col].ToString();
+                            //jobOrder.Customer_PO = DatatableExcel.Rows[i][3].ToString();
+                            jobOrder.Requested_Report_Date = DateTime.Today;
+                            jobOrder.Requested_Start = DateTime.Parse(DatatableExcel.Rows[i][JobTableConfigs.NgayBatDau_Col].ToString());
+                            jobOrder.Requested_End = DateTime.Parse(DatatableExcel.Rows[i][JobTableConfigs.NgayKetThuc_Col].ToString());
+                            jobOrder.ActualvsPlan = 0;
+                            jobOrder.Complete = 0;
+                            jobOrder.Priority = TaskPriority.Normal;
+                            jobOrder.Stage = Status.Plan;
+                            jobOrder.Current_Stage = PlannerModel.getColor(jobOrder.Stage);
+                            jobOrder.Customerinformation = new Customer();
+                            string Tensanpahm = DatatableExcel.Rows[i][JobTableConfigs.TenSanPham_Col].ToString();
+                            string SoLuong = DatatableExcel.Rows[i][JobTableConfigs.SoLuong_Col].ToString();
+                            string Masanpahm = DatatableExcel.Rows[i][JobTableConfigs.MaSanPham_Col].ToString();
+                            jobOrder.Works = GetWorks(Tensanpahm, SoLuong, Masanpahm);
+                            jobOrder.Priority = TaskPriority.Normal;
+
+                            DataProvider.JobOrderInput.Add(jobOrder);
+                            double a = (double)i / (double)(DatatableExcel.Rows.Count*2);
+                            int b = (int)(a * 100);
+                            NhapDuLieu.ReportProgress(b);
+                        }
+
+
+
+                        DataProvider.UpLoad_data(0);
+                        PlannerModel plannerModel = PlannerModel.INS_PlanViewModel;
+                        foreach (var item in DataProvider.JobOrderInput)
+                        {
+                            plannerModel.JobOrders.Add(item);
+
+                        }
+                        NhapDuLieu.ReportProgress(75);
+                        PlannerModel.Save_EditJob.Execute(null);
+                        plannerModel.adruntime();
+                        NhapDuLieu.ReportProgress(90);
+                        if (DataProvider.Error_mesage != string.Empty)
+                        {
+                            throw new Exception(DataProvider.Error_mesage);
+                        }
+                        NhapDuLieu.ReportProgress(100);
+                    }
+                    catch (Exception ex)
+                    {
+
+                        
+                    }
+
+
+                }
+            }
+        }
+
+       
+        public void JobtableConfig_Load() 
+        {
+            try
+            {
+                JobTableConfigs = new JobTableConfig();
+                JobTableConfigs = XMLConfig.Get_JobtableConfig();
+            }
+            catch (Exception ex)
+            {
+
+                messageBoxService.ShowMessage(ex.Message, "Lỗi Cấu Hình File", System.Windows.MessageBoxImage.Error);
+            }
+            
+        }
+
+        public void RefreshConfig()
+        {
+
+            try
+            {
+                JobTableConfigs = new JobTableConfig();
+                JobTableConfigs = XMLConfig.Get_JobtableConfig();
+            }
+            catch (Exception ex)
+            {
+
+                messageBoxService.ShowMessage(ex.Message, "Lỗi Cấu Hình File", System.Windows.MessageBoxImage.Error);
+            }
+        }
+
+        public void UpdateJobConfig(JobTableConfig jobTableConfig) 
+        {
+            try
+            {
+                XMLConfig.Update_JobtableConfig(jobTableConfig);
+            }
+            catch (Exception ex)
+            {
+
+                messageBoxService.ShowMessage(ex.Message, "Lỗi Cập Nhật Cấu Hình File", System.Windows.MessageBoxImage.Error);
+            }
+            
+        }
 
         public void ConfigData() 
         {
@@ -208,32 +415,40 @@ namespace WPF_TEST.ViewModel
             {
                 try
                 {
-                    JobOrder jobOrder = new JobOrder();
-                    string bb = DatatableExcel.Rows[0][0].ToString();
-                    jobOrder.ID = bb;
-                    jobOrder.SaleOrder = DatatableExcel.Rows[0][1].ToString();
-                    jobOrder.Quotation = DatatableExcel.Rows[0][2].ToString();
-                    jobOrder.Customer_PO = DatatableExcel.Rows[0][3].ToString();
-                    jobOrder.Requested_Report_Date = DateTime.Parse(DatatableExcel.Rows[0][4].ToString());
-                    jobOrder.Requested_Start = DateTime.Parse(DatatableExcel.Rows[0][5].ToString());
-                    jobOrder.Requested_End = DateTime.Parse(DatatableExcel.Rows[0][6].ToString());
-                    jobOrder.ActualvsPlan = 0;
-                    jobOrder.Complete = 0;
-                    jobOrder.Priority = TaskPriority.Normal;
-                    jobOrder.Stage = Status.Plan;
-                    jobOrder.Current_Stage = PlannerModel.getColor(jobOrder.Stage);
-                    jobOrder.Customerinformation = CustomerSetting_ViewModel.customers.Where(x =>
-                                                                                             x.Customer_Info == DatatableExcel.Rows[0][7].ToString()
-                                                                                             && x.Address == DatatableExcel.Rows[0][8].ToString()).FirstOrDefault();
-                    var a = ScanWork();
-                    jobOrder.Works = GetWorks(a.Item1, a.Item2, a.Item3);
-                    jobOrder.Priority = TaskPriority.Normal;
+                    for (int i = 1; i < DatatableExcel.Rows.Count; i++)
+                    {
+                        JobOrder jobOrder = new JobOrder();
+                        string bb = DatatableExcel.Rows[i][JobTableConfigs.MaSanPham_Col].ToString();
+                        jobOrder.ID = bb;
+                        //jobOrder.SaleOrder = DatatableExcel.Rows[i][1].ToString();
+                        jobOrder.Quotation = DatatableExcel.Rows[i][JobTableConfigs.ThamKhao_Col].ToString();
+                        //jobOrder.Customer_PO = DatatableExcel.Rows[i][3].ToString();
+                        jobOrder.Requested_Report_Date = DateTime.Today;
+                        jobOrder.Requested_Start = DateTime.Parse(DatatableExcel.Rows[i][JobTableConfigs.NgayBatDau_Col].ToString());
+                        jobOrder.Requested_End = DateTime.Parse(DatatableExcel.Rows[i][JobTableConfigs.NgayKetThuc_Col].ToString());
+                        jobOrder.ActualvsPlan = 0;
+                        jobOrder.Complete = 0;
+                        jobOrder.Priority = TaskPriority.Normal;
+                        jobOrder.Stage = Status.Plan;
+                        jobOrder.Current_Stage = PlannerModel.getColor(jobOrder.Stage);
+                        //jobOrder.Customerinformation = CustomerSetting_ViewModel.customers.Where(x =>
+                        //                                                                         x.Customer_Info == DatatableExcel.Rows[i][7].ToString()
+                        //                                                                         && x.Address == DatatableExcel.Rows[i][8].ToString()).FirstOrDefault();
+                        //var a = ScanWork();
+                        string Tensanpahm = DatatableExcel.Rows[i][JobTableConfigs.TenSanPham_Col].ToString();
+                        string SoLuong = DatatableExcel.Rows[i][JobTableConfigs.SoLuong_Col].ToString();
+                        string Masanpahm = DatatableExcel.Rows[i][JobTableConfigs.MaSanPham_Col].ToString();
+                        jobOrder.Works = GetWorks(Tensanpahm,SoLuong,Masanpahm);
+                        jobOrder.Priority = TaskPriority.Normal;
 
-                    DataProvider.JobOrderInput.Add(jobOrder);
+                        DataProvider.JobOrderInput.Add(jobOrder);
+                    }
+
+                    
 
                     DataProvider.UpLoad_data(0);
 
-                    messageBoxService.ShowMessage("Đã Lưu", "Nhập Dữ Liệu", System.Messaging.MessageType.Report);
+                    messageBoxService.ShowMessage("Đã Lưu", "Nhập Dữ Liệu", System.Windows.MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
@@ -271,6 +486,21 @@ namespace WPF_TEST.ViewModel
             }
             return works;
             
+        }
+        public ObservableCollection<Works> GetWorks(string Tensanpham,string soluong,string masanpham)
+        {
+            ObservableCollection<Works> works = new ObservableCollection<Works>();
+           
+            Works works1 = new Works();
+                //var get = PlannerModel._work.Where(s => s.WorkOrderName == Tensanpham).FirstOrDefault();
+                
+            works1.Quantity = int.Parse(soluong);
+            works1.WorkOrderName = Tensanpham;
+            works1.Product = masanpham;
+            works.Add(works1);
+           
+            return works;
+
         }
         public Customer Customer_Config(string name) // Find customer
         {
@@ -318,5 +548,18 @@ namespace WPF_TEST.ViewModel
             }
 
         }
+    }
+    public class JobTableConfig
+    {
+        public int SoHieuCongViec_Col { get; set; }
+        public int SoSeri_Col { get; set; }
+        public int MaSanPham_Col { get; set; }
+        public int TenSanPham_Col { get; set; }
+        public int SoLuong_Col { get; set; }
+        public int SoLuowngHoanThanh_Col { get; set; }
+        public int NgayBatDau_Col { get; set; }
+        public int NgayKetThuc_Col { get; set; }
+        public int TinhTrang_Col { get; set; }
+        public int ThamKhao_Col { get; set; }
     }
 }
