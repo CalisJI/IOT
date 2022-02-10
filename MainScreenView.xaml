@@ -10,7 +10,7 @@
         DataContext="{StaticResource MenuMainAll}"
         
         Title="MainScreenView" Height="1080" Width="1920" 
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterOwner">
     <Grid>
        
         <ContentControl Content="{Binding SelectedViewModel}"/>

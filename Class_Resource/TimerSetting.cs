@@ -13,9 +13,9 @@ namespace WPF_TEST.Class_Resource
         {
             get 
             {
-                if (dem < 1000) 
+                if (dem < 1) 
                 {
-                    return 10000;
+                    return 10;
                 }
                 else 
                 {

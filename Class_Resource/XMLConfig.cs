@@ -20,7 +20,7 @@ namespace WPF_TEST.Class_Resource
     {
         private static string RuntimeDataxml = System.IO.Directory.GetCurrentDirectory() + @"\" + "RuntimeData.xml";
         private static string Joborderxml = System.IO.Directory.GetCurrentDirectory() + @"\" + "JobData.xml";
-        private static string TimerSettingxml = System.IO.Directory.GetCurrentDirectory() + @"\" + "TimerUpdateRate.xml";
+        private static string TimerSettingxml = System.IO.Directory.GetCurrentDirectory() + @"\" + "UpdateCycle.xml";
         private static string JobTableConfigxml = System.IO.Directory.GetCurrentDirectory() + @"\" + "JobTableConfig.xml";
         #region Runtime Region
         public static void CheckFile(string fileName) 
@@ -162,7 +162,7 @@ namespace WPF_TEST.Class_Resource
             else
             {
                 TimerSetting TimerSetting = new TimerSetting();
-                TimerSetting.TimerUpdatePLCData = 30000;
+                TimerSetting.TimerUpdatePLCData = 30;
 
 
                 XmlSerializer xmlSerializer = new XmlSerializer(typeof(TimerSetting));

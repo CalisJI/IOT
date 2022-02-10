@@ -243,7 +243,7 @@ namespace WPF_TEST.ViewModel
             OpenDataBaseSetting = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
                 DatabaseConfig_View databaseConfig_View = new DatabaseConfig_View();
-                databaseConfig_View.ShowDialog();
+                _ = databaseConfig_View.ShowDialog();
             });
         }
        

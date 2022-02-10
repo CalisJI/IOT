@@ -2256,7 +2256,7 @@ namespace WPF_TEST.ViewModel
             return null;
         }
 
-       
+
     }
 
     [ValueConversion(typeof(DeviceStage), typeof(string))]
