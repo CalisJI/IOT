@@ -17,7 +17,14 @@
              Loaded="UserControl_Loaded"
              xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
              d:DesignHeight="1080" d:DesignWidth="1920" Unloaded="UserControl_Unloaded">
-
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Loaded}"/>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Unloaded">
+            <i:InvokeCommandAction Command="{Binding Unloaded}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <UserControl.Resources>
         <local1:TaskPriorityToIconFilenameConverter x:Key="ImageConvert"/>
         
@@ -135,7 +142,7 @@
                                                />
 
                             </StackPanel>
-                            <TextBlock Text="{Binding Pauseds, UpdateSourceTrigger=PropertyChanged}"
+                            <TextBlock Text="{Binding Plans, UpdateSourceTrigger=PropertyChanged}"
                                            FontSize="30"
                                            HorizontalAlignment="Right"
                                            VerticalAlignment="Top"
@@ -193,17 +200,19 @@
             </Expander>
             <dxlc:LayoutControl 
         VerticalAlignment="Top"
-        Width="auto"
+        Width="1600"
         Orientation="Vertical"
         TextBlock.FontSize="17" >
 
-                <dxlc:LayoutGroup Orientation="Horizontal" Height="1046" Width="auto" dxlc:DockLayoutControl.Dock="Left">
+                <dxlc:LayoutGroup Orientation="Horizontal" Height="1000" Width="1600" dxlc:DockLayoutControl.Dock="Left">
 
                     <!--<StackPanel Orientation="Horizontal" Height="1046" Width="auto">-->
 
 
                     <dxlc:LayoutItem Label="Project" LabelStyle="{StaticResource LB}" LabelPosition="Top"  HorizontalAlignment="Left" Width="auto" >
-                        <dxg:GridControl x:Name="Grid_data" ItemsSource="{Binding Path=JobOrders}" Height="1000" Width="auto" dxlc:DockLayoutControl.Dock="Left">
+                        <dxg:GridControl 
+                            
+                            x:Name="Grid_data" ItemsSource="{Binding Path=JobOrders}" Height="1000" Width="1600" dxlc:DockLayoutControl.Dock="Left">
                             <dxg:GridControl.View>
                                 <dxg:TableView 
                                     AllowEditing="False"
@@ -217,9 +226,15 @@
                             </dxg:GridControl.View>
                             <dxg:GridControl.Columns >
                                 <dxg:GridColumn
+                                    FieldName="ID"
+                                    Header="Bar Code"
+                                    Width="160">
+                                    
+                                </dxg:GridColumn>
+                                <dxg:GridColumn
                                 FieldName="SaleOrder" 
                                 Header="Name"
-                                Width="200"
+                                Width="160"
                                 
                                 >
 
@@ -296,15 +311,17 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="3">
+                <Grid Grid.Row="4">
                     <Button
                      
-                            Style="{StaticResource MaterialDesignFlatButton}"
+                            Style="{StaticResource MaterialDesignFlatLightBgButton}"
                             Height="80"
                             DataContext="{StaticResource ScheduleViewModel}"
                             materialDesign:ShadowAssist.ShadowDepth="Depth3"
-                            Width="120"
+                            Width="105"
                             BorderBrush="Blue"
                             BorderThickness="2"
                             HorizontalAlignment="Center"
@@ -322,10 +339,21 @@
                             Width="50"
                             Foreground="LawnGreen"/>
                             <TextBlock 
-                            Text="Nhập Kế Hoạch"
-                            FontSize="16"
+                            Text="Nhập"
+                            FontSize="15"
                             HorizontalAlignment="Center"
-                            Foreground="Black"/>
+                            Foreground="Black">
+                                <!--<TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <EventTrigger RoutedEvent="UserControl.Loaded">
+                                                <BeginStoryboard Storyboard="{StaticResource ThemPlan}"/>
+                                            </EventTrigger>
+                                            
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>-->
+                            </TextBlock>
                         </StackPanel>
 
                     </Button>
@@ -340,7 +368,7 @@
                     
                     Height="80"
                     materialDesign:ShadowAssist.ShadowDepth="Depth3"
-                    Width="120"
+                    Width="105"
                     HorizontalAlignment="Center"
                     BorderBrush="Blue"
                     BorderThickness="2"
@@ -352,15 +380,26 @@
                         <StackPanel Orientation="Vertical">
 
                             <materialDesign:PackIcon 
-                            Kind="PlaylistEdit"
-                            Height="40"
-                            Width="50"
-                            Foreground="Purple"/>
+                                Kind="PlaylistEdit"
+                                Height="50"
+                                Width="50"
+                                HorizontalAlignment="Center"
+                                Foreground="Purple"/>
                             <TextBlock 
-                            Text="Chỉnh Sửa"
-                            FontSize="20"
-                            HorizontalAlignment="Center"
-                            Foreground="Black"/>
+                                Text="Chỉnh Sửa"
+                                FontSize="15"
+                                HorizontalAlignment="Center"
+                                Foreground="Black">
+                                <!--<TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <EventTrigger RoutedEvent="UserControl.Loaded">
+                                                <BeginStoryboard Storyboard="{StaticResource ChinhSua}"/>
+                                            </EventTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>-->
+                            </TextBlock>
                         </StackPanel>
 
                     </Button>
@@ -368,14 +407,60 @@
                 <Grid 
                   Height="80" 
                   Width="120" 
-                  Grid.Row="4"
+                  Grid.Row="6"
+                  VerticalAlignment="Center">
+                    <Button
+                        DataContext="{StaticResource Planner}"
+                    
+                        Height="80"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                        Width="105"
+                        HorizontalAlignment="Center"
+                        BorderBrush="Blue"
+                        BorderThickness="2"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Command="{Binding DeleteJob}"
+                        CommandParameter="{Binding ElementName=Grid_data, Path=SelectedItem}"
+                        Background="AliceBlue"
+                        materialDesign:ButtonAssist.CornerRadius="8">
+                        <StackPanel Orientation="Vertical">
+
+                            <materialDesign:PackIcon 
+                                Kind="Delete"
+                                Height="40"
+                                Width="50"
+                                HorizontalAlignment="Center"
+                                Foreground="Red"/>
+                            <TextBlock 
+                                Text="Xóa"
+                                FontSize="15"
+                                HorizontalAlignment="Center"
+                                Foreground="Black">
+                                <!--<TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <EventTrigger RoutedEvent="UserControl.Loaded">
+                                                <BeginStoryboard Storyboard="{StaticResource ChinhSua}"/>
+                                            </EventTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>-->
+                            </TextBlock>
+                        </StackPanel>
+
+                    </Button>
+                </Grid>
+                <Grid 
+                  Height="80" 
+                  Width="120" 
+                  Grid.Row="7"
                   VerticalAlignment="Center">
                     <Button
                     DataContext="{StaticResource ScheduleViewModel}"
-                    Style="{StaticResource MaterialDesignFlatButton}"
+                    Style="{StaticResource MaterialDesignFlatLightBgButton}"
                     Height="80"
                     materialDesign:ShadowAssist.ShadowDepth="Depth3"
-                    Width="120"
+                    Width="105"
                     HorizontalAlignment="Center"
                     BorderBrush="Blue"
                         BorderThickness="2"
@@ -387,15 +472,25 @@
 
                             <materialDesign:PackIcon 
                             Kind="CalendarClockOutline"
-                            Height="40"
+                            Height="50"
                             Width="50"
                             HorizontalAlignment="Center"
                             Foreground="Green"/>
                             <TextBlock 
-                            Text="Kế Hoạch"
-                            FontSize="20"
+                            
+                            FontSize="15"
                             HorizontalAlignment="Center"
-                            Foreground="Black"/>
+                            Foreground="Black">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <EventTrigger RoutedEvent="UserControl.Loaded">
+                                                <BeginStoryboard Storyboard="{StaticResource KeHoach}"/>
+                                            </EventTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
                         </StackPanel>
 
                     </Button>
@@ -403,14 +498,14 @@
                 <Grid 
                   Height="80" 
                   Width="120" 
-                  Grid.Row="6"
+                  Grid.Row="8"
                   VerticalAlignment="Center">
                     <Button
                     DataContext="{StaticResource MenuMainAll}"
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Height="80"
                     materialDesign:ShadowAssist.ShadowDepth="Depth3"
-                    Width="120"
+                    Width="105"
                     HorizontalAlignment="Center"
                     Command="{Binding Home}"
                     Background="AliceBlue"
@@ -421,15 +516,25 @@
 
                             <materialDesign:PackIcon 
                             Kind="Home"
-                            Height="40"
+                            Height="50"
                             Width="50"
                             HorizontalAlignment="Center"
                             Foreground="DarkCyan"/>
                             <TextBlock 
-                            Text="Trang Chủ"
-                            FontSize="20"
-                            HorizontalAlignment="Center"
-                            Foreground="Black"/>
+                                Text="Trang Chủ"
+                                FontSize="15"
+                                HorizontalAlignment="Center"
+                                Foreground="Black">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <EventTrigger RoutedEvent="UserControl.Loaded">
+                                                <BeginStoryboard Storyboard="{StaticResource TrangChu}"/>
+                                            </EventTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
                         </StackPanel>
 
                     </Button>

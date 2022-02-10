@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:WPF_TEST.View"
              xmlns:local1 ="clr-namespace:WPF_TEST.ViewModel"
              mc:Ignorable="d" 
+             xmlns:DisplayLed="clr-namespace:WPF_TEST.ViewModel"
              xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              DataContext="{StaticResource Modbus}"
@@ -13,6 +14,9 @@
     <UserControl.Resources>
         <local1:ConnectionTypeToString x:Key="ConnectionConvert"/>
         <BooleanToVisibilityConverter x:Key="ChangeVisible"/>
+        <DisplayLed:LedRunning x:Key="LedRun"/>
+        <DisplayLed:LedPause x:Key="LedPause"/>
+        <DisplayLed:LedError x:Key="LedError"/>
     </UserControl.Resources>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -42,6 +46,7 @@
                     <dxg:GridControl
                         
                         x:Name="Modbus_list" 
+                        SelectedItem="{Binding ValueTemp}"
                         ItemsSource="{Binding ModbusDevices}" Margin="0,0,0,1" Focusable="False" >
                         <dxg:GridControl.View>
                             <dxg:TableView
@@ -67,7 +72,7 @@
                             <i:EventTrigger EventName="SelectedItemChanged">
                                 <i:InvokeCommandAction
                                 Command="{Binding Display_Type}"
-                                CommandParameter="{Binding ElementName= Modbus_list, Path=SelectedItem}"/>
+                                />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </dxg:GridControl>
@@ -241,7 +246,95 @@
                             </ListView.View>
                             <ScrollBar Visibility="Collapsed" HorizontalAlignment="Right"/>
                         </ListView>
+                        <GroupBox Header="Trạng thái Hoạt Động">
+                            <ListView ItemsSource="{Binding ListPlcInformation}" Name="PLCInfor">
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Orientation="Horizontal">
+                                            
+                                        </WrapPanel>
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+                               
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <GroupBox Header="{Binding DeviceName}" TextBlock.TextAlignment="Center">
+                                            <Grid
+                                                Width="200"
+                                                Height="100"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
+                                                <Rectangle 
+                                                    Width="200"
+                                                    Height="100" 
+                                                    RadiusX="20"
+                                                    Grid.ColumnSpan="3"
+                                                    RadiusY="20"
+                                                    materialDesign:ShadowAssist.ShadowDepth="Depth3">
+                                                    <Rectangle.Fill>
+                                                        <RadialGradientBrush>
+                                                            <GradientStop Color="Gray" Offset="0"/>
+                                                            <GradientStop Color="Black" Offset="1.1"/>
+                                                        </RadialGradientBrush>
+                                                    </Rectangle.Fill>
 
+                                                </Rectangle>
+                                                <Rectangle 
+                                                    Grid.Column="0"
+                                                    RadiusX="30"
+                                                    RadiusY="30"
+                                                    Width="60" 
+                                                    Height="60">
+                                                    <Rectangle.Fill>
+                                                        <RadialGradientBrush>
+                                                            <GradientStop Color="Black" Offset="1"/>
+                                                            <GradientStop Color="Gray" Offset="0.9"/>
+                                                            <GradientStop x:Name="LedRun" Color="{Binding Stage, Converter={StaticResource LedRun}}" Offset="0.8"/>
+                                                        </RadialGradientBrush>
+                                                    </Rectangle.Fill>
+                                                </Rectangle>
+                                                <Rectangle 
+                                                    Grid.Column="1"
+                                                    RadiusX="30"
+                                                    RadiusY="30"
+                                                    Width="60" 
+                                                    Height="60">
+                                                    <Rectangle.Fill>
+                                                        <RadialGradientBrush>
+                                                            <GradientStop Color="Black" Offset="1"/>
+                                                            <GradientStop Color="Gray" Offset="0.9"/>
+                                                            <GradientStop Color="{Binding Stage, Converter={StaticResource LedPause}}" Offset="0.8">
+
+                                                            </GradientStop>
+                                                        </RadialGradientBrush>
+                                                    </Rectangle.Fill>
+                                                </Rectangle>
+                                                <Rectangle 
+                                                    Grid.Column="2"
+                                                    RadiusX="30"
+                                                    RadiusY="30"
+                                                    Width="60" 
+                                                    Height="60">
+                                                    <Rectangle.Fill>
+                                                        <RadialGradientBrush>
+                                                            <GradientStop Color="Black" Offset="1"/>
+                                                            <GradientStop Color="Gray" Offset="0.9"/>
+                                                            <GradientStop x:Name="LedError" Color="{Binding Stage, Converter={StaticResource LedError}}" Offset="0.8"/>
+                                                        </RadialGradientBrush>
+                                                    </Rectangle.Fill>
+                                                </Rectangle>
+                                            </Grid>
+
+                                        </GroupBox>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </GroupBox>
                         <!--<GroupBox Height="610"  Header="Runtime Value" FontSize="20" TextBlock.TextAlignment="Center">
                             <ScrollViewer VerticalScrollBarVisibility="Auto">
                                 <ListView ItemsSource="{Binding Select_PLCVALUE.Data}" DataContext="{StaticResource Modbus}">
@@ -353,6 +446,7 @@
 
                 <StackPanel  Margin="70,0,0,0">
                     <Button
+                        Click="Button_Click"
                         Margin='0,30,0,5'
                     materialDesign:ButtonAssist.CornerRadius="8"
                     BorderBrush="Blue"
@@ -500,7 +594,7 @@
                         ToolTip="Xóa"
                         Style="{StaticResource MaterialDesignFlatButton}"
                         Command="{Binding DeleteConnect}"
-                        CommandParameter="{Binding ElementName=Modbus_list,Path=SelectedItem}"
+                        
                         Background="{DynamicResource MaterialDesignTextFieldBoxBackground}">
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                             <Image Source="/ImageSource/Deteting.png" />

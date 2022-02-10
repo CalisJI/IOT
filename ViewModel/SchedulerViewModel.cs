@@ -21,6 +21,7 @@ using WPF_TEST.Class_Resource;
 using WPF_TEST.Data;
 using WPF_TEST.Notyfication;
 using WPF_TEST.View;
+using WPF_TEST.ViewModel.FileConfig;
 
 namespace WPF_TEST.ViewModel
 {
@@ -335,18 +336,20 @@ namespace WPF_TEST.ViewModel
                 {
                     AddProjectSchedule_ViewModel = null;
                 }
+                AddProjectSchedule_ViewModel._AddProjectSchedule_ViewModel = new AddProjectSchedule_ViewModel();
+                //AddProjectSchedule_ViewModel.SaleOrder = string.Empty;
+                //AddProjectSchedule_ViewModel.Request_End = DateTime.Now;
+                //AddProjectSchedule_ViewModel.Request_Start = DateTime.Now;
+                //AddProjectSchedule_ViewModel.SingleCustomer = null;
+                //AddProjectSchedule_ViewModel.WorksList = null;
+                //AddProjectSchedule_ViewModel.ID_Barcode = string.Empty;
+                //AddProjectSchedule_ViewModel.Quantity = 0;
+                //AddProjectSchedule_ViewModel.Quotation = string.Empty;
+                //AddProjectSchedule_ViewModel.Customer_PO = string.Empty;
+                //AddProjectSchedule_ViewModel.Customer_Infor = string.Empty;
                 AddProjectSchedule_ViewModel = AddProjectSchedule_ViewModel._AddProjectSchedule_ViewModel;
-                AddProjectSchedule_ViewModel.SaleOrder = string.Empty;
-                AddProjectSchedule_ViewModel.Request_End = DateTime.Now;
-                AddProjectSchedule_ViewModel.Request_Start = DateTime.Now;
-                AddProjectSchedule_ViewModel.SingleCustomer = null;
-                AddProjectSchedule_ViewModel.WorksList = null;
-                AddProjectSchedule_ViewModel.ID_Barcode = string.Empty;
-                AddProjectSchedule_ViewModel.Quantity = 0;
-                AddProjectSchedule_ViewModel.Quotation = string.Empty;
-                AddProjectSchedule_ViewModel.Customer_PO = string.Empty;
-                AddProjectSchedule_ViewModel.Customer_Infor = string.Empty;
                 schedulerViewModel.SelectedViewModel = AddProjectSchedule_ViewModel;
+                //schedulerViewModel.SelectedViewModel = new ExcelFileConfig_ViewModel();
             });
             BackAddJob = new RelayCommand<object>((p) => { return true; }, (p) => 
             {

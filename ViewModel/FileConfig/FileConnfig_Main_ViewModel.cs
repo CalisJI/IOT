@@ -17,6 +17,7 @@ using WPF_TEST.Class_Resource;
 using MySql.Data.MySqlClient;
 using WPF_TEST.Notyfication;
 using System.ComponentModel;
+using System.Windows.Threading;
 
 namespace WPF_TEST.ViewModel
 {
@@ -131,7 +132,7 @@ namespace WPF_TEST.ViewModel
         public ICommand CSV { get; set; }
         public ICommand Json { get; set; }
         public ICommand Txt { get; set; }
-
+        public ICommand Backtomenu { get; set; }
         public ICommand Openfolder { get; set; }
         public ICommand Changedtable { get; set; }
 
@@ -140,6 +141,7 @@ namespace WPF_TEST.ViewModel
 
         public ICommand CatDatBang { get; set; }
         public ICommand LuuConfigJob { get; set; }
+        public ICommand ExcelUnload { get; set; }
 
         public  bool loaded = false;
         ExcelFileConfig_ViewModel ExcelFileConfig_ViewModel = new ExcelFileConfig_ViewModel();
@@ -154,7 +156,7 @@ namespace WPF_TEST.ViewModel
 
 
         #region Threading Funtion
-        static BackgroundWorker NhapDuLieu = new BackgroundWorker();
+        private BackgroundWorker NhapDuLieu = new BackgroundWorker();
         #endregion
 
 
@@ -175,14 +177,23 @@ namespace WPF_TEST.ViewModel
 
                 loaded = true;
             }
+            Backtomenu = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                fileConnfig_Main_ViewModel.SelectedViewModel = MenuFileConfig_ViewModel;
+            });
             EXcelLoaded = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
+                PlannerModel.StopMultiThread.Execute(null);
                 JobOrders = PlannerModel._jobOrder;
                 JobtableConfig_Load();
             });
             Excel = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
                 fileConnfig_Main_ViewModel.SelectedViewModel = ExcelFileConfig_ViewModel;
+            });
+            ExcelUnload = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                PlannerModel.RunMultiThread.Execute(null);
             });
             CSV = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
@@ -203,7 +214,11 @@ namespace WPF_TEST.ViewModel
             ApplyExcel = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
                 CanSee = true;
-                NhapDuLieu.RunWorkerAsync();
+                if (!NhapDuLieu.IsBusy) 
+                {
+                    NhapDuLieu.RunWorkerAsync();
+                }
+               
                 
                 //ConfigData();
             });
@@ -305,6 +320,7 @@ namespace WPF_TEST.ViewModel
                 {
                     try
                     {
+                        PlannerModel plannerModel = PlannerModel.INS_PlanViewModel;
                         for (int i = 1; i < DatatableExcel.Rows.Count; i++)
                         {
                             JobOrder jobOrder = new JobOrder();
@@ -329,6 +345,20 @@ namespace WPF_TEST.ViewModel
                             jobOrder.Priority = TaskPriority.Normal;
 
                             DataProvider.JobOrderInput.Add(jobOrder);
+                            System.Windows.Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
+                            {
+                                try
+                                {
+
+                                    plannerModel.JobOrders.Add(jobOrder);
+                                }
+                                catch (Exception ex)
+                                {
+
+
+                                }
+                            }));
+                            //plannerModel.JobOrders.Add(jobOrder);
                             double a = (double)i / (double)(DatatableExcel.Rows.Count*2);
                             int b = (int)(a * 100);
                             NhapDuLieu.ReportProgress(b);
@@ -337,15 +367,15 @@ namespace WPF_TEST.ViewModel
 
 
                         DataProvider.UpLoad_data(0);
-                        PlannerModel plannerModel = PlannerModel.INS_PlanViewModel;
-                        foreach (var item in DataProvider.JobOrderInput)
-                        {
-                            plannerModel.JobOrders.Add(item);
+                       
+                        //foreach (var item in DataProvider.JobOrderInput)
+                        //{
+                           
 
-                        }
+                        //}
                         NhapDuLieu.ReportProgress(75);
-                        PlannerModel.Save_EditJob.Execute(null);
-                        plannerModel.adruntime();
+                        plannerModel.Save_Table_Thread();
+                        //plannerModel.adruntime();
                         NhapDuLieu.ReportProgress(90);
                         if (DataProvider.Error_mesage != string.Empty)
                         {

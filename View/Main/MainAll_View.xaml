@@ -176,13 +176,28 @@
                 </GroupBox>
                 <GroupBox 
                     FontWeight="DemiBold"
-                    Header="Kế Hoạch Sản Xuất"
+                    
                     FontSize="30"
                     TextBlock.TextAlignment="Center"
                     Margin="100,0,0,0"
                     VerticalAlignment="Center" 
                     Height="500"
                     Width="250" >
+                    <GroupBox.Header>
+                        <TextBlock >
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <!--<Setter Property="Text" Value="Kế Hoạch Sản Xuất"/>-->
+                                    <Setter Property="Foreground" Value="AliceBlue"/>
+                                    <Style.Triggers>
+                                        <EventTrigger RoutedEvent="UserControl.Loaded">
+                                            <BeginStoryboard Storyboard="{StaticResource PlanAnimation}"/>
+                                        </EventTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </GroupBox.Header>
                     <Grid>
                        
                         <Grid.RowDefinitions>

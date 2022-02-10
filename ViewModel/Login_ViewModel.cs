@@ -454,6 +454,11 @@ namespace WPF_TEST.ViewModel
                 {
                     var check = ListUser.Where(b => b.User == UserID).FirstOrDefault();
                     var login = ListUser.Where(a => a.User == UserID && a.Pass == Sqlexcute.MD5Genrate(Password)).FirstOrDefault();
+                    if (MainScreenViewModel.Home != null) 
+                    {
+                        MainScreenViewModel.Home.Execute(null);
+                    }
+                    
                     if (login != null && check != null)
                     {
                         LoginSuccess = true;

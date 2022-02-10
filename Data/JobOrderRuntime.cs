@@ -9,6 +9,7 @@ namespace WPF_TEST.Data
 {
     public class JobOrderRuntime
     {
+        public string BarCode { get; set; }
         public string OrderName { get; set; }
         public float ActualvsLife { get; set; }
         public float PercentComplete { get; set; }

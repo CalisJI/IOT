@@ -29,6 +29,7 @@ namespace WPF_TEST.ViewModel
         DispatcherTimer UpdateRuntime = new DispatcherTimer();
 
         #region Model
+        public static bool Editting = false;
         private ObservableCollection<ConvertoJson> convertoJson;
         public ObservableCollection<ConvertoJson> ToJson
         {
@@ -168,6 +169,8 @@ namespace WPF_TEST.ViewModel
         }
         
         public ICommand SelectToEditcbbox { get; set; }
+        public ICommand Loaded { get; set; }
+        public ICommand Unload { get; set; }
         private bool load_edit = false;
         #endregion
         public EditJobModel editJobModel;
@@ -310,7 +313,14 @@ namespace WPF_TEST.ViewModel
                 Sqlexcute.Check_Table(Sqlexcute.Database, "JobOrder", ref check);
                 Sqlexcute.Check_Table(Sqlexcute.Database, Customer_Table.TableName, ref check1);
                 Sqlexcute.Check_Table(Sqlexcute.Database, Work_Table.TableName, ref check2);
-
+                Loaded = new RelayCommand<object>((p) => { return true; }, (p) => 
+                {
+                    Editting = true;
+                });
+                Unload = new RelayCommand<object>((p) => { return true; }, (p) => 
+                {
+                    Editting = false;
+                });
                 //if (check1 == 0)
                 //{
 

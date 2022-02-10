@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.IO.Ports;
 using WPF_TEST.ViewModel;
 using System.Security.Cryptography;
+using System.Globalization;
 
 namespace WPF_TEST.Class_Resource
 {
@@ -464,6 +465,98 @@ namespace WPF_TEST.Class_Resource
 
             }
             
+        }
+
+
+        /// <summary>
+        /// Tạo Bảng Có AutoInCrease ID
+        /// </summary>
+        /// <param name="dataTable"></param>
+        /// <param name="database"></param>
+        /// <param name="TableName"></param>
+        public void AutoCreateTable(DataTable dataTable, string database, string TableName,bool Json = false)
+        {
+            string cmd;
+
+            //*****************************************************
+            // Code for processing
+
+
+            if (!Json) 
+            {
+                string sqlsc = string.Empty;
+                sqlsc = "CREATE TABLE " + TableName + " ( id INT NOT NULL AUTO_INCREMENT,";
+                for (int i = 0; i < dataTable.Columns.Count; i++)
+                {
+                    sqlsc += "" + dataTable.Columns[i].ColumnName + " ";
+                    string columnType = dataTable.Columns[i].DataType.ToString();
+                    switch (columnType)
+                    {
+                        case "System.Int32":
+                            sqlsc += " INT ";
+                            break;
+                        case "System.Int64":
+                            sqlsc += " BIGINT(50) ";
+                            break;
+                        case "System.Int16":
+                            sqlsc += " SMALLINT(50)";
+                            break;
+                        case "System.Byte":
+                            sqlsc += " TINYINT(50)";
+                            break;
+                        case "System.Boolean":
+                            sqlsc += " TINYINT(1)";
+                            break;
+                        case "System.Decimal":
+                            sqlsc += " DECIMAL(45) ";
+                            break;
+                        case "System.DateTime":
+                            sqlsc += " DATETIME ";
+                            break;
+                        case "System.Double":
+                            sqlsc += " DOUBLE ";
+                            break;
+                        case "System.Single":
+                            sqlsc += " FLOAT ";
+                            break;
+
+                        //case "WPF_TEST.ViewModel.Status":
+                        //    sqlsc += " ENUM('Queued','Ready','Running','Paused','Delayed','Done','Plan') ";
+                        //    break;
+                        case "System.String":
+                        default:
+                            sqlsc += string.Format(" VARCHAR({0}) ", dataTable.Columns[i].MaxLength == -1 ? "400" : dataTable.Columns[i].MaxLength.ToString());
+                            break;
+                    }
+                    if (dataTable.Columns[i].AutoIncrement)
+                        sqlsc += " IDENTITY(" + dataTable.Columns[i].AutoIncrementSeed.ToString() + "," + dataTable.Columns[i].AutoIncrementStep.ToString() + ") ";
+                    if (!dataTable.Columns[i].AllowDBNull)
+                        sqlsc += " NOT NULL ";
+                    sqlsc += ",";
+                }
+                cmd = sqlsc.Substring(0, sqlsc.Length - 1) + ", PRIMARY KEY (id)) ENGINE=InnoDB";
+
+                //*****************************************************
+                _ = SQL_command(cmd, database);
+            }
+            else 
+            {
+                string sqlsc = string.Empty;
+                sqlsc = "CREATE TABLE " + TableName + " (";
+                for (int i = 0; i < dataTable.Columns.Count; i++)
+                {
+                    sqlsc += "" + dataTable.Columns[i].ColumnName + " ";
+                    sqlsc += "JSON";
+                    sqlsc += ",";
+                }
+                cmd = sqlsc.Substring(0, sqlsc.Length - 1) + ")";
+                _ = SQL_command(cmd, database);
+            }
+                
+                
+
+          
+
         }
         /// <summary>
         /// Kiêm tra xem bảng đã tồn tại hay chưa.
@@ -922,6 +1015,10 @@ namespace WPF_TEST.Class_Resource
                         else if (pro.PropertyType == typeof(TaskPriority))
                         {
                             pro.SetValue(obj, (TaskPriority)Enum.Parse(typeof(TaskPriority), (string)dr[column.ColumnName]), null);
+                        }
+                        else if (pro.PropertyType == typeof(System.Single)) 
+                        {
+                            pro.SetValue(obj, float.Parse(dr[column.ColumnName].ToString(), CultureInfo.InvariantCulture.NumberFormat), null);
                         }
                         else if (column.DataType == typeof(System.DBNull)) 
                         {

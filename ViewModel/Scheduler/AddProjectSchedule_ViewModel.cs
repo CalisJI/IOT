@@ -556,7 +556,7 @@ namespace WPF_TEST.ViewModel
                     {
                         Random random = new Random();
                         JobOrder jobOrder = new JobOrder();
-                        jobOrder.ID = random.Next(111111, 999999).ToString();
+                        jobOrder.ID = ID_Barcode;
                         jobOrder.ActualvsPlan = 0;
                         jobOrder.Complete = 0;
                         jobOrder.Stage = Status.Plan;

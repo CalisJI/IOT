@@ -98,8 +98,16 @@ namespace WPF_TEST.View
 
         private void VideoPlayer_MediaOpened(object sender, RoutedEventArgs e)
         {
-            value = VideoPlayer.NaturalDuration.TimeSpan.TotalSeconds;
-            TimeSlider.Maximum = value;
+            try
+            {
+                value = VideoPlayer.NaturalDuration.TimeSpan.TotalSeconds;
+                TimeSlider.Maximum = value;
+            }
+            catch (Exception ex)
+            {
+
+            }
+           
         }
 
         private void Btn_Stop_Click(object sender, RoutedEventArgs e)

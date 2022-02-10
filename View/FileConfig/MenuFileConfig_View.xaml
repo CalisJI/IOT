@@ -64,7 +64,7 @@
                     Style="{StaticResource MaterialDesignFlatButton}"
                         Height="180" Width="200"
                         materialDesign:ButtonAssist.CornerRadius="20"
-                        
+                        IsEnabled="False"
                         Command="{Binding XML}"
                     CommandParameter="Modbus">
                         <StackPanel 
@@ -93,7 +93,7 @@
                     Style="{StaticResource MaterialDesignFlatButton}"
                         Height="180" Width="200"
                         materialDesign:ButtonAssist.CornerRadius="20"
-                       
+                       IsEnabled="False"
                         Command="{Binding Txt}"
                     CommandParameter="Modbus">
                         <StackPanel 
@@ -122,7 +122,7 @@
                     Style="{StaticResource MaterialDesignFlatButton}"
                         Height="180" Width="200"
                         materialDesign:ButtonAssist.CornerRadius="20"
-                        
+                        IsEnabled="False"
                         Command="{Binding Json}"
                     CommandParameter="Modbus">
                         <StackPanel 

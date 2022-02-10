@@ -6,7 +6,7 @@
              xmlns:viewmodel_FileConfig ="clr-namespace:WPF_TEST.ViewModel.FileConfig"
              xmlns:views="clr-namespace:WPF_TEST.View"
              
-             StartupUri="Login_form.xaml">
+            StartupUri="Login_form.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -15,6 +15,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MainResource/MainResource.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MainResource/StoryTrigger.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MainResource/Ribbon.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MainResource/OutlookInspired.xaml"/>
             </ResourceDictionary.MergedDictionaries>
@@ -93,7 +94,7 @@
                 <views:VideoManager_View/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:DocumentManager_ViewModel}">
-                <views:Document_Docx_View/>
+                <views:DocumentManager_View/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:FileConnfig_Main_ViewModel}">
                 <views:FileConfig_Main_View/>

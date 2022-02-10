@@ -51,4 +51,5 @@
     <viewmodel:Work_Edit_ViewModel x:Key="WorkEdit"/>
     <viewmodel:UserManager_ViewModel x:Key="UserManager"/>
     <viewmodel:DataConfig_ViewModel x:Key="Dataconfig"/>
+    <viewmodel:PlanSetting_ViewModel x:Key="PlanConfiguration"/>
 </ResourceDictionary>

@@ -9,9 +9,18 @@
              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
-             DataContext="{StaticResource ScheduleViewModel}"
+             DataContext="{StaticResource EditJob}"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="1080" d:DesignWidth="1920">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Loaded}"/>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Unloaded">
+            <i:InvokeCommandAction Command="{Binding Unload}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <UserControl.Resources>
         <!--<local1:TaskPriorityToIconFilenameConverter x:Key="ImageConvert"/>-->
         <local1:TaskPriorityToIconFilenameConverter x:Key="ImageConvert"/>
@@ -40,7 +49,7 @@
             <Setter Property="FontWeight" Value="DemiBold"/>
         </Style>
     </UserControl.Resources>
-    <Grid>
+    <Grid DataContext="{StaticResource ScheduleViewModel}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -51,7 +60,7 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="0" 
                     Orientation="Vertical">
-            <Label Content="Edit Job" 
+            <Label Content="Chỉnh Sửa Đơn Hàng" 
                    FontSize="50"
                    FontWeight="DemiBold"
                    Foreground="Gray"
@@ -59,7 +68,7 @@
             <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
                 <StackPanel Orientation="Vertical" Height="800">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Sales Order #*"
+                        <TextBlock Text="Mã Đơn Hàng*"
                            FontSize="22"
                            FontWeight="Bold"
                            Margin="50,10,0,0"
@@ -75,7 +84,7 @@
                     <Grid>
                         <Border BorderBrush="Black" >
                             <StackPanel Margin="0,0,20,0" Orientation="Horizontal">
-                                <StackPanel Orientation="Vertical">
+                                <!--<StackPanel Orientation="Vertical">
                                     <Button 
                                     DataContext="{StaticResource ScheduleViewModel}"
                                     Height="100"
@@ -105,15 +114,15 @@
                                         Margin="0,40,0,0"
                                         Text="{Binding SelectedJob.ID}" 
                                         FontSize="25" FontWeight="DemiBold" Width="247"/>
-                                </StackPanel>
+                                </StackPanel>-->
                                 <GroupBox Header="Customer"
-                                          Margin="40,0,0,0"
+                                          Margin="10,0,0,0"
                                   Background="WhiteSmoke"
                                   FontSize="22">
                                     <StackPanel Orientation="Vertical">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock 
-                                                Text="Custommer*"
+                                                Text="Khách Hàng*"
                                                 Foreground="Black"
                                                 FontWeight="Bold"
                                                 Margin="20,5,0,0"/>
@@ -141,7 +150,7 @@
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock 
-                                        Text="Customer Details"
+                                        Text="Thông tin khách hàng"
                                         Margin="20,10,0,0"/>
                                             <TextBox 
                                         Text="{Binding SingleCustomer.Customer_Details}"
@@ -169,7 +178,7 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel Orientation="Vertical" Grid.Column="0">
                             <TextBlock 
-                        Text="Quotation #" 
+                        Text="Chú Thích #" 
                         Style="{StaticResource tb}"
                         Margin="50,0,0,30"
                         Width="auto"/>
@@ -184,7 +193,7 @@
                         Margin="50,0,0,30"
                         Width="auto"
                         FontWeight="Bold">
-                                <Run Text="Requested Start*"/>
+                                <Run Text="Ngày Bắt Đầu*"/>
                                 <Run Text="(mm/dd/yyy)" FontSize="15" FontWeight="Normal"/>
                             </TextBlock>
                             <TextBlock 
@@ -193,22 +202,22 @@
                         Margin="50,0,0,30"
                         Width="auto"
                         FontWeight="Bold">
-                                <Run Text="Requested End*"/>
+                                <Run Text="Ngày Kết Thúc*"/>
                                 <Run Text="(mm/dd/yyy)" FontSize="15" FontWeight="Normal"/>
                             </TextBlock>
 
                             <TextBlock 
-                        Text="Requested Report Date*" 
+                        Text="Ngày Nhập*" 
                         Style="{StaticResource tb}"
                         Margin="50,0,0,30"
                         Width="auto"/>
                             <TextBlock 
-                        Text="Priority:" 
+                        Text="Độ ưu tiên:" 
                         Style="{StaticResource tb}"
                         Margin="50,0,0,30"
                         Width="auto"/>
                             <TextBlock 
-                        Text="*Required Fields" 
+                        Text="*Yêu cầu không để trống" 
                         FontSize="20"
                         Margin="50,10,0,30"
                         Width="auto"
@@ -236,14 +245,14 @@
                                     Background="Red"
                                     Height="40"
                                     Width="260"
-                                    FontSize="25"
+                                    FontSize="20"
                                     />
                                 <materialDesign:TimePicker 
                                     Margin="20,0,0,0"
                                      Height="40"
                                     Is24Hours="True"
                                     Width="260"
-                                    FontSize="25"
+                                    FontSize="20"
                                     SelectedTime="{Binding SelectedJob.Requested_Start}"/>
                             </StackPanel>
                             <StackPanel
@@ -258,7 +267,7 @@
                                     Background="Red"
                                     Height="40"
                                     Width="260"
-                                    FontSize="25"
+                                    FontSize="20"
                                     >
 
                                 </DatePicker>
@@ -267,7 +276,7 @@
                                      Height="40"
                                     Width="260"
                                     Is24Hours="True"
-                                    FontSize="25"
+                                    FontSize="20"
                                     SelectedTime="{Binding SelectedJob.Requested_End}"/>
                             </StackPanel>
                             <StackPanel
@@ -278,21 +287,21 @@
                                    
                                     SelectedDate="{Binding SelectedJob.Requested_Report_Date}"
                                     DisplayDateStart="01/01/2019"
-                                    
+                                    IsEnabled="False"
                                     Background="Red"
                                     Height="40"
                                     Width="260"
-                                    FontSize="25"
+                                    FontSize="20"
                                     >
 
                                 </DatePicker>
-                                <materialDesign:TimePicker 
+                                <!--<materialDesign:TimePicker 
                                     Margin="20,0,0,0"
                                      Height="40"
                                     Width="260"
                                     Is24Hours="True"
                                     FontSize="25"
-                                    SelectedTime="{Binding SelectedJob.Requested_Report_Date}"/>
+                                    SelectedTime="{Binding SelectedJob.Requested_Report_Date}"/>-->
 
                             </StackPanel>
                             <dxe:ComboBoxEdit 
@@ -353,7 +362,7 @@
 
         </StackPanel>
         <Grid Grid.Column="1">
-            <Grid>
+            <!--<Grid>
                 <Button
                     Style="{StaticResource MaterialDesignRaisedLightButton}"
                     Height="100"
@@ -379,14 +388,14 @@
                     </StackPanel>
 
                 </Button>
-            </Grid>
+            </Grid>-->
             <Grid>
                 <Button
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Height="70"
                     DataContext="{StaticResource Planner}"
                     materialDesign:ShadowAssist.ShadowDepth="Depth3"
-                    Width="70"
+                    Width="80"
                     BorderBrush="Blue"
                     BorderThickness="2"
                     HorizontalAlignment="Right"
@@ -404,7 +413,7 @@
                             Width="35"
                             Foreground="CadetBlue"/>
                         <TextBlock 
-                            Text="Save"
+                            Text="Lưu"
                             FontSize="15"
                             HorizontalAlignment="Center"
                             Foreground="Black"/>
@@ -418,14 +427,14 @@
                     BorderBrush="Blue"
                     BorderThickness="2"
                     materialDesign:ShadowAssist.ShadowDepth="Depth3"
-                    Width="70"
+                    Width="80"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
                     Margin="0,0,20,270"
                     Command="{Binding Goback,UpdateSourceTrigger=PropertyChanged}"
                     Background="AliceBlue"
                     materialDesign:ButtonAssist.CornerRadius="8">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Vertical">
 
                         <materialDesign:PackIcon 
                             Kind="ArrowLeftCircle"
@@ -434,8 +443,9 @@
                             Width="35"
                             Foreground="Purple"/>
                         <TextBlock 
-                            Text="Back"
+                            Text="Trở Lại"
                             FontSize="15"
+                            
                             HorizontalAlignment="Center"
                             Foreground="Black"/>
                     </StackPanel>
@@ -445,7 +455,7 @@
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Height="70"
                     materialDesign:ShadowAssist.ShadowDepth="Depth3"
-                    Width="70"
+                    Width="80"
                     BorderBrush="Blue"
                     BorderThickness="2"
                     HorizontalAlignment="Right"
@@ -466,7 +476,7 @@
                             Width="35"
                             Foreground="Green"/>
                         <TextBlock 
-                            Text="Schedule"
+                            Text="Lịch"
                             FontSize="15"
                             HorizontalAlignment="Center"
                             Foreground="Black"/>
@@ -475,42 +485,60 @@
                 </Button>
             </Grid>
             <Grid Margin="10,140,110,30">
-                <GroupBox Header="Work" FontSize="22">
+                <GroupBox Header="Sản Phẩm" FontSize="22">
                     <ListView 
                        
                         ScrollViewer.VerticalScrollBarVisibility="Auto"
                         ItemsSource="{Binding SelectedJob.Works}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <materialDesign:Card Width="780" Height="160">
+                                <materialDesign:Card Width="750" Height="160">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="2*"/>
                                             <ColumnDefinition Width="0.6*"/>
+                                            <ColumnDefinition Width="0.2*"/>
                                         </Grid.ColumnDefinitions>
                                         <StackPanel
                                             Grid.Column="0"
                                             Orientation="Vertical"
                                             HorizontalAlignment="Stretch" Width="Auto" Margin="33,0,0,0">
-                                            <Grid Margin="5">
-                                                <TextBlock Text="Work Order Name:" FontSize="22"/>
+                                            <Grid Margin="5,2,0,0">
                                                 <TextBlock 
-                                                        FontSize="22"
-                                                    Text="{Binding WorkOrderName}"
-                                                    Margin="220,0,0,0"/>
+                                                            FontWeight="DemiBold"
+                                                            Text="Tên đơn hàng:" 
+                                                            FontSize="20"/>
+                                                <TextBlock 
+                                                            FontSize="20"
+                                                            FontWeight="DemiBold"
+                                                            Text="{Binding WorkOrderName}"
+                                                             Margin="220,0,0,0"/>
                                             </Grid>
-                                            <Grid Margin="5">
-                                                <TextBlock Text="Product:" FontSize="22"/>
+                                            <Grid Margin="5,2,0,0">
+                                                <TextBlock Text="Sản Phẩm:" FontSize="20"
+                                                                   FontWeight="DemiBold"/>
                                                 <TextBlock 
-                                                        FontSize="22"
+                                                        FontWeight="DemiBold"
+                                                        FontSize="20"
                                                     Text="{Binding Product}"
                                                     Margin="220,0,0,0"/>
                                             </Grid>
-                                            <Grid Margin="5">
-                                                <TextBlock Text="Remark:" FontSize="22"/>
+                                            <Grid Margin="5,2,0,0">
+                                                <TextBlock Text="Ghi chú:" FontSize="20"
+                                                                   FontWeight="DemiBold"/>
                                                 <TextBlock 
-                                                        FontSize="22"
+                                                        FontSize="20"
+                                                            FontWeight="DemiBold"
                                                     Text="{Binding Remark}"
+                                                    Margin="220,0,0,0"/>
+                                            </Grid>
+                                            <Grid Margin="5,2,0,0">
+                                                <TextBlock Text="Số lượng:" FontSize="20"
+                                                                   FontWeight="DemiBold"/>
+                                                <TextBlock 
+                                                        FontSize="20"
+                                                            FontWeight="DemiBold"
+                                                    Text="{Binding Quantity}"
                                                     Margin="220,0,0,0"/>
                                             </Grid>
                                         </StackPanel>
@@ -521,6 +549,19 @@
                                                     Stretch="Fill" 
                                                     Margin="10"
                                                     HorizontalAlignment="Right"/>
+                                        </Grid>
+                                        <Grid Grid.Column="2">
+                                            <CheckBox
+                                                        Height="30"
+                                                        Width="30"
+                                                        
+                                                        VerticalAlignment="Center"
+                                                        HorizontalAlignment="Center"
+                                                        IsChecked="{Binding Selected}">
+                                                <CheckBox.LayoutTransform>
+                                                    <ScaleTransform ScaleX="2" ScaleY="2" CenterX="5" CenterY="5"/>
+                                                </CheckBox.LayoutTransform>
+                                            </CheckBox>
                                         </Grid>
                                     </Grid>
                                 </materialDesign:Card>
@@ -535,12 +576,13 @@
             <Button
                 DataContext="{StaticResource MenuMainAll}"
                 Command="{Binding Home}"
-                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    Style="{StaticResource MaterialDesignFlatButton}"
                     Height="100"
                     materialDesign:ShadowAssist.ShadowDepth="Depth3"
                     Width="250"
                     HorizontalAlignment="Center"
-                    Background="#673ab7"
+                    BorderBrush="Blue"
+                    BorderThickness="2"
                     materialDesign:ButtonAssist.CornerRadius="10">
                 <StackPanel Orientation="Vertical">
                     <TextBlock 

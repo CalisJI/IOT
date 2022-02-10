@@ -33,6 +33,7 @@
         <DisplayLed:LedRunning x:Key="LedRun"/>
         <DisplayLed:LedPause x:Key="LedPause"/>
         <DisplayLed:LedError x:Key="LedError"/>
+        <DisplayLed:ArrayToString x:Key="ShowString"/>
         <BooleanToVisibilityConverter x:Key="GridVisible"/>
     </UserControl.Resources>
     <Grid>
@@ -207,26 +208,27 @@
             </StackPanel>
         </Grid>
         <Grid Grid.Column="1">
-            <dxg:GridControl ItemsSource="{Binding Select_PLCVALUE.Data}" >
-                <dxg:GridControl.View>
-                    <dxg:TableView 
-                        ShowIndicator="True" 
-                        ShowTotalSummary="True" 
-                        ShowGroupPanel="False" 
-                        ShowSearchPanelMode="Always" 
-                        ShowSearchPanelNavigationButtons="True" 
-                        ShowSearchPanelFindButton="True"
-                        ShowSearchPanelMRUButton="True"
-                        ShowSearchPanelCloseButton="True"/>
-                </dxg:GridControl.View>
-                <dxg:GridControl.Columns>
-                    <dxg:GridColumn FieldName="CurrentTime"/>
-                    <dxg:GridColumn FieldName="ArrayValue" Width="500">
-                        
-                    </dxg:GridColumn>
-
-                </dxg:GridControl.Columns>
-            </dxg:GridControl>
+            <ListView ItemsSource="{Binding Select_PLCVALUE.Data}" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Thời Gian">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding CurrentTime}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Giá trị">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=ArrayValue, Converter={StaticResource ShowString}}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+                
+            </ListView>
 
 
         </Grid>

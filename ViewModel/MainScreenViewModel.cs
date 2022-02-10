@@ -66,7 +66,7 @@ namespace WPF_TEST.ViewModel
         public ICommand WorkFlow { get; set; }
        
         public ICommand Schedular { get; set; }
-        public ICommand Home { get; set; }
+        public static ICommand Home { get; set; }
         public ICommand UpdateViewCommand { get; set; }
         public ICommand DataStream { get; set; }
         public ICommand Sensor_Collection { get; set; }
@@ -97,7 +97,7 @@ namespace WPF_TEST.ViewModel
         DataCollectConfigureModel DataCollectConfigureModel = new DataCollectConfigureModel();
         Ethenet_SerialModel ethenet_SerialModel = new Ethenet_SerialModel();
         ModbusViewModel ModbusViewModel = ModbusViewModel.INS;
-        Content_Manager_ViewModel Content_Manager_ViewModel = new Content_Manager_ViewModel();
+        Content_Manager_ViewModel Content_Manager_ViewModel = Content_Manager_ViewModel.INS_Content_Manager_ViewModel;
         public MainScreenViewModel mainScreenViewModel;
         public Access_Managerment_ViewModel Access_Managerment_ViewModel = new Access_Managerment_ViewModel();
         UserManager_ViewModel UserManager_ViewModel = UserManager_ViewModel.INSUserManager_ViewModel;

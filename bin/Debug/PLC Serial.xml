@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PLC_Modbus xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Device_Name>PLC Serial</Device_Name>
+  <Data>
+    <RuntimeValue>
+      <CurrentTime>14:31:26</CurrentTime>
+      <ArrayValue>
+        <int>0</int>
+        <int>0</int>
+        <int>757</int>
+        <int>0</int>
+        <int>254</int>
+        <int>0</int>
+        <int>3745</int>
+        <int>0</int>
+        <int>0</int>
+        <int>0</int>
+      </ArrayValue>
+      <Stage>Running</Stage>
+    </RuntimeValue>
+    <RuntimeValue>
+      <CurrentTime>14:31:30</CurrentTime>
+      <ArrayValue>
+        <int>0</int>
+        <int>0</int>
+        <int>757</int>
+        <int>0</int>
+        <int>254</int>
+        <int>0</int>
+        <int>3745</int>
+        <int>0</int>
+        <int>0</int>
+        <int>0</int>
+      </ArrayValue>
+      <Stage>Running</Stage>
+    </RuntimeValue>
+    <RuntimeValue>
+      <CurrentTime>14:31:32</CurrentTime>
+      <ArrayValue>
+        <int>0</int>
+        <int>0</int>
+        <int>757</int>
+        <int>0</int>
+        <int>254</int>
+        <int>0</int>
+        <int>3745</int>
+        <int>0</int>
+        <int>0</int>
+        <int>0</int>
+      </ArrayValue>
+      <Stage>Running</Stage>
+    </RuntimeValue>
+  </Data>
+</PLC_Modbus>

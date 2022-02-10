@@ -206,6 +206,10 @@
     <Reference Include="Microsoft.Extensions.Primitives, Version=5.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Extensions.Primitives.5.0.1\lib\net461\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Office.Interop.Word.15.0.4797.1003\lib\net20\Microsoft.Office.Interop.Word.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
@@ -428,6 +432,7 @@
     <Compile Include="ViewModel\Scheduler\AddProjectSchedule_ViewModel.cs" />
     <Compile Include="ViewModel\Scheduler\FrameWorkscope_ViewModel.cs" />
     <Compile Include="ViewModel\Scheduler\PartSchedulrt_ViewModel.cs" />
+    <Compile Include="ViewModel\Scheduler\PlanSetting_ViewModel.cs" />
     <Compile Include="ViewModel\Scheduler\ScheduleListTime_ViewModel.cs" />
     <Compile Include="ViewModel\Scheduler\EditJobModel.cs" />
     <Compile Include="ViewModel\ModbusConfig\EditModbusConnectionViewModel.cs" />
@@ -587,6 +592,9 @@
     <Compile Include="View\Media\VideoManager_View.xaml.cs">
       <DependentUpon>VideoManager_View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Scheduler\PlanSetting_View.xaml.cs">
+      <DependentUpon>PlanSetting_View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Scheduler\ScheduleListTime_View.xaml.cs">
       <DependentUpon>ScheduleListTime_View.xaml</DependentUpon>
     </Compile>
@@ -638,6 +646,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainResource\Ribbon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainResource\StoryTrigger.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -825,6 +837,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Media\VideoManager_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Scheduler\PlanSetting_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

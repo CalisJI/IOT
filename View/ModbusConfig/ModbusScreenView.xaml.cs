@@ -18,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using WPF_TEST.ViewModel;
 
 namespace WPF_TEST.View
@@ -28,12 +29,25 @@ namespace WPF_TEST.View
     public partial class ModbusScreenView : UserControl
     {
         ModbusViewModel ModbusViewModel;
+        DispatcherTimer rfs = new DispatcherTimer(); 
         public ModbusScreenView()
         {
             InitializeComponent();
-           
+            rfs.Interval = new TimeSpan(0, 0, 1);
+            rfs.Tick += Rfs_Tick;
+            rfs.Start();
            
         }
+
+        private void Rfs_Tick(object sender, EventArgs e)
+        {
+            Dispatcher.CurrentDispatcher.Invoke(delegate 
+            {
+                PLCInfor.Items.Refresh();
+            });
+           
+        }
+
         ObservableCollection<ModbusDevice> ModbusDevice = new ObservableCollection<ModbusDevice>();
         public void Edit_element()
         {
@@ -45,6 +59,11 @@ namespace WPF_TEST.View
             ButtonAutomationPeer peer = new ButtonAutomationPeer(update_btn);
             IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
             invokeProv.Invoke();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
     public class DynamicBindingListView

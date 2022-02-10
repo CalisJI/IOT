@@ -74,6 +74,11 @@ namespace WPF_TEST.ViewModel
         #region                                 Command                         
         public static ICommand Save_EditJob { get; set; }
         public static ICommand Manager_Plan { get; set; }
+        public static ICommand StopMultiThread { get; set; }
+        public static ICommand RunMultiThread { get; set; }
+        public static ICommand DeleteJob { get; set; }
+        public ICommand Loaded { get; set; }
+        public ICommand Unloaded { get; set; }
         #endregion
 
         #region ==============================Timer======================
@@ -90,29 +95,29 @@ namespace WPF_TEST.ViewModel
         WPFMessageBoxService messageBoxService = new WPFMessageBoxService();
 
         public static DataTable DatatableScheduler = new DataTable("Job Information");
-        private static DispatcherTimer _dispatcherTimer;
-        public static DispatcherTimer DispatcherTimer 
-        {
-            get 
-            {
-                if (_dispatcherTimer == null) 
-                {
-                    _dispatcherTimer = new DispatcherTimer();
-                }
-                return _dispatcherTimer;
+        private static DispatcherTimer DispatcherTimer;
+        //public static DispatcherTimer DispatcherTimer 
+        //{
+        //    get 
+        //    {
+        //        if (_dispatcherTimer == null) 
+        //        {
+        //            _dispatcherTimer = new DispatcherTimer();
+        //        }
+        //        return _dispatcherTimer;
 
-            }
-            set 
-            {
-                _dispatcherTimer = value;
-            }
-        }
+        //    }
+        //    set 
+        //    {
+        //        _dispatcherTimer = value;
+        //    }
+        //}
         public EditJobModel EditJobModel { get; set; }
         //public  ObservableCollection<processdata> Resource { get; set; }
         //public  ObservableCollection<proessdataappointment> Appointments { get; set; }
         public ObservableCollection<ImageSource> Images { get; set; }
 
-       
+        public static bool PauseMultiThread = false;
 
         public static ObservableCollection<Works> _work;
         public  ObservableCollection<Works> WorksList { get { return _work; } set { SetProperty(ref _work, value, nameof(WorksList)); } }
@@ -143,6 +148,18 @@ namespace WPF_TEST.ViewModel
             {
                SetProperty(ref _jobOrder, value, nameof(JobOrders));
                 //OnPropertyChanged(nameof(JobOrders));
+            }
+        }
+        private static ObservableCollection<PlanConfiguration> collection;
+        public ObservableCollection<PlanConfiguration> PlanConfig 
+        {
+            get 
+            {
+                return collection;
+            }
+            set 
+            {
+                SetProperty(ref collection, value, nameof(PlanConfig));
             }
         }
         private static int running;
@@ -203,7 +220,7 @@ namespace WPF_TEST.ViewModel
             set { SetProperty(ref taskPriority, value, "TaskPriority"); } }
 
 
-        public static BackgroundWorker Runtime = new BackgroundWorker();
+        public  BackgroundWorker Runtime = new BackgroundWorker();
 
 
         public static bool load = false;
@@ -223,6 +240,7 @@ namespace WPF_TEST.ViewModel
             foreach (var item in JobOrders)
             {
                 JobOrderRuntime jobOrderRuntime = new JobOrderRuntime();
+                jobOrderRuntime.BarCode = item.ID;
                 jobOrderRuntime.OrderName = item.SaleOrder;
                 jobOrderRuntime.ActualvsLife = item.ActualvsPlan;
                 jobOrderRuntime.CurrentStage = item.Stage;
@@ -253,7 +271,7 @@ namespace WPF_TEST.ViewModel
                 {
                     foreach (var item in JobOrdersRumtimes)
                     {
-                        var ss = JobOrders.Where(i => i.SaleOrder == item.OrderName).FirstOrDefault();
+                        var ss = JobOrders.Where(i => i.ID == item.BarCode).FirstOrDefault();
                         if (ss != null)
                         {
                             ss.Complete = item.PercentComplete;
@@ -291,7 +309,14 @@ namespace WPF_TEST.ViewModel
         public PlannerModel() 
         {
             AddProjectSchedule_ViewModel._jobOrderRuntime = JobOrdersRumtimes;
-           
+            DispatcherTimer = new DispatcherTimer();
+            DispatcherTimer.Interval = new TimeSpan(0, 0, 10);
+            DispatcherTimer.Tick += DispatcherTimer_Tick;
+            if (!DispatcherTimer.IsEnabled)
+            {
+                DispatcherTimer.IsEnabled = true;
+                DispatcherTimer.Start();
+            }
             if (!load) 
             {
                 Runtime.DoWork += Runtime_DoWork;
@@ -368,10 +393,11 @@ namespace WPF_TEST.ViewModel
                         {
                             foreach (var item in JobOrders)
                             {
-                                var ss = JobOrdersRumtimes.Where(i => i.OrderName == item.SaleOrder).FirstOrDefault();
+                                var ss = JobOrdersRumtimes.Where(i => i.BarCode == item.ID).FirstOrDefault();
                                 ss.ActualvsLife = item.ActualvsPlan;
                                 ss.CurrentStage = item.Stage;
                                 ss.PercentComplete = item.Complete;
+                                ss.OrderName = item.SaleOrder;
                             }
                         }
                     }
@@ -393,6 +419,22 @@ namespace WPF_TEST.ViewModel
                 Plans = a.Item6;
                 Queueds = a.Item7;
             }
+            Loaded = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                if (!DispatcherTimer.IsEnabled) 
+                {
+                    DispatcherTimer.IsEnabled = true;
+                    DispatcherTimer.Start();
+                }
+            });
+            Unloaded = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                if (DispatcherTimer.IsEnabled) 
+                {
+                    DispatcherTimer.Stop();
+                    DispatcherTimer.IsEnabled = false;
+                }
+            });
             Save_EditJob = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 Thread thread = new Thread(() => 
@@ -405,20 +447,36 @@ namespace WPF_TEST.ViewModel
             {
                 PlanTimer.Tick += PlanTimer_Tick;
                 PlanTimer.Interval = new TimeSpan(0, 0, 1);
-                if (!PlanTimer.IsEnabled) 
-                {
-                    PlanTimer.Start();
-                }
+                //if (!PlanTimer.IsEnabled) 
+                //{
+                //    PlanTimer.Start();
+                //}
             });
-
-            DispatcherTimer.Interval = new TimeSpan(0, 0, 3);
-            DispatcherTimer.Tick += DispatcherTimer_Tick;
-            if (!DispatcherTimer.IsEnabled) 
+            StopMultiThread = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
-               DispatcherTimer.IsEnabled = true;
-               DispatcherTimer.Start();
-            }
+                PauseMultiThread = true;
+            });
+            RunMultiThread = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                PauseMultiThread = false;
+            });
+            DeleteJob = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                try
+                {
+                    var a = (JobOrder)p;
+                    JobOrders.Remove(a);
+                    Deleted_Row_Table();
+                }
+                catch (Exception)
+                {
+
+                   
+                }
+                
+            });
             
+
             //Initialize();
 
         }
@@ -434,89 +492,93 @@ namespace WPF_TEST.ViewModel
         {
             try
             {
+                if (PauseMultiThread) return;
                 DateTime dateTime = DateTime.Now;
-                TimeSpan timeSpan = (dateTime - Ground_timer);
+                TimeSpan timeSpan = dateTime - Ground_timer;
                 int dd = (int)timeSpan.TotalSeconds;
                 if (dd >= 5)
                 {
-                    Ground_timer = dateTime;
-                    string aa = dateTime.ToString("HH:mm:ss");
-                    Sqlexcute.SQL_command("UPDATE Message SET `MSG` = '" + aa + "' WHERE (`ID` = '1')", Sqlexcute.Database);
-
+                    //Ground_timer = dateTime;
+                    //string aa = dateTime.ToString("HH:mm:ss");
+                    //Sqlexcute.SQL_command("UPDATE Message SET `MSG` = '" + aa + "' WHERE (`ID` = '1')", Sqlexcute.Database);
+                    if (EditJobModel.Editting) return;
                     DataTable dataTable = Sqlexcute.Read_data(Sqlexcute.Database, "Message");
                     if (dataTable != null)
                     {
-                        string msg = dataTable.Rows[0][1].ToString();
-                        if (msg == string.Empty)
+                        List<string> Status = new List<string>();
+                        for (int i = 0; i < dataTable.Rows.Count; i++)
                         {
-                            Sqlexcute.SQL_command("UPDATE Message SET `MSG` = 'www' WHERE (`ID` = '1')", Sqlexcute.Database);
+                            string a = dataTable.Rows[i][1].ToString();
+                            Status.Add(a);
                         }
-                        else 
+                        //string msg = dataTable.Rows[0][1].ToString();
+                        //string msgread = dataTable.Rows[1][1].ToString();
+                        //string msgPause = dataTable.Rows[2][1].ToString();
+                        //Đơn hàng đến ngày thực hiện (Trạng thái Plan)
+                       
+                        // trường hợp lên lịch bình thường không có chen ngang
+                        List<JobOrder> Sametype = JobOrders.Where(x => x.Requested_Start.Date == dateTime.Date && x.Stage == ViewModel.Status.Plan).ToList();
+
+                        if (Sametype != null) 
                         {
-                            try
+                            List<JobOrder> HighPriority = Sametype.Where(x => x.Priority == TaskPriority.Urgent).ToList();
+                            if (HighPriority != null) 
                             {
-                                string[] bb = msg.Split('-');
-                                if (bb[1] == "Pause")
+                                for (int i = 0; i < PlanConfig.Count; i++)
                                 {
-
-                                    var pause = JobOrders.Where(x => x.ID == bb[0]).FirstOrDefault();
-                                    pause.Stage = Status.Paused;
-                                    pause.Current_Stage = getColor(pause.Stage);
-
-
-                                }
-                                else if (bb[1] == "Stated")
-                                {
-                                    var pause = JobOrders.Where(x => x.ID == bb[0]).FirstOrDefault();
-                                    pause.Stage = Status.Running;
-                                    pause.Current_Stage = getColor(pause.Stage);
-                                }
-                                else if (bb[1] == "Queued")
-                                {
-                                    var pause = JobOrders.Where(x => x.ID == bb[0]).FirstOrDefault();
-                                    pause.Stage = Status.Queued;
-                                    pause.Current_Stage = getColor(pause.Stage);
-                                }
-                                else if (bb[1] == "Done")
-                                {
-                                    var pause = JobOrders.Where(x => x.ID == bb[0]).FirstOrDefault();
-                                    pause.Stage = Status.Done;
-                                    pause.Current_Stage = getColor(pause.Stage);
-                                }
-                                else
-                                {
-
+                                    for (int j = 0; j < HighPriority.Count; j++)
+                                    {
+                                        string cmd = Status[i];
+                                        string[] code = PlanConfig[i].BarCodes.Split(',');
+                                        for (int t = 0; t < code.Length; t++)
+                                        {
+                                            if (HighPriority[j].ID.Contains(code[t])) 
+                                            {
+                                                Status[i] += "-" + HighPriority[j].ID;
+                                                _ = Sqlexcute.SQL_command("UPDATE Message SET `MSG` = '" + Status[i] + "' WHERE (`ID` = '" + (i + 1).ToString() + "')", Sqlexcute.Database);
+                                                goto FOUND1;
+                                            }
+                                        }
+                                    }
+                                FOUND1:;
                                 }
                             }
-                            catch (Exception ex)
+                            for (int i = 0; i < Sametype.Count; i++)
                             {
-
-                                
+                                for (int j = 0; j < PlanConfig.Count; j++)
+                                {
+                                    string[] code = PlanConfig[j].BarCodes.Split(',');
+                                    for (int t = 0; t < code.Length; t++)
+                                    {
+                                        if (Sametype[i].ID.Contains(code[t]))
+                                        {
+                                            Status[j] += "-" + Sametype[i].ID;
+                                            _ = Sqlexcute.SQL_command("UPDATE Message SET `MSG` = '" + Status[j] + "' WHERE (`ID` = '" + (j + 1).ToString() + "')", Sqlexcute.Database);
+                                            goto FOUND2;
+                                        }
+                                    }
+                                }
+                            FOUND2:;
                             }
-                            
+                           
+                            foreach (JobOrder item in Sametype)
+                            {
+                                item.Stage = ViewModel.Status.Queued;
+                            }
                         }
-                        
+                     
+
+                        // Trường hợp có đơn hàng uuw tiên được thêm vào
+
+
+
+
                     }
-                    foreach (var item in JobOrders)
-                    {
-                        if (item.Requested_Start.Date == dateTime.Date)
-                        {
-                            //read respone from operator
-                            //DataTable dataTable = Sqlexcute.Read_data(Sqlexcute.Database, "Message");
-                            if (dataTable != null)
-                            {
-                                string msg = dataTable.Rows[0][1].ToString();
-                                if (msg == string.Empty)
-                                {
-                                    Sqlexcute.SQL_command("UPDATE Message SET `MSG` = 'www' WHERE (`ID` = '1')", Sqlexcute.Database);
-                                }
-                            }
-                            //Send message to operator
-                        }
-                    }
+
+              
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                
@@ -579,6 +641,65 @@ namespace WPF_TEST.ViewModel
             }
 
         }
+        public void Deleted_Row_Table()
+        {
+
+            DatatableScheduler = new DataTable();
+            var Json = JsonSerializer.Serialize(JobOrders);
+            try
+            {
+                ToJson = new ObservableCollection<ConvertoJson>();
+                ToJson.Add(new ConvertoJson { Code = Json });
+            }
+            catch (Exception)
+            {
+
+                ToJson = new ObservableCollection<ConvertoJson>();
+                ToJson.Add(new ConvertoJson { Code = Json });
+            }
+
+
+
+            DatatableScheduler = Sqlexcute.FillToDataTable(ToJson);
+
+            Sqlexcute.Update_Table_to_Host(DatatableScheduler, Sqlexcute.Database, "JobOrder");
+            if (Sqlexcute.error_message != string.Empty)
+            {
+                messageBoxService.ShowMessage("Lỗi khi lưu dữ liệu lên đám mây:\n " + Sqlexcute.error_message + "", "Thông tin lỗi", System.Messaging.MessageType.Report);
+            }
+            else
+            {
+                messageBoxService.ShowMessage("Đã Xóa", "Thông tin", System.Messaging.MessageType.Report);
+            }
+
+        }
+        public void Save_Table_Thread()
+        {
+
+            DatatableScheduler = new DataTable();
+            var Json = JsonSerializer.Serialize(JobOrders);
+            try
+            {
+                ToJson = new ObservableCollection<ConvertoJson>();
+                ToJson.Add(new ConvertoJson { Code = Json });
+            }
+            catch (Exception)
+            {
+
+                ToJson = new ObservableCollection<ConvertoJson>();
+                ToJson.Add(new ConvertoJson { Code = Json });
+            }
+
+
+
+            DatatableScheduler = Sqlexcute.FillToDataTable(ToJson);
+
+            Sqlexcute.Update_Table_to_Host(DatatableScheduler, Sqlexcute.Database, "JobOrder");
+            if (Sqlexcute.error_message != string.Empty)
+            {
+                messageBoxService.ShowMessage("Lỗi khi lưu dữ liệu lên đám mây:\n " + Sqlexcute.error_message + "", "Thông tin lỗi", System.Messaging.MessageType.Report);
+            }
+        }
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
             if(MainScreenView.Main_quit) 
@@ -588,6 +709,7 @@ namespace WPF_TEST.ViewModel
             }
             else 
             {
+                if (PauseMultiThread) return;
                 if (PlannerView.timerStage) 
                 {
                     try
@@ -746,117 +868,7 @@ namespace WPF_TEST.ViewModel
 
             return (_Ready, _Done, _Running, _Delayed, _Paused, _Plan, _Queued);
         }
-        //void Initialize() 
-        //{
-        //    using(savedataEntities savedataEntities = new savedataEntities()) 
-        //    {
-                
-        //        savedataEntities.proessdataappointments.Load();
-        //        savedataEntities.processdatas.Load();
-        //        int Ready = 0;
-        //        int Done = 0;
-        //        int Running = 0;
-        //        int Delayed = 0;
-        //        int Paused = 0;
-        //        int Plan = 0;
-        //        int Queued = 0;
-        //        Appointments = savedataEntities.proessdataappointments.Local;
-        //        if (AssignedTask.Count > Appointments.Count)
-        //        {
-        //            var secondNotFirst = AssignedTask.Where(x => !Appointments.Any(z => x.Name == z.ProcessName)).FirstOrDefault();
-        //            AssignedTask.Remove(secondNotFirst);
-        //        }
-        //        for (int i = 0; i < Appointments.Count; i++)
-        //        {
-        //            bool err = false;
-        //            try
-        //            {
-        //                var a = AssignedTask.ElementAt(i);
-        //                err = false;
-        //            }
-        //            catch (Exception)
-        //            {
-        //                err = true;
-        //                AssignedTask.Add(new PlannerTask());
 
-        //            }
-        //            finally 
-        //            {
-                        
-        //                var item = Appointments.ElementAt(i);
-        //                AssignedTask.ElementAt(i).Name = item.ProcessName;
-        //                AssignedTask.ElementAt(i).StartDate = item.StartTime;
-        //                AssignedTask.ElementAt(i).DueDate = item.EndTime;
-        //                AssignedTask.ElementAt(i).Priority = (TaskPriority)item.Priority;
-        //                AssignedTask.ElementAt(i).Current_Stage = item.Notes + getColor((Status)item.StatusId);
-        //                AssignedTask.ElementAt(i).Name = item.ProcessName;
-        //                AssignedTask.ElementAt(i).Status = (Status)item.StatusId;
-        //                item.StatusId = (int)AssignedTask.ElementAt(i).Status;
-        //                TimeSpan? total = item.EndTime - item.StartTime;
-        //                TimeSpan? today = DateTime.Now - item.StartTime;
-        //                float percent = (float)((float)today.Value.TotalMinutes / total.Value.TotalMinutes);
-        //                AssignedTask.ElementAt(i).Completion = percent*100;
-        //                GetDone((Status)item.StatusId, ref Done );
-        //                GetDelayed((Status)item.StatusId, ref Delayed);
-        //                GetPaused((Status)item.StatusId, ref Paused);
-        //                GetReady((Status)item.StatusId, ref Ready);
-        //                GetRunning((Status)item.StatusId, ref Running);
-        //                GetPlan((Status)item.StatusId, ref Plan);
-        //                GetQueued((Status)item.StatusId, ref Queued);
-
-        //            }
-                    
-        //        }
-        //        Readys = Ready;
-        //        Runnings = Running;
-        //        Plans = Plan;
-        //        Queueds = Queued;
-        //        Delayeds = Delayed;
-        //        Pauseds = Paused;
-        //        Dones = Done;
-
-        //    }
-            
-        //}
-        
-        void GenerateAssignedTasks() 
-        {
-        //    AssignedTask = new ObservableCollection<PlannerTask>();
-        //    PlannerTask plannerTask = new PlannerTask();
-            
-        //    plannerTask.Priority = (TaskPriority)1;
-        //    plannerTask.Actual_vs_Liftime = 0.65f;
-        //    plannerTask.Completion = 50;
-        //    plannerTask.Current_Stage = "Inspetion";
-        //    AssignedTask.Add(plannerTask);
-
-
-        //    PlannerTask plannerTask1 = new PlannerTask();
-         
-        //    plannerTask1.Priority = (TaskPriority)2;
-        //    plannerTask1.Actual_vs_Liftime = 0.25f;
-        //    plannerTask1.Completion = 30;
-        //    plannerTask1.Current_Stage = "Inspetion";
-        //    AssignedTask.Add(plannerTask1);
-
-        //    PlannerTask plannerTask2 = new PlannerTask();
-          
-        //    plannerTask2.Priority = (TaskPriority)3;
-        //    plannerTask2.Actual_vs_Liftime = 0.25f;
-        //    plannerTask2.Completion = 30;
-        //    plannerTask2.Current_Stage = "Inspetion";
-        //    AssignedTask.Add(plannerTask2);
-
-        //    PlannerTask plannerTask4 = new PlannerTask();
-          
-        //    plannerTask4.Priority = 0;
-        //    plannerTask4.Actual_vs_Liftime = 0.25f;
-        //    plannerTask4.Completion = 30;
-        //    plannerTask4.Current_Stage = "Inspetion";
-        //    AssignedTask.Add(plannerTask4);
-
-        }
-        
     }
    
     public class PlannerTask 

@@ -156,6 +156,7 @@
                     </dxsch:DataSource.AppointmentMappings>
                     <dxsch:DataSource.ResourceMappings>
                         <dxsch:ResourceMappings
+                            
                             Id="ID"
                             Group="Customer"
                             Caption="Customer_Details"/>

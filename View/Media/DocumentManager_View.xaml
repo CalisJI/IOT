@@ -5,10 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF_TEST.View"
              mc:Ignorable="d"
-             DataContext="{StaticResource MenuMainAll}"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             DataContext="{StaticResource DocumentManger}"
              xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="1080" d:DesignWidth="1920">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding FrameDocumentLoaded}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="ChangVisible"/>
+
+
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
@@ -21,15 +32,13 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
                 <Button
-                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            BorderBrush="Blue"
+                    Command="{Binding OpentoAdd}"
+                            BorderThickness="2"
                             Height="100" Width="100"
-                            materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="#FFF08011">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="White" Offset="0"/>
-                            <GradientStop Color="#FF65C6CB" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
+                            materialDesign:ButtonAssist.CornerRadius="5">
+
                     <StackPanel Orientation="Vertical" Height="90" Width="90" HorizontalAlignment="Center"
                                         VerticalAlignment="Center">
                         <Image Height="50"
@@ -51,22 +60,22 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
                 <Button
-                            Style="{StaticResource MaterialDesignRaisedLightButton}"
-                            Height="100" Width="100"
-                            materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="#FFF08011">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="White" Offset="0"/>
-                            <GradientStop Color="#FF65C6CB" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    BorderBrush="Blue"
+                  
+                    BorderThickness="2"
+                    Height="100" Width="100"
+                    Command="{Binding EditExcute}"
+                    materialDesign:ButtonAssist.CornerRadius="5">
+
                     <StackPanel Orientation="Vertical" Height="90" Width="90" HorizontalAlignment="Center"
                                         VerticalAlignment="Center">
-                        <Image Height="50"
-                               HorizontalAlignment="Center"
-                                       Margin="0,5,0,0"
-                                       Width="50"
-                                       Source="pack://application:,,,/ImageSource/Edit.png"/>
+                        <Image
+                            Height="50"
+                            HorizontalAlignment="Center"
+                            Margin="0,5,0,0"
+                            Width="50"
+                            Source="pack://application:,,,/ImageSource/Edit.png"/>
                         <TextBlock
                                     HorizontalAlignment="Center"
                                     Text="Edit"
@@ -81,45 +90,44 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
                 <Button
-                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            BorderBrush="Blue"
+                            BorderThickness="2"
+                            Command="{Binding Delete_Image}"
+                            CommandParameter="{Binding ElementName=documentlist, Path=SelectedItem}"
                             Height="100" Width="100"
-                            materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="#FFF08011">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="White" Offset="0"/>
-                            <GradientStop Color="#FF65C6CB" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
-                    <StackPanel Orientation="Vertical" Height="90" Width="90" HorizontalAlignment="Center"
-                                        VerticalAlignment="Center">
-                        <Image Height="50"
-                               HorizontalAlignment="Center"
-                                       Margin="0,5,0,0"
-                                       Width="50"
-                                       Source="pack://application:,,,/ImageSource/Delete.png"/>
+                            materialDesign:ButtonAssist.CornerRadius="5">
+
+                    <StackPanel 
+                        Orientation="Vertical" Height="90" Width="90" HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                        <Image 
+                            Height="50"
+                            HorizontalAlignment="Center"
+                            Margin="0,5,0,0"
+                            Width="50"
+                            Source="pack://application:,,,/ImageSource/Delete.png"/>
                         <TextBlock
-                                    HorizontalAlignment="Center"
-                                    Text="Delete"
-                                    FontWeight="Bold"
-                                    Margin="0,10,0,0"
-                                    FontSize="16"/>
+                            HorizontalAlignment="Center"
+                            Text="Delete"
+                            FontWeight="Bold"
+                            Margin="0,10,0,0"
+                            FontSize="16"/>
                     </StackPanel>
                 </Button>
             </Grid>
             <Grid
-                        Margin="0,15,0,0"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center">
+                Margin="0,15,0,0"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center">
                 <Button
-                            Style="{StaticResource MaterialDesignRaisedLightButton}"
-                            Height="100" Width="100"
-                            materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="#FFF08011">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="White" Offset="0"/>
-                            <GradientStop Color="#FF65C6CB" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    BorderBrush="Blue"
+                    BorderThickness="2"
+                    Height="100" Width="100"
+                    Command="{Binding View}"
+                    materialDesign:ButtonAssist.CornerRadius="5">
+
                     <StackPanel Orientation="Vertical" Height="90" Width="90" HorizontalAlignment="Center"
                                         VerticalAlignment="Center">
                         <Image Height="50"
@@ -138,19 +146,18 @@
             </Grid>
             <Grid
                         Margin="0,15,0,0"
+               
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
                 <Button
+                    DataContext="{StaticResource MenuMainAll}"
                     Command="{Binding Media}"
-                            Style="{StaticResource MaterialDesignRaisedLightButton}"
-                            Height="100" Width="100"
-                            materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="#FFF08011">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="White" Offset="0"/>
-                            <GradientStop Color="#FF65C6CB" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    BorderBrush="Blue"
+                    BorderThickness="2"
+                    Height="100" Width="100"
+                    materialDesign:ButtonAssist.CornerRadius="5" >
+
                     <StackPanel Orientation="Vertical" Height="90" Width="90" HorizontalAlignment="Center"
                                         VerticalAlignment="Center">
                         <Image Height="50"
@@ -167,6 +174,194 @@
                     </StackPanel>
                 </Button>
             </Grid>
+
+            <Grid
+                DataContext="{StaticResource DocumentManger}"
+                        Margin="0,200,0,0"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0*"/>
+                    <RowDefinition Height="0*"/>
+                </Grid.RowDefinitions>
+                <Button
+                            Command="{Binding DoneEdit}"
+                            
+                            Visibility="{Binding Path=E_Done ,Converter={StaticResource ChangVisible}}"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            BorderBrush="Blue"
+                            BorderThickness="2"
+                            Height="100" Width="100"
+                            materialDesign:ButtonAssist.CornerRadius="5" Grid.RowSpan="2" >
+
+                    <StackPanel Orientation="Vertical" Height="90" Width="90" HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                        <Image Height="50"
+                               HorizontalAlignment="Center"
+                                       Margin="0,5,0,0"
+                                       Width="50"
+                                       Source="pack://application:,,,/ImageSource/Done.png"/>
+                        <TextBlock
+                                    HorizontalAlignment="Center"
+                                    Text="Done"
+                                    FontWeight="Bold"
+                                    Margin="0,10,0,0"
+                                    FontSize="16"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
         </StackPanel>
+        <Grid Grid.Column="1">
+            <dxg:GridControl
+                        
+                        x:Name="documentlist" 
+                SelectedItem="{Binding Document_}"
+                        ItemsSource="{Binding DocumentObjects}" Margin="0,0,0,1" Focusable="False" >
+                <dxg:GridControl.View>
+                    <dxg:TableView
+                                AllowEditing="False"
+                                
+                                ShowSearchPanelMode="Always"
+                                ShowSearchPanelFindButton="True"
+                                ShowSearchPanelMRUButton="True"
+                                ShowSearchPanelNavigationButtons="True"
+                                ShowSelectionRectangle="True"
+                                ShowSearchPanelResultInfo="True"
+                                ShowGroupPanel="False" EditFormColumnCount="2" />
+                </dxg:GridControl.View>
+                <dxg:GridControl.Columns >
+                    <dxg:GridColumn
+                                
+                                IsEnabled="False"
+                                
+                                FieldName="DocumentName" 
+                                FixedWidth="True"/>
+                    <dxg:GridColumn
+                                
+                                IsEnabled="False"
+                                
+                                FieldName="DocumentType" 
+                                FixedWidth="True"/>
+                    <dxg:GridColumn
+                                
+                                IsEnabled="False"
+                                
+                                FieldName="DocumentGroup" 
+                                FixedWidth="True"/>
+                    <dxg:GridColumn
+                                
+                                IsEnabled="False"
+                                
+                                FieldName="DocumentCategory" 
+                                FixedWidth="True"/>
+                    <dxg:GridColumn
+                                
+                                IsEnabled="False"
+                                
+                                FieldName="DocumentVersion" 
+                                FixedWidth="True"/>
+                    <dxg:GridColumn
+                                
+                                IsEnabled="False"
+                                
+                                FieldName="DocumentDateUpLoad" 
+                                FixedWidth="True"/>
+                </dxg:GridControl.Columns>
+                <!--<i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectedItemChanged">
+                        <i:InvokeCommandAction
+                                Command="{Binding SelectImageItem}"
+                                />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>-->
+            </dxg:GridControl>
+        </Grid>
+        <Grid Grid.Column="2">
+            <GroupBox   VerticalAlignment="Stretch">
+                <StackPanel Orientation="Vertical">
+                    <Grid >
+                        <TextBlock
+                                    IsEnabled="{Binding E_Done}"
+                                    VerticalAlignment="Center"
+                                    Text="Original File Name"
+                                    FontSize="16" Margin="10"
+                                    FontWeight="DemiBold"/>
+                        <TextBox
+                                    Margin="200,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding Document_.LinkDocument}" 
+                                    FontSize="16" 
+                                    IsReadOnly="True"
+                                    Width="550"
+                                    FontWeight="Normal"/>
+                    </Grid>
+                    <Grid >
+                        <TextBlock
+                                    VerticalAlignment="Center"
+                                    Text="Document Name"
+                                    FontSize="16" Margin="10"
+                                    FontWeight="DemiBold"/>
+                        <TextBox
+                                    IsEnabled="{Binding E_Done}"
+                                    Margin="200,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding Document_.DocumentName}"
+                                    FontSize="16" 
+                                    
+                                    Width="550"
+                                    FontWeight="Normal"/>
+                    </Grid>
+                    <Grid >
+                        <TextBlock
+                                    
+                                    VerticalAlignment="Center"
+                                    Text="Document Type"
+                                    FontSize="16" Margin="10"
+                                    FontWeight="DemiBold"/>
+                        <TextBox
+                                    IsEnabled="{Binding E_Done}"
+                                    Margin="200,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding Document_.DocumentType}" 
+                                    FontSize="16" 
+                                    
+                                    Width="550"
+                                    FontWeight="Normal"/>
+                    </Grid>
+                    <Grid >
+                        <TextBlock
+                                    VerticalAlignment="Center"
+                                    Text="Document Group"
+                                    FontSize="16" Margin="10"
+                                    FontWeight="DemiBold"/>
+                        <TextBox
+                                    IsEnabled="{Binding E_Done}"
+                                    Margin="200,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding Document_.DocumentGroup}" 
+                                    FontSize="16" 
+                                    
+                                    Width="550"
+                                    FontWeight="Normal"/>
+                    </Grid>
+                    <Grid >
+                        <TextBlock
+                                    VerticalAlignment="Center"
+                                    Text="Document Category"
+                                    FontSize="16" Margin="10"
+                                    FontWeight="DemiBold"/>
+                        <TextBox
+                                    IsEnabled="{Binding E_Done}"
+                                    Margin="200,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding Document_.DocumentCategory}" 
+                                    FontSize="16" 
+                                    
+                                    Width="550"
+                                    FontWeight="Normal"/>
+                    </Grid>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
     </Grid>
 </UserControl>

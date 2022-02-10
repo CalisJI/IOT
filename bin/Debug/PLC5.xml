@@ -3,7 +3,7 @@
   <Device_Name>PLC5</Device_Name>
   <Data>
     <RuntimeValue>
-      <CurrentTime>09:57:39</CurrentTime>
+      <CurrentTime>14:31:20</CurrentTime>
       <ArrayValue>
         <int>11</int>
         <int>0</int>
@@ -19,7 +19,7 @@
       <Stage>Running</Stage>
     </RuntimeValue>
     <RuntimeValue>
-      <CurrentTime>09:58:55</CurrentTime>
+      <CurrentTime>14:31:22</CurrentTime>
       <ArrayValue>
         <int>11</int>
         <int>0</int>
@@ -35,39 +35,7 @@
       <Stage>Running</Stage>
     </RuntimeValue>
     <RuntimeValue>
-      <CurrentTime>09:58:57</CurrentTime>
-      <ArrayValue>
-        <int>11</int>
-        <int>0</int>
-        <int>0</int>
-        <int>5</int>
-        <int>0</int>
-        <int>24</int>
-        <int>0</int>
-        <int>25</int>
-        <int>0</int>
-        <int>0</int>
-      </ArrayValue>
-      <Stage>Running</Stage>
-    </RuntimeValue>
-    <RuntimeValue>
-      <CurrentTime>09:58:59</CurrentTime>
-      <ArrayValue>
-        <int>11</int>
-        <int>0</int>
-        <int>0</int>
-        <int>5</int>
-        <int>0</int>
-        <int>24</int>
-        <int>0</int>
-        <int>25</int>
-        <int>0</int>
-        <int>0</int>
-      </ArrayValue>
-      <Stage>Running</Stage>
-    </RuntimeValue>
-    <RuntimeValue>
-      <CurrentTime>09:59:01</CurrentTime>
+      <CurrentTime>14:31:24</CurrentTime>
       <ArrayValue>
         <int>11</int>
         <int>0</int>

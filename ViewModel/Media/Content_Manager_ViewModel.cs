@@ -23,11 +23,11 @@ namespace WPF_TEST.ViewModel
         public static DocumentManager_ViewModel DocumentManager_ViewModel = new DocumentManager_ViewModel();
         public static DataTable VideoObjectTable = new DataTable();
         public static DataTable ImageObjectTable = new DataTable();
-        public static DataTable AudioObjectTable = new DataTable();
-        public static DataTable DocumentObjectTable = new DataTable();
+        public static DataTable AudioObjectTable = new DataTable("AudioObject");
+        public static DataTable DocumentObjectTable = new DataTable("DocumentObject");
         Sqlexcute Sqlexcute = new Sqlexcute();
 
-        private static Content_Manager_ViewModel _content_Manager_ViewModel;
+        private static Content_Manager_ViewModel _content_Manager_ViewModel = new Content_Manager_ViewModel();
         public static Content_Manager_ViewModel INS_Content_Manager_ViewModel 
         {
             get 
@@ -155,49 +155,7 @@ namespace WPF_TEST.ViewModel
         }
         private void AddImage() 
         {
-            ImageObject imageObject = new ImageObject();
-
-            imageObject.ImageName = "Hình 1";
-            imageObject.LinkImage = @"\\192.168.2.174\CloudFWD\Hinh1.jpg";
-            imageObject.ImageGroup = "Test";
-            imageObject.ImageType = "Electric";
-            imageObject.ImageVersion = 1.1f;
-            imageObject.ImgaeCategory = "unknown";
-            imageObject.ImageDateUpLoad = DateTime.Now + TimeSpan.FromDays(3);
-            ImageObjects.Add(imageObject);
-
-            ImageObject imageObject1 = new ImageObject();
-
-            imageObject1.ImageName = "Hình 1";
-            imageObject1.LinkImage = @"\\192.168.2.174\CloudFWD\Hinh2.jpg";
-            imageObject1.ImageGroup = "Test";
-            imageObject1.ImageType = "Electric";
-            imageObject1.ImageVersion = 1.1f;
-            imageObject1.ImgaeCategory = "unknown";
-            imageObject1.ImageDateUpLoad = DateTime.Now + TimeSpan.FromDays(3);
-            ImageObjects.Add(imageObject1);
-
-            ImageObject imageObject2 = new ImageObject();
-
-            imageObject2.ImageName = "Hình 1";
-            imageObject2.LinkImage = @"\\192.168.2.174\CloudFWD\Hinh3.jpg";
-            imageObject2.ImageGroup = "Test";
-            imageObject2.ImageType = "Electric";
-            imageObject2.ImageVersion = 1.1f;
-            imageObject2.ImgaeCategory = "unknown";
-            imageObject2.ImageDateUpLoad = DateTime.Now + TimeSpan.FromDays(3);
-            ImageObjects.Add(imageObject2);
-
-            ImageObject imageObject3 = new ImageObject();
-
-            imageObject3.ImageName = "Hình 1";
-            imageObject3.LinkImage = @"\\192.168.2.174\CloudFWD\Hinh4.jpg";
-            imageObject3.ImageGroup = "Test";
-            imageObject3.ImageType = "Electric";
-            imageObject3.ImageVersion = 1.1f;
-            imageObject3.ImgaeCategory = "unknown";
-            imageObject3.ImageDateUpLoad = DateTime.Now + TimeSpan.FromDays(3);
-            ImageObjects.Add(imageObject3);
+           
 
             ImageObject imageObject4 = new ImageObject();
 
@@ -274,7 +232,7 @@ namespace WPF_TEST.ViewModel
                 if (check3 == 0)
                 {
                     
-                    DocumentObjectTable = Sqlexcute.FillToDataTable<DocumentObject>(DocumentObjects);
+                    DocumentObjectTable = Sqlexcute.FillToDataTable(DocumentObjects);
                     Sqlexcute.AutoCreateTable(DocumentObjectTable, "fwd63823_database", DocumentObjectTable.TableName, ref check_, ref exist_);
                     mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref DocumentObjectTable, DocumentObjectTable.TableName, "fwd63823_database");
                     AddDocumnet();

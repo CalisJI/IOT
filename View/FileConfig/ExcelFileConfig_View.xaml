@@ -14,6 +14,9 @@
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding EXcelLoaded}"/>
         </i:EventTrigger>
+        <i:EventTrigger EventName="Unloaded">
+            <i:InvokeCommandAction Command="{Binding ExcelUnload}"/>
+        </i:EventTrigger>
     </i:Interaction.Triggers>
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="Cansee"/>
@@ -136,10 +139,10 @@
                 VerticalAlignment="Top"
                 HorizontalAlignment="Center">
                     <Button
-                    DataContext="{StaticResource MenuMainAll}"
+                    
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Height="80" Width="90"
-                    Command="{Binding DataStream}"
+                    Command="{Binding Backtomenu}"
                     BorderBrush="Blue"
                     BorderThickness="2"
                     materialDesign:ButtonAssist.CornerRadius="5">
@@ -163,8 +166,8 @@
             </StackPanel>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="6*"/>
-                    <RowDefinition Height="0.7*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="0.8*"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <TextBlock 
@@ -195,6 +198,7 @@
                     <DataGrid
                     Grid.Row="0" 
                     Margin="0,60,0,0"
+                        Height="620"
                     ItemsSource="{Binding DatatableExcel}">
 
                     </DataGrid>
@@ -240,7 +244,7 @@
                         <TextBox
                             FontWeight="DemiBold"
                             Margin="15,0,0,0"
-                            Text="{Binding JobTableConfigs.MaSanPham_Col}"
+                            Text="{Binding JobTableConfigs.TenSanPham_Col}"
                             materialDesign:HintAssist.Hint="Cột Tên Sản Phẩm"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                             FontFamily="Baskerville"
@@ -250,7 +254,7 @@
                         <TextBox
                             FontWeight="DemiBold"
                             Margin="15,0,0,0"
-                            Text="{Binding JobTableConfigs.MaSanPham_Col}"
+                            Text="{Binding JobTableConfigs.SoLuong_Col}"
                             materialDesign:HintAssist.Hint="Cột Só Lượng Sắp Xếp"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                             FontFamily="Baskerville"
@@ -260,7 +264,7 @@
                         <TextBox
                             FontWeight="DemiBold"
                             Margin="15,0,0,0"
-                            Text="{Binding JobTableConfigs.MaSanPham_Col}"
+                            Text="{Binding JobTableConfigs.SoLuowngHoanThanh_Col}"
                             materialDesign:HintAssist.Hint="Cột Só Lượng Hoàn Thành"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                             FontFamily="Baskerville"
@@ -270,7 +274,7 @@
                         <TextBox
                             FontWeight="DemiBold"
                             Margin="15,0,0,0"
-                            Text="{Binding JobTableConfigs.MaSanPham_Col}"
+                            Text="{Binding JobTableConfigs.NgayBatDau_Col}"
                             materialDesign:HintAssist.Hint="Cột Ngày Bắt Đầu"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                             FontFamily="Baskerville"
@@ -280,7 +284,7 @@
                         <TextBox
                             FontWeight="DemiBold"
                             Margin="15,0,0,0"
-                            Text="{Binding JobTableConfigs.MaSanPham_Col}"
+                            Text="{Binding JobTableConfigs.NgayKetThuc_Col}"
                             materialDesign:HintAssist.Hint="Cột Ngày Hoàn Thành"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                             FontFamily="Baskerville"
@@ -290,7 +294,7 @@
                         <TextBox
                             FontWeight="DemiBold"
                             Margin="15,0,0,0"
-                            Text="{Binding JobTableConfigs.MaSanPham_Col}"
+                            Text="{Binding JobTableConfigs.TinhTrang_Col}"
                             materialDesign:HintAssist.Hint="Cột Tình Trạng"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                             FontFamily="Baskerville"
@@ -300,7 +304,7 @@
                         <TextBox
                             FontWeight="DemiBold"
                             Margin="15,0,0,0"
-                            Text="{Binding JobTableConfigs.MaSanPham_Col}"
+                            Text="{Binding JobTableConfigs.ThamKhao_Col}"
                             materialDesign:HintAssist.Hint="Cột Tham Khảo"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                             FontFamily="Baskerville"

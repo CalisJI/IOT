@@ -51,7 +51,7 @@
         <BooleanToVisibilityConverter x:Key="Cansee"/>
     </UserControl.Resources>
 
-    <Grid>
+    <!--<Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*"/>
             <RowDefinition/>
@@ -135,7 +135,7 @@
                         </StackPanel>
                     </Button>
                 </Grid>
-                <!--<Grid
+                --><!--<Grid
                 Margin="0,30,0,0"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Center">
@@ -163,16 +163,16 @@
                                     FontSize="16"/>
                         </StackPanel>
                     </Button>
-                </Grid>-->
+                </Grid>--><!--
                 <Grid
                 Margin="0,30,0,0"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Center">
                     <Button
-                    DataContext="{StaticResource MenuMainAll}"
+                    DataContext="{StaticResource ScheduleViewModel}"
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Height="80" Width="90"
-                    Command="{Binding DataStream}"
+                    Command="{Binding Goback}"
                     BorderBrush="Blue"
                     BorderThickness="2"
                     materialDesign:ButtonAssist.CornerRadius="5">
@@ -415,15 +415,15 @@
                             <Run Text="%"/>
                         </TextBlock>
                     </Grid>
-                    <!--<Grid>
+                    --><!--<Grid>
                        
-                    </Grid>-->
+                    </Grid>--><!--
 
                 </Grid>
             </Grid>
         </Grid>
 
-    </Grid>
+    </Grid>-->
 
 
 
@@ -435,7 +435,7 @@
 
     <!-- ***************************************************BackUP Designed*****************************-->
 
-    <!--<Grid>
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -607,13 +607,13 @@
                                 <Run Text="Requested End*"/>
                                 <Run Text="(mm/dd/yyy)" FontSize="15" FontWeight="Normal"/>
                             </TextBlock>
-                            -->
-    <!--<TextBlock 
+                            
+    <TextBlock 
                         Text="Requested Report Date*" 
                         FontSize="20"
                         Margin="50,0,0,30"
-                        Width="auto"/>-->
-    <!--
+                        Width="auto"/>
+    
                             <TextBlock 
                         Text="Priority:" 
                         Style="{StaticResource tb}"
@@ -645,7 +645,7 @@
                                 Margin="20,0,0,15">
                                 <DatePicker 
                                     
-                                    SelectedDate="{Binding Request_Start, UpdateSourceTrigger=PropertyChanged ,IsAsync=True}"
+                                    SelectedDate="{Binding Request_Start, UpdateSourceTrigger=PropertyChanged}"
                                     
                                     Background="Red"
                                     Height="40"
@@ -659,18 +659,8 @@
                                     Is24Hours="True"
                                     Width="260"
                                     FontSize="25"
-                                    SelectedTime="{Binding Request_Start, UpdateSourceTrigger=PropertyChanged ,IsAsync=True}"/>
-                                -->
-    <!--<xctk:DateTimePicker
-                                    Margin="20,0,0,0"
-                                    Format="Custom" 
-                                    Height="40"
-                                    Width="260"
-                                    Value="{Binding Request_Start, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                        
-                                    FormatString="HH:mm tt"/>-->
-    <!--
-
+                                    SelectedTime="{Binding Request_Start, UpdateSourceTrigger=PropertyChanged}"/>
+                                
 
                             </StackPanel>
                             <StackPanel
@@ -679,7 +669,7 @@
                                 Margin="20,0,0,15">
                                 <DatePicker 
                                    
-                                    SelectedDate="{Binding Request_End, UpdateSourceTrigger=PropertyChanged,IsAsync=True }"
+                                    SelectedDate="{Binding Request_End, UpdateSourceTrigger=PropertyChanged }"
                                     
                                     DisplayDateStart="2020/01/01"
                                     DisplayDateEnd="2050/01/01"
@@ -701,18 +691,18 @@
                                     FontSize="25"
                                     UseLayoutRounding="False"
                                     
-                                    SelectedTime="{Binding Request_End, UpdateSourceTrigger=PropertyChanged, IsAsync=True}"/>
+                                    SelectedTime="{Binding Request_End, UpdateSourceTrigger=PropertyChanged}"/>
                             </StackPanel>
-                            -->
-    <!--<DatePicker 
+                            
+                        <DatePicker 
                         SelectedDate="{Binding SelectedJob.Requested_Report_Date}"
                         Background="Red"
                         Height="40"
                         Text="Demo"
                         FontSize="25"
                          Margin="20,0,0,10"/>
-                            -->
-    <!--<ComboBox 
+                            
+                            <!--<ComboBox 
                                 Height="40"
                                 Margin="20,0,0,10"
                                 ItemsSource="{Binding Source={StaticResource dataFromEnum}}"
@@ -724,7 +714,7 @@
                                 </ComboBox.ItemTemplate>
                                 
                             </ComboBox>-->
-    <!--
+    
                             <dxe:ComboBoxEdit 
                                 Grid.Column="1"
                                 ItemsSource="{dxe:EnumItemsSource EnumType=local1:TaskPriority,AllowImages=True}"
@@ -790,7 +780,7 @@
             </Grid>
             <Grid>
 
-                -->
+                
     <!--<Button
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Height="70"
@@ -821,7 +811,7 @@
                     </StackPanel>
 
                 </Button>-->
-    <!--
+    
                 <Button
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Height="70"
@@ -970,5 +960,5 @@
 
             </Button>
         </Grid>
-    </Grid>-->
+    </Grid>
 </UserControl>

@@ -451,7 +451,7 @@ namespace WPF_TEST.Class_Resource
                 Sqlexcute.Update_Runtime_to_Host(dataTable, pLC_Modbus.Device_Name);
                 if (Sqlexcute.error_message != string.Empty)
                 {
-                    throw new Exception(Sqlexcute.error_message + "PLC_Error");
+                    throw new Exception(Sqlexcute.error_message + " PLC_Error");
                 }
                 Error_mesage = string.Empty;
             }

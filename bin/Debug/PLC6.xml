@@ -3,23 +3,7 @@
   <Device_Name>PLC6</Device_Name>
   <Data>
     <RuntimeValue>
-      <CurrentTime>09:58:57</CurrentTime>
-      <ArrayValue>
-        <int>75</int>
-        <int>0</int>
-        <int>542</int>
-        <int>0</int>
-        <int>5427</int>
-        <int>0</int>
-        <int>87</int>
-        <int>857</int>
-        <int>0</int>
-        <int>0</int>
-      </ArrayValue>
-      <Stage>Running</Stage>
-    </RuntimeValue>
-    <RuntimeValue>
-      <CurrentTime>09:59:01</CurrentTime>
+      <CurrentTime>14:31:22</CurrentTime>
       <ArrayValue>
         <int>75</int>
         <int>0</int>
