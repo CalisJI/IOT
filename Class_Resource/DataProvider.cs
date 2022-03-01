@@ -256,7 +256,7 @@ namespace WPF_TEST.Class_Resource
                     case 0:
                         var s = JsonSerializer.Serialize(JobOrderInput);
                         Json_Job = new ObservableCollection<ConvertoJson>();
-                        Json_Job.Add(new ConvertoJson { Code = s });
+                        Json_Job.Add(new ConvertoJson { Code = s});
                         INS_JobOrder = Sqlexcute.FillToDataTable(Json_Job);
                         INS_JobOrder.TableName = "JobOrderConfig";
                         Sqlexcute.Update_Table_to_Host( INS_JobOrder, Sqlexcute.Database, INS_JobOrder.TableName);
@@ -370,10 +370,10 @@ namespace WPF_TEST.Class_Resource
                 //jobOrder.Current_Stage = PlannerModel.getColor(jobOrder.Stage);
                 //jobOrder.Works = WorkInput;
                 JobOrderInput.Add(jobOrder);
-                var s = JsonSerializer.Serialize(JobOrderInput);
-                Json_Job = new ObservableCollection<ConvertoJson>();
-                Json_Job.Add(new ConvertoJson { Code = s });
-                INS_JobOrder = Sqlexcute.FillToDataTable(Json_Job);
+                //var s = JsonSerializer.Serialize(JobOrderInput);
+                //Json_Job = new ObservableCollection<ConvertoJson>();
+                //Json_Job.Add(new ConvertoJson { Code = s });
+                INS_JobOrder = Sqlexcute.FillToDataTable(JobOrderInput);
                 INS_JobOrder.TableName = "JobOrderConfig";
             }
 
@@ -521,7 +521,7 @@ namespace WPF_TEST.Class_Resource
             try
             {
                 _insPLC = new DataTable("ModbusDevice");
-                mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref _insPLC, "ModbusDevice", Sqlexcute.Database);
+                Sqlexcute.GetData_FroM_Database(ref _insPLC, "ModbusDevice", Sqlexcute.Database);
                 ModbusDevices = Sqlexcute.Conver_From_Data_Table_To_List<ModbusDevice>(_insPLC);
                 if (pLC_Modbus.Count > 0) 
                 {
@@ -569,15 +569,16 @@ namespace WPF_TEST.Class_Resource
             {
 
                 cloud = Sqlexcute.Conver_From_Data_Table_To_List<DatabaseConfig>(INS_Cloud);
-                JS_Job = Sqlexcute.Conver_From_Data_Table_To_List<ConvertoJson>(INS_JobOrder);
+                jobOrders = Sqlexcute.Conver_From_Data_Table_To_List<JobOrder>(INS_JobOrder);
                 works = Sqlexcute.Conver_From_Data_Table_To_List<Works>(INS_Work);
                 customers = Sqlexcute.Conver_From_Data_Table_To_List<Customer>(INS_Customer);
                 //js_PLC = Sqlexcute.Conver_From_Data_Table_To_List<ConvertoJson>(INS_PLC_Data);
 
                 jobOrders = JsonSerializer.Deserialize<ObservableCollection<JobOrder>>(JS_Job.ElementAt(0).Code);
+                //jobOrders = Sqlexcute.Conver_From_Data_Table_To_List<JobOrder>()
                 //pLC_Modbus = JsonSerializer.Deserialize<ObservableCollection<PLC_Modbus>>(js_PLC.ElementAt(0).Code);
 
-               
+
             }
             catch (Exception ex)
             {

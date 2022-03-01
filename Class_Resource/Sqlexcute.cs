@@ -12,6 +12,8 @@ using System.IO.Ports;
 using WPF_TEST.ViewModel;
 using System.Security.Cryptography;
 using System.Globalization;
+using System.Text.Json;
+using WPF_TEST.Data;
 
 namespace WPF_TEST.Class_Resource
 {
@@ -200,6 +202,54 @@ namespace WPF_TEST.Class_Resource
                 return dt;
             }
         }
+        /// <summary>
+        /// Đọc Bàng Có Điều Kiện
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public DataTable Read_Table_Group(string str)
+        {
+            DataTable dataTable = new DataTable();
+            MySqlDataAdapter mySqlData;
+            try
+            {
+                if (SQL_Connection.State == ConnectionState.Closed)
+                {
+                    SQL_Connection.Open();
+                }
+                int i = 0;
+                //string str = "SELECT * FROM " + table + "";
+                mySqlData = new MySqlDataAdapter(str, SQL_Connection);
+                MySqlCommandBuilder mySqlCommand = new MySqlCommandBuilder(mySqlData);
+                mySqlData.Fill(dataTable);
+                //MySqlCommand cmd = new MySqlCommand(str, SQL_Connection);
+                //var SQL_Reader = cmd.ExecuteReader();
+                //if (SQL_Reader.HasRows)
+                //{
+                //    while (SQL_Reader.Read())
+                //    {
+                //        dataTable.Rows.Add();
+                //        for (int j = 0; j < SQL_Reader.FieldCount; j++)
+                //        {
+                //            if (SQL_Reader.IsDBNull(j)) break;
+                //            dataTable.Columns.Add();
+                //            dataTable.Rows[i][j] = SQL_Reader.GetString(j);
+
+                //        }
+                //        i++;
+
+                //    }
+                //}
+                SQL_Connection.Close();
+                error_message = string.Empty;
+                return dataTable;
+            }
+            catch (Exception ex)
+            {
+                error_message = ex.Message;
+                return dataTable;
+            }
+        }
         public DataTable Read_data(string database, string table)
         {
             DataTable dataTable = new DataTable();
@@ -374,14 +424,14 @@ namespace WPF_TEST.Class_Resource
         /// <param name="TableName"></param>
         /// <param name="check"></param>
         /// <param name="exist"></param>
-        public void AutoCreateTable(DataTable dataTable, string database, string TableName, ref bool check,ref bool exist) 
+        public void AutoCreateTable(DataTable dataTable, string database, string TableName, ref bool check, ref bool exist)
         {
             string cmd;
             int count = 2;
             //*****************************************************
             // Code for processing
-           
-                MySqlCommand command = new MySqlCommand(Check_Table_Exits(database, TableName),SQL_Connection);
+
+            MySqlCommand command = new MySqlCommand(Check_Table_Exits(database, TableName), SQL_Connection);
 
             if (SQL_Connection.State == ConnectionState.Closed)
             {
@@ -390,13 +440,13 @@ namespace WPF_TEST.Class_Resource
 
             MySqlDataReader reader = command.ExecuteReader();
 
-                while (reader.Read())
+            while (reader.Read())
 
-                {
-                     count = reader.GetInt32(0);
-                }
-                SQL_Connection.Close();
-           
+            {
+                count = reader.GetInt32(0);
+            }
+            SQL_Connection.Close();
+
             if (count == 0)
 
             {
@@ -452,7 +502,7 @@ namespace WPF_TEST.Class_Resource
                         sqlsc += " NOT NULL ";
                     sqlsc += ",";
                 }
-                cmd = sqlsc.Substring(0, sqlsc.Length - 1) +", PRIMARY KEY ("+ dataTable.Columns[0].ColumnName + "))";
+                cmd = sqlsc.Substring(0, sqlsc.Length - 1) + ", PRIMARY KEY (" + dataTable.Columns[0].ColumnName + "))";
                 exist = false;
                 //*****************************************************
                 check = SQL_command(cmd, database);
@@ -464,7 +514,7 @@ namespace WPF_TEST.Class_Resource
                 // MessageBox.Show("Such data table exists!");
 
             }
-            
+
         }
 
 
@@ -519,7 +569,9 @@ namespace WPF_TEST.Class_Resource
                         case "System.Single":
                             sqlsc += " FLOAT ";
                             break;
-
+                        case "System.TimeSpan":
+                            sqlsc += " TIME ";
+                            break;
                         //case "WPF_TEST.ViewModel.Status":
                         //    sqlsc += " ENUM('Queued','Ready','Running','Paused','Delayed','Done','Plan') ";
                         //    break;
@@ -695,13 +747,25 @@ namespace WPF_TEST.Class_Resource
         //    }
         //}
         /// <summary>
+        /// Chọn Số lượng hàng cập nhập
+        /// </summary>
+        /// <param name="low"></param>
+        /// <param name="high"></param>
+        /// <returns></returns>
+        public string getLimitRow(int low,int high) 
+        {
+            string aa = " LIMIT " + low.ToString() + ", " + high.ToString() + "";
+            return aa;
+        }
+
+        /// <summary>
         /// Lấy dữ liệu ban đầu từ Server
         /// </summary>
         /// <param name="dataTable"></param>
         /// <param name="table_Name"></param>
         /// <param name="Database"></param>
         /// <returns></returns>
-        public MySqlDataAdapter GetData_FroM_Database(ref DataTable dataTable , string table_Name, string Database)
+        public void GetData_FroM_Database(ref DataTable dataTable , string table_Name,string database ,string limit ="")
         {
             MySqlDataAdapter mySqlData;
             try
@@ -711,20 +775,20 @@ namespace WPF_TEST.Class_Resource
                 {
                     SQL_Connection.Open();
                 }
-                string Query = "SELECT * FROM " + table_Name + "";
-                    mySqlData = new MySqlDataAdapter(Query, SQL_Connection);
-                    MySqlCommandBuilder mySqlCommand = new MySqlCommandBuilder(mySqlData);
-                    mySqlData.Fill(dataTable);
+                string Query = "SELECT * FROM " + table_Name + "" + limit + "";
+                mySqlData = new MySqlDataAdapter(Query, SQL_Connection);
+                MySqlCommandBuilder mySqlCommand = new MySqlCommandBuilder(mySqlData);
+                mySqlData.Fill(dataTable);
 
                 SQL_Connection.Close();
                 error_message = string.Empty;
-                return mySqlData;
+               
             }
             catch (Exception ex)
             {
 
                 error_message = ex.Message;
-                return mySqlData = null;
+               
             }
 
            
@@ -813,7 +877,7 @@ namespace WPF_TEST.Class_Resource
             try
             {
                 
-                SQL_command("DELETE FROM " + table_Name + "",Database);
+                //SQL_command("DELETE FROM " + table_Name + "",Database);
                 if (SQL_Connection.State == ConnectionState.Closed)
                 {
                     SQL_Connection.Open();
@@ -895,7 +959,7 @@ namespace WPF_TEST.Class_Resource
         public static DataTable FillToDataTable<T>(ObservableCollection<T> items)
         {
             DataTable dataTable = new DataTable(typeof(T).Name);
-
+           
             //Get all the properties
             PropertyInfo[] Props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
             foreach (PropertyInfo prop in Props)
@@ -903,7 +967,15 @@ namespace WPF_TEST.Class_Resource
                 //Defining type of data column gives proper data table 
                 var type = (prop.PropertyType.IsGenericType && prop.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>) ? Nullable.GetUnderlyingType(prop.PropertyType) : prop.PropertyType);
                 //Setting column names as Property names
-                dataTable.Columns.Add(prop.Name, type);
+                if (type.Name == "ObservableCollection`1")
+                {
+                    Type type1 = typeof(string);
+                    dataTable.Columns.Add(prop.Name, type1);
+                }
+                else
+                {
+                    dataTable.Columns.Add(prop.Name, type);
+                }
             }
             foreach (T item in items)
             {
@@ -911,7 +983,18 @@ namespace WPF_TEST.Class_Resource
                 for (int i = 0; i < Props.Length; i++)
                 {
                     //inserting property values to datatable rows
-                    values[i] = Props[i].GetValue(item, null);
+
+                    if (Props[i].PropertyType.Name == "ObservableCollection`1")
+                    {
+                        Type type1 = Props[i].PropertyType;
+                        string a = JsonSerializer.Serialize(Props[i].GetValue(item, null), type1);
+                        values[i] = a;
+                    }
+                    else
+                    {
+                        values[i] = Props[i].GetValue(item, null);
+                    }
+                   // values[i] = Props[i].GetValue(item, null);
                 }
                 dataTable.Rows.Add(values);
             }
@@ -948,102 +1031,128 @@ namespace WPF_TEST.Class_Resource
         {
             Type temp = typeof(T);
             T obj = Activator.CreateInstance<T>();
-
-            foreach (DataColumn column in dr.Table.Columns)
+            try
             {
-                foreach (PropertyInfo pro in temp.GetProperties())
+                foreach (DataColumn column in dr.Table.Columns)
                 {
-                    if (pro.Name == column.ColumnName) 
+                    foreach (PropertyInfo pro in temp.GetProperties())
                     {
-                        if(pro.PropertyType == typeof(System.IO.Ports.Parity)) 
+                        if (pro.Name == column.ColumnName)
                         {
-                            pro.SetValue(obj, (Parity)Enum.Parse(typeof(Parity), (string)dr[column.ColumnName]), null);
-                        }
-                        else if (pro.PropertyType == typeof(System.IO.Ports.StopBits)) 
-                        {
-                            pro.SetValue(obj, (StopBits)Enum.Parse(typeof(StopBits), (string)dr[column.ColumnName]), null);
-                        }
-                        else if(pro.PropertyType == typeof(ConntionTypes))
-                        {
-                            pro.SetValue(obj, (ConntionTypes)Enum.Parse(typeof(ConntionTypes), (string)dr[column.ColumnName]), null);
-                        }
-                        else if (pro.PropertyType == typeof(ModbusFunction))
-                        {
-                            pro.SetValue(obj, (ModbusFunction)Enum.Parse(typeof(ModbusFunction), (string)dr[column.ColumnName]), null);
-                        }
-                        else if(pro.PropertyType == typeof(DeviceStage)) 
-                        {
-                            pro.SetValue(obj, (DeviceStage)Enum.Parse(typeof(DeviceStage), (string)dr[column.ColumnName]), null);
-                        }
-                        else if(pro.PropertyType == typeof(byte[])) 
-                        {
-                            try
+                            if (pro.PropertyType == typeof(System.IO.Ports.Parity))
                             {
-                                if ((string)dr[column.ColumnName] == string.Empty || (string)dr[column.ColumnName] == null)
+                                pro.SetValue(obj, (Parity)Enum.Parse(typeof(Parity), (string)dr[column.ColumnName]), null);
+                            }
+                            else if (pro.PropertyType == typeof(System.IO.Ports.StopBits))
+                            {
+                                pro.SetValue(obj, (StopBits)Enum.Parse(typeof(StopBits), (string)dr[column.ColumnName]), null);
+                            }
+                            else if (pro.PropertyType == typeof(ConntionTypes))
+                            {
+                                pro.SetValue(obj, (ConntionTypes)Enum.Parse(typeof(ConntionTypes), (string)dr[column.ColumnName]), null);
+                            }
+                            else if (pro.PropertyType == typeof(ModbusFunction))
+                            {
+                                pro.SetValue(obj, (ModbusFunction)Enum.Parse(typeof(ModbusFunction), (string)dr[column.ColumnName]), null);
+                            }
+                            else if (pro.PropertyType == typeof(DeviceStage))
+                            {
+                                pro.SetValue(obj, (DeviceStage)Enum.Parse(typeof(DeviceStage), (string)dr[column.ColumnName]), null);
+                            }
+                            else if (pro.PropertyType == typeof(byte[]))
+                            {
+                                try
                                 {
+                                    if ((string)dr[column.ColumnName] == string.Empty || (string)dr[column.ColumnName] == null)
+                                    {
+                                        pro.SetValue(obj, new byte[] { }, null);
+                                    }
+                                    else
+                                    {
+                                        pro.SetValue(obj, Encoding.UTF8.GetBytes(((string)dr[column.ColumnName])), null);
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+
                                     pro.SetValue(obj, new byte[] { }, null);
                                 }
-                                else
+
+
+                            }
+                            else if (pro.PropertyType == typeof(Status))
+                            {
+                                Status myStatus;
+                                try
                                 {
-                                    pro.SetValue(obj, Encoding.UTF8.GetBytes(((string)dr[column.ColumnName])), null);
+                                    Enum.TryParse((string)dr[column.ColumnName], out myStatus);
+                                }
+                                catch (Exception)
+                                {
+
+                                    myStatus = (Status)dr[column.ColumnName];
+                                }
+
+
+                                pro.SetValue(obj, myStatus, null);
+                            }
+                            else if (pro.PropertyType == typeof(TaskPriority))
+                            {
+                                pro.SetValue(obj, (TaskPriority)Enum.Parse(typeof(TaskPriority), (string)dr[column.ColumnName]), null);
+                            }
+                            else if (pro.PropertyType == typeof(System.Single))
+                            {
+                                pro.SetValue(obj, float.Parse(dr[column.ColumnName].ToString(), CultureInfo.InvariantCulture.NumberFormat), null);
+                            }
+                            else if (column.DataType == typeof(System.DBNull))
+                            {
+                                pro.SetValue(obj, ConvertFromDBVal<string>((string)dr[column.ColumnName]), null);
+                            }
+                            //else if (pro.PropertyType == typeof(Customer))
+                            //{
+                            //    pro.SetValue(obj,JsonSerializer.Deserialize<Customer>((string)dr[column.ColumnName]), null);
+                            //}
+                            //else if (pro.PropertyType == typeof(Works))
+                            //{
+                            //    pro.SetValue(obj, JsonSerializer.Deserialize<Works>((string)dr[column.ColumnName]), null);
+                            //}
+                            else if (pro.PropertyType.Name == "ObservableCollection`1")
+                            {
+                                Type type1 = pro.PropertyType;
+                                object b = JsonSerializer.Deserialize(ConvertFromDBVal<string>((string)dr[column.ColumnName]), type1);
+                                pro.SetValue(obj, b, null);
+                            }
+                            else if (column.DataType == typeof(System.Int32)|| column.DataType == typeof(System.Int64)|| column.DataType == typeof(System.Int16))
+                            {
+                                pro.SetValue(obj, Convert.ToInt32(dr[column.ColumnName].ToString()), null);
+                            }
+                            else
+                            {
+                                try
+                                {
+                                    pro.SetValue(obj, dr[column.ColumnName], null);
+                                }
+                                catch (Exception ex)
+                                {
+
+                                    pro.SetValue(obj, "", null);
                                 }
                             }
-                            catch (Exception ex)
-                            {
 
-                                pro.SetValue(obj, new byte[] { }, null);
-                            }
-                            
-                           
                         }
-                        else if (pro.PropertyType == typeof(Status))
-                        {
-                            Status myStatus;
-                            try
-                            {
-                                Enum.TryParse((string)dr[column.ColumnName], out myStatus);
-                            }
-                            catch (Exception)
-                            {
 
-                                myStatus = (Status)dr[column.ColumnName];
-                            }
-                           
 
-                            pro.SetValue(obj, myStatus, null);
-                        }
-                        else if (pro.PropertyType == typeof(TaskPriority))
-                        {
-                            pro.SetValue(obj, (TaskPriority)Enum.Parse(typeof(TaskPriority), (string)dr[column.ColumnName]), null);
-                        }
-                        else if (pro.PropertyType == typeof(System.Single)) 
-                        {
-                            pro.SetValue(obj, float.Parse(dr[column.ColumnName].ToString(), CultureInfo.InvariantCulture.NumberFormat), null);
-                        }
-                        else if (column.DataType == typeof(System.DBNull)) 
-                        {
-                            pro.SetValue(obj, ConvertFromDBVal<string>((string)dr[column.ColumnName]), null);
-                        }
-                        else 
-                        {
-                            try
-                            {
-                                pro.SetValue(obj, dr[column.ColumnName], null);
-                            }
-                            catch (Exception ex)
-                            {
-
-                                pro.SetValue(obj, "", null);
-                            }
-                        }
-                        
+                        else
+                            continue;
                     }
-
-                       
-                    else
-                        continue;
                 }
             }
+            catch (Exception ex)
+            {
+
+               
+            }
+            
             return obj;
         }
     }

@@ -402,6 +402,7 @@
       <DependentUpon>MainScreenView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\ModbusModel.cs" />
+    <Compile Include="Notyfication\DialogVIewModel.cs" />
     <Compile Include="Notyfication\WPFMessageBoxService.cs" />
     <Compile Include="SerialCommunicate\BoolToIsConnectedConverter.cs" />
     <Compile Include="SerialCommunicate\iModbus.cs" />

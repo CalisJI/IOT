@@ -77,7 +77,8 @@
 
             </Grid.ColumnDefinitions>
             <dxg:GridControl 
-                
+                MaxHeight="1000"
+                MaxWidth="1400"
                 DataContext="{StaticResource CustomerSetting}"
                 ItemsSource="{Binding Customer_Storage}"
                 AutoGenerateColumns="AddNew"
@@ -86,7 +87,10 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch">
                 <dxg:GridControl.View>
-                    <dxg:TableView ShowTotalSummary="True" ShowGroupPanel="False"/>
+                    <dxg:TableView
+                        Height="1000"
+                        Width="1400"
+                        ShowTotalSummary="True" ShowGroupPanel="False"/>
                 </dxg:GridControl.View>
                 <dxg:GridControl.Columns>
                     <dxg:GridColumn

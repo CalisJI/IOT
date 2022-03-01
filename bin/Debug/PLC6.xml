@@ -3,7 +3,55 @@
   <Device_Name>PLC6</Device_Name>
   <Data>
     <RuntimeValue>
-      <CurrentTime>14:31:22</CurrentTime>
+      <CurrentTime>11:57:36</CurrentTime>
+      <ArrayValue>
+        <int>75</int>
+        <int>0</int>
+        <int>542</int>
+        <int>0</int>
+        <int>5427</int>
+        <int>0</int>
+        <int>87</int>
+        <int>857</int>
+        <int>0</int>
+        <int>0</int>
+      </ArrayValue>
+      <Stage>Running</Stage>
+    </RuntimeValue>
+    <RuntimeValue>
+      <CurrentTime>11:57:40</CurrentTime>
+      <ArrayValue>
+        <int>75</int>
+        <int>0</int>
+        <int>542</int>
+        <int>0</int>
+        <int>5427</int>
+        <int>0</int>
+        <int>87</int>
+        <int>857</int>
+        <int>0</int>
+        <int>0</int>
+      </ArrayValue>
+      <Stage>Running</Stage>
+    </RuntimeValue>
+    <RuntimeValue>
+      <CurrentTime>11:57:44</CurrentTime>
+      <ArrayValue>
+        <int>75</int>
+        <int>0</int>
+        <int>542</int>
+        <int>0</int>
+        <int>5427</int>
+        <int>0</int>
+        <int>87</int>
+        <int>857</int>
+        <int>0</int>
+        <int>0</int>
+      </ArrayValue>
+      <Stage>Running</Stage>
+    </RuntimeValue>
+    <RuntimeValue>
+      <CurrentTime>11:57:48</CurrentTime>
       <ArrayValue>
         <int>75</int>
         <int>0</int>

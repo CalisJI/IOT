@@ -95,34 +95,33 @@ namespace WPF_TEST.ViewModel
         {
             int check = 2;
             PlanConfig = new ObservableCollection<PlanConfiguration>();
-            PlannerModel.INS_PlanViewModel.PlanConfig = PlanConfig;
+            
             Sqlexcute.Check_Table(Sqlexcute.Database, Table_Name, ref check);
             if (check == 0) 
             {
                 Initial();
-                var Json = JsonSerializer.Serialize(PlanConfig);
-                try
-                {
-                    ToJson = new ObservableCollection<ConvertoJson>();
-                    ToJson.Add(new ConvertoJson { Code = Json });
-                }
-                catch (Exception)
-                {
+                //var Json = JsonSerializer.Serialize(PlanConfig);
+                //try
+                //{
+                //    ToJson = new ObservableCollection<ConvertoJson>();
+                //    ToJson.Add(new ConvertoJson { Code = Json });
+                //}
+                //catch (Exception)
+                //{
 
-                    ToJson = new ObservableCollection<ConvertoJson>();
-                    ToJson.Add(new ConvertoJson { Code = Json });
-                }
-                Table_PlanConfigJson = Sqlexcute.FillToDataTable(ToJson);
-                Sqlexcute.AutoCreateTable(Table_PlanConfigJson, Sqlexcute.Database, Table_Name, true);
+                //    ToJson = new ObservableCollection<ConvertoJson>();
+                //    ToJson.Add(new ConvertoJson { Code = Json });
+                //}
+                Table_PlanConfigJson = Sqlexcute.FillToDataTable(PlanConfig);
+                Sqlexcute.AutoCreateTable(Table_PlanConfigJson, Sqlexcute.Database, Table_Name);
             }
             else 
             {
                 try
                 {
-                    _ = Sqlexcute.GetData_FroM_Database(ref Table_PlanConfigJson,Table_Name, Sqlexcute.Database);
-                    ToJson = Sqlexcute.Conver_From_Data_Table_To_List<ConvertoJson>(Table_PlanConfigJson);
-                    string a = Table_PlanConfigJson.Rows[0][0].ToString();
-                    PlanConfig = JsonSerializer.Deserialize<ObservableCollection<PlanConfiguration>>(ToJson.ElementAt(0).Code);
+                    Sqlexcute.GetData_FroM_Database(ref Table_PlanConfigJson,Table_Name, Sqlexcute.Database);
+                    PlanConfig = Sqlexcute.Conver_From_Data_Table_To_List <PlanConfiguration>(Table_PlanConfigJson);
+                    PlannerModel.INS_PlanViewModel.PlanConfig = PlanConfig;
                 }
                 catch (Exception)
                 {
@@ -144,6 +143,8 @@ namespace WPF_TEST.ViewModel
                 planConfiguration.TenMay = "New";
                 planConfiguration.BarCodes = "Barcode";
                 PlanConfig.Add(planConfiguration);
+                PlannerModel.INS_PlanViewModel.PlanConfig = PlanConfig;
+
             });
             Editting = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
@@ -153,7 +154,8 @@ namespace WPF_TEST.ViewModel
             {
                 if (!IsEnable) return;
                 var a = (PlanConfiguration)p;
-                PlanConfig.Remove(a);
+                _ = PlanConfig.Remove(a);
+                PlannerModel.INS_PlanViewModel.PlanConfig = PlanConfig;
             });
             SaveConfig = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
@@ -161,22 +163,15 @@ namespace WPF_TEST.ViewModel
                 {
 
                     MessageInitial();
-                    var Json = JsonSerializer.Serialize(PlanConfig);
-                    try
-                    {
-                        ToJson = new ObservableCollection<ConvertoJson>();
-                        ToJson.Add(new ConvertoJson { Code = Json });
-                    }
-                    catch (Exception)
-                    {
-
-                        ToJson = new ObservableCollection<ConvertoJson>();
-                        ToJson.Add(new ConvertoJson { Code = Json });
-                    }
-                    Table_PlanConfigJson = Sqlexcute.FillToDataTable(ToJson);
+                    PlannerModel.INS_PlanViewModel.PlanConfig = PlanConfig;
+                    Table_PlanConfigJson = Sqlexcute.FillToDataTable(PlanConfig);
                     Sqlexcute.Update_Table_to_Host(Table_PlanConfigJson, Sqlexcute.Database, Table_Name);
-
-                    if(Sqlexcute.error_message == "") 
+                    _ = Sqlexcute.SQL_command(" DELETE S1 FROM " + Table_Name + " AS S1  INNER JOIN " + Table_Name + " AS S2 WHERE S1.TenMay = S2.TenMay AND S1.id < S2.id", Sqlexcute.Database);
+                    for (int i = 0; i < PlanConfig.Count; i++)
+                    {
+                        _ = Sqlexcute.SQL_command("UPDATE `" + Table_Name + "` SET `id` = '" + (i + 1).ToString() + "' WHERE (`TenMay`='" + PlanConfig[i].TenMay + "')", Sqlexcute.Database);
+                    }
+                    if (Sqlexcute.error_message == "") 
                     {
                         WPFMessageBoxService.ShowMessage("Đã Lưu", "Lưu Cài Đặt", System.Windows.MessageBoxImage.Information);
                         IsEnable = false;

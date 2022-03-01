@@ -296,7 +296,7 @@ namespace WPF_TEST.ViewModel
             UserAccount userAccount = new UserAccount();
             userAccount.UserID = 1;
             userAccount.User = "admin";
-            userAccount.Pass = Sqlexcute.MD5Genrate("fwd@2021");
+            userAccount.Pass = Sqlexcute.MD5Genrate("00000000");
 
             userAccount.Permit.Weekly_Schedule.CacAccess = true;
             userAccount.Permit.Weekly_Schedule.CanAdd = true;
@@ -569,6 +569,33 @@ namespace WPF_TEST.ViewModel
             
         }
 
+        public bool Changpass(string User,string oldPW,string newPW) 
+        {
+            bool changed = false;
+            if(User == LoginAcount.User && Sqlexcute.MD5Genrate(oldPW) == LoginAcount.Pass) 
+            {
+                UserAccount a = ListUser.Where(x => x.User == LoginAcount.User && x.Pass == LoginAcount.Pass).FirstOrDefault();
+
+                a.Pass = Sqlexcute.MD5Genrate(newPW);
+                var Json = JsonSerializer.Serialize(ListUser);
+                ToJSON.Add(new ConvertoJson { Code = Json });
+                //var aa = JsonSerializer.Deserialize<ObservableCollection<UserAccount>>(Json);
+
+
+                TableUser = Sqlexcute.FillToDataTable(ToJSON);
+
+                Sqlexcute.Create_JSon_Table(TableUser, Sqlexcute.Database, "UserAccount");
+                Sqlexcute.Update_Table_to_Host(TableUser, Sqlexcute.Database, "UserAccount");
+                changed = true;
+                return changed;
+            }
+            else 
+            {
+                changed = false;
+                return changed;
+            }
+            
+        }
        
     }
     public static class Loading_Indicator 

@@ -117,6 +117,60 @@ namespace WPF_TEST.ViewModel
             get { return _customer_Infor; }
             set { SetProperty(ref _customer_Infor, value, nameof(Customer_Infor)); }
         }
+
+        private string _product;
+        public string Product 
+        {
+            get 
+            {
+                return _product;
+            }
+            set 
+            {
+                SetProperty(ref _product, value, nameof(Product));
+            }
+        }
+
+        private string _productCode;
+        public string Product_Code 
+        {
+            get 
+            {
+                return _productCode;
+            }
+            set 
+            {
+
+                SetProperty(ref _productCode, value, nameof(Product_Code));
+            }
+
+        }
+        private int _productquantity;
+        public int ProDuctQuantity
+        {
+            get 
+            {
+                return _productquantity;
+            }
+            set 
+            {
+                SetProperty(ref _productquantity, value, nameof(ProDuctQuantity));
+            }
+        }
+       
+        private string _barcode;
+        public string  BarCode
+        {
+            get
+            {
+                return _barcode;
+                     
+            }
+            set 
+            {
+                SetProperty(ref _barcode, value, nameof(BarCode));
+            }
+        }
         private string _saleorder;
         public string SaleOrder 
         {
@@ -301,50 +355,50 @@ namespace WPF_TEST.ViewModel
                 }
                
             });
-            Test = new RelayCommand<object>((p) => { return true; }, (p) => 
-            {
-                //Random random = new Random();
-                //SaleOrder = random.Next(165516, 8981961).ToString();
-                //WorksList = DataProvider.JobOrderInput.ElementAt(1).Works;
-                var a = DataProvider.JobOrderInput.Where(x => x.ID == "68189122").FirstOrDefault();
-                if (a != null)
-                {
+            //Test = new RelayCommand<object>((p) => { return true; }, (p) => 
+            //{
+            //    //Random random = new Random();
+            //    //SaleOrder = random.Next(165516, 8981961).ToString();
+            //    //WorksList = DataProvider.JobOrderInput.ElementAt(1).Works;
+            //    var a = DataProvider.JobOrderInput.Where(x => x.BarCode == "68189122").FirstOrDefault();
+            //    if (a != null)
+            //    {
 
-                    //SaleOrder = sale;
-                    //SingleCustomer = s1;
-                    //Customer_Infor = s2;
-                    //Quotation = s3;
-                    //Customer_PO = s4;
-                    //Request_Start = s5;
-                    //Request_End = s6;
-                    //Report_Date = DateTime.Now;
-                    //WorksList = new ObservableCollection<Works>();
-                    //foreach (var item in s7)
-                    //{
-                    //    WorksList.Add(item);
-                    //}
+            //        //SaleOrder = sale;
+            //        //SingleCustomer = s1;
+            //        //Customer_Infor = s2;
+            //        //Quotation = s3;
+            //        //Customer_PO = s4;
+            //        //Request_Start = s5;
+            //        //Request_End = s6;
+            //        //Report_Date = DateTime.Now;
+            //        //WorksList = new ObservableCollection<Works>();
+            //        //foreach (var item in s7)
+            //        //{
+            //        //    WorksList.Add(item);
+            //        //}
                      
-                    SaleOrder = a.SaleOrder;
-                    SingleCustomer = a.Customerinformation;
-                    Customer_Infor = SingleCustomer.Customer_Details;
-                    Quotation = a.Quotation;
-                    Customer_PO = a.Customer_PO;
-                    Request_Start = a.Requested_Start;
-                    Request_End = a.Requested_End;
-                    Report_Date = DateTime.Now;
-                    WorksList = new ObservableCollection<Works>();
-                    foreach (var item in a.Works)
-                    {
-                        WorksList.Add(item);
-                    }
+            //        SaleOrder = a.SaleOrder;
+            //        //SingleCustomer = a.Customerinformation;
+            //        Customer_Infor = SingleCustomer.Customer_Details;
+            //        Quotation = a.Quotation;
+            //        Customer_PO = a.Customer_PO;
+            //        Request_Start = a.Requested_Start;
+            //        Request_End = a.Requested_End;
+            //        Report_Date = DateTime.Now;
+            //        WorksList = new ObservableCollection<Works>();
+            //        foreach (var item in a.Works)
+            //        {
+            //            WorksList.Add(item);
+            //        }
 
-                }
-                else
-                {
-                    ScanBarCode = false;
-                    messageBoxService.ShowMessage("Không tìm thấy mã", "Quét Barcode", System.Messaging.MessageType.Acknowledgment);
-                }
-            });
+            //    }
+            //    else
+            //    {
+            //        ScanBarCode = false;
+            //        messageBoxService.ShowMessage("Không tìm thấy mã", "Quét Barcode", System.Messaging.MessageType.Acknowledgment);
+            //    }
+            //});
             Get_BarCode = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
                 try
@@ -396,15 +450,15 @@ namespace WPF_TEST.ViewModel
             });
             BarcodeApply = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
-                var a = DataProvider.JobOrderInput.Where(x => x.ID == p.ToString()).FirstOrDefault();
+                var a = DataProvider.JobOrderInput.Where(x => x.BarCode == p.ToString()).FirstOrDefault();
 
                 //var a = DataProvider.JobOrderInput.Where(x => x.ID == "68189122").FirstOrDefault();
                 if (a != null) 
                 {
                     dem = 2;
                     Barcode_SaleOder = a.SaleOrder;
-                    Barcode_ID = a.ID;
-                    Barcode_Customer = a.Customerinformation;
+                    Barcode_ID = a.BarCode;
+                    //Barcode_Customer = a.Customerinformation;
                     Barcode_CustomeDetail = Barcode_Customer.Customer_Details;
                     Barcode_Quotation = a.Quotation;
                     Barcode_customerPO = a.Customer_PO;
@@ -412,10 +466,11 @@ namespace WPF_TEST.ViewModel
                     Barcode_Requested_End = a.Requested_End;
                     //Dat = DateTime.Now;
                     Barcode_Work = new ObservableCollection<Works>();
-                    foreach (var item in a.Works)
-                    {
-                        Barcode_Work.Add(item);
-                    }
+                    
+                    //foreach (var item in a.Works)
+                    //{
+                    //    Barcode_Work.Add(item);
+                    //}
 
 
                     //SaleOrder = a.SaleOrder;
@@ -493,70 +548,73 @@ namespace WPF_TEST.ViewModel
                 {
                     if (ScanBarCode)
                     {
-                        JobOrder jobOrder = new JobOrder();
-                        jobOrder.ID = ID_Barcode;
-                        jobOrder.ActualvsPlan = 0;
-                        jobOrder.Complete = 0;
-                        jobOrder.Stage = Status.Plan;
-                        jobOrder.Current_Stage = PlannerModel.getColor(jobOrder.Stage);
-                        jobOrder.SaleOrder = SaleOrder;
-                        jobOrder.Priority = TaskPriority;
-                        jobOrder.Requested_End = Request_End;
-                        jobOrder.Request_end_Time = Request_time_end;
+                        //JobOrder jobOrder = new JobOrder();
+                        //jobOrder.BarCode = ID_Barcode;
+                        //jobOrder.ActualvsPlan = 0;
+                        //jobOrder.Complete = 0;
+                        //jobOrder.Stage = Status.Plan;
+                        //jobOrder.Current_Stage = PlannerModel.getColor(jobOrder.Stage);
+                        //jobOrder.SaleOrder = SaleOrder;
+                        //jobOrder.Priority = TaskPriority;
+                        //jobOrder.Requested_End = Request_End;
+                        //jobOrder.Request_end_Time = Request_time_end;
 
-                        jobOrder.Requested_Start = Request_Start;
-                        jobOrder.Request_start_Time = Request_time_start;
-                        jobOrder.Requested_Report_Date = DateTime.Now;
-                        jobOrder.Quotation = Quotation;
-                        jobOrder.Customerinformation = SingleCustomer;
+                        //jobOrder.Requested_Start = Request_Start;
+                        //jobOrder.Request_start_Time = Request_time_start;
+                        //jobOrder.Requested_Report_Date = DateTime.Now;
+                        //jobOrder.Quotation = Quotation;
+                        ////jobOrder.Customerinformation = SingleCustomer;
 
-                        jobOrder.Customer_PO = Customer_PO;
-                        jobOrder.Works = new ObservableCollection<Works>();
-                        foreach (var item in WorksList)
-                        {
+                        //jobOrder.Customer_PO = Customer_PO;
 
-                            jobOrder.Works.Add(item);
-                        }
+                        ////jobOrder.Quantity = WorksList[0].Quantity;
+                        ////jobOrder.Product = WorksList[0].Product;
+                        ////jobOrder.ProductCode = WorksList[0].WorkOrderName;
+                        ////foreach (var item in WorksList)
+                        ////{
 
-                        JobOrders.Add(jobOrder);
-                        try
-                        {
-                            JobOrdersRumtimes = new ObservableCollection<JobOrderRuntime>();
-                            JobOrdersRumtimes = PlannerModel._jobOrderRuntime;
-                            JobOrdersRumtimes.Add(new JobOrderRuntime
-                            {
-                                CurrentStage = jobOrder.Stage,
-                                ActualvsLife = jobOrder.ActualvsPlan,
-                                OrderName = jobOrder.SaleOrder,
-                                PercentComplete = jobOrder.Complete
+                        ////    jobOrder.Works.Add(item);
+                        ////}
 
-
-                            });
-                        }
-                        catch (Exception ex)
-                        {
+                        //JobOrders.Add(jobOrder);
+                        //try
+                        //{
+                        //    JobOrdersRumtimes = new ObservableCollection<JobOrderRuntime>();
+                        //    JobOrdersRumtimes = PlannerModel._jobOrderRuntime;
+                        //    JobOrdersRumtimes.Add(new JobOrderRuntime
+                        //    {
+                        //        CurrentStage = jobOrder.Stage,
+                        //        ActualvsLife = jobOrder.ActualvsPlan,
+                        //        OrderName = jobOrder.SaleOrder,
+                        //        PercentComplete = jobOrder.Complete
 
 
-                        }
+                        //    });
+                        //}
+                        //catch (Exception ex)
+                        //{
 
-                        JobOrderRuntime_Table = Sqlexcute.FillToDataTable(JobOrdersRumtimes);
-                        Sqlexcute.Update_Table_to_Host(JobOrderRuntime_Table, Sqlexcute.Database, JobOrderRuntime_Table.TableName);
-                        Save_Table();
-                        foreach (var item in Work_Library)
-                        {
-                            item.Selected = false;
-                        }
-                        ScanBarCode = false;
-                        WorksList.Clear();
-                        SchedulerViewModel schedulerViewModel = SchedulerViewModel._SchedulerViewModel;
-                        schedulerViewModel.SaveAddjob.CanExecute(null);
-                        schedulerViewModel.SaveAddjob.Execute(null);
+
+                        //}
+
+                        //JobOrderRuntime_Table = Sqlexcute.FillToDataTable(JobOrdersRumtimes);
+                        //Sqlexcute.Update_Table_to_Host(JobOrderRuntime_Table, Sqlexcute.Database, JobOrderRuntime_Table.TableName);
+                        //Save_Table();
+                        //foreach (var item in Work_Library)
+                        //{
+                        //    item.Selected = false;
+                        //}
+                        //ScanBarCode = false;
+                        //WorksList.Clear();
+                        //SchedulerViewModel schedulerViewModel = SchedulerViewModel._SchedulerViewModel;
+                        //schedulerViewModel.SaveAddjob.CanExecute(null);
+                        //schedulerViewModel.SaveAddjob.Execute(null);
                     }
                     else
                     {
                         Random random = new Random();
                         JobOrder jobOrder = new JobOrder();
-                        jobOrder.ID = ID_Barcode;
+                        jobOrder.BarCode = ID_Barcode;
                         jobOrder.ActualvsPlan = 0;
                         jobOrder.Complete = 0;
                         jobOrder.Stage = Status.Plan;
@@ -570,15 +628,12 @@ namespace WPF_TEST.ViewModel
                         jobOrder.Request_start_Time = Request_time_start;
                         jobOrder.Requested_Report_Date = DateTime.Now;
                         jobOrder.Quotation = Quotation;
-                        jobOrder.Customerinformation = SingleCustomer;
+                        //jobOrder.Customerinformation = SingleCustomer;
 
                         jobOrder.Customer_PO = Customer_PO;
-                        jobOrder.Works = new ObservableCollection<Works>();
-                        foreach (var item in WorksList)
-                        {
-
-                            jobOrder.Works.Add(item);
-                        }
+                        jobOrder.Quantity = ProDuctQuantity;
+                        jobOrder.Product = Product;
+                        jobOrder.ProductCode = Product_Code;
 
                         JobOrders.Add(jobOrder);
                         try
@@ -600,16 +655,59 @@ namespace WPF_TEST.ViewModel
 
 
                         }
+                        _ = Sqlexcute.SQL_command("INSERT INTO `JobOrder` " +
+                            "(`BarCode`," +
+                            " `SaleOrder`," +
+                            " `Quotation`, " +
+                            "`Customer_PO`, " +
+                            "`Requested_Start`, " +
+                            "`Request_start_Time`, " +
+                            "`Requested_End`, " +
+                            "`Request_end_Time`, " +
+                            "`Requested_Report_Date`, " +
+                            "`Priority`, " +
+                            "`ActualvsPlan`, " +
+                            "`Complete`, " +
+                            "`Stage`, " +
+                            "`Current_Stage`, " +
+                            "`ProductCode`, " +
+                            "`Product`, " +
+                            "`Quantity`) " +
+                            "VALUES ('" + jobOrder.BarCode + "', " +
+                            "'" + jobOrder.SaleOrder + "', " +
+                            "'" + jobOrder.Quotation + "', " +
+                            "'" + jobOrder.Customer_PO + "', " +
+                            "'" + jobOrder.Requested_Start.ToString("yyyy-MM-dd HH:mm:ss") + "', " +
+                            "'" + jobOrder.Request_start_Time.ToString() + "', " +
+                            "'" + jobOrder.Requested_End.ToString("yyyy-MM-dd HH:mm:ss") + "', " +
+                            "'" + jobOrder.Request_end_Time.ToString() + "', " +
+                            "'" + jobOrder.Requested_Report_Date.ToString("yyyy-MM-dd HH:mm:ss") + "', " +
+                            "'" + Convert.ToInt32(jobOrder.Priority).ToString() + "', " +
+                            "'" + jobOrder.ActualvsPlan.ToString() + "', " +
+                            "'" + jobOrder.Complete.ToString() + "', " +
+                            "'" + Convert.ToInt32(jobOrder.Stage).ToString() + "', " +
+                            "'" + jobOrder.Current_Stage + "', " +
+                            "'" + jobOrder.ProductCode + "', " +
+                            "'" + jobOrder.Product + "', " +
+                            "'" + jobOrder.Quantity.ToString() + "')", Sqlexcute.Database);
 
-                        JobOrderRuntime_Table = Sqlexcute.FillToDataTable(JobOrdersRumtimes);
-                        Sqlexcute.Update_Table_to_Host( JobOrderRuntime_Table, Sqlexcute.Database, JobOrderRuntime_Table.TableName);
-                        Save_Table();
-                        foreach (var item in Work_Library)
-                        {
-                            item.Selected = false;
-                        }
+                        _ = Sqlexcute.SQL_command("INSERT INTO `JobOrderRuntime` (`BarCode`, `ActualvsLife`, `PercentComplete`, `CurrentStage`) VALUES ('" + jobOrder.BarCode + "', '0', '0', '6')", Sqlexcute.Database);
+                        //JobOrderRuntime_Table = Sqlexcute.FillToDataTable(JobOrdersRumtimes);
+                        //Sqlexcute.Update_Table_to_Host( JobOrderRuntime_Table, Sqlexcute.Database, JobOrderRuntime_Table.TableName);
+                        //Save_Table();
+                        //foreach (var item in Work_Library)
+                        //{
+                        //    item.Selected = false;
+                        //}
                         ScanBarCode = false;
-                        WorksList.Clear();
+                        if (Sqlexcute.error_message != string.Empty)
+                        {
+                            messageBoxService.ShowMessage("Lỗi khi lưu dữ liệu lên đám mây:\n " + Sqlexcute.error_message + "", "Thông tin lỗi", System.Messaging.MessageType.Report);
+                        }
+                        else
+                        {
+                            messageBoxService.ShowMessage("Đã Lưu", "Thông tin", System.Messaging.MessageType.Report);
+                        }
                         SchedulerViewModel schedulerViewModel = SchedulerViewModel._SchedulerViewModel;
                         schedulerViewModel.SaveAddjob.CanExecute(null);
                         schedulerViewModel.SaveAddjob.Execute(null);
@@ -648,19 +746,19 @@ namespace WPF_TEST.ViewModel
         public void Save_Table()
         {
 
-            PlannerModel.DatatableScheduler = new DataTable("JobOrder");
-            var Json = JsonSerializer.Serialize(JobOrders);
-            try
-            {
-                ToJson = new ObservableCollection<ConvertoJson>();
-                ToJson.Add(new ConvertoJson { Code = Json });
-            }
-            catch (Exception)
-            {
+            //PlannerModel.DatatableScheduler = new DataTable("JobOrder");
+            //var Json = JsonSerializer.Serialize(JobOrders);
+            //try
+            //{
+            //    ToJson = new ObservableCollection<ConvertoJson>();
+            //    ToJson.Add(new ConvertoJson { Code = Json });
+            //}
+            //catch (Exception)
+            //{
 
-                ToJson = new ObservableCollection<ConvertoJson>();
-                ToJson.Add(new ConvertoJson { Code = Json });
-            }
+            //    ToJson = new ObservableCollection<ConvertoJson>();
+            //    ToJson.Add(new ConvertoJson { Code = Json });
+            //}
 
 
 

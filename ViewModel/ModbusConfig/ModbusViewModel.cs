@@ -584,7 +584,7 @@ namespace WPF_TEST.ViewModel
                 timerUpdateData.Interval = new TimeSpan(0,0,1);
                 timerUpdateData.Tick += TimerUpdateData_Tick;
                 timerUpdateData.IsEnabled = false;
-                mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref SQLModbus, "ModbusDevice", Sqlexcute.Database);
+                Sqlexcute.GetData_FroM_Database(ref SQLModbus, "ModbusDevice", Sqlexcute.Database);
                 ModbusDevices = Sqlexcute.Conver_From_Data_Table_To_List<ModbusDevice>(SQLModbus);
                 Get_Thread(ref ComName);
                 //GetmodbusTCP();
@@ -597,7 +597,7 @@ namespace WPF_TEST.ViewModel
                 if (!_load) 
                 {
                     SQLModbus = new DataTable("ModbusDevice");
-                    mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref SQLModbus, "ModbusDevice", Sqlexcute.Database);
+                    Sqlexcute.GetData_FroM_Database(ref SQLModbus, "ModbusDevice", Sqlexcute.Database);
                     ModbusDevices = Sqlexcute.Conver_From_Data_Table_To_List<ModbusDevice>(SQLModbus);
                     Get_Thread(ref ComName);
                     //GetmodbusTCP();

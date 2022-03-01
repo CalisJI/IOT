@@ -181,14 +181,14 @@ namespace WPF_TEST.ViewModel
                 Add_Customer();
                 Customer_Table = Sqlexcute.FillToDataTable(Customer_Storage);
                 Sqlexcute.AutoCreateTable(Customer_Table, Sqlexcute.Database, Customer_Table.TableName, ref check_, ref exist_);
-                mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref Customer_Table, Customer_Table.TableName, Sqlexcute.Database);
+                Sqlexcute.GetData_FroM_Database(ref Customer_Table, Customer_Table.TableName, Sqlexcute.Database);
 
                 Customer_Table = Sqlexcute.FillToDataTable(Customer_Storage);
                 Sqlexcute.Update_Table_to_Host(Customer_Table, Sqlexcute.Database, Customer_Table.TableName);
             }
             else
             {
-                mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref Customer_Table, Customer_Table.TableName, Sqlexcute.Database);
+                Sqlexcute.GetData_FroM_Database(ref Customer_Table, Customer_Table.TableName, Sqlexcute.Database);
                 Customer_Storage = Sqlexcute.Conver_From_Data_Table_To_List<Customer>(Customer_Table);
             }
         }

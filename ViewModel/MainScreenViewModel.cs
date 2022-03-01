@@ -86,6 +86,7 @@ namespace WPF_TEST.ViewModel
         public ICommand User_Manager { get; set; }
 
         public ICommand OpenDataBaseSetting { get; set; }
+        public ICommand PlanConfig { get; set; }
         #endregion
         FileConnfig_Main_ViewModel FileConnfig_Main_ViewModel = new FileConnfig_Main_ViewModel();
         //DataStreamCollectionModel DataStreamCollectionModel = new DataStreamCollectionModel();
@@ -101,6 +102,8 @@ namespace WPF_TEST.ViewModel
         public MainScreenViewModel mainScreenViewModel;
         public Access_Managerment_ViewModel Access_Managerment_ViewModel = new Access_Managerment_ViewModel();
         UserManager_ViewModel UserManager_ViewModel = UserManager_ViewModel.INSUserManager_ViewModel;
+
+        PlanSetting_ViewModel PlanSetting_ViewModel = PlanSetting_ViewModel.INS_PlanSetting;
         public bool loadMain = false;
         public MainScreenViewModel() 
         {
@@ -244,6 +247,10 @@ namespace WPF_TEST.ViewModel
             {
                 DatabaseConfig_View databaseConfig_View = new DatabaseConfig_View();
                 _ = databaseConfig_View.ShowDialog();
+            });
+            PlanConfig = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                mainScreenViewModel.SelectedViewModel = PlanSetting_ViewModel;
             });
         }
        

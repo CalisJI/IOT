@@ -251,6 +251,8 @@ namespace WPF_TEST.Data
     }
     public class ConvertoJson 
     {
+        
+        //public int Id { get; set; }
         public string Code { get; set; }
     }
     public class UACC

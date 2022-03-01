@@ -321,11 +321,12 @@ namespace WPF_TEST.ViewModel
                     try
                     {
                         PlannerModel plannerModel = PlannerModel.INS_PlanViewModel;
+                        ObservableCollection<JobOrder> temp = new ObservableCollection<JobOrder>();
                         for (int i = 1; i < DatatableExcel.Rows.Count; i++)
                         {
                             JobOrder jobOrder = new JobOrder();
                             string bb = DatatableExcel.Rows[i][JobTableConfigs.SoHieuCongViec_Col].ToString();
-                            jobOrder.ID = bb;
+                            jobOrder.BarCode = bb;
                             //jobOrder.SaleOrder = DatatableExcel.Rows[i][1].ToString();
                             jobOrder.Quotation = DatatableExcel.Rows[i][JobTableConfigs.ThamKhao_Col].ToString();
                             //jobOrder.Customer_PO = DatatableExcel.Rows[i][3].ToString();
@@ -337,11 +338,14 @@ namespace WPF_TEST.ViewModel
                             jobOrder.Priority = TaskPriority.Normal;
                             jobOrder.Stage = Status.Plan;
                             jobOrder.Current_Stage = PlannerModel.getColor(jobOrder.Stage);
-                            jobOrder.Customerinformation = new Customer();
+                            //jobOrder.Customerinformation = new Customer();
                             string Tensanpahm = DatatableExcel.Rows[i][JobTableConfigs.TenSanPham_Col].ToString();
                             string SoLuong = DatatableExcel.Rows[i][JobTableConfigs.SoLuong_Col].ToString();
                             string Masanpahm = DatatableExcel.Rows[i][JobTableConfigs.MaSanPham_Col].ToString();
-                            jobOrder.Works = GetWorks(Tensanpahm, SoLuong, Masanpahm);
+                            //jobOrder.Works = GetWorks(Tensanpahm, SoLuong, Masanpahm);
+                            jobOrder.ProductCode = Masanpahm;
+                            jobOrder.Quantity = Convert.ToInt32(SoLuong);
+                            jobOrder.Product = Tensanpahm;
                             jobOrder.Priority = TaskPriority.Normal;
 
                             DataProvider.JobOrderInput.Add(jobOrder);
@@ -351,8 +355,9 @@ namespace WPF_TEST.ViewModel
                                 {
 
                                     plannerModel.JobOrders.Add(jobOrder);
+                                    temp.Add(jobOrder);
                                 }
-                                catch (Exception ex)
+                                catch (Exception)
                                 {
 
 
@@ -374,8 +379,8 @@ namespace WPF_TEST.ViewModel
 
                         //}
                         NhapDuLieu.ReportProgress(75);
-                        plannerModel.Save_Table_Thread();
-                        //plannerModel.adruntime();
+                        //plannerModel.Save_Table_Thread();
+                        SaveExCel_to_Server(temp);
                         NhapDuLieu.ReportProgress(90);
                         if (DataProvider.Error_mesage != string.Empty)
                         {
@@ -394,7 +399,14 @@ namespace WPF_TEST.ViewModel
             }
         }
 
-       
+        public void SaveExCel_to_Server(ObservableCollection<JobOrder> jobOrders) 
+        {
+            for (int i = 0; i < jobOrders.Count; i++)
+            {
+                _ = Sqlexcute.SQL_command("INSERT INTO `JobOrder` (`BarCode`, `SaleOrder`, `Quotation`, `Customer_PO`, `Requested_Start`, `Request_start_Time`, `Requested_End`, `Request_end_Time`, `Requested_Report_Date`, `Priority`, `ActualvsPlan`, `Complete`, `Stage`, `Current_Stage`, `ProductCode`, `Product`, `Quantity`) VALUES ('" + jobOrders[i].BarCode + "', '" + jobOrders[i].SaleOrder + "', '" + jobOrders[i].Quotation + "', '" + jobOrders[i].Customer_PO + "', '" + jobOrders[i].Requested_Start.ToString("yyyy-MM-dd HH:mm:ss") + "', '" + jobOrders[i].Request_start_Time.ToString() + "', '" + jobOrders[i].Requested_End.ToString("yyyy-MM-dd HH:mm:ss") + "', '" + jobOrders[i].Request_end_Time.ToString() + "', '" + jobOrders[i].Requested_Report_Date.ToString("yyyy-MM-dd HH:mm:ss") + "', '" + Convert.ToInt32(jobOrders[i].Priority).ToString() + "', '" + jobOrders[i].ActualvsPlan.ToString() + "', '" + jobOrders[i].Complete.ToString() + "', '" + Convert.ToInt32(jobOrders[i].Stage).ToString() + "', '" + jobOrders[i].Current_Stage + "', '" + jobOrders[i].ProductCode + "', '" + jobOrders[i].Product + "', '" + jobOrders[i].Quantity.ToString() + "')", Sqlexcute.Database);
+                _ = Sqlexcute.SQL_command("INSERT INTO `JobOrderRuntime` (`BarCode`, `ActualvsLife`, `PercentComplete`, `CurrentStage`) VALUES ('" + jobOrders[i].BarCode + "', '0', '0', '6')", Sqlexcute.Database);
+            }
+        }
         public void JobtableConfig_Load() 
         {
             try
@@ -449,7 +461,7 @@ namespace WPF_TEST.ViewModel
                     {
                         JobOrder jobOrder = new JobOrder();
                         string bb = DatatableExcel.Rows[i][JobTableConfigs.MaSanPham_Col].ToString();
-                        jobOrder.ID = bb;
+                        jobOrder.BarCode = bb;
                         //jobOrder.SaleOrder = DatatableExcel.Rows[i][1].ToString();
                         jobOrder.Quotation = DatatableExcel.Rows[i][JobTableConfigs.ThamKhao_Col].ToString();
                         //jobOrder.Customer_PO = DatatableExcel.Rows[i][3].ToString();
@@ -468,7 +480,10 @@ namespace WPF_TEST.ViewModel
                         string Tensanpahm = DatatableExcel.Rows[i][JobTableConfigs.TenSanPham_Col].ToString();
                         string SoLuong = DatatableExcel.Rows[i][JobTableConfigs.SoLuong_Col].ToString();
                         string Masanpahm = DatatableExcel.Rows[i][JobTableConfigs.MaSanPham_Col].ToString();
-                        jobOrder.Works = GetWorks(Tensanpahm,SoLuong,Masanpahm);
+                        //jobOrder.Works = GetWorks(Tensanpahm,SoLuong,Masanpahm);
+                        jobOrder.Quantity = Convert.ToInt32(SoLuong);
+                        jobOrder.ProductCode = Masanpahm;
+                        jobOrder.Product = Tensanpahm;
                         jobOrder.Priority = TaskPriority.Normal;
 
                         DataProvider.JobOrderInput.Add(jobOrder);
@@ -546,38 +561,7 @@ namespace WPF_TEST.ViewModel
 
             return cc;
         }
-        public void Save_Table()
-        {
-
-            DatatableScheduler = new DataTable();
-            var Json = JsonSerializer.Serialize(JobOrders);
-            try
-            {
-                ToJson = new ObservableCollection<ConvertoJson>();
-                ToJson.Add(new ConvertoJson { Code = Json });
-            }
-            catch (Exception)
-            {
-
-                ToJson = new ObservableCollection<ConvertoJson>();
-                ToJson.Add(new ConvertoJson { Code = Json });
-            }
-
-
-
-            DatatableScheduler = Sqlexcute.FillToDataTable(ToJson);
-
-            Sqlexcute.Update_Table_to_Host( DatatableScheduler, "fwd63823_database", "JobOrder");
-            if (Sqlexcute.error_message != string.Empty)
-            {
-                messageBoxService.ShowMessage("Lỗi khi lưu dữ liệu lên đám mây:\n " + Sqlexcute.error_message + "", "Thông tin lỗi", System.Messaging.MessageType.Report);
-            }
-            else
-            {
-                messageBoxService.ShowMessage("Đã Lưu", "Thông tin", System.Messaging.MessageType.Report);
-            }
-
-        }
+        
     }
     public class JobTableConfig
     {

@@ -32,7 +32,7 @@
         <DataTemplate x:Key="Template">
             <Border Background="Transparent" Height="40" Width="40" HorizontalAlignment="Center">
                 <Image 
-                Source="{Binding TaskPriority,Converter={StaticResource ImageConvert}}"
+                Source="{Binding TaskPriority, Converter={StaticResource ImageConvert}}"
                 Stretch="Fill"
                 Height="30"
                 Width="30"
@@ -61,7 +61,7 @@
 
     </UserControl.Resources>
 
-    <ScrollViewer HorizontalScrollBarVisibility="Visible">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto">
         <DockPanel>
             <Expander DockPanel.Dock="Left"
                     ExpandDirection="Left" Margin="0,23">
@@ -199,20 +199,39 @@
                 </StackPanel>
             </Expander>
             <dxlc:LayoutControl 
-        VerticalAlignment="Top"
-        Width="1600"
-        Orientation="Vertical"
-        TextBlock.FontSize="17" >
+                VerticalAlignment="Top"
+                Width="1600"
+                Orientation="Vertical"
+                TextBlock.FontSize="17" >
 
-                <dxlc:LayoutGroup Orientation="Horizontal" Height="1000" Width="1600" dxlc:DockLayoutControl.Dock="Left">
+                <dxlc:LayoutGroup 
+                    Orientation="Horizontal" 
+                    Height="1000"
+                    Width="1600"
+                    dxlc:DockLayoutControl.Dock="Left">
 
                     <!--<StackPanel Orientation="Horizontal" Height="1046" Width="auto">-->
 
 
-                    <dxlc:LayoutItem Label="Project" LabelStyle="{StaticResource LB}" LabelPosition="Top"  HorizontalAlignment="Left" Width="auto" >
+                    <dxlc:LayoutItem
+                        Label="Project" 
+                        LabelStyle="{StaticResource LB}" 
+                        LabelPosition="Top" 
+                        HorizontalAlignment="Left" 
+                        Width="auto" >
                         <dxg:GridControl 
                             
-                            x:Name="Grid_data" ItemsSource="{Binding Path=JobOrders}" Height="1000" Width="1600" dxlc:DockLayoutControl.Dock="Left">
+                            x:Name="Grid_data" 
+                            ItemsSource="{Binding Path=JobOrders}"
+                            Height="1000" Width="1600"
+                            dxlc:DockLayoutControl.Dock="Left">
+                            <!--<i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectedItemChanged">
+                                    <i:InvokeCommandAction 
+                                        Command="{Binding Select_To_Changed}"
+                                        CommandParameter="{Binding ElementName=Grid_data,Path=SelectedItem}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>-->
                             <dxg:GridControl.View>
                                 <dxg:TableView 
                                     AllowEditing="False"
@@ -226,7 +245,7 @@
                             </dxg:GridControl.View>
                             <dxg:GridControl.Columns >
                                 <dxg:GridColumn
-                                    FieldName="ID"
+                                    FieldName="BarCode"
                                     Header="Bar Code"
                                     Width="160">
                                     
@@ -252,16 +271,18 @@
                                 <dxg:GridColumn FieldName="Requested_End" Header="Due Date" Width="200">
 
                                 </dxg:GridColumn>
-                                <dxg:GridColumn FieldName="Priority" Header="Priority" Width="70" FixedWidth="True" >
+                                <dxg:GridColumn FieldName="Priority" Header="Priority Level" Width="110" FixedWidth="True" >
                                     <dxg:GridColumn.EditSettings>
 
-                                        <dxe:ComboBoxEditSettings ItemsSource="{dxe:EnumItemsSource EnumType=local1:TaskPriority,AllowImages=True}"
-                                                          ApplyItemTemplateToSelectedItem="True"
-                                                          IsTextEditable="False"
-                                                          IsEnabled="False"
-                                                          AllowDefaultButton="False"
-                                                          HorizontalContentAlignment="Stretch"
-                                                          ItemTemplate="{StaticResource Template}"/>
+                                        <dxe:ComboBoxEditSettings 
+                                            
+                                            ItemsSource="{dxe:EnumItemsSource EnumType=local1:TaskPriority,AllowImages=True}"
+                                            ApplyItemTemplateToSelectedItem="False"
+                                            IsTextEditable="False"
+                                            IsEnabled="True"
+                                            
+                                            HorizontalContentAlignment="Stretch"
+                                            ItemTemplate="{StaticResource Template}"/>
 
                                     </dxg:GridColumn.EditSettings>
 

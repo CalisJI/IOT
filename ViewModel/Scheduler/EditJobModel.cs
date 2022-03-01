@@ -19,9 +19,30 @@ namespace WPF_TEST.ViewModel
     [POCOViewModel]
     public class EditJobModel:BaseViewModel
     {
+        private static EditJobModel model;
+        public static EditJobModel INS_EditJobModel
+        {
+            get 
+            {
+                if (model != null) 
+                {
+                    return model;
+                }
+                else 
+                {
+                    model = new EditJobModel();
+                    return model;
+                }
+            }
+            set 
+            {
+                model = value;
+            }
+        }
+
         WPFMessageBoxService messageBoxService = new WPFMessageBoxService();
         Sqlexcute Sqlexcute = new Sqlexcute();
-        DataTable JobOrder_Table = new DataTable("Job Information");
+        DataTable JobOrder_Table = new DataTable("JobOrder");
         DataTable Customer_Table = new DataTable("Customer_Details");
         DataTable Work_Table = new DataTable("Work Information");
        
@@ -157,16 +178,16 @@ namespace WPF_TEST.ViewModel
         #endregion
         
         #region Commmand
-        public ICommand Save_EditJob 
-        {
-            get 
-            {
-                return new RelayCommand<object>((p) => { return true; }, (p) =>
-                {
-                    Save_Table();
-                });
-            }
-        }
+        //public ICommand Save_EditJob 
+        //{
+        //    get 
+        //    {
+        //        return new RelayCommand<object>((p) => { return true; }, (p) =>
+        //        {
+        //            Save_Table();
+        //        });
+        //    }
+        //}
         
         public ICommand SelectToEditcbbox { get; set; }
         public ICommand Loaded { get; set; }
@@ -235,8 +256,8 @@ namespace WPF_TEST.ViewModel
         {
             JobOrder jobOrder = new JobOrder();
             Random random = new Random();
-            jobOrder.Customerinformation = CustomerInfo[0];
-            jobOrder.ID = random.Next(111111, 888888).ToString();
+            //jobOrder.Customerinformation = CustomerInfo[0];
+            jobOrder.BarCode = random.Next(111111, 888888).ToString();
             jobOrder.Customer_PO = "PO1";
             jobOrder.Quotation = "Quotation1";
             jobOrder.Priority = TaskPriority.Normal;
@@ -248,33 +269,36 @@ namespace WPF_TEST.ViewModel
             jobOrder.Stage = Status.Queued;
             jobOrder.Complete = 25;
             jobOrder.Current_Stage = PlannerModel.getColor(jobOrder.Stage);
-            jobOrder.Works = this.WorksList;
+            jobOrder.Quantity = WorksList[0].Quantity;
+            jobOrder.Product = WorksList[0].Product;
+            jobOrder.ProductCode = WorksList[0].WorkOrderName;
+            
 
-            JobOrder jobOrder1 = new JobOrder();
+            //JobOrder jobOrder1 = new JobOrder();
 
-            jobOrder1.Customerinformation = CustomerInfo[1];
-            jobOrder1.ID = random.Next(111111, 888888).ToString();
-            jobOrder1.Customer_PO = "PO2";
-            jobOrder1.Quotation = "Quotation2";
-            jobOrder1.Priority = TaskPriority.Normal;
-            jobOrder1.Current_Stage = PlannerModel.getColor(Status.Plan);
-            jobOrder1.Requested_Start = DateTime.Today + TimeSpan.FromDays(1);
-            jobOrder1.Requested_End = DateTime.Now + TimeSpan.FromDays(8);
-            jobOrder1.Requested_Report_Date = DateTime.Today;
-            jobOrder1.SaleOrder = "SaleOrder2";
-            jobOrder1.Stage = Status.Plan;
-            jobOrder1.Current_Stage = PlannerModel.getColor(jobOrder1.Stage);
-            jobOrder1.Complete = 0;
-            Works works = new Works();
-            works.Product = "Sản phẩm 2";
-            works.WorkOrderName = "Mã 1";
-            works.ImageProduct = @"F:\IMAGE\W_Motors_Lykan_HyperSport_2014_4K_7128x4493.jpg";
-            works.Remark = "Noremark";
-            works.Quantity = random.Next(1, 20);
-            WorksList.Add(works);
-            jobOrder1.Works.Add(works);
-            JobOrders.Add(jobOrder);
-            JobOrders.Add(jobOrder1);
+            //jobOrder1.Customerinformation = CustomerInfo[1];
+            //jobOrder1.ID = random.Next(111111, 888888).ToString();
+            //jobOrder1.Customer_PO = "PO2";
+            //jobOrder1.Quotation = "Quotation2";
+            //jobOrder1.Priority = TaskPriority.Normal;
+            //jobOrder1.Current_Stage = PlannerModel.getColor(Status.Plan);
+            //jobOrder1.Requested_Start = DateTime.Today + TimeSpan.FromDays(1);
+            //jobOrder1.Requested_End = DateTime.Now + TimeSpan.FromDays(8);
+            //jobOrder1.Requested_Report_Date = DateTime.Today;
+            //jobOrder1.SaleOrder = "SaleOrder2";
+            //jobOrder1.Stage = Status.Plan;
+            //jobOrder1.Current_Stage = PlannerModel.getColor(jobOrder1.Stage);
+            //jobOrder1.Complete = 0;
+            //Works works = new Works();
+            //works.Product = "Sản phẩm 2";
+            //works.WorkOrderName = "Mã 1";
+            //works.ImageProduct = @"F:\IMAGE\W_Motors_Lykan_HyperSport_2014_4K_7128x4493.jpg";
+            //works.Remark = "Noremark";
+            //works.Quantity = random.Next(1, 20);
+            //WorksList.Add(works);
+            //jobOrder1.Works.Add(works);
+            //JobOrders.Add(jobOrder);
+            //JobOrders.Add(jobOrder1);
             //PlannerModel._jobOrder = JobOrders;
         }
 
@@ -284,7 +308,7 @@ namespace WPF_TEST.ViewModel
         public EditJobModel() 
         {
             if (!load_edit) 
-            {
+          {
 
 
                 JobOrders = new ObservableCollection<JobOrder>();
@@ -343,7 +367,7 @@ namespace WPF_TEST.ViewModel
                     Add();
                     Work_Table = Sqlexcute.FillToDataTable(WorksList);
                     Sqlexcute.AutoCreateTable(Work_Table, Sqlexcute.Database, Work_Table.TableName, ref check_, ref exist_);
-                    mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref Work_Table, Work_Table.TableName, Sqlexcute.Database);
+                    Sqlexcute.GetData_FroM_Database(ref Work_Table, Work_Table.TableName, Sqlexcute.Database);
              
                     Work_Table = Sqlexcute.FillToDataTable(WorksList);
                     Sqlexcute.Update_Table_to_Host(Work_Table, Sqlexcute.Database, Work_Table.TableName);
@@ -351,7 +375,7 @@ namespace WPF_TEST.ViewModel
                 }
                 else
                 {
-                    mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref Work_Table, Work_Table.TableName, Sqlexcute.Database);
+                    Sqlexcute.GetData_FroM_Database(ref Work_Table, Work_Table.TableName, Sqlexcute.Database);
                     WorksList = Sqlexcute.Conver_From_Data_Table_To_List<Works>(Work_Table);
 
                 }
@@ -359,13 +383,9 @@ namespace WPF_TEST.ViewModel
                 if (check == 0)
                 {
                     Add_Job();
-                    var Json = JsonSerializer.Serialize(JobOrders);
-                    ToJson.Add(new ConvertoJson { Code = Json });
-                    PlannerModel.DatatableScheduler = Sqlexcute.FillToDataTable(ToJson);
-                    JobOrder_Table = Sqlexcute.FillToDataTable(ToJson);
-                    //Sqlexcute.AutoCreateTable(JobOrder_Table, "fwd63823_database", JobOrder_Table.TableName, ref check_, ref exist_);
-                    Sqlexcute.Create_JSon_Table(JobOrder_Table, Sqlexcute.Database, "JobOrder");
-                    //mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref JobOrder_Table, "JobOrder", Sqlexcute.Database);
+                    JobOrder_Table = Sqlexcute.FillToDataTable(JobOrders);
+                    Sqlexcute.AutoCreateTable(JobOrder_Table, Sqlexcute.Database, JobOrder_Table.TableName);
+                    PlannerModel.DatatableScheduler = Sqlexcute.FillToDataTable(JobOrders);
                     mySqlDataAdapter = null;
 
                     Sqlexcute.Update_Table_to_Host(JobOrder_Table, Sqlexcute.Database, "JobOrder");
@@ -374,10 +394,9 @@ namespace WPF_TEST.ViewModel
                 {
                     try
                     {
-                        mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref JobOrder_Table, "JobOrder", Sqlexcute.Database);
-                        ToJson = Sqlexcute.Conver_From_Data_Table_To_List<ConvertoJson>(JobOrder_Table);
-                        string a = JobOrder_Table.Rows[0][0].ToString();
-                        JobOrders = JsonSerializer.Deserialize<ObservableCollection<JobOrder>>(ToJson.ElementAt(0).Code);
+                        Sqlexcute.GetData_FroM_Database(ref JobOrder_Table, "JobOrder", Sqlexcute.Database,Sqlexcute.getLimitRow(0,500));
+                     
+                        JobOrders = Sqlexcute.Conver_From_Data_Table_To_List<JobOrder>(JobOrder_Table);
                         PlannerModel._jobOrder = JobOrders;
                         PlannerModel._customerInfo = CustomerInfo;
                         PlannerModel._work = WorksList;
@@ -387,20 +406,16 @@ namespace WPF_TEST.ViewModel
                         AddProjectSchedule_ViewModel._Work_Library = WorksList;
                         AddProjectSchedule_ViewModel._customer = CustomerInfo;
                     }
-                    catch (Exception)
+                    catch (Exception ex )
                     {
 
                        
                     }
-                   
+
                 }
                
-
-            }
-            //Save_EditJob = new RelayCommand<object>((p) => { return true; }, (p) =>
-            //{
-            //    Save_Table();
-            //});
+                
+            }      
             SelectToEditcbbox = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
                 try
@@ -419,32 +434,23 @@ namespace WPF_TEST.ViewModel
                 
             });
         }
-        public void Save_Table()
-        {
-            JobOrder_Table = new DataTable();
-            var Json = JsonSerializer.Serialize(JobOrders);
-            ToJson.Clear();
-            ToJson.Add(new ConvertoJson { Code = Json });
-            JobOrder_Table = Sqlexcute.FillToDataTable(ToJson);
-            //bool check = true;
-            //bool exist = false;
-            //Sqlexcute.AutoCreateTable(JobOrder_Table, Sqlexcute.Database, "JobOrder", ref check, ref exist);
-            //if (!check)
-            //{
-            //    messageBoxService.ShowMessage(Sqlexcute.error_message, "Thông tin lỗi", System.Messaging.MessageType.Report);
-            //}
-           
-            Sqlexcute.Update_Table_to_Host(JobOrder_Table, "fwd63823_database", JobOrder_Table.TableName);
-            if (Sqlexcute.error_message != string.Empty)
-            {
-                messageBoxService.ShowMessage("Lỗi khi lưu dữ liệu lên đám mây:\n " + Sqlexcute.error_message + "", "Thông tin lỗi", System.Messaging.MessageType.Report);
-            }
-            else 
-            {
-                messageBoxService.ShowMessage("Đã Lưu", "Thông tin", System.Messaging.MessageType.Report);
-            }
-
-        }
+        //public void Save_Table()
+        //{
+        //    JobOrder_Table = new DataTable();
+            
+        //    JobOrder_Table = Sqlexcute.FillToDataTable(JobOrders);
+          
+        //    Sqlexcute.Update_Table_to_Host(JobOrder_Table, "fwd63823_database", JobOrder_Table.TableName);
+        //    if (Sqlexcute.error_message != string.Empty)
+        //    {
+        //        messageBoxService.ShowMessage("Lỗi khi lưu dữ liệu lên đám mây:\n " + Sqlexcute.error_message + "", "Thông tin lỗi", System.Messaging.MessageType.Report);
+        //    }
+        //    else 
+        //    {
+        //        Sqlexcute.SQL_command(" DELETE S1 FROM " + JobOrder_Table.TableName + " AS S1  INNER JOIN " + JobOrder_Table.TableName + " AS S2 WHERE S1.BarCode = S2.BarCode AND S1.id < S2.id", Sqlexcute.Database);
+        //        messageBoxService.ShowMessage("Đã Lưu", "Thông tin", System.Messaging.MessageType.Report);
+        //    }
+        //}
     }
 
 }

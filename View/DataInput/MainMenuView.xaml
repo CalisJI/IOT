@@ -6,8 +6,9 @@
              xmlns:local="clr-namespace:WPF_TEST.View"
               xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
               xmlns:viewmodels ="clr-namespace:WPF_TEST.ViewModel"
-             mc:Ignorable="d" 
-             d:DesignHeight="1080" d:DesignWidth="1920"
+             mc:Ignorable="d"
+             Height="1000"
+             Width="1920"
              DataContext="{StaticResource MenuMainAll}">
     <Grid>
         <StackPanel Orientation="Vertical" Height="300" Width="900" HorizontalAlignment="Center" VerticalAlignment="Center">

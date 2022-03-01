@@ -9,7 +9,7 @@
              DataContext="{StaticResource Modbus}"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             d:DesignHeight="450" d:DesignWidth="800">
+             Height="768" Width="1366">
    
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">

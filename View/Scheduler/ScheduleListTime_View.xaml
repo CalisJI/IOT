@@ -13,11 +13,12 @@
              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
              xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
              xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
-             d:DesignHeight="1080" d:DesignWidth="1920">
+             d:DesignHeight="1000" d:DesignWidth="1920">
     <DockPanel>
 
         <ContentControl
-           
+            Height="155"
+            
             ContentTemplate="{StaticResource Ribbon}"
             dxsch:SchedulerControl.Scheduler="{Binding ElementName=schedule}"
             DockPanel.Dock="Top"/>
@@ -107,6 +108,118 @@
                                 FontSize="20" Margin="20,0,5,2"/>
                         </StackPanel>
                     </Button>
+                    <StackPanel 
+                        Margin="0,30,0,0"
+                        Orientation="Horizontal">
+                        <Rectangle 
+                            HorizontalAlignment="Left"
+                            Margin="10,0,0,0"
+                            Fill="#808080"
+                            Width="20" Height="20">
+                            
+                        </Rectangle>
+                        <TextBlock
+                            Margin="10,0,0,0"
+                            FontSize="20"
+                            FontWeight="DemiBold"
+                            Text="Queued"/>
+                    </StackPanel>
+                    <StackPanel 
+                        Margin="0,5,0,0"
+                        Orientation="Horizontal">
+                        <Rectangle 
+                            HorizontalAlignment="Left"
+                            Margin="10,0,0,0"
+                            Fill="#ffa204"
+                            Width="20" Height="20">
+
+                        </Rectangle>
+                        <TextBlock
+                            Margin="10,0,0,0"
+                            FontSize="20"
+                            FontWeight="DemiBold"
+                            Text="Plan"/>
+                    </StackPanel>
+                    <StackPanel 
+                        Margin="0,5,0,0"
+                        Orientation="Horizontal">
+                        <Rectangle 
+                            HorizontalAlignment="Left"
+                            Margin="10,0,0,0"
+                            Fill="#05fd00"
+                            Width="20" Height="20">
+
+                        </Rectangle>
+                        <TextBlock
+                            Margin="10,0,0,0"
+                            FontSize="20"
+                            FontWeight="DemiBold"
+                            Text="Running"/>
+                    </StackPanel>
+                    <StackPanel 
+                        Margin="0,5,0,0"
+                        Orientation="Horizontal">
+                        <Rectangle 
+                            HorizontalAlignment="Left"
+                            Margin="10,0,0,0"
+                            Fill="#fefe00"
+                            Width="20" Height="20">
+
+                        </Rectangle>
+                        <TextBlock
+                            Margin="10,0,0,0"
+                            FontSize="20"
+                            FontWeight="DemiBold"
+                            Text="Pause"/>
+                    </StackPanel>
+                    <StackPanel 
+                        Margin="0,5,0,0"
+                        Orientation="Horizontal">
+                        <Rectangle 
+                            HorizontalAlignment="Left"
+                            Margin="10,0,0,0"
+                            Fill="#fd0000"
+                            Width="20" Height="20">
+
+                        </Rectangle>
+                        <TextBlock
+                            Margin="10,0,0,0"
+                            FontSize="20"
+                            FontWeight="DemiBold"
+                            Text="Delayed"/>
+                    </StackPanel>
+                    <StackPanel 
+                        Margin="0,5,0,0"
+                        Orientation="Horizontal">
+                        <Rectangle 
+                            HorizontalAlignment="Left"
+                            Margin="10,0,0,0"
+                            Fill="#6495e5"
+                            Width="20" Height="20">
+
+                        </Rectangle>
+                        <TextBlock
+                            Margin="10,0,0,0"
+                            FontSize="20"
+                            FontWeight="DemiBold"
+                            Text="Done"/>
+                    </StackPanel>
+                    <StackPanel 
+                        Margin="0,5,0,0"
+                        Orientation="Horizontal">
+                        <Rectangle 
+                            HorizontalAlignment="Left"
+                            Margin="10,0,0,0"
+                            Fill="#7c0080"
+                            Width="20" Height="20">
+
+                        </Rectangle>
+                        <TextBlock
+                            Margin="10,0,0,0"
+                            FontSize="20"
+                            FontWeight="DemiBold"
+                            Text="Ready"/>
+                    </StackPanel>
                 </StackPanel>
             </Expander>
         </StackPanel>
@@ -114,7 +227,9 @@
 
         <dxsch:SchedulerControl 
             
-            
+            Width="1920"
+            AllowAppointmentResize="True"
+            Height="920"
             x:Name="schedule"
             AutomationProperties.AutomationId="True"
             GroupType="Resource"
@@ -144,11 +259,11 @@
 
             <dxsch:SchedulerControl.DataSource>
                 <dxsch:DataSource
-                    DataContext="{StaticResource EditJob}"
+                    DataContext="{StaticResource Planner}"
                     AppointmentsSource="{Binding JobOrders}">
                     <dxsch:DataSource.AppointmentMappings>
                         <dxsch:AppointmentMappings
-                            Subject="SaleOrder"
+                            Subject="BarCode"
                             Start="Requested_Start"
                             End="Requested_End"
                             LabelId="LabelId"
@@ -191,6 +306,7 @@
                     </dxsch:DataSource.ResourceMappings>
                 </dxsch:DataSource>
             </dxsch:SchedulerControl.DataSource>-->
+            
         </dxsch:SchedulerControl>
 
     </DockPanel>

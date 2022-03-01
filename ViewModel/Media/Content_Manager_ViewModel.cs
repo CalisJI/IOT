@@ -203,14 +203,14 @@ namespace WPF_TEST.ViewModel
                     VideoObjectTable = Sqlexcute.FillToDataTable<VideoObject>(VideoObjects);
                   
                     Sqlexcute.AutoCreateTable(VideoObjectTable, "fwd63823_database", VideoObjectTable.TableName, ref check_, ref exist_);
-                    mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref VideoObjectTable, VideoObjectTable.TableName, "fwd63823_database");
+                    Sqlexcute.GetData_FroM_Database(ref VideoObjectTable, VideoObjectTable.TableName, "fwd63823_database");
                     AddVideo();
                     VideoObjectTable = Sqlexcute.FillToDataTable<VideoObject>(VideoObjects);
                     Sqlexcute.Update_Table_to_Host(VideoObjectTable, "fwd63823_database", VideoObjectTable.TableName);
                 }
                 else
                 {
-                    mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref VideoObjectTable, VideoObjectTable.TableName, "fwd63823_database");
+                    Sqlexcute.GetData_FroM_Database(ref VideoObjectTable, VideoObjectTable.TableName, "fwd63823_database");
                     VideoObjects = Sqlexcute.Conver_From_Data_Table_To_List<VideoObject>(VideoObjectTable);
                 }
                 if (check1 == 0)
@@ -219,14 +219,14 @@ namespace WPF_TEST.ViewModel
                     
                     ImageObjectTable = Sqlexcute.FillToDataTable<ImageObject>(ImageObjects);
                     Sqlexcute.AutoCreateTable(ImageObjectTable, "fwd63823_database", ImageObjectTable.TableName, ref check_, ref exist_);
-                    mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref ImageObjectTable, ImageObjectTable.TableName, "fwd63823_database");
+                    Sqlexcute.GetData_FroM_Database(ref ImageObjectTable, ImageObjectTable.TableName, "fwd63823_database");
                     AddImage();
                     ImageObjectTable = Sqlexcute.FillToDataTable<ImageObject>(ImageObjects);
                     Sqlexcute.Update_Table_to_Host(ImageObjectTable, "fwd63823_database", ImageObjectTable.TableName);
                 }
                 else
                 {
-                    mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref ImageObjectTable, ImageObjectTable.TableName, "fwd63823_database");
+                    Sqlexcute.GetData_FroM_Database(ref ImageObjectTable, ImageObjectTable.TableName, "fwd63823_database");
                     ImageObjects = Sqlexcute.Conver_From_Data_Table_To_List<ImageObject>(ImageObjectTable);
                 }
                 if (check3 == 0)
@@ -234,14 +234,14 @@ namespace WPF_TEST.ViewModel
                     
                     DocumentObjectTable = Sqlexcute.FillToDataTable(DocumentObjects);
                     Sqlexcute.AutoCreateTable(DocumentObjectTable, "fwd63823_database", DocumentObjectTable.TableName, ref check_, ref exist_);
-                    mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref DocumentObjectTable, DocumentObjectTable.TableName, "fwd63823_database");
+                    Sqlexcute.GetData_FroM_Database(ref DocumentObjectTable, DocumentObjectTable.TableName, "fwd63823_database");
                     AddDocumnet();
                     DocumentObjectTable = Sqlexcute.FillToDataTable<DocumentObject>(DocumentObjects);
                     Sqlexcute.Update_Table_to_Host( DocumentObjectTable, "fwd63823_database", DocumentObjectTable.TableName);
                 }
                 else
                 {
-                    mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref DocumentObjectTable, DocumentObjectTable.TableName, "fwd63823_database");
+                    Sqlexcute.GetData_FroM_Database(ref DocumentObjectTable, DocumentObjectTable.TableName, "fwd63823_database");
                     DocumentObjects = Sqlexcute.Conver_From_Data_Table_To_List<DocumentObject>(DocumentObjectTable);
                 }
                 if (check2 == 0)
@@ -249,14 +249,14 @@ namespace WPF_TEST.ViewModel
 
                     AudioObjectTable = Sqlexcute.FillToDataTable<AudioObject>(AudioObjects);
                     Sqlexcute.AutoCreateTable(AudioObjectTable, "fwd63823_database", AudioObjectTable.TableName, ref check_, ref exist_);
-                    mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref AudioObjectTable, AudioObjectTable.TableName, "fwd63823_database");
+                    Sqlexcute.GetData_FroM_Database(ref AudioObjectTable, AudioObjectTable.TableName, "fwd63823_database");
                     AddAudio();
                     AudioObjectTable = Sqlexcute.FillToDataTable<AudioObject>(AudioObjects);
                     Sqlexcute.Update_Table_to_Host(AudioObjectTable, "fwd63823_database", AudioObjectTable.TableName);
                 }
                 else
                 {
-                    mySqlDataAdapter = Sqlexcute.GetData_FroM_Database(ref AudioObjectTable, AudioObjectTable.TableName, "fwd63823_database");
+                    Sqlexcute.GetData_FroM_Database(ref AudioObjectTable, AudioObjectTable.TableName, "fwd63823_database");
                     AudioObjects = Sqlexcute.Conver_From_Data_Table_To_List<AudioObject>(AudioObjectTable);
                 }
             }

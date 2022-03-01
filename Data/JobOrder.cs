@@ -14,13 +14,13 @@ namespace WPF_TEST.Data
         private TimeSpan start = new TimeSpan();
         private TimeSpan end = new TimeSpan();
         
-        private ObservableCollection<Works> works = new ObservableCollection<Works>();
-        public string ID { get; set; }
+       
+        public string BarCode { get; set; }
         public string SaleOrder { get; set; }
         //public string Customer { get; set; }
         //public string Customer_Details { get; set; }
-
-        public Customer Customerinformation { get; set; }
+       
+        // public Customer Customerinformation { get; set; }
         public string Quotation { get; set; }
         public string Customer_PO { get; set; }
         public DateTime Requested_Start { get; set; }
@@ -45,19 +45,22 @@ namespace WPF_TEST.Data
         { get; set; }
         public float ActualvsPlan { get; set; }
         public float Complete { get; set; }
+        public Status Stage { get { return status; } set { status = value; } }
         public int LabelId
         { get { return (int)this.status; } }
-        public Status Stage { get { return status; } set { status = value; } }
-        public string Current_Stage { get; set; }
 
-        public ObservableCollection< Works> Works
-        {
-            get
-            {
-                return works; 
-            }
-            set { works = value; }
-        }
+        public string Current_Stage { get; set; }
+        public string ProductCode { get; set; }
+        public string Product { get; set; }
+        public int Quantity { get; set; }
+        //public ObservableCollection< Works> Works
+        //{
+        //    get
+        //    {
+        //        return works; 
+        //    }
+        //    set { works = value; }
+        //}
 
     }
 }

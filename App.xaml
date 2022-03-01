@@ -152,6 +152,9 @@
             <DataTemplate DataType="{x:Type viewmodels:DeviceDataValue_ViewModel}">
                 <views:DeviceDataValue_View/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:PlanSetting_ViewModel}">
+                <views:PlanSetting_View/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

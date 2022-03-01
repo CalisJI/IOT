@@ -454,12 +454,12 @@
             <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
                 <StackPanel Orientation="Vertical" Height="700">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Tên Đơn Hàng #*"
+                        <TextBlock Text="Mã Đơn Hàng #*"
                            FontSize="22"
                            FontWeight="Bold"
                            Margin="50,10,0,0"
                            Foreground="Gray"/>
-                        <TextBox Text="{Binding SaleOrder , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBox Text="{Binding ID_Barcode , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          FontSize="30"
                          Margin="20,0,10,0"
                          Foreground="Gray"
@@ -578,7 +578,7 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel Orientation="Vertical" Grid.Column="0">
                             <TextBlock 
-                                Text="Quotation #" 
+                                Text="Chú Thích " 
                                 Style="{StaticResource tb}"
                                 Margin="50,0,0,30"
                                 Width="auto"/>
@@ -589,38 +589,37 @@
                                 Width="auto"/>
                             <TextBlock 
                         
-                                FontSize="20"
-                                
+                                Style="{StaticResource tb}"
                                 Margin="50,0,0,30"
                                 Width="auto"
                                 FontWeight="Bold">
-                                <Run Text="Requested Start*"/>
+                                <Run Text="Ngày Bắt Đầu*"/>
                                 <Run Text="(mm/dd/yyy)" FontSize="15" FontWeight="Normal"/>
                             </TextBlock>
 
                             <TextBlock 
                         
-                        FontSize="20"
-                        Margin="50,0,0,30"
-                        Width="auto"
-                        FontWeight="Bold">
-                                <Run Text="Requested End*"/>
+                                FontSize="22"
+                                Margin="50,0,0,30"
+                                Width="auto"
+                                FontWeight="Bold">
+                                <Run Text="Ngày Kết Thúc*"/>
                                 <Run Text="(mm/dd/yyy)" FontSize="15" FontWeight="Normal"/>
                             </TextBlock>
-                            
-    <TextBlock 
-                        Text="Requested Report Date*" 
-                        FontSize="20"
+
+                            <TextBlock 
+                        Text="Ngày Nhập*" 
+                        Style="{StaticResource tb}"
                         Margin="50,0,0,30"
                         Width="auto"/>
-    
+
                             <TextBlock 
-                        Text="Priority:" 
+                        Text="Độ ưu tiên:" 
                         Style="{StaticResource tb}"
                         Margin="50,0,0,30"
                         Width="auto"/>
                             <TextBlock 
-                        Text="*Required Fields" 
+                        Text="*Yêu cầu không để trống" 
                         FontSize="20"
                         Margin="50,10,0,30"
                         Width="auto"
@@ -745,7 +744,7 @@
         </StackPanel>
         <Grid Grid.Column="1">
             <Grid>
-                <Button
+                <!--<Button
                     DataContext="{StaticResource ScheduleViewModel}"
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Height="100"
@@ -776,7 +775,7 @@
                             Margin="10,0,0,0"/>
                     </StackPanel>
 
-                </Button>
+                </Button>-->
             </Grid>
             <Grid>
 
@@ -861,13 +860,13 @@
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
 
                         <materialDesign:PackIcon 
-                            Kind="CloseCircle"
+                            Kind="ArrowBackCircle"
                             HorizontalAlignment="Center"
                             Height="35"
                             Width="35"
                             Foreground="Red"/>
                         <TextBlock 
-                            Text="Cancel"
+                            Text="Back"
                             FontSize="15"
                             HorizontalAlignment="Center"
                             Foreground="Black"/>
@@ -880,11 +879,67 @@
                 <GroupBox Header="Work" FontSize="22">
                     <ListView 
                         DataContext="{StaticResource AddJobProject}"
-                        ScrollViewer.VerticalScrollBarVisibility="Auto"
-                        ItemsSource="{Binding WorksList, UpdateSourceTrigger=PropertyChanged, IsAsync=True}">
+                        ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <ListViewItem>
+                            <materialDesign:Card Width="780" Height="160">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="0.6*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel
+                                            Grid.Column="0"
+                                            Orientation="Vertical"
+                                            HorizontalAlignment="Stretch" Width="Auto" Margin="33,0,0,0">
+                                        <Grid Margin="5">
+                                            <TextBlock
+                                                FontWeight="DemiBold"
+                                                Text="Mã Sản Phẩm:" FontSize="22"/>
+                                            <TextBox 
+                                                FontSize="22"
+                                                Text="{Binding Product_Code, UpdateSourceTrigger=PropertyChanged}"
+                                                Margin="220,0,0,0"/>
+                                        </Grid>
+                                        <Grid Margin="5">
+                                            <TextBlock 
+                                                FontWeight="DemiBold"
+                                                Text="Tên Sản Phẩm:" FontSize="22"/>
+                                            <TextBox 
+                                                FontSize="22"
+                                                Text="{Binding Product, UpdateSourceTrigger=PropertyChanged}"
+                                                Margin="220,0,0,0"/>
+                                        </Grid>
+                                        <!--<Grid Margin="5">
+                                            <TextBlock Text="Chú Thích:" FontSize="22"/>
+                                            <TextBox
+                                                        FontSize="22"
+                                                    Text="{Binding Remark, UpdateSourceTrigger=PropertyChanged}"
+                                                    Margin="220,0,0,0"/>
+                                        </Grid>-->
+                                        <Grid Margin="5">
+                                            <TextBlock 
+                                                FontWeight="DemiBold"
+                                                Text="Số Lượng:" FontSize="22"/>
+                                            <TextBox
+                                                FontSize="22"
+                                                Text="{Binding ProDuctQuantity, UpdateSourceTrigger=PropertyChanged}"
+                                                Margin="220,0,0,0"/>
+                                        </Grid>
+                                    </StackPanel>
+                                    <!--<Grid Grid.Column="1">
+                                            <Image 
+                                                    Source="{Binding ImageProduct, UpdateSourceTrigger=PropertyChanged}" 
+                                                    Width="200"
+                                                    Stretch="Fill" 
+                                                    Margin="10"
+                                                    HorizontalAlignment="Right"/>
+                                        </Grid>-->
+                                </Grid>
+                            </materialDesign:Card>
+                        </ListViewItem>
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <materialDesign:Card Width="780" Height="160">
+                                <!--<materialDesign:Card Width="780" Height="160">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="2*"/>
@@ -896,36 +951,43 @@
                                             HorizontalAlignment="Stretch" Width="Auto" Margin="33,0,0,0">
                                             <Grid Margin="5">
                                                 <TextBlock Text="Work Order Name:" FontSize="22"/>
-                                                <TextBlock 
+                                                <TextBox 
                                                         FontSize="22"
-                                                    Text="{Binding WorkOrderName, UpdateSourceTrigger=PropertyChanged}"
+                                                    Text="{Binding Pro, UpdateSourceTrigger=PropertyChanged}"
                                                     Margin="220,0,0,0"/>
                                             </Grid>
                                             <Grid Margin="5">
                                                 <TextBlock Text="Product:" FontSize="22"/>
-                                                <TextBlock 
+                                                <TextBox 
                                                         FontSize="22"
                                                     Text="{Binding Product, UpdateSourceTrigger=PropertyChanged}"
                                                     Margin="220,0,0,0"/>
                                             </Grid>
                                             <Grid Margin="5">
                                                 <TextBlock Text="Remark:" FontSize="22"/>
-                                                <TextBlock 
+                                                <TextBox
                                                         FontSize="22"
                                                     Text="{Binding Remark, UpdateSourceTrigger=PropertyChanged}"
                                                     Margin="220,0,0,0"/>
                                             </Grid>
+                                            <Grid Margin="5">
+                                                <TextBlock Text="Quantity:" FontSize="22"/>
+                                                <TextBox
+                                                        FontSize="22"
+                                                    Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}"
+                                                    Margin="220,0,0,0"/>
+                                            </Grid>
                                         </StackPanel>
-                                        <Grid Grid.Column="1">
+                                        --><!--<Grid Grid.Column="1">
                                             <Image 
                                                     Source="{Binding ImageProduct, UpdateSourceTrigger=PropertyChanged}" 
                                                     Width="200"
                                                     Stretch="Fill" 
                                                     Margin="10"
                                                     HorizontalAlignment="Right"/>
-                                        </Grid>
+                                        </Grid>--><!--
                                     </Grid>
-                                </materialDesign:Card>
+                                </materialDesign:Card>-->
                             </DataTemplate>
                         </ListView.ItemTemplate>
 

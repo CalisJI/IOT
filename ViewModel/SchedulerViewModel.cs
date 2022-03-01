@@ -110,7 +110,7 @@ namespace WPF_TEST.ViewModel
         public string Details
         { get { return _detail; } set { SetProperty(ref _detail, value, nameof(Details)); } }
         private Customer Edit_JobItem;
-        private JobOrder _SelectedJob;
+        public static JobOrder _SelectedJob;
         private Customer _singleCustomer;
         public Customer SingleCustomer
         {
@@ -161,7 +161,7 @@ namespace WPF_TEST.ViewModel
         public bool loaded = false;
         //public ObservableCollection<Customer> CustomerInfo { get; set; }
         //public ObservableCollection<Works> WorksList { get; set; }
-        EditJobModel EditJobModel = new EditJobModel();
+        EditJobModel EditJobModel = EditJobModel.INS_EditJobModel;
         
         PartSchedulrt_ViewModel PartSchedulrt_ViewModel = new PartSchedulrt_ViewModel();
         ScheduleListTime_ViewModel ScheduleListTime_ViewModel = new ScheduleListTime_ViewModel();
@@ -225,8 +225,8 @@ namespace WPF_TEST.ViewModel
             {
                 try
                 {
-                    var a = SelectedJob.Works.Where(x => x == (Works)p).FirstOrDefault();
-                    SelectedJob.Works.Remove(a);
+                    //var a = SelectedJob.Works.Where(x => x == (Works)p).FirstOrDefault();
+                    //SelectedJob.Works.Remove(a);
                 }
                 catch (Exception ex)
                 {
@@ -263,7 +263,10 @@ namespace WPF_TEST.ViewModel
                     {
                         foreach (var item in Work_Edit_ViewModel._work)
                         {
-                            SelectedJob.Works.Add(item);
+                            //SelectedJob.Works.Add(item);
+                            SelectedJob.Product = item.Product;
+                            SelectedJob.ProductCode = item.WorkOrderName;
+                            SelectedJob.Quantity = item.Quantity;
                         }
                         schedulerViewModel.SelectedViewModel = EditJobModel;
                     }
@@ -315,9 +318,9 @@ namespace WPF_TEST.ViewModel
             {
                 try
                 {
-                    var d = (Works)p;
-                    var a = SelectedJob.Works.Where(x => x == d).SingleOrDefault();
-                    SelectedJob.Works.Remove(a);
+                    //var d = (Works)p;
+                    //var a = SelectedJob.Works.Where(x => x == d).SingleOrDefault();
+                    //SelectedJob.Works.Remove(a);
                 }
                 catch (Exception ex)
                 {
@@ -358,8 +361,8 @@ namespace WPF_TEST.ViewModel
            
             SelectedWork = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
-                var aa = SelectedJob.Works.Where(s => s == (Works)p).FirstOrDefault();
-                GetWorks = aa;
+                //var aa = SelectedJob.Works.Where(s => s == (Works)p).FirstOrDefault();
+                //GetWorks = aa;
                // works = GetWorks;
 
             }); 
@@ -377,19 +380,19 @@ namespace WPF_TEST.ViewModel
             });
             WorKScope = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                try
-                {
-                    if (SelectedJob.Works.Count == 1)
-                    {
-                        GetWorks = SelectedJob.Works.ElementAt(0);
-                    }
-                    schedulerViewModel.SelectedViewModel = WorkScope_ViewModel;
-                }
-                catch (Exception)
-                {
+                //try
+                //{
+                //    if (SelectedJob.Works.Count == 1)
+                //    {
+                //        GetWorks = SelectedJob.Works.ElementAt(0);
+                //    }
+                //    schedulerViewModel.SelectedViewModel = WorkScope_ViewModel;
+                //}
+                //catch (Exception)
+                //{
 
-                    schedulerViewModel.SelectedViewModel = WorkScope_ViewModel;
-                }
+                //    schedulerViewModel.SelectedViewModel = WorkScope_ViewModel;
+                //}
              
                 
             });
@@ -412,11 +415,12 @@ namespace WPF_TEST.ViewModel
                         throw new Exception();
                     }
                     SelectedJob = (JobOrder)p;
+                    PlannerModel.ItemSelected = SelectedJob;
                     //var dd = JobOrders.Where(x => x == Edit_JobItem).FirstOrDefault();
                     //SelectedJob = Edit_JobItem;
 
-                    Edit_JobItem = CustomerInfo.Where(x => x == SelectedJob.Customerinformation).FirstOrDefault();
-                    SingleCustomer = Edit_JobItem;
+                    //Edit_JobItem = CustomerInfo.Where(x => x == SelectedJob.Customerinformation).FirstOrDefault();
+                    //SingleCustomer = Edit_JobItem;
                     schedulerViewModel.SelectedViewModel = EditJobModel;
                 }
                 catch (Exception )
@@ -439,23 +443,23 @@ namespace WPF_TEST.ViewModel
             {
 
             });
-            ChangeCustomer = new RelayCommand<object>((p) => { return true; }, (p) =>
-            {
-                try
-                {
-                    var d = (Customer)p;
-                    SingleCustomer = d;
-                    Customer_Infor = d.Customer_Details;
-                    SelectedJob.Customerinformation = d;
-                }
-                catch (Exception)
-                {
+            //ChangeCustomer = new RelayCommand<object>((p) => { return true; }, (p) =>
+            //{
+            //    try
+            //    {
+            //        var d = (Customer)p;
+            //        SingleCustomer = d;
+            //        Customer_Infor = d.Customer_Details;
+            //        SelectedJob.Customerinformation = d;
+            //    }
+            //    catch (Exception)
+            //    {
 
                     
-                }
+            //    }
                
-                //SelectedJob.Customer_Details = d.Customer_Details;
-            });
+            //    //SelectedJob.Customer_Details = d.Customer_Details;
+            //});
             StartSchedule = new RelayCommand<object>((p) => { return true; }, (p) =>
              {
                  schedulerViewModel.SelectedViewModel = PartSchedulrt_ViewModel;

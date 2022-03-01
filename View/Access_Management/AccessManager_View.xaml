@@ -15,7 +15,7 @@
              
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              DataContext="{StaticResource Login}"
-             d:DesignHeight="1080" d:DesignWidth="1920">
+             Height="1000" Width ="1920">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.3*"/>
@@ -144,7 +144,10 @@
                                 <ColumnDefinition Width="100" />
                             </Grid.ColumnDefinitions>
 
-                            <dxg:GridControl Name="grid" ItemsSource="{Binding HoSoNhanVien }" SelectionMode="Row">
+                            <dxg:GridControl 
+                                Height="900"
+                                Width="1200"
+                                Name="grid" ItemsSource="{Binding HoSoNhanVien }" SelectionMode="Row">
                                 <dxg:GridControl.Columns>
                                     <dxg:GridColumn FieldName="Name" MinWidth="100" />
                                     
@@ -164,6 +167,7 @@
                                 </dxg:GridControl.Columns>
                                 <dxg:GridControl.View>
                                     <dxg:TableView
+                                        
                                         ShowGroupPanel="False"
                                         ShowSearchPanelMode="Always"
                                         ShowSearchPanelFindButton="True"
@@ -171,6 +175,7 @@
                                         ShowSearchPanelNavigationButtons="True"
                                         ShowGroupedColumns="True"
                                         Name="view" 
+                                        
                                         AutoWidth="True">
                                         <dxmvvm:Interaction.Behaviors>
                                             <local:CommitEditingOnCellValueChanged />
@@ -178,13 +183,16 @@
                                     </dxg:TableView>
                                 </dxg:GridControl.View>
                             </dxg:GridControl>
-                            <dxprg:PropertyGridControl x:Name="pGrid"
-                                   Grid.Column="2"
-                                   SelectedObjects="{Binding Path=SelectedItems, ElementName=grid}"
-                                   ShowProperties="WithPropertyDefinitions"
-                                   ShowCategories="False"
-                                   SortMode="Definitions"
-                                   ExpandCategoriesWhenSelectedObjectChanged="True">
+                            <dxprg:PropertyGridControl 
+                                Height="1000"
+                                Width="400"
+                                x:Name="pGrid"
+                                Grid.Column="2"
+                                SelectedObjects="{Binding Path=SelectedItems, ElementName=grid}"
+                                ShowProperties="WithPropertyDefinitions"
+                                ShowCategories="False"
+                                SortMode="Definitions"
+                                ExpandCategoriesWhenSelectedObjectChanged="True">
                                 <dxprg:PropertyGridControl.PropertyDefinitions>
                                     <dxprg:PropertyDefinition Path="Photo" AllowExpanding="Never">
                                         <dxprg:PropertyDefinition.EditSettings>
@@ -268,13 +276,14 @@
                         </Grid>
                     </TabItem>
                     <TabItem Header="Quản Ly Truy Cập">
-                        <Grid>
+                        <Grid Width="1920" Height="900">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
+                                <ColumnDefinition Width="0.2*"/>
+                                <ColumnDefinition Width="0.5*"/>
                                 <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="0.25*"/>
                             </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="2">
+                            <Grid Grid.Column="3">
                                 <Button
                                     Style="{StaticResource MaterialDesignFlatButton}"
                                     Height="80"
@@ -307,7 +316,7 @@
                                 </Button>
                                
                             </Grid> 
-                            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="0"> 
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="1"> 
                                 <Grid>
                                     <ListView ItemsSource="{Binding ListUser}" Name="userlist" HorizontalAlignment="Stretch">
                                         <i:Interaction.Triggers>
@@ -342,8 +351,10 @@
                                     </ListView>
                                 </Grid>
                             </ScrollViewer>
-                            <Grid Grid.Column="1">
-                                <TabControl Margin="10">
+                            <Grid Grid.Column="2">
+                                <TabControl 
+                                    Height="800"
+                                    Margin="10">
                                     <TabItem Header="Quản Lý Đơn Hàng">
                                         <ScrollViewer VerticalScrollBarVisibility="Auto">
                                             <StackPanel>

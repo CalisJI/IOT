@@ -66,7 +66,7 @@ namespace WPF_TEST.View
         {
             loadstage = true;
             LocalWebcamCollection = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            localCamera = new VideoCaptureDevice(LocalWebcamCollection[0].MonikerString);
+            localCamera = new VideoCaptureDevice(LocalWebcamCollection[1].MonikerString);
             localCamera.NewFrame += LocalCamera_NewFrame;
             localCamera.Start();
             

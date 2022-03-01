@@ -110,16 +110,16 @@ namespace WPF_TEST.Class_Resource
                 JobOrder.Complete = 0;
                 JobOrder.Stage = ViewModel.Status.Plan;
                 JobOrder.Current_Stage = PlannerModel.getColor(JobOrder.Stage);
-                JobOrder.Customerinformation = new Customer();
+                //JobOrder.Customerinformation = new Customer();
                 JobOrder.Customer_PO = "";
-                JobOrder.ID = "000";
+                JobOrder.BarCode = "000";
                 JobOrder.Priority = TaskPriority.Normal;
                 JobOrder.Quotation = "None";
                 JobOrder.Requested_End = DateTime.Now;
                 JobOrder.Requested_Report_Date = DateTime.Now;
                 JobOrder.Requested_Start = DateTime.Now;
                 JobOrder.SaleOrder = "None";
-                JobOrder.Works = new System.Collections.ObjectModel.ObservableCollection<Works>();
+                //JobOrder.Works = new System.Collections.ObjectModel.ObservableCollection<Works>();
                 JobOrders.Add(JobOrder);
 
 
